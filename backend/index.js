@@ -1,10 +1,12 @@
-require('dotenv').config();
+require('dotenv').config({path:'../.env'});
 const express=require('express');
 const connectDb=require('./utils/db');
 
 const app=express();
 
 const PORT=process.env.PORT;
+console.log('Mongo URI:', process.env.MONGO_URI); 
+console.log('Server Port:', process.env.PORT);
 
 app.use(express.json());
 
@@ -17,3 +19,4 @@ connectDb().then(()=>{
         console.log(`server is running at port ${PORT}`);
     })
 })
+
