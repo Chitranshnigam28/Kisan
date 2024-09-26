@@ -1,6 +1,6 @@
 // models/Crop.js
 const mongoose = require('mongoose');
-
+//this is for recommendation to suggest crops.
 // Define a Crop schema that matches your crops collection structure
 const cropSchema = new mongoose.Schema({
   name: String,
