@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//this will be used for graphs only and it is on the mongodb database
 const CropPriceSchema = new mongoose.Schema({
     crop_id: {
         type: Number,

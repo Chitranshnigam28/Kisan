@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+//this will be used for graphs only
 const TopCropSchema = new mongoose.Schema({
     name : {
         type : String,
