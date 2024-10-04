@@ -24,7 +24,7 @@ const ProfileSetup = () => {
         e.preventDefault();
         try {
             console.log(formData);
-            const response = await fetch('http://localhost:5002/api/farmer/profile', {
+            const response = await fetch('http://localhost:5001/api/farmer/profile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

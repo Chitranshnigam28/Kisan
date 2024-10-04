@@ -43,6 +43,6 @@ const FarmerProfileSchema = new mongoose.Schema({
     },
 });
 
-const expMg = mongoose.model('FarmerProfile', FarmerProfileSchema, 'farmer_profiles');
+const FarmerProfile = mongoose.model('FarmerProfile', FarmerProfileSchema, 'farmer_profiles');
 
-module.exports = expMg; 
+module.exports = FarmerProfile; 
