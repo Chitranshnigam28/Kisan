@@ -6,7 +6,9 @@ const cropRoutes=require('./src/Routes/cropRoute');
 const priceRoute=require('./src/Routes/priceRoute');
 const topCropRoute=require('./src/Routes/topCropRoute');
 const farmRoutes = require('./src/Routes/farmRoutes'); 
+const profileSetupRoute = require('./src/Routes/profileSetupRoute');
 const app = express();
+const cors = require('cors');
 
 const PORT = process.env.PORT;
 
@@ -15,7 +17,7 @@ app.use("/api", authRoutes);
 app.use("/api", cropRoutes);
 app.use("/api", priceRoute);
 app.use("/api", topCropRoute);
-
+app.use("/api", profileSetupRoute);
 app.use("/api", farmRoutes);
 
 

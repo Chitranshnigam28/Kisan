@@ -9,16 +9,19 @@ const CropPriceChart = ({ crop }) => {
     const fetchCropPrices = async () => {
         try {
             const response = await fetch(`http://localhost:5001/api/crops/price?crop=Wheat`);
-            console.log(response.data());
+            // console.log("response.data()"+response.data());
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
 
+            console.log("data"+JSON.stringify(data));
             // Extract historical prices
-            const historicalPrices = data.market_price.historical_prices;
-            console.log(historicalPrices);
+            const historicalPrices = data[0].market_price.historical_prices;
+
+            // console.log("historicalPrices "+historicalPrices);
             setCropPrices(historicalPrices);
+            console.log("cropPrices after historicalPrices "+cropPrices);
         } catch (error) {
             console.error('Error fetching crop prices:', error);
         } finally {

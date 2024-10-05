@@ -1,13 +1,14 @@
 import React from 'react';
+import "./App.css";
 import ComponentPriceGraph from './Components/CropPriceGraph';
-import TranslationComponent from './Components/TranslationComponent';
 
 const App = () => {
   return (
+    <Router>
     <div>
       <ComponentPriceGraph crop="wheat" />
-      <TranslationComponent />
     </div>
+    </Router>
   );
 };
 
