@@ -1,36 +1,39 @@
+require('dotenv').config({ path: '../../.env' }); 
+
 const express = require('express');
-const axios = require('axios');
+const { Translate } = require('@google-cloud/translate').v2;
+const bodyParser = require('body-parser');
 const cors = require('cors');
-require('dotenv').config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
+app.use(bodyParser.json());
+app.use(cors());
+
+const googleApiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
+console.log("Google API Key:", googleApiKey); 
+
+const translate = new Translate({
+  key: googleApiKey, 
+});
 
 app.post('/api/translate', async (req, res) => {
   const { text, targetLanguage } = req.body;
 
-  try {
-    const response = await axios.post(
-      `https://translation.googleapis.com/language/translate/v2`,
-      {
-        q: text,
-        target: targetLanguage,
-        key: apiKey
-      }
-    );
+  if (!text || !targetLanguage) {
+    return res.status(400).json({ message: 'Invalid request parameters' });
+  }
 
-    const translatedText = response.data.data.translations.map(t => t.translatedText).join(' || ');
-    res.json({ translatedText });
+  try {
+    const [translation] = await translate.translate(text, targetLanguage);
+    res.json({ translatedText: translation });
   } catch (error) {
-    console.error('Error in translation API:', error.response ? error.response.data : error.message);
-    res.status(500).send('Translation failed');
+    console.error('Translation failed:', error);
+    res.status(500).json({ message: 'Translation failed' });
   }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Translation server running on http://localhost:${PORT}`);
 });
