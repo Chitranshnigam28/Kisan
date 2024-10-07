@@ -13,7 +13,7 @@ const cropRecommendationAI = async () => {
                 { role: "system", content: "You are a helpful assistant." },
                 {
                     role: "user",
-                    content: "Write a crop recommendation for moderate temperature.",
+                    content: "Write one word answer on what is the best crop to grow in Punjab, India.",
                 },
             ],
         });
