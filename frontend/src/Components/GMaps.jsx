@@ -11,12 +11,14 @@ import {
 
 // Coordinates for the initial center point
 const center = { lat: 30.2458, lng: 75.8421 }
-
+console.log("process.env.REACT_APP_GOOGLE_MAPS_API_KEY "+process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 function GMaps() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ['places'], // libraries to be used
   });
+
+ 
 
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
