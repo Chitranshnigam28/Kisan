@@ -5,6 +5,8 @@ import ProfileSetup from './Components/ProfileSetup';
 import {BrowserRouter as Router, Routes,Route,Link} from 'react-router-dom';
 import GMaps from './Components/GMaps';
 import Weather from './Components/Weather';
+import TranslationComponent from './Components/TranslationComponent';
+
 const App = () => {
   return (
   <>
@@ -17,6 +19,8 @@ const App = () => {
           <li><Link to="/charts">Charts</Link></li>
           <li><Link to='/maps'>Maps</Link></li>
           <li><Link to='/profilesetup'>Profile Setup</Link></li>
+          <li><Link to='/translate'>Translation</Link></li>
+
         </ul>
       </nav>
       
@@ -25,7 +29,9 @@ const App = () => {
         <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />}/>
         <Route path='/maps' element={<GMaps/>}/>
         <Route path='/profilesetup' element={<ProfileSetup/>}/>
+        <Route path='/translate' element={<TranslationComponent />}/>
       </Routes>
+
     </div>
     </Router>
     <Weather/>
