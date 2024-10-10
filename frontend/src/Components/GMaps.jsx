@@ -1,38 +1,38 @@
 /* global google */
-import '../css/maps.css';
-import { useRef, useState } from 'react'
+import "../css/maps.css";
+import { useRef, useState } from "react";
 import {
   useJsApiLoader,
   GoogleMap,
   MarkerF,
   Autocomplete,
   DirectionsRenderer,
-} from '@react-google-maps/api'
+} from "@react-google-maps/api";
 
 // Coordinates for the initial center point
-const center = { lat: 30.2458, lng: 75.8421 }
+const center = { lat: 30.2458, lng: 75.8421 };
 
 function GMaps() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries: ['places'], // libraries to be used
+    libraries: ["places"], // libraries to be used
   });
 
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
   const [currentLocation, setCurrentLocation] = useState(center);
 
   const originRef = useRef();
   const destinationRef = useRef();
 
   if (!isLoaded) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   async function calculateRoute() {
-    if (originRef.current.value === '' || destinationRef.current.value === '') {
+    if (originRef.current.value === "" || destinationRef.current.value === "") {
       return;
     }
     const directionsService = new google.maps.DirectionsService();
@@ -48,10 +48,10 @@ function GMaps() {
 
   function clearRoute() {
     setDirectionsResponse(null);
-    setDistance('');
-    setDuration('');
-    originRef.current.value = '';
-    destinationRef.current.value = '';
+    setDistance("");
+    setDuration("");
+    originRef.current.value = "";
+    destinationRef.current.value = "";
   }
 
   function panToCurrentLocation() {
@@ -76,77 +76,78 @@ function GMaps() {
   }
 
   return (
-    <div className="app">
-      <div className="map-container">
-        {/* Google Map Box */}
-        <GoogleMap
-          center={currentLocation} // Use currentLocation to dynamically center the map
-          zoom={15}
-          mapContainerStyle={{ width: '100%', height: '100%' }}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            fullscreenControl: false,
-          }}
-          onLoad={(map) => setMap(map)}
-        >
-          <MarkerF position={currentLocation} /> {/* Show marker at current location */}
-          {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
-          )}
-        </GoogleMap>
-      </div>
-
-      <div className="controls-container">
-        <div className="inputs">
-          <Autocomplete>
-            <input
-              type="text"
-              placeholder="Origin"
-              ref={originRef}
-              className="input"
-            />
-          </Autocomplete>
-          <Autocomplete>
-            <input
-              type="text"
-              placeholder="Destination"
-              ref={destinationRef}
-              className="input"
-            />
-          </Autocomplete>
-        </div>
-
-        <div className="button-group">
-          <button onClick={calculateRoute} className="button">
-            Calculate Route
-          </button>
-          <button onClick={clearRoute} className="button clear-button">
-            Clear
-          </button>
-          <button
-            onClick={panToCurrentLocation}
-            className="button location-button"
-          >
-            Current Location
-          </button>
-        </div>
-
-        <div className="info">
-          <p>Distance: {distance}</p>
-          <p>Duration: {duration}</p>
-          <button
-            className="location-button"
-            onClick={() => {
-              map.panTo(center);
-              map.setZoom(15);
+      <div className="app">
+        <div className="map-container">
+          {/* Google Map Box */}
+          <GoogleMap
+            center={currentLocation} // Use currentLocation to dynamically center the map
+            zoom={15}
+            mapContainerStyle={{ width: "100%", height: "100%" }}
+            options={{
+              zoomControl: false,
+              streetViewControl: false,
+              fullscreenControl: false,
             }}
+            onLoad={(map) => setMap(map)}
           >
-            Center Map
-          </button>
+            <MarkerF position={currentLocation} />{" "}
+            {/* Show marker at current location */}
+            {directionsResponse && (
+              <DirectionsRenderer directions={directionsResponse} />
+            )}
+          </GoogleMap>
+        </div>
+
+        <div className="controls-container">
+          <div className="inputs">
+            <Autocomplete>
+              <input
+                type="text"
+                placeholder="Origin"
+                ref={originRef}
+                className="input"
+              />
+            </Autocomplete>
+            <Autocomplete>
+              <input
+                type="text"
+                placeholder="Destination"
+                ref={destinationRef}
+                className="input"
+              />
+            </Autocomplete>
+          </div>
+
+          <div className="button-group">
+            <button onClick={calculateRoute} className="button">
+              Calculate Route
+            </button>
+            <button onClick={clearRoute} className="button clear-button">
+              Clear
+            </button>
+            <button
+              onClick={panToCurrentLocation}
+              className="button location-button"
+            >
+              Current Location
+            </button>
+          </div>
+
+          <div className="info">
+            <p>Distance: {distance}</p>
+            <p>Duration: {duration}</p>
+            <button
+              className="location-button"
+              onClick={() => {
+                map.panTo(center);
+                map.setZoom(15);
+              }}
+            >
+              Center Map
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 

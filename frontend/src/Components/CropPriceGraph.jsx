@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
+import '../css/dashboard.css'
 
 const CropPriceChart = ({ crop }) => {
     const [cropPrices, setCropPrices] = useState([]);
@@ -55,7 +56,7 @@ const CropPriceChart = ({ crop }) => {
 
     return (
         <div>
-            <h1> Enter The Crop </h1>
+            <h1>Crop Prices Trends</h1>
             {loading ? (
                 <p>Loading...</p>
             ) : (

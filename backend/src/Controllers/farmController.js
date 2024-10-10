@@ -3,7 +3,7 @@ const Farm = require("../models/farmModel");
 const createFarm = async (req, res) => {
     try {
         console.log(req.user)
-        const { farmerName, numberOfFarms, soilType } = req.body;
+        const { farmerName,  soilType, state,last_crop_sowed,soilQuality,currentSeason} = req.body;
         // console.log(req.user, req.user._id)
         // Ensure req.user is defined
         if (!req.user || !req.user.UserId) {
@@ -12,8 +12,12 @@ const createFarm = async (req, res) => {
 
         const newFarm = new Farm({
             farmerName,
-            numberOfFarms,
+            // numberOfFarms,
             soilType,
+            state,
+            last_crop_sowed,
+            soilQuality,
+            currentSeason,
             owner: req.user.UserId 
         });
         const savedFarm = await newFarm.save();
