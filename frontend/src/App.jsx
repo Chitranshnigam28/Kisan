@@ -36,7 +36,7 @@ const App = () => {
 
     </div>
     </Router>
-    <Weather/>
+    {/* <Weather/> */}
     </>
   );
 };
