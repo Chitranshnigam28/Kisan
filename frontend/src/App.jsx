@@ -11,7 +11,7 @@ import Weather from './Components/Weather';
 
 const App = () => {
   return (
-  <>
+  <>  
     <Router>
       <div>
         <Routes>
