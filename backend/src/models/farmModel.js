@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const farmSchema = mongoose.Schema({
     farmerName: { type: String, required: true },
-    // numberOfFarms: { type: Number, required: true },
+    numberOfFarms: { type: Number, required: true },
     soilType: { type: String, enum: ['Red', 'Black', 'Brown', 'Sandy'], required: true },
     state: { type: String, required: true },
     last_crop_sowed: { type: String, required: true },

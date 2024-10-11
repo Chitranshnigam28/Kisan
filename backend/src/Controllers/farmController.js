@@ -28,7 +28,6 @@ const createFarm = async (req, res) => {
     }
 }
 
-
 const getFarms = async (req, res) => {
     try {
         const farms = await Farm.find({ owner: req.user.UserId })
