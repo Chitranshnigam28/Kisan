@@ -65,7 +65,7 @@ function Weather() {
 
   return (
     
-    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl shadow-gray-400 ${formatBackground()}`} style={{ height: '60vh', overflowY: 'auto' }}>
+    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl max-w-full h-auto shadow-gray-400 ${formatBackground()}`} style={{ height: '60vh', overflowY: 'auto' }}>
      
 
       <TopButtons setQuery={setQuery} />

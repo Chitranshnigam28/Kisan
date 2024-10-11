@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import GMaps from "../GMaps";
 import ComponentPriceGraph from "../CropPriceGraph";
-import { FaThLarge, FaSeedling, FaMapMarkerAlt } from "react-icons/fa";
+import { FaThLarge, FaSeedling, FaMapMarkerAlt,FaLanguage } from "react-icons/fa";
 import "../../css/footer.css";
 
 const Footer = () => {
@@ -50,6 +50,12 @@ const Footer = () => {
         <div className="icon-wrapper">
           <Link to="/maps">
             <FaMapMarkerAlt className="footer-icon" />
+            {/* <GMaps /> */}
+          </Link>
+        </div>
+        <div className="icon-wrapper">
+          <Link to="/translate">
+            <FaLanguage className="footer-icon" />
             {/* <GMaps /> */}
           </Link>
         </div>
