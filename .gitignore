@@ -5,3 +5,5 @@ frontend/.env
 .env/
 
 .DS_Store
+
+frontend/.DS_Store
