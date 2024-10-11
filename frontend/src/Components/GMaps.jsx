@@ -18,6 +18,8 @@ function GMaps() {
     libraries: ["places"], // libraries to be used
   });
 
+ 
+
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");

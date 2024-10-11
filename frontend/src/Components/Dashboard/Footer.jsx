@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaThLarge, FaSeedling, FaMapMarkerAlt } from 'react-icons/fa'; 
-import '../../css/footer.css'
+import GMaps from "../GMaps";
+import ComponentPriceGraph from "../CropPriceGraph";
+import { FaThLarge, FaSeedling, FaMapMarkerAlt } from "react-icons/fa";
+import "../../css/footer.css";
 
 const Footer = () => {
   const [showFooter, setShowFooter] = useState(true);
@@ -21,29 +23,35 @@ const Footer = () => {
       lastScrollY = window.scrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <footer className={`footer-container ${showFooter ? 'show' : 'hide'}`}>
+    <footer className={`footer-container ${showFooter ? "show" : "hide"}`}>
       <div className="icon-container">
+        {/* Home icon with link */}
         <div className="icon-wrapper">
-          <FaThLarge className="footer-icon">
-             {/* <Link to="/maps">
-          <GMaps />
-        </Link> */}
-          </FaThLarge>
-          
+          <Link to="/">
+            <FaThLarge className="footer-icon" />
+          </Link>
         </div>
+        {/* Charts icon with link */}
         <div className="icon-wrapper">
-          <FaSeedling className="footer-icon" />
+          <Link to="/charts">
+            <FaSeedling className="footer-icon" />
+            {/* <ComponentPriceGraph /> */}
+          </Link>
         </div>
+        {/* Maps icon with link */}
         <div className="icon-wrapper">
-          <FaMapMarkerAlt className="footer-icon" />
+          <Link to="/maps">
+            <FaMapMarkerAlt className="footer-icon" />
+            {/* <GMaps /> */}
+          </Link>
         </div>
       </div>
     </footer>
