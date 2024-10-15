@@ -1,4 +1,4 @@
-require('dotenv').config({path:'./../../.env'}); 
+require('dotenv').config({ path: './../../.env' });
 const mongoose = require('mongoose');
 const OpenAI = require('openai');
 const farmSchema = require('./../models/farmModel');
@@ -10,7 +10,7 @@ const openai = new OpenAI({
 
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);
-console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);  
+console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 const connectDB = async () => {
     try {
@@ -24,7 +24,7 @@ const connectDB = async () => {
 
 
 const fetchFarmAndRecommendCrop = async (ownerId) => {
-    console.log(ownerId,">>>>>>>>")
+    console.log(ownerId, ">>>>>>>>")
     try {
         console.log("Fetching farm data for owner ID:", ownerId);
 
@@ -37,20 +37,25 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
 
         console.log('Farm data fetched successfully:', farm);
 
-        const { soilType, state, last_crop_sowed, currentSeason, soilQuality } = farm;
+        const { farmName, cropType, soilType, location, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason, dateOfPlanting } = farm;
 
         const prompt = `
-            Based on the following farm details:
-            - State: ${state}
+        Based on the following farm details:
+            - Farm Name: ${farmName}
+            - Crop Type: ${cropType}
+            - Location: ${location}
             - Soil Type: ${soilType}
+            - Farming Method: ${farmingMethod}
+            - Water Source: ${waterSource}
             - Last Crop Sowed: ${last_crop_sowed}
-            - Current Season: ${currentSeason}
             - Soil Quality: ${soilQuality}
+            - Current Season: ${currentSeason}
+            - Date of Planting: ${dateOfPlanting}
 
-            What should be the best crop to grow next. Answer in one word?
-        `;
+        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop: Current price in the market, Harvest Period Price of the crop seed`;
 
         console.log('Prompt sent to OpenAI:', prompt);
+
 
         const completion = await openai.chat.completions.create({
             model: "gpt-4",
@@ -75,12 +80,12 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
 const main = async () => {
     try {
         await connectDB();
-        const ownerId = '66f92acd44f00ac86e5adac1'; 
+        const ownerId = '66f92acd44f00ac86e5adac1';
         await fetchFarmAndRecommendCrop(ownerId);
     } catch (error) {
         console.error('An error occurred:', error);
     } finally {
-        mongoose.connection.close();  
+        mongoose.connection.close();
     }
 };
 

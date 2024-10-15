@@ -27,6 +27,7 @@ app.get('/api/crops/price', async(req,res) => {
 
 //starting the server
 const port = process.env.PORT;
+
 app.listen(port,()=>{
     console.log(`Server listening on port ${port}`)
 })
