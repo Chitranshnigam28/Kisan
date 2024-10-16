@@ -1,11 +1,15 @@
+require('dotenv').config({ path: '../../.env' });
 const express = require('express');
 const { connect } = require('mongoose');
 const connectDB = require('../utils/db');
 const CropPrice = require('../models/CropPrice');
+const cors = require('cors');
 
 const app = express();
 connectDB();
+app.use(cors());
 app.use(express.json());
+
 
 app.get('/api/crops/price', async(req,res) => {
     const { crop } = req.query;
