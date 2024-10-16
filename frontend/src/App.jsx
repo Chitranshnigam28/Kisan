@@ -7,7 +7,8 @@ import GMaps from "./Components/GMaps";
 import TranslationComponent from "./Components/TranslationComponent";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Weather from './Components/Weather';
-
+import Login from "./Components/Login";
+import SignUp from "./Components/SignUp";
 
 const App = () => {
   return (
@@ -21,6 +22,9 @@ const App = () => {
           <Route path="/translate" element={<TranslationComponent />} />
           <Route path="/" element={<Dashboard />} />
           <Route path='/weather' element={<Weather />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<SignUp />}/>
+
         </Routes>
       </div>
     </Router>
