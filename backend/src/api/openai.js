@@ -10,6 +10,24 @@ const openai = new OpenAI({
 
 // Function to fetch farm data and recommend a crop
 const fetchFarmAndRecommendCrop = async (ownerId) => {
+
+const MONGO_URI = process.env.MONGODB_URI;
+console.log('MONGO_URI:', MONGO_URI);
+console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(MONGO_URI);
+        console.log("Connected to MongoDB");
+    } catch (err) {
+        console.error("Error connecting to MongoDB:", err);
+        throw err;
+    }
+};
+
+
+const fetchFarmAndRecommendCrop = async (ownerId) => {
+    console.log(ownerId, ">>>>>>>>")
     try {
         const farm = await farmSchema.findOne({ owner: ownerId });
         if (!farm) {
@@ -18,16 +36,28 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
 
         const { soilType, state, last_crop_sowed, currentSeason, soilQuality } = farm;
 
-        const prompt = `
-            Based on the following farm details:
-            - State: ${state}
-            - Soil Type: ${soilType}
-            - Last Crop Sowed: ${last_crop_sowed}
-            - Current Season: ${currentSeason}
-            - Soil Quality: ${soilQuality}
+        console.log('Farm data fetched successfully:', farm);
 
-            What should be the best crop to grow next. Answer in one word?
-        `;
+        const { farmName, cropType, soilType, location, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason, dateOfPlanting } = farm;
+
+
+        const prompt = `
+        Based on the following farm details:
+            - Farm Name: ${farmName}
+            - Crop Type: ${cropType}
+            - Location: ${location}
+            - Soil Type: ${soilType}
+            - Farming Method: ${farmingMethod}
+            - Water Source: ${waterSource}
+            - Last Crop Sowed: ${last_crop_sowed}
+            - Soil Quality: ${soilQuality}
+            - Current Season: ${currentSeason}
+            - Date of Planting: ${dateOfPlanting}
+
+        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop: Current price in the market, Harvest Period Price of the crop seed`;
+
+        console.log('Prompt sent to OpenAI:', prompt);
+
 
         const completion = await openai.chat.completions.create({
             model: 'gpt-4',
@@ -62,5 +92,15 @@ module.exports = (app) => {
         }
         res.json(result);
     });
+const main = async () => {
+    try {
+        await connectDB();
+        const ownerId = '66f92acd44f00ac86e5adac1';
+        await fetchFarmAndRecommendCrop(ownerId);
+    } catch (error) {
+        console.error('An error occurred:', error);
+    } finally {
+        mongoose.connection.close();
+    }
 };
 
