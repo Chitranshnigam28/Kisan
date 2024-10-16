@@ -7,6 +7,8 @@ import GMaps from "./Components/GMaps";
 import TranslationComponent from "./Components/TranslationComponent";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Weather from './Components/Weather';
+import AddFarms from "./Components/AddFarms";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const App = () => {
@@ -15,12 +17,13 @@ const App = () => {
     <Router>
       <div>
         <Routes>
-        <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />}/>
+          <Route path="/" element={<Dashboard />} />
+          <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />}/>
           <Route path="/maps" element={<GMaps />} />
           <Route path="/profilesetup" element={<ProfileSetup />} />
           <Route path="/translate" element={<TranslationComponent />} />
-          <Route path="/" element={<Dashboard />} />
           <Route path='/weather' element={<Weather />}/>
+          <Route path="/add-farm" element={<AddFarms />} />
         </Routes>
       </div>
     </Router>

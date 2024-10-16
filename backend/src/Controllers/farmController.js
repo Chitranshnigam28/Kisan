@@ -2,24 +2,40 @@ const Farm = require("../models/farmModel");
 
 const createFarm = async (req, res) => {
     try {
-        console.log(req.user)
-        const { farmerName,  soilType, state,last_crop_sowed,soilQuality,currentSeason} = req.body;
-        // console.log(req.user, req.user._id)
-        // Ensure req.user is defined
+        console.log(req.user);
+        const {
+            farmName,
+            cropType,
+            soilType,
+            location,
+            farmingMethod,
+            waterSource,
+            last_crop_sowed,
+            soilQuality,
+            currentSeason,
+            dateOfPlanting,
+            farmImage
+        } = req.body;
+
         if (!req.user || !req.user.UserId) {
             return res.status(401).json({ message: 'User not authenticated' });
         }
 
         const newFarm = new Farm({
-            farmerName,
-            // numberOfFarms,
+            farmName,
+            cropType,
             soilType,
-            state,
+            location, 
+            farmingMethod,
+            waterSource,
             last_crop_sowed,
             soilQuality,
             currentSeason,
+            dateOfPlanting,
+            farmImage,
             owner: req.user.UserId 
         });
+
         const savedFarm = await newFarm.save();
         res.status(201).json(savedFarm);
 
