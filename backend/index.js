@@ -8,6 +8,7 @@ const topCropRoute=require('./src/Routes/topCropRoute');
 const farmRoutes = require('./src/Routes/farmRoutes'); 
 const profileSetupRoute = require('./src/Routes/profileSetupRoute');
 const weatherRoute=require('./src/Routes/weatherRoute');
+const cropRecomendRoute=require('./src/Routes/croprecommendRoute');
 const app = express();
 const cors = require('cors');
 
@@ -21,7 +22,10 @@ app.use("/api", priceRoute);
 app.use("/api", topCropRoute);
 app.use("/api", profileSetupRoute);
 app.use("/api", farmRoutes);
+
 app.use("/api",weatherRoute);
+app.use("/api",cropRecomendRoute);
+
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Kisan');
