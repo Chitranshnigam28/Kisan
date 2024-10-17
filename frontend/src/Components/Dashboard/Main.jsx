@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import Weather from "../Weather";
 import ComponentPriceGraph from "../CropPriceGraph";
-import AddFarms from "../AddFarms";
+import MyFarms from '../Farms/MyFarms'
 import '../../css/main.css';
 
 const Main = () => {
@@ -15,12 +15,13 @@ const Main = () => {
 
       <div className="my-farms">
         <h3>My Farms</h3>
+        <MyFarms />
         <Link to="/add-farm">Add a New Farm</Link>
-        <div className="farms-cards">
+        {/* <div className="farms-cards">
           <div className="farm-card"></div>
           <div className="farm-card"></div>
           <div className="farm-card"></div>
-        </div>
+        </div> */}
       </div>
 
       <div className="crop-info">

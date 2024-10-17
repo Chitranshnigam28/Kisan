@@ -17,21 +17,24 @@ const AddFarms = () => {
         soilQuality: "",
         currentSeason: "",
         dateOfPlanting: "",
+        dateOfHarvest: "",   
+        sizeOfFarm: "",      
         farmImage: null,
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log("Previous farmData:", farmData);
         setFarmData(prevState => ({
             ...prevState,
             [name]: value
         }));
-
-    };
+    };    
 
     const handleFileChange = (e) => {
-        setFarmData(...farmData, { farmImage: e.target.files[0] });
+        setFarmData(prevState => ({
+            ...prevState,
+            farmImage: e.target.files[0]
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -40,7 +43,12 @@ const AddFarms = () => {
         const farmFormData = new FormData();
         Object.keys(farmData).forEach(key => {
             farmFormData.append(key, farmData[key]);
-        })
+        });
+
+        if (farmData.sizeOfFarm <= 0) {
+            alert('Size of farm must be a positive number.');
+            return;
+        }
 
         try {
             const response = await axios.post('/api/farms', farmFormData, {
@@ -61,6 +69,8 @@ const AddFarms = () => {
                 soilQuality: "",
                 currentSeason: "",
                 dateOfPlanting: "",
+                dateOfHarvest: "",
+                sizeOfFarm: "",
                 farmImage: null,
             });
             alert('Farm added successfully!');
@@ -101,7 +111,8 @@ const AddFarms = () => {
                         <option value="">Select Crop Type</option>
                         <option value="Cereal Crops">Cereal Crops</option>
                         <option value="Cash Crops">Cash Crops</option>
-                        <option value="Vegetable & Fruits">Vegetable & Fruits</option>
+                        <option value="Vegetables">Vegetables and Fruits</option>
+                        <option value="Fruits">Fruits</option>
                         <option value="Beverages">Beverages</option>
                         <option value="Oil Seeds">Oil Seeds</option>
                     </select>
@@ -272,6 +283,31 @@ const AddFarms = () => {
                         required
                     />
                 </div>
+
+                <div className="mb-4">
+                    <label className="form-label d-flex align-items-center"> Date of Harvest: </label>
+                    <input
+                        type="date"
+                        name="dateOfHarvest"
+                        className="form-control"
+                        value={farmData.dateOfHarvest}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label className="form-label d-flex align-items-center"> Size of Farm (in Hectares): </label>
+                    <input
+                        type="number"
+                        name="sizeOfFarm"
+                        className="form-control"
+                        value={farmData.sizeOfFarm}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
 
                 <div className="mb-4">
                     <label className="form-label d-flex align-items-center">Upload Farm Image:  <FiUpload className="me-2" /></label>
