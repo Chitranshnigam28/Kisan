@@ -4,6 +4,7 @@ import Weather from "../Weather";
 import ComponentPriceGraph from "../CropPriceGraph";
 import AddFarms from "../AddFarms";
 import '../../css/main.css';
+import CropRecommendation from "../CropRecomendation";
 
 const Main = () => {
   return (
@@ -32,6 +33,13 @@ const Main = () => {
         <h3>Tips</h3>
         <div className="tips-content">
           Content Here
+        </div>
+      </div>
+
+      <div className="cropRecomendation">
+        <h3>Crop Recommendation</h3>
+        <div className="cropRecomendation-content">
+          <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
         </div>
       </div>
     </main>

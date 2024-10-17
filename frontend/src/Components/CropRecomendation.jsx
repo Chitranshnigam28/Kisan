@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types'; // For prop validation
 
 const CropRecommendation = ({ ownerId }) => {
   const [farmDetails, setFarmDetails] = useState(null);
@@ -8,23 +9,25 @@ const CropRecommendation = ({ ownerId }) => {
   // Function to fetch farm and crop recommendation
   const fetchFarmAndCropRecommendation = async () => {
     try {
+      // Check if ownerId is defined
       if (!ownerId) {
         throw new Error('Owner ID is undefined');
       }
 
-      // Make request to your backend
-      const response = await axios.get(`/api/recommend-crop/${ownerId}`);
+      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${ownerId}`);
       setFarmDetails(response.data);
     } catch (error) {
       console.error('Error fetching farm details:', error);
-      setError('Error fetching farm details');
+      setError(error.message);
     }
   };
 
+  // Fetch data on component mount
   useEffect(() => {
     fetchFarmAndCropRecommendation();
   }, [ownerId]);
 
+  // Handling loading and error states
   if (error) return <p>{error}</p>;
   if (!farmDetails) return <p>Loading...</p>;
 
@@ -36,6 +39,11 @@ const CropRecommendation = ({ ownerId }) => {
       <p>Recommended Crop: {farmDetails.recommendedCrop}</p>
     </div>
   );
+};
+
+// Prop validation
+CropRecommendation.propTypes = {
+  ownerId: PropTypes.string.isRequired, // Ensure ownerId is a required string
 };
 
 export default CropRecommendation;

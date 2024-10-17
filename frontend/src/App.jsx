@@ -12,7 +12,7 @@ import CropRecommendation from "./Components/CropRecomendation";
 import AddFarms from "./Components/AddFarms";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+import { FloatingDockDemo } from "./Components/NavigationDock";
 
 const App = () => {
   return (
@@ -27,8 +27,9 @@ const App = () => {
           <Route path="/translate" element={<TranslationComponent />} />
           <Route path='/weather' element={<Weather />}/>
           <Route path="/add-farm" element={<AddFarms />} />
+          <Route path="/crop-recommendation" element={<CropRecommendation/>} />
         </Routes>
-        <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
+        <FloatingDockDemo></FloatingDockDemo>
       </div>
     </Router>
     </>
