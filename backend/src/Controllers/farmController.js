@@ -2,7 +2,6 @@ const Farm = require("../models/farmModel");
 
 const createFarm = async (req, res) => {
     try {
-        console.log(req.user)
         const { farmerName,  soilType, state,last_crop_sowed,soilQuality,currentSeason} = req.body;
         // console.log(req.user, req.user._id)
         // Ensure req.user is defined

@@ -2,6 +2,7 @@ import React from "react";
 import Weather from "../Weather";
 import ComponentPriceGraph from "../CropPriceGraph";
 import '../../css/main.css';
+import FunFacts from "../FunFacts";
 
 const Main = () => {
   return (
@@ -25,11 +26,8 @@ const Main = () => {
         <ComponentPriceGraph />
       </div>
 
-      <div className="tips">
-        <h3>Tips</h3>
-        <div className="tips-content">
-          Content Here
-        </div>
+      <div className="fun-facts">
+        <FunFacts />
       </div>
     </main>
   );

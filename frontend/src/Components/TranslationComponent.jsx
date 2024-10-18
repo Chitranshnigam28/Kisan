@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../css/translation.css';
 
 const TranslationComponent = () => {
   const [originalContent, setOriginalContent] = useState({});
@@ -48,7 +49,7 @@ const TranslationComponent = () => {
       const textNodes = getTextNodes(document.body);
       const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
 
-      const response = await axios.post('http://localhost:5001/api/translate', {
+      const response = await axios.post('http://localhost:5002/api/translate', {
         text: textToTranslate,
         targetLanguage: selectedLanguage
       });
@@ -69,11 +70,11 @@ const TranslationComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className='translate'>
       <h1>Welcome to the Translation feature of Kisan App</h1>
       <p>This is a demo of a simple translation feature.</p>
 
-      <div>
+      <div className='button-Separation'>
         <label>Select Language: </label>
         <select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
           <option value="en">English (अंग्रेज़ी)</option>

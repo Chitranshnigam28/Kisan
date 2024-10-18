@@ -2,6 +2,7 @@
 const express = require('express');
 const connectDB = require('../utils/db');
 const Crop = require('../models/Crop');
+const Tips = require('../models/tipsSchema')
 const app = express();
 
 // Connect to MongoDB
@@ -112,10 +113,22 @@ app.post('/recommendCrop', async (req, res) => {
     const { recommendedCrop } = await getCropRecommendation(state, temp, humid, rain, soilType, previousCrop);
 
     if (recommendedCrop) {
-      res.json({
-        message: `Recommended crop for ${state} is ${recommendedCrop.name}`,
-        crop: recommendedCrop
-      });
+      const cropTips = await Tips.findOne({ crop_name: recommendedCrop.name }); // Compare the name directly
+      if (cropTips) {
+        res.json({
+          message: `Recommended crop for ${state} is ${recommendedCrop.name}`,
+          crop: recommendedCrop,
+          tips: cropTips.tips // Include the specific tips related to the recommended crop
+        });
+      } else {
+        // If no specific tips for the recommended crop, fetch a random crop's tips
+        const randomTips = await Tips.aggregate([{ $sample: { size: 1 } }]); // Get one random tip
+        res.json({
+          message: `Recommended crop for ${state} is ${recommendedCrop.name}, but no specific tips available. Here's a random tip for ${randomTips[0].crop_name}:`,
+          crop: recommendedCrop,
+          tips: randomTips[0].tips // Return the random crop's tips
+        });
+      }
     } else {
       res.status(404).json({ message: 'No crop recommendation found for the provided data.' });
     }
@@ -130,3 +143,5 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+module.exports = getCropRecommendation;

@@ -1,0 +1,12 @@
+.translate{
+    display: flex;
+    flex-direction: column;
+}
+
+.button-Separation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    margin: auto;
+}
