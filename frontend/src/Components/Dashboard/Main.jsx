@@ -5,6 +5,7 @@ import ComponentPriceGraph from "../CropPriceGraph";
 import MyFarms from '../Farms/MyFarms'
 import '../../css/main.css';
 import FunFacts from "../FunFacts";
+import CropRecommendation from "../CropRecomendation";
 
 const Main = () => {
 
@@ -30,6 +31,13 @@ const Main = () => {
 
       <div className="fun-facts">
         <FunFacts />
+      </div>
+
+      <div className="cropRecomendation">
+        <h3>Crop Recommendation</h3>
+        <div className="cropRecomendation-content">
+          <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
+        </div>
       </div>
     </main>
   );

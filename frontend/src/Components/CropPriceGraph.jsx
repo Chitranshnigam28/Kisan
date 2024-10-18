@@ -37,8 +37,8 @@ const CropPriceChart = ({ crop }) => {
             // Extract historical prices
             const historicalPrices = data[0].market_price.historical_prices;
             
-            setCropPrices(historicalPrices);
-            console.log("cropPrices after historicalPrices "+cropPrices);
+            setCropPrices(allPrices);
+            console.log("Fetched cropPrices: ", allPrices);
         } catch (error) {
             console.error('Error fetching crop prices:', error);
         } finally {

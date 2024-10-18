@@ -34,7 +34,7 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             return { error: 'No farm data found for this user.' };
         }
 
-        
+        // const { soilType, state, last_crop_sowed, currentSeason, soilQuality } = farm;
 
         console.log('Farm data fetched successfully:', farm);
 
@@ -102,6 +102,4 @@ const main = async () => {
     } finally {
         mongoose.connection.close();
     }
-};
-
-}}
+};}}
