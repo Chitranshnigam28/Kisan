@@ -8,9 +8,11 @@ import TranslationComponent from "./Components/TranslationComponent";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Weather from './Components/Weather';
 import AddFarms from "./Components/Farms/AddFarms";
-import MyFarms from './Components/Farms/MyFarms'
+import MyFarms from "./Components/Farms/MyFarms";
+import Login from "./Components/Login";
+import SignUp from "./Components/SignUp";
+import CropRecommendation from "./Components/CropRecomendation";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 const App = () => {
   return (
@@ -24,9 +26,13 @@ const App = () => {
           <Route path="/profilesetup" element={<ProfileSetup />} />
           <Route path="/translate" element={<TranslationComponent />} />
           <Route path='/weather' element={<Weather />}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<SignUp />}/>
+
           <Route path="/add-farm" element={<AddFarms />} />
           <Route path="/my-farms" element={<MyFarms />} />
         </Routes>
+        <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
       </div>
     </Router>
     </>

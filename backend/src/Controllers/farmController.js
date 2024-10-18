@@ -50,15 +50,15 @@ const createFarm = async (req, res) => {
 
 const getFarms = async (req, res) => {
     try {
-        if (!req.user || !req.user.UserId) {
-            return res.status(401).json({ message: "User not authenticated" });
+        const farms = await Farm.find(); 
+
+        if (!farms || farms.length === 0) {
+            return res.status(404).json({ message: "No farms found" });
         }
-        const farms = await Farm.find({ owner: req.user.UserId }); // Fixed field name
-        if (farms.length === 0) {
-            return res.status(404).json({ message: "No farms found for this owner" });
-        }
+
         res.json(farms);
     } catch (error) {
+        console.error('Error fetching farms:', error);  
         res.status(500).json({ message: "Failed to fetch farms", error: error.message });
     }
 };
