@@ -54,7 +54,7 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             - Current Season: ${currentSeason}
             - Date of Planting: ${dateOfPlanting}
 
-        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop: Current price in the market, Harvest Period Price of the crop seed`;
+        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop: Current price in the market (only numerical range), Harvest Period and Price of the crop seed (only numerical answer)`;
 
         console.log('Prompt sent to OpenAI:', prompt);
 

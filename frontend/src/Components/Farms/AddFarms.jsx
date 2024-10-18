@@ -17,39 +17,74 @@ const AddFarms = () => {
         soilQuality: "",
         currentSeason: "",
         dateOfPlanting: "",
+        dateOfHarvest: "",
+        sizeOfFarm: "",
         farmImage: null,
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log("Previous farmData:", farmData);
         setFarmData(prevState => ({
             ...prevState,
             [name]: value
         }));
-
     };
 
     const handleFileChange = (e) => {
-        setFarmData(...farmData, { farmImage: e.target.files[0] });
+        setFarmData(prevState => ({
+            ...prevState,
+            farmImage: e.target.files[0]
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const farmFormData = new FormData();
-        Object.keys(farmData).forEach(key => {
-            farmFormData.append(key, farmData[key]);
-        })
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('No token found. Please log in again.');
+            return;
+        }
 
+        const farmDetails = {
+            farmName: farmData.farmName,
+            cropType: farmData.cropType,
+            soilType: farmData.soilType,
+            location: farmData.location,
+            farmingMethod: farmData.farmingMethod,
+            waterSource: farmData.waterSource,
+            last_crop_sowed: farmData.last_crop_sowed,
+            soilQuality: farmData.soilQuality,
+            currentSeason: farmData.currentSeason,
+            dateOfPlanting: farmData.dateOfPlanting,
+            dateOfHarvest: farmData.dateOfHarvest,
+            sizeOfFarm: farmData.sizeOfFarm,
+        };
+    
         try {
-            const response = await axios.post('/api/farms', farmFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            let response;
+            if (farmData.farmImage) {
+                const farmFormData = new FormData();
+                farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
+                farmFormData.append('farmDetails', JSON.stringify(farmDetails)); 
+    
+                response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+            } else {
+                response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+            }
+    
             console.log('Farm added:', response.data);
-
+    
             setFarmData({
                 farmName: "",
                 cropType: "",
@@ -61,16 +96,23 @@ const AddFarms = () => {
                 soilQuality: "",
                 currentSeason: "",
                 dateOfPlanting: "",
+                dateOfHarvest: "",
+                sizeOfFarm: "",
                 farmImage: null,
             });
+    
             alert('Farm added successfully!');
+        } catch (error) {
+            console.error('Error adding farm:', error.response?.data || error.message);
+    
+            if (error.response?.data?.message) {
+                alert(`Error: ${error.response.data.message}`);
+            } else {
+                alert('Failed to add farm. Please try again.');
+            }
         }
-        catch (error) {
-            console.error('Error adding farm:', error.response.data || error.message);
-            alert('Failed to add farm. Please try again.');
-        }
-    }
-
+    };
+    
 
     return (
         <div className='addFarmContainer container my-5'>
@@ -101,7 +143,8 @@ const AddFarms = () => {
                         <option value="">Select Crop Type</option>
                         <option value="Cereal Crops">Cereal Crops</option>
                         <option value="Cash Crops">Cash Crops</option>
-                        <option value="Vegetable & Fruits">Vegetable & Fruits</option>
+                        <option value="Vegetables">Vegetables</option>
+                        <option value="Fruits">Fruits</option>
                         <option value="Beverages">Beverages</option>
                         <option value="Oil Seeds">Oil Seeds</option>
                     </select>
@@ -272,6 +315,31 @@ const AddFarms = () => {
                         required
                     />
                 </div>
+
+                <div className="mb-4">
+                    <label className="form-label d-flex align-items-center"> Date of Harvest: </label>
+                    <input
+                        type="date"
+                        name="dateOfHarvest"
+                        className="form-control"
+                        value={farmData.dateOfHarvest}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label className="form-label d-flex align-items-center"> Size of Farm (in Hectares): </label>
+                    <input
+                        type="number"
+                        name="sizeOfFarm"
+                        className="form-control"
+                        value={farmData.sizeOfFarm}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+
 
                 <div className="mb-4">
                     <label className="form-label d-flex align-items-center">Upload Farm Image:  <FiUpload className="me-2" /></label>

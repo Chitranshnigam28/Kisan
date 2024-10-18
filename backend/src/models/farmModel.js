@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const farmSchema = mongoose.Schema({
     farmName: { type: String, required: true },
     cropType: { type: String, enum: [
-        'Cereal Crops', 'Cash Crops', 'Vegetable & Fruits', 'Beverages', 'Oil Seeds'
+        'Cereal Crops', 'Cash Crops', 'Vegetables', 'Fruits', 'Beverages', 'Oil Seeds'
     ], required: true },
     soilType: { type: String, enum: [
         'Clay and Loamy', 'Loamy and Well-Drained', 'Sandy and Well-Drained', 'Well-drained Sandy Loam', 'Well-Drained and Rich in Organic Matter', 'Well-drained Sandy or Loamy Soil', 'Well-drained, Fertile Soil'
@@ -29,6 +29,8 @@ const farmSchema = mongoose.Schema({
     soilQuality: { type: String, enum: ['low', 'moderate', 'high'], required: true },
     currentSeason: { type: String, enum: ['spring', 'autumn', 'summer', 'winter'], required: true },
     dateOfPlanting: { type: Date, required: true },
+    dateOfHarvest: { type: Date, required: true },
+    sizeOfFarm: { type: Number, required: true },
     farmImage: { type: String, required: false }, 
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
