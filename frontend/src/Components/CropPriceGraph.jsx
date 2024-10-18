@@ -14,6 +14,10 @@ const CropPriceChart = ({ crop }) => {
             console.log("cropSent: ", cropSent);
             
             const response = await fetch(`http://localhost:5001/api/crops/price?crop=${cropSent}`);
+            
+    
+           
+            // console.log("response.data()"+response.data());
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -29,6 +33,12 @@ const CropPriceChart = ({ crop }) => {
             
             setCropPrices(allPrices);
             console.log("Fetched cropPrices: ", allPrices);
+            console.log("data received new "+JSON.stringify(data));
+            // Extract historical prices
+            const historicalPrices = data[0].market_price.historical_prices;
+            
+            setCropPrices(historicalPrices);
+            console.log("cropPrices after historicalPrices "+cropPrices);
         } catch (error) {
             console.error('Error fetching crop prices:', error);
         } finally {

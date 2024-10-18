@@ -6,7 +6,7 @@
 
 /* In your CSS file */
 
-/* .navbar {
+.navbar {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -25,7 +25,4 @@
   
   .navbar li a:hover {
     background-color: #575757;
-  } */
-
-
-  /* General resets */
+  }

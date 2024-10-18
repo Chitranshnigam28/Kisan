@@ -1,4 +1,4 @@
-import '../App.css';
+import "../css/weather.css"
 import { useEffect, useState } from 'react';
 import TopButtons from '../Components/weatherComponents/TopButtons';
 import Inputs from '../Components/weatherComponents/Inputs';

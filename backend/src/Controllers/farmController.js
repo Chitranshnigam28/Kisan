@@ -2,23 +2,50 @@ const Farm = require("../models/farmModel");
 
 const createFarm = async (req, res) => {
     try {
+<<<<<<< HEAD
         const { farmerName,  soilType, state,last_crop_sowed,soilQuality,currentSeason} = req.body;
         // console.log(req.user, req.user._id)
         // Ensure req.user is defined
+=======
+        console.log(req.user);
+        const {
+            farmName,
+            cropType,
+            soilType,
+            location,
+            farmingMethod,
+            waterSource,
+            last_crop_sowed,
+            soilQuality,
+            currentSeason,
+            dateOfPlanting,
+            dateOfHarvest,
+            sizeOfFarm,
+            farmImage
+        } = req.body;
+
+>>>>>>> db8512f8c83a2f3fa4b392c1dc1a511aae95ec7e
         if (!req.user || !req.user.UserId) {
             return res.status(401).json({ message: 'User not authenticated' });
         }
 
         const newFarm = new Farm({
-            farmerName,
-            // numberOfFarms,
+            farmName,
+            cropType,
             soilType,
-            state,
+            location, 
+            farmingMethod,
+            waterSource,
             last_crop_sowed,
             soilQuality,
             currentSeason,
+            dateOfPlanting,
+            dateOfHarvest,
+            sizeOfFarm,
+            farmImage,
             owner: req.user.UserId 
         });
+
         const savedFarm = await newFarm.save();
         res.status(201).json(savedFarm);
 
@@ -29,12 +56,19 @@ const createFarm = async (req, res) => {
 
 const getFarms = async (req, res) => {
     try {
-        const farms = await Farm.find({ owner: req.user.UserId })
-        res.json(farms)
+        const farms = await Farm.find(); 
+
+        if (!farms || farms.length === 0) {
+            return res.status(404).json({ message: "No farms found" });
+        }
+
+        res.json(farms);
     } catch (error) {
-        res.status(500).json({ message: "Failed to fetch farm", error: error.message })
+        console.error('Error fetching farms:', error);  
+        res.status(500).json({ message: "Failed to fetch farms", error: error.message });
     }
-}
+};
+
 
 const updateFarms = async (req, res) => {
     const { id } = req.params;
