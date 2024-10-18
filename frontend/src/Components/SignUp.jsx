@@ -72,7 +72,7 @@ const SignUp = () => {
             <p id="hvact" style={{color:"#818898",fontWeight:600}}>Please agree to Art Asta <b>Terms of Use</b> and
 <b>Privacy Policy</b>, and to receive emails from kisan.</p>
             
-            <button type="submit">Next</button>
+            <button type="submit" className='authBtn'>Next</button>
             <p id="hvact" style={{color:"#818898",fontWeight:600}}>Already have an account? <b>Sign up</b></p>
         </form>
             </div>

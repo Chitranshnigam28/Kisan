@@ -72,7 +72,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
-                <button type="submit">Login</button>
+                <button type="submit" className='authBtn'>Login</button>
                 <p id="hvact" style={{color:"#818898",fontWeight:600}}>Don't have an account? <b>Sign up</b></p>
             </form>
         </div>

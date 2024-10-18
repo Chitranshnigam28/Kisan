@@ -73,12 +73,13 @@ h6 {
     font-size: 1rem;
 }
 
-p {
+
+
+/* p {
     margin-bottom: 1.25rem;
     font-weight: lighter;
-    color: white;
-    
-}
+    color: rgb(142, 105, 105);
+} */
 #hvact{
     text-align: center;
 }
@@ -101,13 +102,13 @@ input, textarea, select, button {
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 4px;
     font-size: 1rem;
 }
 
-button {
-    /* background-color: black; */
+.authBtn {
+    background-color: black;
     color: white;
     border: none;
     cursor: pointer;
