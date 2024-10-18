@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import "../css/loginsignup.css";
-import "../css/default.css";
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -47,7 +47,7 @@ const Login = () => {
         <div className="containerlogin">
             <h1>Login</h1>
             <h2>Enter your credentials</h2>
-            <p>Sign in with your username and password. If you don’t have an account yet, we’ll get you one set up.</p>
+            <p style={{color:"#818898",fontWeight:600}}>Sign in with your username and password. If you don’t have an account yet, we’ll get you one set up.</p>
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} 
 
@@ -73,7 +73,7 @@ const Login = () => {
                     />
                 </label>
                 <button type="submit">Login</button>
-                <p id="hvact">Don't have an account? <b>Sign up</b></p>
+                <p id="hvact" style={{color:"#818898",fontWeight:600}}>Don't have an account? <b>Sign up</b></p>
             </form>
         </div>
     );

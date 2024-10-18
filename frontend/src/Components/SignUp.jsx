@@ -50,7 +50,7 @@ const SignUp = () => {
         <div className="containersignup">
             <h1>SignUp</h1>
             <h2>Set up credentials</h2>
-        <p>Sign Up by creating your username and password.</p>
+        <p style={{color:"#818898",fontWeight:600}}>Sign Up by creating your username and password.</p>
         <form onSubmit={handleSubmit}>
             <label htmlFor="uname">
                 Username
@@ -69,11 +69,11 @@ const SignUp = () => {
                Create Password
                 <input type="password" name="password" id="password" value={cpassword} onChange={(e)=>{setCPassword(e.target.value)}}/>
             </label>
-            <p id="hvact">Please agree to Art Asta <b>Terms of Use</b> and
+            <p id="hvact" style={{color:"#818898",fontWeight:600}}>Please agree to Art Asta <b>Terms of Use</b> and
 <b>Privacy Policy</b>, and to receive emails from kisan.</p>
             
             <button type="submit">Next</button>
-            <p id="hvact">Already have an account? <b>Sign up</b></p>
+            <p id="hvact" style={{color:"#818898",fontWeight:600}}>Already have an account? <b>Sign up</b></p>
         </form>
             </div>
     )
