@@ -39,11 +39,11 @@ const iconUrlFromCode = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.p
 const formatCurrent = (data) => {
     if (!data || !data.main || !data.weather || !data.sys || !data.wind) {
         console.error('Invalid data structure:', data);
-        return {}; // Return an empty object if data is invalid
+        return {}; 
     }
 
     const {
-        coord: { lat, lon }, // Fixed lat/lon destructuring
+        coord: { lat, lon }, 
         main: { temp, feels_like, temp_min, temp_max, humidity },
         name,
         dt,
