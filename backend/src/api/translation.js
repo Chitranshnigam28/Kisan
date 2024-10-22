@@ -11,13 +11,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const googleApiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
-console.log("Google API Key:", googleApiKey); 
 
 const translate = new Translate({
   key: googleApiKey, 
 });
 
-app.post('/api/translate', async (req, res) => {
+const translateText = async (req, res) => {
   const { text, targetLanguage } = req.body;
 
   if (!text || !targetLanguage) {
@@ -31,9 +30,6 @@ app.post('/api/translate', async (req, res) => {
     console.error('Translation failed:', error);
     res.status(500).json({ message: 'Translation failed' });
   }
-});
+};
 
-const PORT =  5002;
-app.listen(PORT, () => {
-  console.log(`Translation server running on http://localhost:${PORT}`);
-});
+module.exports = translateText

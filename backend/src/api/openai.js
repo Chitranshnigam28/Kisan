@@ -11,7 +11,6 @@ const openai = new OpenAI({
 // MongoDB connection URI
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);
-console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 // Function to connect to MongoDB
 const connectDB = async () => {
@@ -24,9 +23,7 @@ const connectDB = async () => {
     }
 };
 
-// Function to fetch farm data and recommend a crop
 const fetchFarmAndRecommendCrop = async (ownerId) => {
-    console.log(ownerId, ">>>>>>>>");
     try {
         const farm = await farmSchema.findOne({ owner: ownerId });
         if (!farm) {
@@ -50,7 +47,13 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             - Current Season: ${currentSeason}
             - Date of Planting: ${dateOfPlanting}
 
-        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop:. please answer in one word`;
+        Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. Provide the data in the following JSON array format:
+
+        At index 0: The recommended crop in one word.
+        At index 1: The current price of the crop in the market per Kg (numerical value in INR).
+        At index 2: The harvest period of the crop (monthly range or suitable format).
+        At index 3: The price of the crop seed per Kg(numerical value in INR).
+        Ensure that only the JSON array is returned, with no additional explanations or context.`;
 
         console.log('Prompt sent to OpenAI:', prompt);
 
@@ -63,7 +66,7 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
         });
 
         const recommendedCrop = completion.choices[0]?.message.content.trim();
-
+        console.log(recommendedCrop)
         return {
             farmName,
             soilType,
@@ -80,7 +83,7 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
 const main = async () => {
     try {
         await connectDB();
-        const ownerId = '66f92acd44f00ac86e5adac1';
+        const ownerId = '67108f8d06fdf532952b1baa';
         await fetchFarmAndRecommendCrop(ownerId);
     } catch (error) {
         console.error('An error occurred:', error);
@@ -94,5 +97,5 @@ const main = async () => {
 
 module.exports = {
     fetchFarmAndRecommendCrop,
-    connectDB, 
+    connectDB,
 };
