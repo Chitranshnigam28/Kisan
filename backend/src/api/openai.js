@@ -1,22 +1,22 @@
 require('dotenv').config({ path: './../../.env' });
 const mongoose = require('mongoose');
 const OpenAI = require('openai');
-const farmSchema = require('./models/farmModel');
+const farmSchema = require('../models/farmModel');
 
 // Initialize OpenAI API
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Function to fetch farm data and recommend a crop
-const fetchFarmAndRecommendCrop = async (ownerId) => {
-
+// MongoDB connection URI
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);
-console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
+// console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
+// Function to connect to MongoDB
 const connectDB = async () => {
     try {
+        
         await mongoose.connect(MONGO_URI);
         console.log("Connected to MongoDB");
     } catch (err) {
@@ -25,21 +25,23 @@ const connectDB = async () => {
     }
 };
 
-
+// Function to fetch farm data and recommend a crop
+// console.log(ownerId);
 const fetchFarmAndRecommendCrop = async (ownerId) => {
-    console.log(ownerId, ">>>>>>>>")
+    // console.log(ownerId, ">>>>>>>>");
     try {
+        // checkUserExist = ((req,res)=>{
+        //     console.log(req.user.UserID)
+        // })
+        // checkUserExist();
         const farm = await farmSchema.findOne({ owner: ownerId });
         if (!farm) {
             return { error: 'No farm data found for this user.' };
         }
 
-        
+        const { farmName, cropType, location, soilType, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason, dateOfPlanting } = farm;
 
         console.log('Farm data fetched successfully:', farm);
-
-        const { farmName, cropType, soilType, location, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason, dateOfPlanting } = farm;
-
 
         const prompt = `
         Based on the following farm details:
@@ -54,10 +56,15 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             - Current Season: ${currentSeason}
             - Date of Planting: ${dateOfPlanting}
 
-        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop: Current price in the market (only numerical range), Harvest Period and Price of the crop seed (only numerical answer)`;
+        Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. Provide the data in the following JSON array format:
+
+At index 0: The recommended crop in one word.
+At index 1: The current price of the crop in the market Per kg (numerical value in INR).
+At index 2: The harvest period of the crop (monthly range or suitable format).
+At index 3: The price of the crop seed Per kg(numerical value in INR).
+Ensure that only the JSON array is returned, with no additional explanations or context.`;
 
         console.log('Prompt sent to OpenAI:', prompt);
-
 
         const completion = await openai.chat.completions.create({
             model: 'gpt-4',
@@ -68,11 +75,11 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
         });
 
         const recommendedCrop = completion.choices[0]?.message.content.trim();
-
+        console.log(recommendedCrop)
         return {
-            farmName: farm.farmName,
-            soilType: farm.soilType,
-            waterSource: farm.waterSource,
+            farmName,
+            soilType,
+            waterSource,
             recommendedCrop,
         };
     } catch (error) {
@@ -81,27 +88,25 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
     }
 };
 
-// Add this route to your existing Express app
-module.exports = (app) => {
-    app.get('/api/recommend-crop/:ownerId', async (req, res) => {
-        const { ownerId } = req.params;
-        const result = await fetchFarmAndRecommendCrop(ownerId);
+// Connect to the database and fetch farm data (optional for initial testing)
+// const main = async () => {
+//     try {
         
-        if (result.error) {
-            return res.status(400).json({ error: result.error });
-        }
-        res.json(result);
-    });
-const main = async () => {
-    try {
-        await connectDB();
-        const ownerId = '66f92acd44f00ac86e5adac1';
-        await fetchFarmAndRecommendCrop(ownerId);
-    } catch (error) {
-        console.error('An error occurred:', error);
-    } finally {
-        mongoose.connection.close();
-    }
-};
+//         await connectDB();
+//         const ownerId = '67108f8d06fdf532952b1baa';
+//         await fetchFarmAndRecommendCrop(ownerId);
+//     } catch (error) {
+//         console.error('An error occurred:', error);
+//     } finally {
+//         mongoose.connection.close();
+//     }
+// };
 
-}}
+
+// Uncomment for initial testing
+// main();
+
+module.exports = {
+    fetchFarmAndRecommendCrop,
+    connectDB,
+};

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Tips = require('../models/tipsSchema'); 
 const Crop = require('../models/Crop'); 
-const {getCropRecommendation} = require('../api/cropRecommendation'); 
+// const {getCropRecommendation} = require('../api/cropRecommendation'); 
 
 
 router.post('/recommended', async (req, res) => {

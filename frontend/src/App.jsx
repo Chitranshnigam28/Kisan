@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/add-farm" element={<AddFarms />} />
           <Route path="/my-farms" element={<MyFarms />} />
         </Routes>
-        <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
+        <CropRecommendation />
       </div>
     </Router>
     </>

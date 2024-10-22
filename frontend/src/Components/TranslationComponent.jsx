@@ -49,7 +49,7 @@ const TranslationComponent = () => {
       const textNodes = getTextNodes(document.body);
       const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
 
-      const response = await axios.post('http://localhost:5002/api/translate', {
+      const response = await axios.post('http://localhost:5001/api/translate', {
         text: textToTranslate,
         targetLanguage: selectedLanguage
       });

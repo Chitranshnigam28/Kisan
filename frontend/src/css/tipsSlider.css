@@ -1,0 +1,57 @@
+.carousel-container {
+    top: 117px;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    justify-content: flex-start;
+    position: relative;
+  }
+  
+  .cards-track {
+    display: flex;
+    animation: scrollInfinite 100s linear infinite; /* Adjusted speed */
+    transition: animation-play-state 0.5s; /* Optional smooth transition */
+  }
+  
+  .card {
+    min-width: 300px;
+    margin-right: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+  }
+  
+  .cards-track:hover {
+    animation-play-state: paused; /* Pause on hover for the entire track */
+  }
+  
+  @keyframes scrollInfinite {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .crop-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .crop-tips {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: 1024px) {
+    .card {
+      min-width: 200px; /* Adjust for smaller screens */
+    }
+  }
+  
