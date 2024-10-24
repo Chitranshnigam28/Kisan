@@ -34,7 +34,7 @@ const farmSchema = mongoose.Schema({
     dateOfPlanting: { type: Date, required: true },
     dateOfHarvest: { type: Date, required: true },
     sizeOfFarm: { type: Number, required: true },
-    farmImage: { type: String, required: false }, 
+    farmImage: { type: mongoose.Schema.Types.ObjectId, ref: 'Image' }, 
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true

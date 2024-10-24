@@ -78,7 +78,7 @@ const formatCurrent = (data) => {
 };
 
 const formatForecastWeather = (secs, offset, data) => {
-    console.log("data", JSON.stringify(data, null, 2)); 
+    // console.log("data", JSON.stringify(data, null, 2)); 
 
     const hourly = data
         .filter((f) => f.dt > secs)
@@ -105,7 +105,7 @@ const formatForecastWeather = (secs, offset, data) => {
 const getFormattedWeatherData = async (searchParams) => {
     // Fetch current weather data
     const currentWeatherData = await getWeatherData('weather', searchParams);
-    console.log("currentWeatherData", JSON.stringify(currentWeatherData));
+    // console.log("currentWeatherData", JSON.stringify(currentWeatherData));
 
     if (!currentWeatherData) {
         return {}; // Return empty if API call fails

@@ -15,6 +15,7 @@ console.log('MONGO_URI:', MONGO_URI);
 // Function to connect to MongoDB
 const connectDB = async () => {
     try {
+
         await mongoose.connect(MONGO_URI);
         console.log("Connected to MongoDB");
     } catch (err) {
@@ -50,9 +51,9 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
         Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. Provide the data in the following JSON array format:
 
         At index 0: The recommended crop in one word.
-        At index 1: The current price of the crop in the market per Kg (numerical value in INR).
+        At index 1: The current price of the crop in the market Per kg (numerical value in INR).
         At index 2: The harvest period of the crop (monthly range or suitable format).
-        At index 3: The price of the crop seed per Kg(numerical value in INR).
+        At index 3: The price of the crop seed Per kg(numerical value in INR).
         Ensure that only the JSON array is returned, with no additional explanations or context.`;
 
         console.log('Prompt sent to OpenAI:', prompt);
@@ -78,22 +79,6 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
         return { error: 'Error generating crop recommendation' };
     }
 };
-
-// Connect to the database and fetch farm data (optional for initial testing)
-const main = async () => {
-    try {
-        await connectDB();
-        const ownerId = '67108f8d06fdf532952b1baa';
-        await fetchFarmAndRecommendCrop(ownerId);
-    } catch (error) {
-        console.error('An error occurred:', error);
-    } finally {
-        mongoose.connection.close();
-    }
-};
-
-// Uncomment for initial testing
-// main();
 
 module.exports = {
     fetchFarmAndRecommendCrop,

@@ -9,12 +9,16 @@ const CropRecommendation = ({ ownerId }) => {
   // Function to fetch farm and crop recommendation
   const fetchFarmAndCropRecommendation = async () => {
     try {
+      const ownerId = localStorage.getItem('userId');
+      console.log(ownerId,'+++++++++++++++++++++++++++++++++++++------------------------')
       // Check if ownerId is defined
       if (!ownerId) {
         throw new Error('Owner ID is undefined');
+      }else{
+        console.log(ownerId)
       }
 
-      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${ownerId}`);
+      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${"67108f8d06fdf532952b1baa"}`);
       setFarmDetails(response.data);
     } catch (error) {
       console.error('Error fetching farm details:', error);
