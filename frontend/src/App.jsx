@@ -40,7 +40,8 @@ const App = () => {
           <Route path="/my-farms" element={<MyFarms />} />
           <Route path="/crop-recommendation" element={<CropRecommendation/>} />
         </Routes>
-        <FloatingDockDemo></FloatingDockDemo>
+        {/* <FloatingDockDemo></FloatingDockDemo> */}
+        <CropRecommendation />
       </div>
     </Router>
     </>

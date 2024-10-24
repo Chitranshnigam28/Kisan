@@ -15,7 +15,7 @@ async function getWeather(lat, lon) {
         const response = await axios.get(url);
         const weatherData = response.data;
 
-        console.log(weatherData);
+        // console.log(weatherData);
         return weatherData;
     } catch (error) {
         console.error("Error fetching weather data:", error.response?.data || error.message);

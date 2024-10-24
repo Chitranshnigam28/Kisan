@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import MatchingTips from '../MatchingTips';
 
 const MyFarms = () => {
     const [farms, setFarms] = useState([]);
@@ -74,9 +75,11 @@ const MyFarms = () => {
 
     return (
         <div className="container my-5">
-            {location.pathname === '/' ? (
-                <div className="d-flex overflow-auto">
-                    {farms.slice(0, 2).map(farm => (
+            <MatchingTips />
+    
+            <div className={location.pathname === '/' ? "d-flex overflow-auto" : "row g-3"}>
+                {location.pathname === '/' ? (
+                    farms.slice(0, 2).map(farm => ( // Using `farms` instead of `userFarms`
                         <div className="me-3" key={farm._id}>
                             <div className="card border-success shadow" style={{ width: '18rem' }}>
                                 <div className="card-header text-white bg-success">
@@ -98,80 +101,77 @@ const MyFarms = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
-                </div>
-            ) : (
-                <>
-                    <div className="row g-3">
-                        {farms.map(farm => (
-                            <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
-                                <div className="card border-success shadow">
-                                    <div className="card-header text-white bg-success">
-                                        <h5 className="card-title">{farm.farmName}</h5>
-                                    </div>
-                                    <div className="card-body">
-                                        <p className="card-text"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
-                                        <div className="d-flex justify-content-between mt-3">
-                                            <Link to={`/edit-farm/${farm._id}`} className="btn btn-outline-warning me-2">
-                                                <FaEdit /> Edit
-                                            </Link>
-                                            <button
-                                                className="btn btn-outline-danger"
-                                                onClick={() => handleDelete(farm._id)}
-                                            >
-                                                <FaTrash /> Delete
-                                            </button>
+                    ))
+                ) : (
+                    <>
+                        <div className="row g-3">
+                            {farms.map(farm => (
+                                <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
+                                    <div className="card border-success shadow">
+                                        <div className="card-header text-white bg-success">
+                                            <h5 className="card-title">{farm.farmName}</h5>
+                                        </div>
+                                        <div className="card-body">
+                                            <p className="card-text"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
+                                            <div className="d-flex justify-content-between mt-3">
+                                                <Link to={`/edit-farm/${farm._id}`} className="btn btn-outline-warning me-2">
+                                                    <FaEdit /> Edit
+                                                </Link>
+                                                <button
+                                                    className="btn btn-outline-danger"
+                                                    onClick={() => handleDelete(farm._id)}
+                                                >
+                                                    <FaTrash /> Delete
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-
-                        {farms.length === 0 && (
-                            <div className="col-12 text-center">
-                                <p className="text-muted">No farms found.</p>
+                            ))}
+    
+                            {farms.length === 0 && (
+                                <div className="col-12 text-center">
+                                    <p className="text-muted">No farms found.</p>
+                                </div>
+                            )}
+                        </div>
+    
+                        {selectedFarm && (
+                            <div className="selected-farm mt-5 p-4 border border-success">
+                                <h3>{selectedFarm.farmName}</h3>
+                                <div>
+                                    <span><strong>{selectedFarm.sizeOfFarm} HA</strong> .</span>
+                                    <span><strong>{new Date(selectedFarm.dateOfPlanting).toLocaleDateString()} Date Of Planting</strong></span>
+                                </div>
+                                <br />
+                                <div>
+                                    <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
+                                    <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
+                                    <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
+                                </div>
                             </div>
                         )}
-                    </div>
-
-                    {selectedFarm && (
-                        <div className="selected-farm mt-5 p-4 border border-success">
-                            <h3>{selectedFarm.farmName}</h3>
-                            <div>
-                                <span><strong>{selectedFarm.sizeOfFarm} HA</strong> .</span>
-                                <span><strong>{new Date(selectedFarm.dateOfPlanting).toLocaleDateString()} Date Of Planting</strong></span>
+    
+                        {farms.length > 2 && (
+                            <div className="text-center">
+                                <button
+                                    onClick={() => navigate(`/my-farms?userId=${userId}`)}
+                                    className="btn btn-success mt-4"
+                                >
+                                    View All Farms
+                                </button>
                             </div>
-                            <br />
-                            <div>
-                                <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
-                                <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
-                                <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
-                            </div>
+                        )}
+    
+                        <div className="d-flex justify-content-center align-items-center vh-50">
+                            <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
+                                Go Back
+                            </Link>
                         </div>
-                    )}
-
-                    {farms.length > 2 && (
-                        <div className="text-center">
-                            <button
-                                onClick={() => navigate(`/my-farms?userId=${userId}`)}
-                                className="btn btn-success mt-4"
-                            >
-                                View All Farms
-                            </button>
-                        </div>
-                    )}
-
-                    <div className="d-flex justify-content-center align-items-center vh-50">
-                        <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
-                            Go Back
-                        </Link>
-                    </div>
-                </>
-
-
-            )}
+                    </>
+                )}
+            </div>
         </div>
     );
-};
-
+}    
 export default MyFarms;

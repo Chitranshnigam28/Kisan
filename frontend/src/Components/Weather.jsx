@@ -31,12 +31,12 @@ function Weather() {
       const cityName = query.q ? capitalizeFirstLetter(query.q) : "current location";
       toast.info(`Fetching weather data for ${isGeolocation ? "current location" : cityName}...`);
       
-      console.log("Query being sent:", query);
+      // console.log("Query being sent:", query);
       const response = await fetch(`http://localhost:5001/api/weather?${queryString}&units=${units}`);
       if (!response.ok) throw new Error("Failed to fetch weather data");
 
       const data = await response.json();
-      console.log("Weather data received:", data);
+      // console.log("Weather data received:", data);
       if (!data.temp || !data.hourly || !data.daily) {
         throw new Error("Incomplete weather data received");
       }

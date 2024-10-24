@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const googleApiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
+<<<<<<< HEAD
+=======
+// console.log("Google API Key:", googleApiKey); 
+>>>>>>> 11cbb57c496de835251c2caa152204e71533a7ef
 
 const translate = new Translate({
   key: googleApiKey, 

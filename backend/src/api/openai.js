@@ -11,10 +11,12 @@ const openai = new OpenAI({
 // MongoDB connection URI
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);
+console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 // Function to connect to MongoDB
 const connectDB = async () => {
     try {
+        
 
         await mongoose.connect(MONGO_URI);
         console.log("Connected to MongoDB");
@@ -23,6 +25,7 @@ const connectDB = async () => {
         throw err;
     }
 };
+
 
 const fetchFarmAndRecommendCrop = async (ownerId) => {
     try {
@@ -68,7 +71,11 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
 
         const recommendedCrop = completion.choices[0]?.message.content.trim();
         console.log(recommendedCrop)
+        console.log(recommendedCrop)
         return {
+            farmName,
+            soilType,
+            waterSource,
             farmName,
             soilType,
             waterSource,

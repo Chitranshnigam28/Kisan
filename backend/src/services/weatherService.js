@@ -15,7 +15,7 @@ const getWeatherData = async (infoType, searchParams) => {
         throw new Error('Invalid search parameters: Either city (q) or lat/lon must be provided.');
     }
     
-    console.log("Requesting weather data from:", url);
+    // console.log("Requesting weather data from:", url);
 
     try {
         const response = await fetch(url);
@@ -121,7 +121,7 @@ const getFormattedWeatherData = async (searchParams) => {
     });
 
     if (!forecastData || !forecastData.list) {
-        console.error('Invalid forecast data structure:', forecastData);
+        // console.error('Invalid forecast data structure:', forecastData);
         return {}; // Return empty if forecast API call fails
     }
 

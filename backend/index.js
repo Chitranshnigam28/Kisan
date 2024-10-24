@@ -11,8 +11,12 @@ const weatherRoute = require('./src/Routes/weatherRoute');
 const funFactsRoute = require('./src/Routes/funFactRoutes')
 const tipsRoute = require('./src/Routes/tipsRoute')
 const cropRecomendRoute=require('./src/Routes/croprecommendRoute');
+<<<<<<< HEAD
 const translateRoute = require('./src/Routes/translationRoutes');
 
+=======
+const translateRoute = require('./src/Routes/translationRoutes')
+>>>>>>> 11cbb57c496de835251c2caa152204e71533a7ef
 const app = express();
 const cors = require('cors');
 

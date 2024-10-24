@@ -5,8 +5,9 @@ import ComponentPriceGraph from "../CropPriceGraph";
 import MyFarms from '../Farms/MyFarms'
 import '../../css/main.css';
 import FunFacts from "../FunFacts";
-import { BiRightTopArrowCircle } from "react-icons/bi";
 import CropRecommendation from "../CropRecomendation";
+import Tips from "../Tips";
+import { BiRightTopArrowCircle } from "react-icons/bi";
 
 const Main = () => {
 
@@ -33,6 +34,7 @@ const Main = () => {
 
       <div className="fun-facts">
         <FunFacts />
+        <Tips />
       </div>
 
       <div className="cropRecomendation">
