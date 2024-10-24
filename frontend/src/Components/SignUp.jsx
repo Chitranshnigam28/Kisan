@@ -1,13 +1,17 @@
 import React from 'react'
 import "../css/loginsignup.css"
 import {useState} from 'react';
-import {Link } from 'react-router-dom' 
+import {Link,useNavigate } from 'react-router-dom' 
+
 
 const SignUp = () => {
     const [uname,setUname]=useState('');
     const [password,setPassword]=useState('');
     const [cpassword,setCPassword]=useState('');
     const [email,setEmail]=useState('');
+    const navigate = useNavigate();
+
+
     const handleSubmit=async (e)=>{
         e.preventDefault();
         const usrname=uname;
@@ -40,6 +44,7 @@ const SignUp = () => {
             const data=await res.json();
             if(res.status===200){
                 console.log("registration succesfull");
+                navigate(`/profilesetup?userId=${data.userId}`);
             }
         } catch (error) {
             console.log(error);
