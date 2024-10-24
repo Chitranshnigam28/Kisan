@@ -5,7 +5,6 @@ const tipsSchema = mongoose.Schema({
     tips: { type: [String], required: true },
 })
 
-
 const Tips = mongoose.model("Tips",tipsSchema,"tips_data")
 
 module.exports = Tips;

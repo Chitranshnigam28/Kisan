@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import MatchingTips from '../MatchingTips';
 
 const MyFarms = ({ userId: propUserId }) => {
     const [farms, setFarms] = useState([]);
@@ -71,6 +72,7 @@ const MyFarms = ({ userId: propUserId }) => {
 
     return (
         <div className="container my-5">
+                <MatchingTips />
 
             <div className={location.pathname === '/' ? "d-flex overflow-auto" : "row g-3"}>
                 {location.pathname === '/' ? (
