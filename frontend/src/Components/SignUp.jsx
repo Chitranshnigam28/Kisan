@@ -1,6 +1,7 @@
 import React from 'react'
 import "../css/loginsignup.css"
 import {useState} from 'react';
+import {Link } from 'react-router-dom' 
 
 const SignUp = () => {
     const [uname,setUname]=useState('');
@@ -57,7 +58,7 @@ const SignUp = () => {
                 <input type="text" name="uname" id="uname" value={uname} onChange={(e)=>{setUname(e.target.value)}}/>
             </label>
             <label htmlFor="email">
-                Username
+                Email
                 <input type="text" name="email" id="email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
             </label>
             <label htmlFor="password">
@@ -66,14 +67,14 @@ const SignUp = () => {
             </label>
             
             <label htmlFor="password">
-               Create Password
+               Confirm Password
                 <input type="password" name="password" id="password" value={cpassword} onChange={(e)=>{setCPassword(e.target.value)}}/>
             </label>
             <p id="hvact" style={{color:"#818898",fontWeight:600}}>Please agree to Art Asta <b>Terms of Use</b> and
 <b>Privacy Policy</b>, and to receive emails from kisan.</p>
             
             <button type="submit" className='authBtn'>Next</button>
-            <p id="hvact" style={{color:"#818898",fontWeight:600}}>Already have an account? <b>Sign up</b></p>
+            <p id="hvact" style={{color:"#818898",fontWeight:600}}>Already have an account? <Link to="/login"><b>Log In</b></Link></p>
         </form>
             </div>
     )

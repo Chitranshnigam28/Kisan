@@ -36,7 +36,7 @@ const register=async (req,res,next)=>{
                 userId:createdUser._id.toString()
             });
        }
-        res.status(200).send({msg:req.body});
+        
     }catch(err){
         console.log(err);
         next(err);
