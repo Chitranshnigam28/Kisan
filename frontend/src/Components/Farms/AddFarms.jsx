@@ -407,7 +407,7 @@ const AddFarms = () => {
 
             </form>
             <div className="d-flex justify-content-center align-items-center vh-50">
-                <Link to="/" className="btn btn-dark btn-lg rounded-pill">
+                <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
                     Go Back
                 </Link>
             </div>
