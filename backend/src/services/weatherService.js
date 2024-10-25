@@ -15,7 +15,7 @@ const getWeatherData = async (infoType, searchParams) => {
         throw new Error('Invalid search parameters: Either city (q) or lat/lon must be provided.');
     }
     
-    console.log("Requesting weather data from:", url);
+    // console.log("Requesting weather data from:", url);
 
     try {
         const response = await fetch(url);
@@ -39,11 +39,11 @@ const iconUrlFromCode = (icon) => `http://openweathermap.org/img/wn/${icon}@2x.p
 const formatCurrent = (data) => {
     if (!data || !data.main || !data.weather || !data.sys || !data.wind) {
         console.error('Invalid data structure:', data);
-        return {}; // Return an empty object if data is invalid
+        return {}; 
     }
 
     const {
-        coord: { lat, lon }, // Fixed lat/lon destructuring
+        coord: { lat, lon }, 
         main: { temp, feels_like, temp_min, temp_max, humidity },
         name,
         dt,
@@ -78,7 +78,7 @@ const formatCurrent = (data) => {
 };
 
 const formatForecastWeather = (secs, offset, data) => {
-    console.log("data", JSON.stringify(data, null, 2)); 
+    // console.log("data", JSON.stringify(data, null, 2)); 
 
     const hourly = data
         .filter((f) => f.dt > secs)
@@ -105,7 +105,7 @@ const formatForecastWeather = (secs, offset, data) => {
 const getFormattedWeatherData = async (searchParams) => {
     // Fetch current weather data
     const currentWeatherData = await getWeatherData('weather', searchParams);
-    console.log("currentWeatherData", JSON.stringify(currentWeatherData));
+    // console.log("currentWeatherData", JSON.stringify(currentWeatherData));
 
     if (!currentWeatherData) {
         return {}; // Return empty if API call fails
@@ -121,7 +121,7 @@ const getFormattedWeatherData = async (searchParams) => {
     });
 
     if (!forecastData || !forecastData.list) {
-        console.error('Invalid forecast data structure:', forecastData);
+        // console.error('Invalid forecast data structure:', forecastData);
         return {}; // Return empty if forecast API call fails
     }
 

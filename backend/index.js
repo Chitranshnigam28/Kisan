@@ -15,6 +15,8 @@ const googleRoute=require('./src/Routes/googleRoute');
 const session = require('express-session');
 const passport = require('passport');
 const passportSetup=require('./src/middlewares/passport');
+const translateRoute = require('./src/Routes/translationRoutes');
+
 const app = express();
 const cors = require('cors');
 
@@ -43,7 +45,7 @@ app.use("/api", weatherRoute);
 app.use("/api", funFactsRoute);
 app.use("/api", tipsRoute);
 app.use("/api",cropRecomendRoute);
-
+app.use("/api",translateRoute);
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Kisan');

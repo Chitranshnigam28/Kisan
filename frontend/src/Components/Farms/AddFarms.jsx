@@ -9,6 +9,7 @@ const AddFarms = () => {
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
+        cropName: "",
         soilType: "",
         location: "",
         farmingMethod: "",
@@ -49,6 +50,7 @@ const AddFarms = () => {
         const farmDetails = {
             farmName: farmData.farmName,
             cropType: farmData.cropType,
+            cropName: farmData.cropName,
             soilType: farmData.soilType,
             location: farmData.location,
             farmingMethod: farmData.farmingMethod,
@@ -88,6 +90,7 @@ const AddFarms = () => {
             setFarmData({
                 farmName: "",
                 cropType: "",
+                cropName: "",
                 soilType: "",
                 location: "",
                 farmingMethod: "",
@@ -147,6 +150,46 @@ const AddFarms = () => {
                         <option value="Fruits">Fruits</option>
                         <option value="Beverages">Beverages</option>
                         <option value="Oil Seeds">Oil Seeds</option>
+                    </select>
+                </div>
+
+                <div className="mb-4">
+                    <label className="form-label">Crop Name:</label>
+                    <select
+                        name="cropName"
+                        className="form-select"
+                        value={farmData.cropName}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Select Crop Name</option>
+                        <option value="Rice">Rice</option>
+                        <option value="Wheat">Wheat</option>
+                        <option value="Maize">Maize</option>
+                        <option value="Cotton">Cotton</option>
+                        <option value="Sugarcane">Sugarcane</option>
+                        <option value="Barley">Barley</option>
+                        <option value="Millet">Millet</option>
+                        <option value="Tobacco">Tobacco</option>
+                        <option value="Cabbage">Cabbage</option>
+                        <option value="Onion">Onion</option>
+                        <option value="Garlic">Garlic</option>
+                        <option value="Cauliflower">Cauliflower</option>
+                        <option value="Spinach">Spinach</option>
+                        <option value="Tomato">Tomato</option>
+                        <option value="Pumpkin">Pumpkin</option>
+                        <option value="Eggplant">Eggplant</option>
+                        <option value="Bitter Gourd">Bitter Gourd</option>
+                        <option value="Tea">Tea</option>
+                        <option value="Coffee">Coffee</option>
+                        <option value="Jowar">Jowar</option>
+                        <option value="Bajra">Bajra</option>
+                        <option value="Potato">Potato</option>
+                        <option value="Peas">Peas</option>
+                        <option value="Ragi">Ragi</option>
+                        <option value="Soybean">Soybean</option>
+                        <option value="Seasame">Sesame</option>
+                        <option value="Groundnut">Groundnut</option>
                     </select>
                 </div>
 
@@ -364,7 +407,7 @@ const AddFarms = () => {
 
             </form>
             <div className="d-flex justify-content-center align-items-center vh-50">
-                <Link to="/" className="btn btn-dark btn-lg rounded-pill">
+                <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
                     Go Back
                 </Link>
             </div>

@@ -5,6 +5,9 @@ const farmSchema = mongoose.Schema({
     cropType: { type: String, enum: [
         'Cereal Crops', 'Cash Crops', 'Vegetables', 'Fruits', 'Beverages', 'Oil Seeds'
     ], required: true },
+    cropName : { type: String, enum: [
+        'Rice', 'Wheat', 'Maize', 'Cotton', 'Sugarcane', 'Barley', 'Millet', 'Tobacco', 'Cabbage', 'Onion', 'Garlic', 'Cauliflower', 'Spinach', 'Tomato', 'Pumpkin', 'Eggplant', 'Bitter Gourd', 'Tea', 'Coffee', 'Jowar', 'Bajra', 'Potato', 'Peas', 'Ragi', 'Soybean', 'Sesame', 'Groundnut'
+    ], required: true},
     soilType: { type: String, enum: [
         'Clay and Loamy', 'Loamy and Well-Drained', 'Sandy and Well-Drained', 'Well-drained Sandy Loam', 'Well-Drained and Rich in Organic Matter', 'Well-drained Sandy or Loamy Soil', 'Well-drained, Fertile Soil'
     ], required: true },
@@ -31,7 +34,7 @@ const farmSchema = mongoose.Schema({
     dateOfPlanting: { type: Date, required: true },
     dateOfHarvest: { type: Date, required: true },
     sizeOfFarm: { type: Number, required: true },
-    farmImage: { type: String, required: false }, 
+    farmImage: { type: mongoose.Schema.Types.ObjectId, ref: 'Image' }, 
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true

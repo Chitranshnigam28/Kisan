@@ -6,6 +6,8 @@ import MyFarms from '../Farms/MyFarms'
 import '../../css/main.css';
 import FunFacts from "../FunFacts";
 import CropRecommendation from "../CropRecomendation";
+import Tips from "../Tips";
+import { BiRightTopArrowCircle } from "react-icons/bi";
 
 const Main = () => {
 
@@ -20,6 +22,7 @@ const Main = () => {
 
       <div className="my-farms ">
         <h3>My Farms</h3>
+        <Link to="/my-farms"><BiRightTopArrowCircle style={{ fontSize: '30px', color:'grey'}}/></Link>
         <MyFarms userId={userId} />
         <Link to="/add-farm">Add a New Farm</Link>
       </div>
@@ -31,6 +34,7 @@ const Main = () => {
 
       <div className="fun-facts">
         <FunFacts />
+        <Tips />
       </div>
 
       <div className="cropRecomendation">
