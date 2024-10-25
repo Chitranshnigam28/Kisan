@@ -41,7 +41,7 @@ const App = () => {
           <Route path="/crop-recommendation" element={<CropRecommendation/>} />
         </Routes>
         {/* <FloatingDockDemo></FloatingDockDemo> */}
-        <CropRecommendation />
+        {/* <CropRecommendation /> */}
       </div>
     </Router>
     </>
