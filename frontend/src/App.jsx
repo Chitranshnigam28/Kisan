@@ -95,6 +95,16 @@ const AppRoutes = () => {
         <Route path='/profilesetup' element={<ProfileSetup />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/maps" element={<GMaps />} />
+                    <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />}/>
+                    <Route path="/crop-recommendation" element={<CropRecommendation/>} />
+                    <Route path="/translate" element={<TranslationComponent />} /> 
+                    <Route path='/weather' element={<Weather />}/>
+                    <Route path="/add-farm" element={<AddFarms />} />
+                    <Route path="/my-farms" element={<MyFarms />} />
+                    <Route path='/funfacts' element={<FunFact />}/>
+                    <Route path='/tips' element={<Tips />}/>
+                    <Route path="/profilesetup" element={<ProfileSetup />} />
         </Route>
       </Routes>
       <FloatingDockDemo />
