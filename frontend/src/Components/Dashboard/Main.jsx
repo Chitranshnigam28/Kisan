@@ -10,6 +10,7 @@ import CropRecommendation from "../CropRecomendation";
 const Main = () => {
 
   const userId = localStorage.getItem('userId');
+  console.log(userId);
 
   return (
     <main className="main-layout">
@@ -36,7 +37,7 @@ const Main = () => {
       <div className="cropRecomendation">
         <h3>Crop Recommendation</h3>
         <div className="cropRecomendation-content">
-          <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
+          <CropRecommendation ownerId={userId} />
         </div>
       </div>
     </main>

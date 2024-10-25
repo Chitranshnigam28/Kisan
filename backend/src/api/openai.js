@@ -11,7 +11,6 @@ const openai = new OpenAI({
 // MongoDB connection URI
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);
-console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 // Function to connect to MongoDB
 const connectDB = async () => {
@@ -26,16 +25,13 @@ const connectDB = async () => {
 
 // Function to fetch farm data and recommend a crop
 const fetchFarmAndRecommendCrop = async (ownerId) => {
-    console.log(ownerId, ">>>>>>>>");
     try {
         const farm = await farmSchema.findOne({ owner: ownerId });
         if (!farm) {
             return { error: 'No farm data found for this user.' };
         }
 
-        const { farmName, cropType, location, soilType, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason, dateOfPlanting } = farm;
-
-        console.log('Farm data fetched successfully:', farm);
+        const { farmName, soilType, waterSource } = farm;
 
         const prompt = `
         Based on the following farm details:
@@ -50,7 +46,10 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             - Current Season: ${currentSeason}
             - Date of Planting: ${dateOfPlanting}
 
-        Considering all these factors, what should be the best crop to grow next? Answer in one word. Also provide these details relating to the recommended crop:. please answer in one word`;
+        Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. Provide the data in the following JSON array format:
+
+At index 0: The recommended crop in one word and why should we plant it.
+Ensure that only the JSON array is returned, with no additional explanations or context.`;
 
         console.log('Prompt sent to OpenAI:', prompt);
 
@@ -62,37 +61,46 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             ],
         });
 
-        const recommendedCrop = completion.choices[0]?.message.content.trim();
+
+        // Log the full response
+        console.log('OpenAI API Response:', completion.choices);
+
+        const rawContent = completion.choices[0]?.message?.content?.trim();
+        if (!rawContent) {
+            throw new Error('Invalid response from OpenAI API');
+        }
+
+        // Parse the string to get the JSON array
+        let recommendedCropData;
+        try {
+            recommendedCropData = JSON.parse(rawContent);
+        } catch (parseError) {
+            throw new Error('Error parsing OpenAI response as JSON');
+        }
+
+        // Handle cases where field names differ from expectation
+        const recommendedCrop = recommendedCropData[0];
+        if (!recommendedCrop || !recommendedCrop.RecommendedCrop || !recommendedCrop.Reason) {
+            throw new Error('Recommended crop data is missing or incomplete');
+        }
+
+        // Construct the recommendation sentence using the correct field names
+        const recommendationSentence = `The recommended crop is ${recommendedCrop.RecommendedCrop} because ${recommendedCrop.Reason.toLowerCase()}.`;
 
         return {
             farmName,
             soilType,
             waterSource,
-            recommendedCrop,
+            recommendedCrop: recommendationSentence, // Return a sentence instead of array
         };
     } catch (error) {
         console.error('Error generating crop recommendation:', error);
-        return { error: 'Error generating crop recommendation' };
+        return { error: error.message || 'Error generating crop recommendation' };
     }
 };
 
-// Connect to the database and fetch farm data (optional for initial testing)
-const main = async () => {
-    try {
-        await connectDB();
-        const ownerId = '66f92acd44f00ac86e5adac1';
-        await fetchFarmAndRecommendCrop(ownerId);
-    } catch (error) {
-        console.error('An error occurred:', error);
-    } finally {
-        mongoose.connection.close();
-    }
-};
-
-// Uncomment for initial testing
-// main();
-
+// Export the function
 module.exports = {
     fetchFarmAndRecommendCrop,
-    connectDB, 
+    connectDB,
 };

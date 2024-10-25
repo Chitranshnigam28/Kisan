@@ -17,7 +17,9 @@ import SignUp from "./Components/SignUp";
 import CropRecommendation from "./Components/CropRecomendation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { FloatingDockDemo } from "./Components/NavigationDock";
+
+const userId = localStorage.getItem('userId');
+  console.log(userId);
 
 const App = () => {
   return (
@@ -38,9 +40,8 @@ const App = () => {
 
           <Route path="/add-farm" element={<AddFarms />} />
           <Route path="/my-farms" element={<MyFarms />} />
-          <Route path="/crop-recommendation" element={<CropRecommendation/>} />
+          <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId}/>} />
         </Routes>
-        <FloatingDockDemo></FloatingDockDemo>
       </div>
     </Router>
     </>
