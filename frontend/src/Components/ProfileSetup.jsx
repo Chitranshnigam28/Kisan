@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 const ProfileSetup = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +13,17 @@ const ProfileSetup = () => {
         season: ''
     });
 
+    const location = useLocation();
+    const [userId, setUserId] = useState(null);
+    const navigate = useNavigate(); // Hook to navigate between pages
+
+    // Extract userId from query params
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const userIdFromQuery = searchParams.get('userId');
+        setUserId(userIdFromQuery);
+    }, [location.search]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -23,7 +35,8 @@ const ProfileSetup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(formData);
+            const profileData = { ...formData, userId }; // Attach the userId to the profile data
+            console.log("profileData "+profileData);
             const response = await fetch('http://localhost:5001/api/farmer/profile', {
                 method: 'POST',
                 headers: {
@@ -39,6 +52,9 @@ const ProfileSetup = () => {
             const data = await response.json();
             console.log('Profile submitted:', data);
             // Handle success (e.g., reset form, show success message, etc.)
+
+            window.alert('Profile & Account created successfully!. Redirecting you to login page');
+            navigate('/login'); 
         } catch (error) {
             console.error('Error submitting profile:', error);
             // Handle error (e.g., show error message)
