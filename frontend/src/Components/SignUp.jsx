@@ -44,6 +44,7 @@ const SignUp = () => {
             const data=await res.json();
             if(res.status===200){
                 console.log("registration succesfull");
+                console.log("${data.userId} "+data.userId);
                 navigate(`/profilesetup?userId=${data.userId}`);
             }
         } catch (error) {

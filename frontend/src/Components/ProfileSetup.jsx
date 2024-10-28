@@ -60,6 +60,9 @@ const ProfileSetup = () => {
             // Handle error (e.g., show error message)
         }
     };
+    const inputStyles={
+        border:"1px solid black"
+    }
 
     return (
         <div>
@@ -72,6 +75,7 @@ const ProfileSetup = () => {
                     <label>Name:</label>
                     <input 
                         type="text" 
+                        style={inputStyles}
                         name="name" 
                         value={formData.name} 
                         onChange={handleChange}
@@ -84,9 +88,11 @@ const ProfileSetup = () => {
                     <label>Profile Picture URL:</label>
                     <input 
                         type="text" 
+                        
                         name="profilePicture" 
                         value={formData.profilePicture} 
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
 
@@ -100,6 +106,7 @@ const ProfileSetup = () => {
                         onChange={handleChange}
                         min="0"
                         required
+                        style={inputStyles}
                     />
                 </div>
 
@@ -111,6 +118,7 @@ const ProfileSetup = () => {
                         value={formData.soilType} 
                         onChange={handleChange}
                         required
+                        style={inputStyles}
                     >
                         <option value="">Select Soil Type</option>
                         <option value="Loamy">Loamy</option>
@@ -128,6 +136,7 @@ const ProfileSetup = () => {
                         value={formData.state} 
                         onChange={handleChange}
                         required
+                        style={inputStyles}
                     >
                         <option value="">Select State</option>
                         <option value="Punjab">Punjab</option>
@@ -146,6 +155,7 @@ const ProfileSetup = () => {
                         onChange={handleChange}
                         min="0"
                         required
+                        style={inputStyles}
                     />
                 </div>
 
@@ -154,6 +164,7 @@ const ProfileSetup = () => {
                     <label>Last Crop Sowed:</label>
                     <input 
                         type="text" 
+                        style={inputStyles}
                         name="lastCrop" 
                         value={formData.lastCrop} 
                         onChange={handleChange}
@@ -169,6 +180,7 @@ const ProfileSetup = () => {
                         value={formData.season} 
                         onChange={handleChange}
                         required
+                        style={inputStyles}
                     >
                         <option value="">Select Season</option>
                         <option value="Summer">Summer</option>
@@ -177,7 +189,7 @@ const ProfileSetup = () => {
                     </select>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button type="submit" style={inputStyles}>Submit</button>
             </form>
         </div>
     );
