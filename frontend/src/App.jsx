@@ -17,9 +17,11 @@ import CropRecommendation from "./Components/CropRecomendation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from "./Components/PrivateRoute";
 import { useNavigate } from "react-router-dom";
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 
-import { FloatingDockDemo } from "./Components/NavigationDock";
+
+const userId = localStorage.getItem('userId');
+console.log(userId);
 
 // const App = () => {
 
@@ -37,13 +39,13 @@ import { FloatingDockDemo } from "./Components/NavigationDock";
 //     <Router>
 //       <div>
 //         <Routes>
-        
+
 //         <Route path='/login' element={<Login />}/>
 //         <Route path='/register' element={<SignUp />}/>
 //         <Route element={<PrivateRoute/>}>
 //           <Route path="/" element={<Dashboard />} />
 //         </Route>
-          
+
 //           {/* <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />}/>
 //           <Route path="/maps" element={<GMaps />} />
 //           <Route path="/profilesetup" element={<ProfileSetup />} />
@@ -68,6 +70,7 @@ const App = () => {
   return (
     <Router>
       <AppRoutes /> {/* Moved all routes into a new component */}
+      {/* <FloatingDockDemo /> */}
     </Router>
   );
 };
@@ -93,22 +96,30 @@ const AppRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profilesetup' element={<ProfileSetup />} />
-        
+
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<GMaps />} />
-                    <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />}/>
-                    <Route path="/crop-recommendation" element={<CropRecommendation/>} />
-                    <Route path="/translate" element={<TranslationComponent />} /> 
-                    <Route path='/weather' element={<Weather />}/>
-                    <Route path="/add-farm" element={<AddFarms />} />
-                    <Route path="/my-farms" element={<MyFarms />} />
-                    <Route path='/funfacts' element={<FunFact />}/>
-                    <Route path='/tips' element={<Tips />}/>
-                    <Route path="/profilesetup" element={<ProfileSetup />} />
+          <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />} />
+          <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
+          <Route path="/translate" element={<TranslationComponent />} />
+          <Route path='/weather' element={<Weather />} />
+          <Route path="/add-farm" element={<AddFarms />} />
+          <Route path="/my-farms" element={<MyFarms />} />
+          <Route path='/funfacts' element={<FunFact />} />
+          <Route path='/tips' element={<Tips />} />
+          <Route path="/profilesetup" element={<ProfileSetup />} />
+
+         
+         
+          
+          
+
+          
+          
         </Route>
       </Routes>
-      <FloatingDockDemo />
+      
     </>
   );
 };

@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { FaThLarge, FaSeedling, FaMapMarkerAlt, FaLanguage } from "react-icons/fa";
+import { FloatingDock } from '../FloatingDeck'; // Ensure you have the FloatingDock component
 import { Link } from "react-router-dom";
-import GMaps from "../GMaps";
-import ComponentPriceGraph from "../CropPriceGraph";
-import { FaThLarge, FaSeedling, FaMapMarkerAlt,FaLanguage } from "react-icons/fa";
-import "../../css/footer.css";
+import '../../css/footer.css';
 
-const Footer = () => {
-  const [showFooter, setShowFooter] = useState(true);
+export function Footer() {
+  const [showDock, setShowDock] = useState(true);
 
-  // Detect scroll to show/hide the footer
+  // Detect scroll to show/hide the floating dock
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        // Hide footer when scrolling down
-        setShowFooter(false);
+        // Hide dock when scrolling down
+        setShowDock(false);
       } else {
-        // Show footer when scrolling up
-        setShowFooter(true);
+        // Show dock when scrolling up
+        setShowDock(true);
       }
       lastScrollY = window.scrollY;
     };
@@ -30,38 +29,42 @@ const Footer = () => {
     };
   }, []);
 
-  return (
-    <footer className={`footer-container ${showFooter ? "show" : "hide"}`}>
-      <div className="icon-container">
-        {/* Home icon with link */}
-        <div className="icon-wrapper">
-          <Link to="/">
-            <FaThLarge className="footer-icon" />
-          </Link>
-        </div>
-        {/* Charts icon with link */}
-        <div className="icon-wrapper">
-          <Link to="/charts">
-            <FaSeedling className="footer-icon" />
-            {/* <ComponentPriceGraph /> */}
-          </Link>
-        </div>
-        {/* Maps icon with link */}
-        <div className="icon-wrapper">
-          <Link to="/maps">
-            <FaMapMarkerAlt className="footer-icon" />
-            {/* <GMaps /> */}
-          </Link>
-        </div>
-        <div className="icon-wrapper">
-          <Link to="/translate">
-            <FaLanguage className="footer-icon" />
-            {/* <GMaps /> */}
-          </Link>
-        </div>
-      </div>
-    </footer>
-  );
-};
+  const links = [
+    {
+      title: "Home",
+      icon: <FaThLarge className="footer-icon" />,
+      href: "/", // React Router path for home
+    },
+    {
+      title: "Charts",
+      icon: <FaSeedling className="footer-icon" />,
+      href: "/charts", // React Router path for charts
+    },
+    {
+      title: "Maps",
+      icon: <FaMapMarkerAlt className="footer-icon" />,
+      href: "/maps", // React Router path for maps
+    },
+    {
+      title: "Translate",
+      icon: <FaLanguage className="footer-icon" />,
+      href: "/translate", // React Router path for translate
+    },
+  ];
 
-export default Footer;
+  return (
+    <div className={`floating-dock ${showDock ? "show" : "hide"}`}>
+      <FloatingDock
+        mobileClassName="translate-y-20"
+        items={links.map(link => ({
+          ...link,
+          icon: (
+            <Link to={link.href}> {/* Wrap icon with Link */}
+              {link.icon}
+            </Link>
+          ),
+        }))}
+      />
+    </div>
+  );
+}
