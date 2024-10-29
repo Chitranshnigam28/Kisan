@@ -8,7 +8,6 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-
 // MongoDB connection URI
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);

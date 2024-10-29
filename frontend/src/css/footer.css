@@ -1,47 +1,35 @@
-.footer-container {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 50px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
-    z-index: 100;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
-  
-  .icon-container {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .icon-wrapper {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #f0f0f0;
-  }
-  
-  .footer-icon {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  /* Show or hide footer based on scroll */
-  .footer-container.hide {
-    opacity: 0;
-    transform: translate(-50%, 100%);
-  }
-  
-  .footer-container.show {
-    opacity: 1;
-    transform: translateX(-50%);
-  }
-  
+.floating-dock {
+  position: fixed; /* Keep it fixed at the bottom */
+  bottom: 10px; /* Align to the bottom of the viewport */
+  left: 50%; /* Center the dock horizontally */
+  transform: translateX(-50%) translateY(0); /* Center horizontally, initially visible */
+  width: 80%; /* Set width to 80% of the viewport width */
+  max-width: 600px; /* Maximum width for the dock */
+  border-radius: 20px; /* Rounded corners */
+  padding: 10px; /* Padding inside the dock */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hiding */
+  z-index: 1000; /* Ensure it stays on top of other content */
+  display: flex; /* Use flexbox to arrange icons */
+  justify-content: space-around; /* Space out icons evenly */
+}
+
+/* Add the 'show' and 'hide' states */
+.floating-dock.show {
+  transform: translateX(-50%) translateY(0); /* Keep it visible */
+}
+
+.floating-dock.hide {
+  transform: translateX(-50%) translateY(100%); /* Move it out of view */
+}
+
+/* Style for footer icons */
+.footer-icon {
+  margin-left: 7px;
+  font-size: 24px; /* Adjust icon size */
+  color: white; /* Set icon color to white */
+}
+
+/* Change icon color on hover */
+.footer-icon:hover {
+  color: #e0e0e0; /* Change color on hover */
+}
