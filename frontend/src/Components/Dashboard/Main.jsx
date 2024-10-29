@@ -8,6 +8,7 @@ import FunFacts from "../FunFacts";
 import CropRecommendation from "../CropRecomendation";
 import Tips from "../Tips";
 import { BiRightTopArrowCircle } from "react-icons/bi";
+import TopCropsChart from "../TopCropChart"; 
 
 const Main = () => {
 
@@ -31,6 +32,11 @@ const Main = () => {
       <div className="crop-info">
         <h3>Crop Price Graph</h3>
         <ComponentPriceGraph />
+      </div>
+
+      <div className="top-crops-chart">
+        <h3>Top 5 Crops by Estimated Revenue</h3>
+        <TopCropsChart /> 
       </div>
 
       <div className="fun-facts">
