@@ -140,8 +140,8 @@ const MyFarms = () => {
                             <div className="selected-farm mt-5 p-4 border border-success">
                                 <h3>{selectedFarm.farmName}</h3>
                                 <div>
-                                    <span><strong>{selectedFarm.sizeOfFarm} HA</strong> .</span>
-                                    <span><strong>{new Date(selectedFarm.dateOfPlanting).toLocaleDateString()} Date Of Planting</strong></span>
+                                    <span><strong>{selectedFarm.sizeOfFarm} HA</strong> . </span>
+                                    <span><strong>Date Of Planting: {new Date(selectedFarm.dateOfPlanting).toLocaleDateString()}</strong></span>
                                 </div>
                                 <br />
                                 <div>

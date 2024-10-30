@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState,useEffect } from 'react';
+import { useNavigate,Link } from 'react-router-dom'; 
 import "../css/loginsignup.css";
-import "../css/default.css";
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
 
+
     const navigate = useNavigate(); 
+
+    // useEffect(() => {
+    //     // Extract the token from the URL if it exists
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const token = urlParams.get('token');
+
+    //     if (token) {
+    //         localStorage.setItem('token', token);
+    //         navigate('/dashboard'); // or wherever you want to redirect after login
+    //     }
+    // }, [navigate]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,12 +54,15 @@ const Login = () => {
             setErrorMessage('An error occurred during login. Please try again.');
         }
     };
+    const handleGoogleLogin = () => {
+        window.open('http://localhost:5001/auth/google', '_self');  // Redirects to the backend for Google login
+      };
 
     return (
         <div className="containerlogin">
             <h1>Login</h1>
             <h2>Enter your credentials</h2>
-            <p>Sign in with your username and password. If you don’t have an account yet, we’ll get you one set up.</p>
+            <p style={{color:"#818898",fontWeight:600}}>Sign in with your username and password. If you don’t have an account yet, we’ll get you one set up.</p>
 
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>} 
 
@@ -72,8 +87,11 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
-                <button type="submit">Login</button>
-                <p id="hvact">Don't have an account? <b>Sign up</b></p>
+                <button type="submit" className='authBtn'>Login</button>
+                <button onClick={handleGoogleLogin}>
+                    Sign in with Google
+                </button>
+                <p id="hvact" style={{color:"#818898",fontWeight:600}}>Don't have an account? <Link to="/register"><b>Sign up</b></Link></p>
             </form>
         </div>
     );

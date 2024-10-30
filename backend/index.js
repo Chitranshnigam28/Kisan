@@ -11,8 +11,10 @@ const weatherRoute = require('./src/Routes/weatherRoute');
 const funFactsRoute = require('./src/Routes/funFactRoutes')
 const tipsRoute = require('./src/Routes/tipsRoute')
 const cropRecomendRoute=require('./src/Routes/croprecommendRoute');
-const translateRoute = require('./src/Routes/translationRoutes');
-
+const googleRoute=require('./src/Routes/googleRoute');
+const session = require('express-session');
+const passport = require('passport');
+const passportSetup=require('./src/middlewares/passport');
 const app = express();
 const cors = require('cors');
 
@@ -20,6 +22,17 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
+// Session configuration
+app.use(session({
+    secret: process.env.SESSION_SECRET, // Use a strong secret
+    resave: false,
+    saveUninitialized: true,
+}));
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+app.use("/",googleRoute);
 app.use("/api", authRoutes);
 app.use("/api", cropRoutes);
 app.use("/api", priceRoute);
@@ -30,7 +43,7 @@ app.use("/api", weatherRoute);
 app.use("/api", funFactsRoute);
 app.use("/api", tipsRoute);
 app.use("/api",cropRecomendRoute);
-app.use("/api",translateRoute);
+
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Kisan');
@@ -41,6 +54,3 @@ connectDb().then(() => {
         console.log(`server is running at port ${PORT}`);
     })
 })
-
-
-

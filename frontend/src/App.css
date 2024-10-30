@@ -6,6 +6,9 @@
 
 /* In your CSS file */
 
+body{
+  color: black !important;
+}
 /* .navbar {
     list-style-type: none;
     padding: 0;
