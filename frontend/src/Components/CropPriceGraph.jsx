@@ -30,12 +30,11 @@ const CropPriceChart = ({ crop }) => {
                     price: priceData.price
                 }))
             ) || [];
-            
-            setCropPrices(allPrices);
-            console.log("Fetched cropPrices: ", allPrices);
-            console.log("data received new "+JSON.stringify(data));
+            // setCropPrices(allPrices);
+            // console.log("Fetched cropPrices: ", allPrices);
+            // console.log("data received new "+JSON.stringify(data));
             // Extract historical prices
-            const historicalPrices = data[0].market_price.historical_prices;
+            const historicalPrices = data[0].market_price.historical_prices; //Wrong line market price and historical prices are different.
             
             setCropPrices(allPrices);
             console.log("Fetched cropPrices: ", allPrices);

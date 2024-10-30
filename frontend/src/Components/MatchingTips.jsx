@@ -61,12 +61,45 @@ const MatchingTips = () => {
       tipsData.forEach((tip) => {
         const tipCrop = tip.crop_name?.toLowerCase(); // Assuming tip has crop_name
         if (farmCrop && tipCrop && farmCrop === tipCrop) {
-          matched.push({ cropName: farm.cropName, tips: tip.tips });
+          matched.push({ cropName: farm.cropName, tips: tip.tips, farmId: farm._id });
         }
       });
     });
 
     setMatchedTips(matched);
+  };
+
+
+//   const handleDelete = async (farmId) => {
+//     try {
+//         const token = localStorage.getItem('token');
+//         await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//             },
+//         });
+//         setFarms(farms.filter(farm => farm._id !== farmId));
+//     } catch (err) {
+//         console.error("Error deleting farm:", err.response ? err.response.data : err.message);
+//         alert(`Failed to delete farm: ${err.response ? err.response.data.message : err.message}`);
+//     }
+// };
+  // Delete a farm and update matching tips
+  const deleteFarm = async (farmId) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Update farms and matched tips after deletion
+      setFarms(prevFarms => prevFarms.filter(farm => farm._id !== farmId));
+      setMatchedTips(prevTips => prevTips.filter(tip => tip.farmId !== farmId));
+    } catch (err) {
+      console.error('Error deleting farm:', err);
+      setError('Failed to delete farm');
+    }
   };
 
   useEffect(() => {
