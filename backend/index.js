@@ -15,6 +15,8 @@ const googleRoute=require('./src/Routes/googleRoute');
 const session = require('express-session');
 const passport = require('passport');
 const passportSetup=require('./src/middlewares/passport');
+const translateRoute = require('./src/Routes/translationRoutes');
+
 const app = express();
 const cors = require('cors');
 
