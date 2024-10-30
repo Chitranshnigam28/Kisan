@@ -25,7 +25,15 @@ function GMaps() {
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
   const [currentLocation, setCurrentLocation] = useState(center);
-
+  const [destination, setDestination] = useState("");
+  // List of locations for markers
+const markerLocations = [
+  { id: 1, name: "Gurgaon Anaz Mandi", position: { lat: 28.444514, lng:77.016479 } },
+  { id: 2, name: "Kurukshetra Anaz Mandi", position: { lat: 29.952667, lng: 76.841861 } },
+  { id: 3, name: "Ludhiana Anaz Mandi", position: { lat: 30.874118, lng: 75.856712 } },
+  { id: 4, name: "Ahemdabad Anaz Mandi", position: { lat: 22.8679724372229, lng: 72.59402568474931 } },
+  
+];
   const originRef = useRef();
   const destinationRef = useRef();
 
@@ -54,6 +62,7 @@ function GMaps() {
     setDuration("");
     originRef.current.value = "";
     destinationRef.current.value = "";
+    
   }
 
   function panToCurrentLocation() {
@@ -77,6 +86,12 @@ function GMaps() {
     }
   }
 
+   // When marker is clicked, set the destination input
+   function handleMarkerClick(location) {
+    setDestination(location.position);
+    destinationRef.current.value = location.name; // Set destination in input field
+  }
+
   return (
       <div className="app">
         <div className="map-container">
@@ -93,6 +108,17 @@ function GMaps() {
             onLoad={(map) => setMap(map)}
           >
             <MarkerF position={currentLocation} />{" "}
+
+
+          {/* Add markers for specified locations */}
+          {markerLocations.map((location) => (
+            <MarkerF
+              key={location.id}
+              position={location.position}
+              label={location.name}
+              onClick={() => handleMarkerClick(location)}
+            />
+          ))}
             {/* Show marker at current location */}
             {directionsResponse && (
               <DirectionsRenderer directions={directionsResponse} />

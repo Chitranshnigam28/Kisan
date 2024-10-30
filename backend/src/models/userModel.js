@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: function() {
+            return this.authMethod === 'local';  // Make username required only for local (non-OAuth) users
+        },
     },
     email: {
         type: String,
@@ -13,7 +15,9 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: function() {
+            return this.authMethod === 'local';  // Password required only for local (traditional) login
+        },
     },
     isAdmin: {
         type: Boolean,

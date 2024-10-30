@@ -11,6 +11,10 @@ const weatherRoute = require('./src/Routes/weatherRoute');
 const funFactsRoute = require('./src/Routes/funFactRoutes')
 const tipsRoute = require('./src/Routes/tipsRoute')
 const cropRecomendRoute=require('./src/Routes/croprecommendRoute');
+const googleRoute=require('./src/Routes/googleRoute');
+const session = require('express-session');
+const passport = require('passport');
+const passportSetup=require('./src/middlewares/passport');
 const translateRoute = require('./src/Routes/translationRoutes');
 
 const app = express();
@@ -20,6 +24,17 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
+// Session configuration
+app.use(session({
+    secret: process.env.SESSION_SECRET, // Use a strong secret
+    resave: false,
+    saveUninitialized: true,
+}));
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+app.use("/",googleRoute);
 app.use("/api", authRoutes);
 app.use("/api", cropRoutes);
 app.use("/api", priceRoute);

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 const ProfileSetup = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +13,17 @@ const ProfileSetup = () => {
         season: ''
     });
 
+    const location = useLocation();
+    const [userId, setUserId] = useState(null);
+    const navigate = useNavigate(); // Hook to navigate between pages
+
+    // Extract userId from query params
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const userIdFromQuery = searchParams.get('userId');
+        setUserId(userIdFromQuery);
+    }, [location.search]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -23,7 +35,8 @@ const ProfileSetup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(formData);
+            const profileData = { ...formData, userId }; // Attach the userId to the profile data
+            console.log("profileData "+profileData);
             const response = await fetch('http://localhost:5001/api/farmer/profile', {
                 method: 'POST',
                 headers: {
@@ -39,11 +52,17 @@ const ProfileSetup = () => {
             const data = await response.json();
             console.log('Profile submitted:', data);
             // Handle success (e.g., reset form, show success message, etc.)
+
+            window.alert('Profile & Account created successfully!. Redirecting you to login page');
+            navigate('/login'); 
         } catch (error) {
             console.error('Error submitting profile:', error);
             // Handle error (e.g., show error message)
         }
     };
+    const inputStyles={
+        border:"1px solid black"
+    }
 
     return (
         <div>
@@ -56,6 +75,7 @@ const ProfileSetup = () => {
                     <label>Name:</label>
                     <input 
                         type="text" 
+                        style={inputStyles}
                         name="name" 
                         value={formData.name} 
                         onChange={handleChange}
@@ -68,9 +88,11 @@ const ProfileSetup = () => {
                     <label>Profile Picture URL:</label>
                     <input 
                         type="text" 
+                        
                         name="profilePicture" 
                         value={formData.profilePicture} 
                         onChange={handleChange}
+                        style={inputStyles}
                     />
                 </div>
 
@@ -84,6 +106,7 @@ const ProfileSetup = () => {
                         onChange={handleChange}
                         min="0"
                         required
+                        style={inputStyles}
                     />
                 </div>
 
@@ -95,6 +118,7 @@ const ProfileSetup = () => {
                         value={formData.soilType} 
                         onChange={handleChange}
                         required
+                        style={inputStyles}
                     >
                         <option value="">Select Soil Type</option>
                         <option value="Loamy">Loamy</option>
@@ -112,6 +136,7 @@ const ProfileSetup = () => {
                         value={formData.state} 
                         onChange={handleChange}
                         required
+                        style={inputStyles}
                     >
                         <option value="">Select State</option>
                         <option value="Punjab">Punjab</option>
@@ -130,6 +155,7 @@ const ProfileSetup = () => {
                         onChange={handleChange}
                         min="0"
                         required
+                        style={inputStyles}
                     />
                 </div>
 
@@ -138,6 +164,7 @@ const ProfileSetup = () => {
                     <label>Last Crop Sowed:</label>
                     <input 
                         type="text" 
+                        style={inputStyles}
                         name="lastCrop" 
                         value={formData.lastCrop} 
                         onChange={handleChange}
@@ -153,6 +180,7 @@ const ProfileSetup = () => {
                         value={formData.season} 
                         onChange={handleChange}
                         required
+                        style={inputStyles}
                     >
                         <option value="">Select Season</option>
                         <option value="Summer">Summer</option>
@@ -161,7 +189,7 @@ const ProfileSetup = () => {
                     </select>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button type="submit" style={inputStyles}>Submit</button>
             </form>
         </div>
     );

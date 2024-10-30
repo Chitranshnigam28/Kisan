@@ -8,10 +8,12 @@ import FunFacts from "../FunFacts";
 import CropRecommendation from "../CropRecomendation";
 import Tips from "../Tips";
 import { BiRightTopArrowCircle } from "react-icons/bi";
+import TopCropsChart from "../TopCropChart"; 
 
 const Main = () => {
 
   const userId = localStorage.getItem('userId');
+  console.log(userId);
 
   return (
     <main className="main-layout">
@@ -32,6 +34,11 @@ const Main = () => {
         <ComponentPriceGraph />
       </div>
 
+      <div className="top-crops-chart">
+        <h3>Top 5 Crops by Estimated Revenue</h3>
+        <TopCropsChart /> 
+      </div>
+
       <div className="fun-facts">
         <FunFacts />
         <Tips />
@@ -40,7 +47,7 @@ const Main = () => {
       <div className="cropRecomendation">
         <h3>Crop Recommendation</h3>
         <div className="cropRecomendation-content">
-          <CropRecommendation ownerId="66f92acd44f00ac86e5adac1"></CropRecommendation>
+          <CropRecommendation ownerId={userId} />
         </div>
       </div>
     </main>
