@@ -10,11 +10,11 @@ const CropRecommendation = ({ ownerId }) => {
   const fetchFarmAndCropRecommendation = async () => {
     try {
       const ownerId = localStorage.getItem('userId');
-      console.log(ownerId,'+++++++++++++++++++++++++++++++++++++------------------------')
+      console.log(ownerId, '+++++++++++++++++++++++++++++++++++++------------------------')
       // Check if ownerId is defined
       if (!ownerId) {
         throw new Error('Owner ID is undefined');
-      }else{
+      } else {
         console.log(ownerId)
       }
 
@@ -36,11 +36,25 @@ const CropRecommendation = ({ ownerId }) => {
   if (!farmDetails) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2>Farm Name: {farmDetails.farmName}</h2>
-      <p>Soil Type: {farmDetails.soilType}</p>
-      <p>Water Source: {farmDetails.waterSource}</p>
-      <p>Recommended Crop: {farmDetails.recommendedCrop}</p>
+    <div className="crWrapper">
+      <div className="farmImgWrapper">
+        <img src="./cucumberFarm.webp" id="featureImage" />
+
+        <div className="fieldIconWrapper">
+          <h2 id="farmName">{farmDetails.farmName} Farm</h2>
+          <img src="./tomato.png" alt="" id="fieldImage" />
+        </div>
+      </div>
+      <div className="wrcsWrapper">
+        <div className="soilWrapper">
+          <img src="./loamySoil.png" />
+          <p><span className="attrHeading"><span className="attrHeading">Soil:</span></span> <br/>{farmDetails.soilType}</p></div>
+        <div className="waterWrapper">
+          <img src="./Water.png" />
+          <p><span className="attrHeading">Water Source:</span> {farmDetails.waterSource}</p>
+        </div>
+        <div className="rcWrapper"><p><span className="attrHeading">Recommended Crop:</span> {farmDetails.recommendedCrop}</p></div>
+      </div>
     </div>
   );
 };
