@@ -44,12 +44,12 @@ const Main = () => {
         <Tips />
       </div>
 
-      <div className="cropRecomendation">
+      {/* <div className="cropRecomendation">
         <h3>Crop Recommendation</h3>
         <div className="cropRecomendation-content">
           <CropRecommendation ownerId={userId} />
         </div>
-      </div>
+      </div> */}
     </main>
   );
 };

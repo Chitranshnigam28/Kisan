@@ -18,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from "./Components/PrivateRoute";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import ForgotPassword from "./Components/ForgotPassword";
 
 
 const userId = localStorage.getItem('userId');
@@ -96,7 +97,7 @@ const AppRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profilesetup' element={<ProfileSetup />} />
-
+        <Route path="/forgotpassword" element={<ForgotPassword/>}/>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<GMaps />} />
