@@ -57,7 +57,7 @@ const handleLocationChange = (newLocation) => {
         {/* <Tips /> */}
       </div>
 
-      <div className="cropRecomendation">
+      {/* <div className="cropRecomendation">
         <h3>Crop Recommendation</h3>
         <div className="cropRecomendation-content">
           <CropRecommendation ownerId={userId} />
@@ -66,6 +66,7 @@ const handleLocationChange = (newLocation) => {
       <div className="translation-component">
         <TranslationComponent />
       </div>
+      </div> */}
     </main>
   );
 };
