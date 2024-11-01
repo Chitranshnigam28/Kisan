@@ -7,6 +7,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import Forecast from '../Components/weatherComponents/Forecast';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TopCropsChart from "./TopCropChart"; //Matching the location for both weather and
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

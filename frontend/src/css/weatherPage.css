@@ -25,6 +25,7 @@
   display: flex;
   gap: 30px;
   padding: 20px;
+  flex-direction: column; /* Stacks vertically by default for smaller screens */
 }
 
 .weather-visualization {
@@ -35,6 +36,7 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem; /* Add space when stacked */
 }
 
 .temperature-display {
@@ -80,7 +82,7 @@
 
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
   margin-top: 1rem;
 }
@@ -143,21 +145,43 @@
 }
 
 .sunny {
-  background-color: #add8e6; 
+  background-color: #add8e6;
 }
 
 .thunderstorm {
-  background-color: #a9a9a9; 
+  background-color: #a9a9a9;
 }
 
 .clear-night {
-  background-color: #00008b; 
+  background-color: #00008b;
 }
 
 .nice-weather {
-  background-color: #ffdab9; 
+  background-color: #ffdab9;
 }
 
 .weather-icon {
   font-size: 2rem;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .weather-main {
+    flex-direction: row; /* Horizontal layout for tablets and above */
+  }
+  
+  .highlights-grid {
+    grid-template-columns: repeat(1, 1fr); /* Adjust grid for medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .weather-main {
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .highlights-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3-column grid for larger screens */
+  }
 }

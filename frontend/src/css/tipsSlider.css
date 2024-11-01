@@ -1,41 +1,26 @@
 .carousel-container {
   display: flex;
-  overflow: hidden;
-  /* width: 100%; */
-  white-space: nowrap;
-  justify-content: flex-start;
+  justify-content: center; /* Center the card */
+  align-items: center; /* Vertically align if needed */
+  height: 100%; /* Ensure it takes full height of its container */
   position: relative;
 }
 
 .cards-track {
-  display: flex;
-  animation: scrollInfinite 400s linear infinite; 
-  transition: animation-play-state 0.5s; 
+  /* display: flex; */
+  /* Removed scrolling animation */
 }
 
 .card {
-  min-width: 200px;
-  min-height: 200px;
-  margin-right: 20px;
+  min-width: 200px; /* Card width */
+  min-height: 200px; /* Card height */
+  margin: 0 10px; /* Center the card with margin */
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
-}
-
-.cards-track:hover {
-  animation-play-state: paused; 
-}
-
-@keyframes scrollInfinite {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .crop-name {
@@ -48,4 +33,3 @@
   font-size: 16px;
   line-height: 1.4;
 }
-

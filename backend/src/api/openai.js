@@ -12,6 +12,7 @@ const openai = new OpenAI({
 const MONGO_URI = process.env.MONGODB_URI;
 console.log('MONGO_URI:', MONGO_URI);
 
+
 // Function to connect to MongoDB
 const connectDB = async () => {
     try {
