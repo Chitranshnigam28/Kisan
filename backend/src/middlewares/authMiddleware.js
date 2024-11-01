@@ -20,7 +20,7 @@ const authMiddleware = (req, res, next) => {
     try {
         // Verify the token and decode it
         const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET_KEY);
-        console.log(decoded )
+        // console.log(decoded )
 
         // Attach the user info (from the token) to the request object
         req.user = {

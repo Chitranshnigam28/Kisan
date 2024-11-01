@@ -4,14 +4,15 @@ import { BiSolidDropletHalf } from "react-icons/bi";
 import { FiWind } from "react-icons/fi";
 import { GiSunrise, GiSunset } from "react-icons/gi";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { WiHumidity } from "react-icons/wi"; // New icon for AQI
+import { MdVisibility, MdAir } from "react-icons/md"; // New icons for Visibility and UVI
 
 const TemperatureAndDetails = ({ weather }) => {
-    // Handle the case where weather is not passed or undefined
     if (!weather) {
         return <p className="text-center text-white">Temperature details not available</p>;
     }
 
-    const { details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, feels_like } = weather;
+    const { details, icon, temp, temp_min, temp_max, sunrise, sunset, speed, humidity, feels_like, visibility, uvi, aqi } = weather;
 
     const verticalDetails = [
         {
@@ -32,6 +33,24 @@ const TemperatureAndDetails = ({ weather }) => {
             title: "Wind",
             value: speed ? `${speed.toFixed()} km/h` : 'N/A'
         },
+        {
+            id: 4,
+            Icon: MdVisibility,
+            title: "Visibility",
+            value: visibility ? `${visibility.toFixed(1)} km` : 'N/A'
+        },
+        {
+            id: 5,
+            Icon: MdAir,
+            title: "UV Index",
+            value: (uvi !== undefined && uvi !== null) ? uvi.toFixed(1) : 'N/A'
+        },
+        {
+            id: 6,
+            Icon: WiHumidity,
+            title: "Air Quality Index",
+            value: aqi !== undefined ? aqi : 'N/A'
+        }
     ];
 
     const horizontalDetails = [

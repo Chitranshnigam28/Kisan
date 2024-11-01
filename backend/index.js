@@ -14,7 +14,9 @@ const cropRecomendRoute=require('./src/Routes/croprecommendRoute');
 const googleRoute=require('./src/Routes/googleRoute');
 const session = require('express-session');
 const passport = require('passport');
-const passportSetup=require('./src/middlewares/passport');
+const topCropRoutes = require('./src/api/fetchTopCrops');
+
+// const passportSetup=require('./src/middlewares/passport');
 const translateRoute = require('./src/Routes/translationRoutes');
 
 const app = express();
@@ -46,6 +48,7 @@ app.use("/api", funFactsRoute);
 app.use("/api", tipsRoute);
 app.use("/api",cropRecomendRoute);
 app.use("/api",translateRoute);
+app.use('/api', topCropRoutes);
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Kisan');
@@ -56,6 +59,3 @@ connectDb().then(() => {
         console.log(`server is running at port ${PORT}`);
     })
 })
-
-
-

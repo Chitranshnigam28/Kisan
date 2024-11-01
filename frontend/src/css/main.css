@@ -1,65 +1,65 @@
 /* Global Layout */
 .main-layout {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 20px;
-    padding: 20px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(10,1fr);
+  gap: 1rem;
+}
+
+/* Weather Info */
+.weather-info {
+  background-color: #e3e9ec;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* My Farms */
+.my-farms {
+  background-color: #e3e9ec;
+  grid-column: 2/11;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.farms-cards {
+  display: flex;
+  gap: 10px;
+}
+
+.farm-card {
+  width: 100px;
+  height: 80px;
+  background-color: #e3e9ec;
+  border-radius: 5px;
+}
+
+/* Crop Info */
+.crop-info {
+  grid-column: span 8;
+  background-color: #e3e9ec;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Tips */
+.tips {
+  grid-column: span 4;
+  background-color: #e3e9ec;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Responsive Design for Mobile (below 700px) */
+@media (max-width: 850px) {
+  .main-layout {
+    grid-template-columns: 1fr;
   }
-  
-  /* Weather Info */
-  .weather-info {
-    grid-column: span 9;
-    background-color: #e3e9ec;    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  /* My Farms */
-  .my-farms {
-    grid-column: span 3;
-    background-color: #e3e9ec;
-        padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .farms-cards {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .farm-card {
-    width: 100px;
-    height: 80px;
-    background-color: #e3e9ec;
-        border-radius: 5px;
-  }
-  
-  /* Crop Info */
-  .crop-info {
-    grid-column: span 8;
-    background-color: #e3e9ec;
-        padding: 20px;
-    border-radius: 10px;
-  }
-  
-  /* Tips */
+
+  .weather-info,
+  .my-farms,
+  .crop-info,
   .tips {
-    grid-column: span 4;
-    background-color: #e3e9ec;    padding: 20px;
-    border-radius: 10px;
+    grid-column: span 12;
+    margin-bottom: 20px;
   }
-  
-  /* Responsive Design for Mobile (below 700px) */
-  @media (max-width: 850px) {
-    .main-layout {
-      grid-template-columns: 1fr;
-    }
-  
-    .weather-info, 
-    .my-farms, 
-    .crop-info, 
-    .tips {
-      grid-column: span 12;
-      margin-bottom: 20px;
-    }
-  }
-  
+}

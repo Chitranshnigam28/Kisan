@@ -4,17 +4,20 @@ import '../css/translation.css';
 
 const TranslationComponent = () => {
   const [originalContent, setOriginalContent] = useState({});
-  const [selectedLanguage, setSelectedLanguage] = useState('en');  
+  const [showLanguageOptions, setShowLanguageOptions] = useState(false); // State to show/hide language options
   const [isTranslated, setIsTranslated] = useState(false);
 
-  // Function to collect all text nodes from the page
+  // Function to collect all text nodes from the page, excluding buttons and icons
   const getTextNodes = (element) => {
     let textNodes = [];
     element.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() !== '') {
         textNodes.push(node);
       } else if (node.nodeType === Node.ELEMENT_NODE) {
-        textNodes = textNodes.concat(getTextNodes(node));
+        // Skip buttons and icons
+        if (node.tagName !== 'BUTTON' && !node.classList.contains('translation-icon')) {
+          textNodes = textNodes.concat(getTextNodes(node));
+        }
       }
     });
     return textNodes;
@@ -34,13 +37,16 @@ const TranslationComponent = () => {
   const restoreOriginalContent = () => {
     const textNodes = getTextNodes(document.body);
     Object.keys(originalContent).forEach((key) => {
-      textNodes[key].nodeValue = originalContent[key];
+      // Ensure we do not access out-of-bounds
+      if (textNodes[key]) {
+        textNodes[key].nodeValue = originalContent[key];
+      }
     });
     setIsTranslated(false);
   };
 
   // Handle language change and translation
-  const handleLanguageChange = async () => {
+  const handleLanguageChange = async (language) => {
     if (!isTranslated) {
       saveOriginalContent();
     }
@@ -49,16 +55,23 @@ const TranslationComponent = () => {
       const textNodes = getTextNodes(document.body);
       const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
 
+      console.log(`Translating text: "${textToTranslate}" to ${language}`); // Log the text to be translated
+
       const response = await axios.post('http://localhost:5001/api/translate', {
         text: textToTranslate,
-        targetLanguage: selectedLanguage
+        targetLanguage: language,
       });
+
+      console.log(`Response from API: `, response.data); // Log the API response
 
       const translatedTextArray = response.data.translatedText.split(' || ');
       textNodes.forEach((node, index) => {
-        node.nodeValue = translatedTextArray[index];
+        if (translatedTextArray[index]) {
+          node.nodeValue = translatedTextArray[index];
+        }
       });
       setIsTranslated(true);
+      setShowLanguageOptions(false);
     } catch (error) {
       console.error('Translation error:', error);
     }
@@ -71,30 +84,26 @@ const TranslationComponent = () => {
 
   return (
     <div className='translate'>
-      <h1>Welcome to the Translation feature of Kisan App</h1>
-      <p>This is a demo of a simple translation feature.</p>
-
-      <div className='button-Separation'>
-        <label>Select Language: </label>
-        <select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
-          <option value="en">English (अंग्रेज़ी)</option>
-          <option value="hi">Hindi (हिन्दी)</option>
-          <option value="bn">Bengali (বাংলা)</option>
-          <option value="te">Telugu (తెలుగు)</option>
-          <option value="mr">Marathi (मराठी)</option>
-          <option value="ta">Tamil (தமிழ்)</option>
-          <option value="gu">Gujarati (ગુજરાતી)</option>
-          <option value="kn">Kannada (ಕನ್ನಡ)</option>
-          <option value="ml">Malayalam (മലയാളം)</option>
-          <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
-          <option value="ur">Urdu (اردو)</option>
-        </select>
-
-        <button onClick={handleLanguageChange} disabled={isTranslated}>
-          {isTranslated ? "Translated!" : "Translate"}
-        </button>
-        <button onClick={restoreOriginalContent}>Restore to English</button>
+      {/* Translation Icon */}
+      <div className="translation-icon" onClick={() => setShowLanguageOptions(!showLanguageOptions)}>
+        🌐 {/* You can replace this with an actual icon if you have one */}
       </div>
+
+      {/* Language Options */}
+      {showLanguageOptions && (
+        <div className='button-Separation'>
+          <button onClick={() => handleLanguageChange('en')}>English (अंग्रेज़ी)</button>
+          <button onClick={() => handleLanguageChange('hi')}>Hindi (हिन्दी)</button>
+          <button onClick={() => handleLanguageChange('pa')}>Punjabi (ਪੰਜਾਬੀ)</button>
+        </div>
+      )}
+
+      {/* Restore button to revert to English */}
+      {isTranslated && (
+        <button className="reset-button" onClick={restoreOriginalContent}>
+          Restore to English
+        </button>
+      )}
     </div>
   );
 };
