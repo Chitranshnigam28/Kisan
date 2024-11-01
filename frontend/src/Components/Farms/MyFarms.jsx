@@ -7,13 +7,16 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import MatchingTips from "../MatchingTips";
+import MatchingTips, { deleteMyTips } from "../MatchingTips";
+
+// import MatchingTips from "../MatchingTips";
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFarm, setSelectedFarm] = useState(null);
+  const [matchedTips, setMatchedTips] = useState([]); // State for matched tips
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -64,23 +67,14 @@ const MyFarms = () => {
 
   const handleDelete = async (farmId) => {
     try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setFarms(farms.filter((farm) => farm._id !== farmId));
+      await deleteMyTips(farmId); // Call deleteMyTips
+      setFarms((prevFarms) => prevFarms.filter((farm) => farm._id !== farmId)); // Update state after deletion
+
+      // Remove the corresponding matched tips
+      setMatchedTips((prevTips) => prevTips.filter((tip) => tip.farmId !== farmId)); 
     } catch (err) {
-      console.error(
-        "Error deleting farm:",
-        err.response ? err.response.data : err.message
-      );
-      alert(
-        `Failed to delete farm: ${
-          err.response ? err.response.data.message : err.message
-        }`
-      );
+      console.error("Error deleting farm:", err);
+      alert("Failed to delete farm: " + err.message);
     }
   };
 
@@ -89,8 +83,7 @@ const MyFarms = () => {
 
   return (
     <div className="container my-5">
-      <MatchingTips />
-
+      <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} /> {/* Pass props */}
       <div
         className={
           location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"
@@ -122,7 +115,7 @@ const MyFarms = () => {
                       </Link>
                       <button
                         className="btn btn-outline-danger"
-                        onClick={() => handleDelete(farm._id)}
+                        onClick={() => handleDelete(farm._id)} // Just call handleDelete directly
                       >
                         <FaTrash /> Delete
                       </button>

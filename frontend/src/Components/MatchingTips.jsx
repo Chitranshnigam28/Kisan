@@ -1,10 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const MatchingTips = () => {
+
+// export const deleteMyTips = async (farmId) => {
+//   try {
+//     const token = localStorage.getItem('token');
+//     await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     // Update farms and matched tips after deletion
+//     setFarms(prevFarms => prevFarms.filter(farm => farm._id !== farmId));
+//     setMatchedTips(prevTips => prevTips.filter(tip => tip.farmId !== farmId));
+//   } catch (err) {
+//     console.error('Error deleting farm:', err);
+//     setError('Failed to delete farm');
+//   }
+// };
+
+
+export const deleteMyTips = async (farmId) => {
+  const token = localStorage.getItem('token');
+  try {
+    await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (err) {
+    console.error('Error deleting farm:', err);
+    throw new Error('Failed to delete farm'); // Throw error for handling in MyFarms
+  }
+};
+
+const MatchingTips = ({ matchedTips, setMatchedTips }) => {
   const [farms, setFarms] = useState([]);
   const [tipsData, setTipsData] = useState([]);
-  const [matchedTips, setMatchedTips] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -13,7 +45,7 @@ const MatchingTips = () => {
   if (!userId) {
     throw new Error('User ID is undefined');
   } else {
-    console.log(userId, "matching tips section --------");
+    // console.log(userId, "matching tips section --------");
   }
 
   // Fetch user's farms
@@ -48,18 +80,14 @@ const MatchingTips = () => {
     }
   };
 
-  // Match the user's farms with tips based on crop names
   const matchCropsWithTips = () => {
     const matched = [];
-
-    // Filter farms based on current user
     const userFarms = farms.filter(farm => farm.owner === userId);
-    console.log('User farms:', userFarms);
 
     userFarms.forEach((farm) => {
-      const farmCrop = farm.cropName?.toLowerCase(); // Assuming farm has cropName
+      const farmCrop = farm.cropName?.toLowerCase(); 
       tipsData.forEach((tip) => {
-        const tipCrop = tip.crop_name?.toLowerCase(); // Assuming tip has crop_name
+        const tipCrop = tip.crop_name?.toLowerCase();
         if (farmCrop && tipCrop && farmCrop === tipCrop) {
           matched.push({ cropName: farm.cropName, tips: tip.tips, farmId: farm._id });
         }
@@ -69,38 +97,7 @@ const MatchingTips = () => {
     setMatchedTips(matched);
   };
 
-
-//   const handleDelete = async (farmId) => {
-//     try {
-//         const token = localStorage.getItem('token');
-//         await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//             },
-//         });
-//         setFarms(farms.filter(farm => farm._id !== farmId));
-//     } catch (err) {
-//         console.error("Error deleting farm:", err.response ? err.response.data : err.message);
-//         alert(`Failed to delete farm: ${err.response ? err.response.data.message : err.message}`);
-//     }
-// };
-  // Delete a farm and update matching tips
-  const deleteFarm = async (farmId) => {
-    try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      // Update farms and matched tips after deletion
-      setFarms(prevFarms => prevFarms.filter(farm => farm._id !== farmId));
-      setMatchedTips(prevTips => prevTips.filter(tip => tip.farmId !== farmId));
-    } catch (err) {
-      console.error('Error deleting farm:', err);
-      setError('Failed to delete farm');
-    }
-  };
+ 
 
   useEffect(() => {
     const initialize = async () => {

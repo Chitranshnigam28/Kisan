@@ -7,13 +7,14 @@ import TemperatureAndDetails from '../Components/weatherComponents/TemperatureAn
 import Forecast from '../Components/weatherComponents/Forecast';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TopCropsChart from "./TopCropChart"; //Matching the location for both weather and
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function Weather() {
-  const [query, setQuery] = useState({ q: "toronto" });  // Default to city name
+  const [query, setQuery] = useState({ q: "delhi" });  // Default to city name
   const [units, setUnits] = useState("metric");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ function Weather() {
       const queryString = isGeolocation
         ? `lat=${query.lat}&lon=${query.lon}`
         : `q=${query.q}`;
-        
+
       const cityName = query.q ? capitalizeFirstLetter(query.q) : "current location";
       toast.info(`Fetching weather data for ${isGeolocation ? "current location" : cityName}...`);
       

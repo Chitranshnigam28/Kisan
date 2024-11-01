@@ -41,12 +41,37 @@
     border-radius: 10px;
   }
   
+  .top-crops-chart{
+    grid-column: span 4;
+    background-color: #e3e9ec;  
+        padding: 20px;
+    border-radius: 10px;
+  }
   /* Tips */
   .tips {
     grid-column: span 4;
     background-color: #e3e9ec;    padding: 20px;
     border-radius: 10px;
   }
+
+  /* Translation Icon Styles */
+.translation-icon {
+  position: fixed;
+  bottom: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  font-size: 3rem; /* Set the size */
+  cursor: pointer;
+  z-index: 1000; /* Make sure it stays on top */
+  background-color: #f0f0f0; /* Highlight background */
+  border-radius: 50%; /* Circular shape */
+  padding: 10px; /* Space around the icon */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for elevation */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.translation-icon:hover {
+  background-color: #e0e0e0; /* Slightly darker on hover */
+}
   
   /* Responsive Design for Mobile (below 700px) */
   @media (max-width: 850px) {
