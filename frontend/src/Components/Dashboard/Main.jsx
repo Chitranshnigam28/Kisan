@@ -26,7 +26,7 @@ const handleLocationChange = (newLocation) => {
   console.log(`Location changed to: ${newLocation}`);
 };
 
-  return (
+  return (<>
     <main className="main-layout">
       <div className="weather-info">
         <h3>Weather Information</h3>
@@ -57,17 +57,14 @@ const handleLocationChange = (newLocation) => {
         {/* <Tips /> */}
       </div>
 
-      <div className="cropRecomendation">
+      {/* <div className="cropRecomendation"> */}
         <h3>Crop Recommendation</h3>
         <div className="cropRecomendation-content">
           <CropRecommendation ownerId={userId} />
         </div>
-      </div>
-      <div className="translation-component">
-        <TranslationComponent />
-      </div>
+      
     </main>
+    </>
   );
 };
-
 export default Main;

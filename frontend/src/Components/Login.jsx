@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate,Link } from 'react-router-dom'; 
 import "../css/loginsignup.css";
-
-
+import { FaGoogle } from "react-icons/fa";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -88,8 +87,16 @@ const Login = () => {
                     />
                 </label>
                 <button type="submit" className='authBtn'>Login</button>
-                <button onClick={handleGoogleLogin}>
-                    Sign in with Google
+                <div className="optionsWrapper">
+                    <div>
+                        <input type="checkbox"/><p>Remember Me</p>
+                    </div>
+                    <p>
+                        <a href="/forgotpassword">Forgot Password?</a>
+                    </p>
+                    </div>
+                <button onClick={handleGoogleLogin} id="googleBtn">
+                   <img src="./google.png" id="googleIcon"/> <span>Sign in with Google</span>
                 </button>
                 <p id="hvact" style={{color:"#818898",fontWeight:600}}>Don't have an account? <Link to="/register"><b>Sign up</b></Link></p>
             </form>

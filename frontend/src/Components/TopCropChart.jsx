@@ -14,6 +14,7 @@ const TopCropsChart = ({ onLocationChange }) => {
         const response = await axios.get(`http://localhost:5001/api/recommend-crop/`, {
             params: { location },
         });
+        console.log("response")
         if (Array.isArray(response.data.crops)) {
           setTopCrops(response.data.crops);
         } else {
