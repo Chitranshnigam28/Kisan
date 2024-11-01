@@ -1,9 +1,9 @@
-import "../css/weather.css"
+import "../css/weatherPage.css";
 import { useEffect, useState } from 'react';
-import TopButtons from '../Components/weatherComponents/TopButtons';
-import Inputs from '../Components/weatherComponents/Inputs';
-import TimeAndLocation from '../Components/weatherComponents/TimeAndLocation';
-import TemperatureAndDetails from '../Components/weatherComponents/TemperatureAndDetails';
+import { Link, useLocation } from 'react-router-dom';
+import { WiDaySunny, WiCloud, WiRain, WiSnow, WiThunderstorm } from 'react-icons/wi';
+import { BsFillSunriseFill, BsFillSunsetFill } from "react-icons/bs";
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import Forecast from '../Components/weatherComponents/Forecast';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,35 +13,48 @@ function capitalizeFirstLetter(string) {
 }
 
 function Weather() {
-  const [query, setQuery] = useState({ q: "toronto" });  // Default to city name
+  const location = useLocation();
+  const [query, setQuery] = useState(location.state?.query || { q: "Delhi" });
   const [units, setUnits] = useState("metric");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  function getWeatherIcon(condition) {
+    switch (condition) {
+      case 'Clear':
+        return <WiDaySunny size={64} color="#FFD700" />;
+      case 'Clouds':
+        return <WiCloud size={64} color="#A9A9A9" />;
+      case 'Rain':
+        return <WiRain size={64} color="#1E90FF" />;
+      case 'Snow':
+        return <WiSnow size={64} color="#ADD8E6" />;
+      case 'Thunderstorm':
+        return <WiThunderstorm size={64} color="#00008B" />;
+      default:
+        return <WiCloud size={64} color="#A9A9A9" />;
+    }
+  }
+
   const getWeather = async () => {
     try {
       setLoading(true);
-      
-      // Detect whether to use city name or latitude/longitude
       const isGeolocation = query.lat && query.lon;
-      const queryString = isGeolocation
-        ? `lat=${query.lat}&lon=${query.lon}`
-        : `q=${query.q}`;
-        
+      const queryString = isGeolocation ? `lat=${query.lat}&lon=${query.lon}` : `q=${query.q}`;
       const cityName = query.q ? capitalizeFirstLetter(query.q) : "current location";
       toast.info(`Fetching weather data for ${isGeolocation ? "current location" : cityName}...`);
-      
-      // console.log("Query being sent:", query);
+
       const response = await fetch(`http://localhost:5001/api/weather?${queryString}&units=${units}`);
       if (!response.ok) throw new Error("Failed to fetch weather data");
 
       const data = await response.json();
-      // console.log("Weather data received:", data);
-      if (!data.temp || !data.hourly || !data.daily) {
-        throw new Error("Incomplete weather data received");
-      }
+      if (!data.temp || !data.hourly || !data.daily || !data.name || !data.country) throw new Error("Incomplete weather data received");
+
       toast.success(`Fetched weather data for ${data.name}, ${data.country}`);
-      setWeather(data);
+      setWeather({
+        ...data,
+        bgColor: data.weather && data.weather[0] ? getBackgroundColor(data.weather[0].main) : "#FFD700",
+      });
     } catch (error) {
       toast.error(`Error fetching weather data: ${error.message}`);
     } finally {
@@ -50,37 +63,67 @@ function Weather() {
   };
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      getWeather();
-    }, 500);  // Debounce: Wait 500ms before making API call to reduce unnecessary calls.
-
-    return () => clearTimeout(timerId);  // Cleanup timer
+    getWeather();
   }, [query, units]);
 
-  const formatBackground = () => {
-    if (!weather) return "from-cyan-600 to-blue-700";
-    const threshold = units === "metric" ? 20 : 60;
-    return weather.temp <= threshold ? "from-cyan-600 to-blue-700" : "from-yellow-600 to-orange-700";
-  };
-
   return (
-    
-    <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl max-w-full h-auto shadow-gray-400 ${formatBackground()}`} style={{ height: '60vh', overflowY: 'auto' }}>
-     
-
-      <TopButtons setQuery={setQuery} />
-      <Inputs setQuery={setQuery} setUnits={setUnits} />
+    <div className="weather-details-container">
+      <div className="weather-tip">
+        Today’s weather is sunny! Make sure to irrigate your crops early in the morning or late in the evening to prevent excessive water evaporation during peak sunlight.
+      </div>
 
       {loading ? (
-        <p className="text-center text-xl text-white">Loading...</p>
+        <p className="loading-text">Loading...</p>
       ) : (
         weather && (
-          <>
-            <TimeAndLocation weather={weather} />
-            <TemperatureAndDetails weather={weather} />
-            <Forecast key="forecast1" title="3-hour step forecast" data={weather.hourly} />
-            <Forecast key="forecast2" title="daily forecast" data={weather.daily} />
-          </>
+          <div className="weather-main">
+            <div className="weather-visualization" style={{ backgroundColor: weather.bgColor }}>
+              <div className="temperature-display">
+                {getWeatherIcon()}
+                <p className="temperature">{`${weather.temp.toFixed()}°C`}</p>
+              </div>
+              <div className="location">
+                <FaMapMarkerAlt size={18} color="#fff" />
+                <span>{`${weather.name}, ${weather.country}`}</span>
+              </div>
+              <Forecast title="Hourly Forecast" data={weather.hourly} />
+            </div>
+
+            <div className="weather-info">
+              <h3 className="highlights-title">Today's Highlights</h3>
+              <div className="highlights-grid">
+                <div className="highlight-box">
+                  <p>UV Index</p>
+                  <p>{weather.uvi}</p>
+                </div>
+                <div className="highlight-box">
+                  <p>Wind Status</p>
+                  <p>{weather.speed} Km/hr</p>
+                </div>
+                <div className="highlight-box">
+                  <p>Sunrise & Sunset</p>
+                  <p><BsFillSunriseFill /> {weather.sunrise} / <BsFillSunsetFill /> {weather.sunset}</p>
+                </div>
+                <div className="highlight-box">
+                  <p>Humidity</p>
+                  <p>{weather.humidity}%</p>
+                </div>
+                <div className="highlight-box">
+                  <p>Visibility</p>
+                  <p>{weather.visibility} Km</p>
+                </div>
+                <div className="highlight-box">
+                  <p>Air Quality</p>
+                  <p>{weather.aqi || 'N/A'}</p>
+                </div>
+              </div>
+              <div className="d-flex justify-content-center align-items-center vh-50">
+                <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
+                  Go Back
+                </Link>
+              </div>
+            </div>
+          </div>
         )
       )}
 

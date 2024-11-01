@@ -9,6 +9,7 @@ import CropRecommendation from "../CropRecomendation";
 import Tips from "../Tips";
 import { BiRightTopArrowCircle } from "react-icons/bi";
 import TopCropsChart from "../TopCropChart"; 
+import WeatherWidget from "../weatherWidget";
 
 const Main = () => {
 
@@ -19,7 +20,7 @@ const Main = () => {
     <main className="main-layout">
       <div className="weather-info">
         <h3>Weather Information</h3>
-        <Weather />
+        <WeatherWidget />
       </div>
 
       <div className="my-farms ">
