@@ -18,7 +18,7 @@ const CropRecommendation = ({ ownerId }) => {
         console.log(ownerId)
       }
 
-      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${"67108f8d06fdf532952b1baa"}`);
+      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${ownerId}}`);
       setFarmDetails(response.data);
     } catch (error) {
       console.error('Error fetching farm details:', error);

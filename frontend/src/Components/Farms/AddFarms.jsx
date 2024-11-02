@@ -3,6 +3,8 @@ import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../../css/addFarms.css'
+import { IoMdArrowBack } from "react-icons/io";
 
 const AddFarms = () => {
 
@@ -119,9 +121,11 @@ const AddFarms = () => {
 
     return (
         <div className='addFarmContainer container my-5'>
-            <h2 className="mb-4">Add New Farm</h2>
+            <h2 className="mb-4">Add a New Farm</h2>
+            <h5 className="mb-5">Create an account to access and start to set up your farm and garden.</h5>
             <form onSubmit={handleSubmit}>
 
+              <div className="form-group">
                 <div className="mb-4">
                     <label className="form-label">Farm Name:</label>
                     <input
@@ -395,20 +399,17 @@ const AddFarms = () => {
                     />
 
                 </div>
+                </div>
 
                 <div className="d-flex">
                     <button type="submit" className="btn btn-success me-3">Save</button>
-                    <button type="submit" className="btn btn-dark d-flex align-items-center">
-                        <FaPlus className="me-2" />
-                        Add New Farm
-                    </button>
                 </div>
 
 
             </form>
             <div className="d-flex justify-content-center align-items-center vh-50">
                 <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
-                    Go Back
+                <IoMdArrowBack className="back-icon" />Go Back
                 </Link>
             </div>
         </div>

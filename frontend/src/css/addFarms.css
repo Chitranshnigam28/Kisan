@@ -1,0 +1,111 @@
+.addFarmContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+}
+
+.addFarmContainer h2 {
+    text-align: center;
+    color: #333;
+}
+
+.addFarmContainer h5 {
+    text-align: center;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control,
+.form-select {
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button,
+input[type="submit"] {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.save-btn,
+.add-new-farm-btn {
+    display: block;
+    margin: 15px auto;
+    width: 150px;
+    text-align: center;
+    
+}
+
+.back-btn {
+    background-color: #ffc107;
+    color: #fff;
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background-color: #e0a800;
+}
+
+.btn {
+    width: auto;
+}
+
+.back-button {
+    display: inline-flex; /* Ensures content is in a row */
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Center content horizontally */
+    gap: 5px; /* Spacing between icon and text */
+    white-space: nowrap; /* Prevents text from wrapping */
+    width: auto; /* Prevents full-width button */
+}
+
+.back-icon {
+    font-size: 1.2em; /* Adjust icon size if needed */
+    display: inline-block; /* Ensures icon aligns inline */
+}
+
+
+
+@media (min-width: 768px) {
+    .save-btn,
+    .add-new-farm-btn,
+    .back-btn {
+        width: 180px;
+    }
+}
+
