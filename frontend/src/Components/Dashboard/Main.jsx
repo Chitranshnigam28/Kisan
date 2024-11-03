@@ -34,6 +34,14 @@ const handleLocationChange = (newLocation) => {
       </div>
 
       <div className="my-farms ">
+        <Link to="/my-farms">
+          <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+        </Link>
+        <MyFarms userId={userId} />
+        <Link to="/add-farm">Add a New Farm</Link>
+      </div>
+
+      {/* <div className="my-farms ">
         <h3>My Farms</h3>
         <Link to="/my-farms">
           <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
@@ -47,25 +55,26 @@ const handleLocationChange = (newLocation) => {
         <ComponentPriceGraph />
       </div>
 
-      {/* <div className="top-crops-chart">
+      <div className="top-crops-chart">
         <h3>Top 5 Crops by Estimated Revenue</h3>
         <TopCropsChart onLocationChange={handleLocationChange} location={location} />
-        </div> */}
+      </div>
 
       <div className="fun-facts">
         <FunFacts />
-        {/* <Tips /> */}
+        <Tips />
       </div>
 
-      {/* <div className="cropRecomendation">
+      <div className="cropRecomendation">
         <h3>Crop Recommendation</h3>
         <div className="cropRecomendation-content">
           <CropRecommendation ownerId={userId} />
         </div>
       </div>
+
       <div className="translation-component">
         <TranslationComponent />
-      </div>
+      
       </div> */}
     </main>
   );

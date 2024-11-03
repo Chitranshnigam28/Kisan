@@ -22,20 +22,21 @@ function Weather() {
 
   function getWeatherIcon(condition) {
     switch (condition) {
-      case 'Clear':
-        return <WiDaySunny size={64} color="#FFD700" />;
-      case 'Clouds':
-        return <WiCloud size={64} color="#A9A9A9" />;
-      case 'Rain':
-        return <WiRain size={64} color="#1E90FF" />;
-      case 'Snow':
-        return <WiSnow size={64} color="#ADD8E6" />;
-      case 'Thunderstorm':
-        return <WiThunderstorm size={64} color="#00008B" />;
-      default:
-        return <WiCloud size={64} color="#A9A9A9" />;
+        case 'Clear':
+            return <WiDaySunny size={64} color="#84B8EA" />; // Sunny - Light blue
+        case 'Clouds':
+            return <WiCloud size={64} color="#A9A9A9" />; // Default color for clouds
+        case 'Rain':
+            return <WiRain size={64} color="#627685" />; // Rain - Dark grayish-blue
+        case 'Snow':
+            return <WiSnow size={64} color="#ADD8E6" />; // Snow - Light blue
+        case 'Thunderstorm':
+            return <WiThunderstorm size={64} color="#627685" />; // Thunderstorm - Dark grayish-blue
+        default:
+            return <WiCloud size={64} color="#A9A9A9" />; // Default color for clouds
     }
-  }
+}
+
 
   const getWeather = async () => {
     try {
