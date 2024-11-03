@@ -5,6 +5,7 @@ import "./SingleTips";
 import SingleTips from "./SingleTips";
 import TopCropsChart from "./TopCropChart";
 import "../css/marketInsights.css"; // Import the new CSS file
+import MarketInsights from "./MarketInsights";
 
 const CropPriceChart = ({ crop }) => {
   const [cropPrices, setCropPrices] = useState([]);
@@ -128,6 +129,7 @@ const CropPriceChart = ({ crop }) => {
               location={location}
             />
           </div>
+          <MarketInsights />
       </div>
     </div>
   );

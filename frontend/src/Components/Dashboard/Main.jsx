@@ -62,7 +62,7 @@ const handleLocationChange = (newLocation) => {
         <div className="cropRecomendation-content">
           <CropRecommendation ownerId={userId} />
         </div>
-      
+      <TranslationComponent />
     </main>
     </>
   );
