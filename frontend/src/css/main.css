@@ -35,7 +35,7 @@
 
 /* Crop Info */
 .crop-info {
-  grid-column: span 8;
+  grid-column: span 4;
   background-color: #e3e9ec;
   padding: 20px;
   border-radius: 10px;
@@ -48,7 +48,19 @@
   padding: 20px;
   border-radius: 10px;
 }
+.dashboard-marketview{
+  grid-column: span 8;
+  background-color: #e3e9ec;
+  padding: 20px;
+  border-radius: 10px;
+}
 
+.market-info,.top-crops{
+  display: flex;
+}
+/* .top-crops{
+
+} */
 /* Responsive Design for Mobile (below 700px) */
 @media (max-width: 850px) {
   .main-layout {
