@@ -8,6 +8,7 @@ import FunFacts from "../FunFacts";
 import CropRecommendation from "../CropRecomendation";
 import Tips from "../Tips";
 import { BiRightTopArrowCircle } from "react-icons/bi";
+// import TopCropsChart from "../TopCropChart"; 
 import TopCropsChart from "../TopCropChart";
 import WeatherWidget from "../weatherWidget";
 // import TopCropsChart from "../TopCropChart";

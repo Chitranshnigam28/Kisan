@@ -22,8 +22,8 @@ const TopCropsChart = ({ onLocationChange }) => {
           setTopCrops([]);
         }
       } catch (error) {
-        console.error('Error fetching top crops:', error);
-        setTopCrops([]);
+        console.error('Error fetching top crops:', error.response ? error.response.data : error.message);
+        setTopCrops([]); // Set to empty on error
       } finally {
         setLoading(false);
       }
