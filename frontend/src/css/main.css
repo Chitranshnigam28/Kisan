@@ -52,8 +52,8 @@
 }
 
 .farm-card {
-  min-width: 200px;
-  height: 150px;
+  width: 20rem;
+  height: 300px;
   border-radius: 5px;
   flex: 0 0 auto;
 }

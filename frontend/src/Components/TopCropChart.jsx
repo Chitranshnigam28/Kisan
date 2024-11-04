@@ -60,7 +60,7 @@ const TopCropsChart = ({ onLocationChange }) => {
           height: 350,
         },
         title: {
-          text: `Top 5 Crops in ${location}`,
+          text: `Top Selling Crops in ${location}`,
           align: 'center',
         },
         labels: topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
