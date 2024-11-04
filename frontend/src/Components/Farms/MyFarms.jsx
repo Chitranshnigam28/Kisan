@@ -8,7 +8,9 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import MatchingTips, { deleteMyTips } from "../MatchingTips";
-
+import farmImage from "../../Assets/Images/farm.jpg";
+import MyFarmsSvg from "../../Assets/Logo/Myfarm.svg"
+import '../../css/main.css'
 // import MatchingTips from "../MatchingTips";
 
 const MyFarms = () => {
@@ -71,7 +73,7 @@ const MyFarms = () => {
       setFarms((prevFarms) => prevFarms.filter((farm) => farm._id !== farmId)); // Update state after deletion
 
       // Remove the corresponding matched tips
-      setMatchedTips((prevTips) => prevTips.filter((tip) => tip.farmId !== farmId)); 
+      setMatchedTips((prevTips) => prevTips.filter((tip) => tip.farmId !== farmId));
     } catch (err) {
       console.error("Error deleting farm:", err);
       alert("Failed to delete farm: " + err.message);
@@ -82,49 +84,40 @@ const MyFarms = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container my-5">
-      <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} /> {/* Pass props */}
+    <div className="container ">
+      <div className="MyFarmsHeading">
+        <h4>
+          <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />
+          My Farms
+        </h4>
+      </div>
       <div
         className={
           location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"
         }
       >
         {location.pathname === "/" ? (
-          farms.slice(0, 2).map(
-            (
-              farm // Using `farms` instead of `userFarms`
-            ) => (
-              <div className="me-3" key={farm._id}>
-                <div
-                  className="card border-success shadow"
-                  style={{ width: "18rem" }}
-                >
-                  <div className="card-header text-white bg-success">
-                    <h5 className="card-title">{farm.farmName}</h5>
-                  </div>
-                  <div className="card-body">
-                    <p className="card-text">
+          farms.slice(0, 3).map((farm) => (
+            <div className="me-3" key={farm._id}>
+
+              <div className="card border-success shadow farm-card" style={{ width: "18rem" }}>
+                <img
+                  src={farmImage}
+                  alt={farm.farmName}
+                  className="card-img-top rounded-top"
+                />
+                <div className="card-body">
+                  {/* Farm Name and Size in Separate Halves */}
+                  <div className="farm-details">
+                    <h5 className="farm-name">{farm.farmName}</h5>
+                    <p className="farm-size">
                       <strong>Size:</strong> {farm.sizeOfFarm} HA
                     </p>
-                    <div className="d-flex justify-content-between mt-3">
-                      <Link
-                        to={`/edit-farm/${farm._id}`}
-                        className="btn btn-outline-warning me-2"
-                      >
-                        <FaEdit /> Edit
-                      </Link>
-                      <button
-                        className="btn btn-outline-danger"
-                        onClick={() => handleDelete(farm._id)} // Just call handleDelete directly
-                      >
-                        <FaTrash /> Delete
-                      </button>
-                    </div>
                   </div>
                 </div>
               </div>
-            )
-          )
+            </div>
+          ))
         ) : (
           <>
             <div className="row g-3">
@@ -135,6 +128,7 @@ const MyFarms = () => {
                   onClick={() => setSelectedFarm(farm)}
                 >
                   <div className="card border-success shadow">
+                    <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
                     <div className="card-header text-white bg-success">
                       <h5 className="card-title">{farm.farmName}</h5>
                     </div>
