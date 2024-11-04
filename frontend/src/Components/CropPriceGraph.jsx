@@ -10,7 +10,7 @@ const CropPriceChart = ({ crop }) => {
   const [cropPrices, setCropPrices] = useState([]);
   const [cropName, setCropName] = useState("");
   const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState("Delhi");
+  // const [location, setLocation] = useState("Delhi");
 
   const fetchCropPrices = async () => {
     try {
@@ -72,10 +72,10 @@ const CropPriceChart = ({ crop }) => {
     fetchCropPrices();
   };
 
-  const handleLocationChange = (newLocation) => {
-    setLocation(newLocation);
-    console.log(`Location changed to: ${newLocation}`);
-  };
+  // const handleLocationChange = (newLocation) => {
+  //   setLocation(newLocation);
+  //   console.log(`Location changed to: ${newLocation}`);
+  // };
 
   return (
     <div className="container">
@@ -122,12 +122,7 @@ const CropPriceChart = ({ crop }) => {
           <div className="tips">
             <SingleTips cropName={cropName} />
           </div>
-          <div className="top-crops">
-            <TopCropsChart
-              onLocationChange={handleLocationChange}
-              location={location}
-            />
-          </div>
+         
       </div>
     </div>
   );
