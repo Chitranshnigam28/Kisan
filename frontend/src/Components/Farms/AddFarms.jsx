@@ -403,6 +403,10 @@ const AddFarms = () => {
 
                 <div className="d-flex">
                     <button type="submit" className="btn btn-success me-3">Save</button>
+                    <button type="submit" className="btn btn-dark d-flex align-items-center">
+                        <FaPlus className="me-2" />
+                        Add New Farm
+                    </button>
                 </div>
 
 

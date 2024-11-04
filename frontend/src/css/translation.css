@@ -1,12 +1,56 @@
-.translate{
+.translate {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
-.button-Separation{
+.button-Separation {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 50%;
-    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    width: 120px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.button-Separation button {
+    margin: 5px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-Separation button:hover {
+    background-color: #0056b3;
+}
+
+.reset-button {
+    position: fixed;
+    bottom: 20px;
+    right: 60px;
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+}
+
+.reset-button:hover {
+    background-color: #c62828;
 }

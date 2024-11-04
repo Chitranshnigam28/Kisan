@@ -1,4 +1,11 @@
+
+img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 .floating-dock {
+  color: #28a745;
   position: fixed; /* Keep it fixed at the bottom */
   bottom: 10px; /* Align to the bottom of the viewport */
   left: 50%; /* Center the dock horizontally */
@@ -32,4 +39,137 @@
 /* Change icon color on hover */
 .footer-icon:hover {
   color: #e0e0e0; /* Change color on hover */
+}
+
+.crop-recommendation-div {
+  position: fixed;
+  bottom: 100px; /* Positions the modal above the floating dock */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #a4d86e; /* Background color similar to your design */
+  padding: 20px;
+  width: 700px; /* Adjust width as needed */
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1500; /* Ensures it appears above other content */
+  text-align: center;
+}
+
+.crop-recommendation-div h2.crTitle {
+  font-size: 1.5rem;
+  color: #ffffff; /* White text color */
+  /* margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; */
+  margin: 0;
+}
+.crTitleWrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: left;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+.crop-recommendation-div .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #ffffff; /* White close button color */
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 0;
+  display: grid;
+    justify-items: end;
+    align-items: start;
+    padding-top: 0;
+}
+
+/* .crop-recommendation-div .close-btn:hover{
+  background-color:#ffffff;
+  color: black;
+} */
+.crop-recommendation-div .recommend-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #f1c40f; /* Yellow color for the button */
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #000000; /* Black text color */
+  font-weight: bold;
+}
+
+.crop-recommendation-div .crWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+.farmImgWrapper{
+  grid-row: 1 / -1;
+  background: white;
+  border-radius: 1rem;
+}
+.fieldIconWrapper{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+#fieldImage{
+  width: 15%;
+}
+
+#farmName{
+  display: grid;
+  place-items: center;
+  padding-left: 1rem;
+}
+
+#featureImage{
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.soilWrapper,.waterWrapper,.rcWrapper{
+background: #DBEFB8;
+border-radius: 1rem;
+padding: 1rem;
+}
+
+.wrcsWrapper{
+grid-row: 1/-1;
+display: flex;
+    flex-wrap: wrap;
+gap: 0.5rem;
+}
+.soilWrapper{
+flex-basis: 48.7%;
+order: 1;
+}
+
+.waterWrapper{
+  flex-basis: 48.7%;
+  order: 2;
+}
+
+.rcWrapper{
+  flex-basis: 100%;
+order: 3;
+}
+
+.soilWrapper p{
+  text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.waterWrapper p{
+  text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+.attrHeading{
+  color: #929292;
 }
