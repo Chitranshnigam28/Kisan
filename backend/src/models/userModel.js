@@ -22,9 +22,7 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false,
-    },
-    otp: { type: String },  // OTP for password reset
-    otpExpiry: { type: Date },
+    }
 })
 
 userSchema.pre("save", async function (next) {

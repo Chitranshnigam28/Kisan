@@ -1,4 +1,3 @@
-// WeatherWidget.js
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -110,7 +109,7 @@ function WeatherWidget({ showSearch = true }) {
                         </div>
                     )
                 )}
-                {/* <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" /> */}
+                <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" />
             </div>
         </div>
     );
@@ -230,7 +229,7 @@ export default WeatherWidget;
 //                         </div>
 //                     )
 //                 )}
-//                 <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" />
+//                 {/* <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" /> */}
 //             </div>
 //         </div>
 //     );

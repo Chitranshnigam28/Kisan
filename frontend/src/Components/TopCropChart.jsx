@@ -8,25 +8,6 @@ const TopCropsChart = ({ onLocationChange }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const fetchTopCrops = async () => {
-    //   setLoading(true);
-    //   try {
-    //     const response = await axios.get(`http://localhost:5001/api/recommend-crop/`, {
-    //         params: { location },
-    //     });
-    //     if (Array.isArray(response.data.crops)) {
-    //       setTopCrops(response.data.crops);
-    //     } else {
-    //       console.error('Unexpected response format:', response.data);
-    //       setTopCrops([]);
-    //     }
-    //   } catch (error) {
-    //     console.error('Error fetching top crops:', error);
-    //     setTopCrops([]); // Set to empty on error
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
     const fetchTopCrops = async () => {
       setLoading(true);
       try {

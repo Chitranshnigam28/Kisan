@@ -8,10 +8,10 @@
 
 /* Weather Info */
 .weather-info {
-<<<<<<< HEAD
-  /* background-color: #e3e9ec; */
-=======
->>>>>>> f140e27d181436536433cc8d00692b2ead1684a0
+
+ 
+  background-color: white;
+
   padding: 20px;
   border-radius: 10px;
 }

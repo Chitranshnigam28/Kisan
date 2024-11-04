@@ -17,7 +17,7 @@ const passport = require('passport');
 const topCropRoutes = require('./src/api/fetchTopCrops');
 const marketInsights = require('./src/api/marketInsigtsai')
 
-const passportSetup=require('./src/middlewares/passport');
+// const passportSetup=require('./src/middlewares/passport');
 const translateRoute = require('./src/Routes/translationRoutes');
 
 const app = express();

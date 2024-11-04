@@ -11,9 +11,16 @@ router.get('/', home);
 router.post('/register', register);
 router.post('/login', login);
 
-// // Forgot password routes
-// router.post('/forgot-password', forgotPassword); // Initiates OTP sending
-// router.post('/verify-otp', verifyOtp);           // Verifies OTP
-// router.post('/reset-password', resetPassword);    // Resets the password
+// Redirect to Google for authentication
+// router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// // Callback route where Google will redirect after authentication
+// router.get('/auth/google/callback', 
+//     passport.authenticate('google', { failureRedirect: '/login' }),
+//     (req, res) => {
+//         const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+//         res.redirect(`http://localhost:3000?token=${token}`); // Redirect to frontend with the JWT token
+//     }
+// );
 
 module.exports = router;
