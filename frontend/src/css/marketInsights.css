@@ -1,74 +1,89 @@
-/* CropPriceChart.css */
-
-/* General Styles */
-.container {
+.market-insights-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-}
-
-/* Title Styles */
-.title {
-    display: flex;
-    align-items: center;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.title-icon {
-    margin-left: 0.5rem;
-}
-
-/* Content Layout */
-.content {
-    display: flex;
-    flex-direction: column; /* Default to column for mobile */
+    /* background-color: #f5f8fa; */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
-}
-
-/* Responsive Styles for Desktop */
-@media (min-width: 768px) {
-    .content {
-        flex-direction: row; /* Switch to row on larger screens */
-    }
-
-    .chart {
-        flex: 2; /* Chart takes more space */
-        margin-right: 1rem; /* Space between chart and tips */
-    }
-
-    .tips {
-        flex: 1; /* Single tips takes less space */
-        margin-left: 1rem; /* Space between tips and chart */
-    }
-}
-
-/* Content2 Styles */
-.content2 {
+    max-width: 600px;
+  }
+  
+  .market-insights-title {
     display: flex;
-    flex-direction: column; /* Stack elements vertically for mobile */
-    width: 100%;
-    margin-top: 1rem; /* Space above content2 */
-}
-
-.top-crops {
-    margin-top: 1rem; /* Space above the top crops chart */
-}
-
-/* Responsive Styles for Desktop */
-@media (min-width: 768px) {
-    .content2 {
-        flex-direction: row; /* Switch to row on larger screens */
-        justify-content: space-between; /* Space out elements */
-    }
-
-    .tips {
-        flex: 1; /* Single tips takes less space */
-        margin-right: 1rem; /* Space between tips and top crops */
-    }
-
-    .top-crops {
-        flex: 1; /* Top crops takes equal space */
-    }
-}
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .market-insights-icon {
+    margin-right: 8px;
+  }
+  
+  .market-insights-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .market-insights-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .market-insights-item:last-child {
+    border-bottom: none;
+  }
+  
+  .crop-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+  
+  .crop-info {
+    flex-grow: 1;
+  }
+  
+  .crop-name {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
+  
+  .crop-location {
+    font-size: 0.9em;
+    color: #888;
+  }
+  
+  .price-trend {
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  
+  .price-trend.positive {
+    color: #4caf50; /* Green for positive */
+  }
+  
+  .price-trend.negative {
+    color: #f44336; /* Red for negative */
+  }
+  
+  .current-price {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    margin-left: 1rem;
+  }
+  
+ /* .crop-info {
+  grid-column: span 4;
+  padding: 20px;
+  border-radius: 10px;
+} */
