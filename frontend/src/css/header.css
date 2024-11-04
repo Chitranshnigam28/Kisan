@@ -1,55 +1,118 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: #e3e9ec;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #e3e9ec;
+  height: 4rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 30px;
+  margin-right: 0.5rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notification {
+  position: relative;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-arrow {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+/* Dropdown container with transition for width and opacity */
+.dropdown {
+  position: absolute !important;
+  top: 4rem !important;
+  right: 0.5% !important;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 1rem;
   
-  .logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo-image {
-    height: 30px; /* Adjust based on your logo size */
-    margin-right: 0.5rem;
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .notification {
-    position: relative;
-  }
-  
-  .icon {
-    font-size: 1.5rem;
-    color: #333;
-    cursor: pointer;
-  }
-  
-  .notification-dot {
-    position: absolute;
-    top: 0;
-    right: -5px;
-    height: 10px;
-    width: 10px;
-    background-color: red;
-    border-radius: 50%;
-  }
-  
-  .profile {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-arrow {
-    margin-left: 0.5rem;
-    font-size: 0.8rem;
-    color: #333;
-  }
-  
+  width: 12%; /* Default width */
+  opacity: 0;
+  transform: translateY(-10px); /* Initial slight upward position for a smoother effect */
+  transition: width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show the dropdown with transition */
+.dropdown.show {
+  opacity: 1;
+  transform: translateY(0); /* Move to original position */
+}
+
+/* Main menu buttons */
+.profile-btn, .logout-btn {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+  color: #333;
+}
+
+.profile-btn:hover, .logout-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Profile setup view with Back button */
+.profile-setup-view {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Back button inside the profile setup view */
+.back-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}

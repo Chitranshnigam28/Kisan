@@ -1,5 +1,6 @@
 .weather-widget {
-    width: 280px;
+    width: 100%;
+    height: 93%;/*280px;*/
     padding: 20px;
     border-radius: 16px;
     color: #fff;

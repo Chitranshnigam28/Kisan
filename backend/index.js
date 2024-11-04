@@ -16,7 +16,7 @@ const session = require('express-session');
 const passport = require('passport');
 const topCropRoutes = require('./src/api/fetchTopCrops');
 
-// const passportSetup=require('./src/middlewares/passport');
+const passportSetup=require('./src/middlewares/passport');
 const translateRoute = require('./src/Routes/translationRoutes');
 
 const app = express();

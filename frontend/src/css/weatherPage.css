@@ -1,5 +1,8 @@
+body{
+  background-color: #fafffb;
+}
 .weather-details-container {
-  max-width: 1000px;
+  max-width: 70%;
   margin: 20px auto;
   padding: 2rem;
   background: #ffffff;
@@ -9,9 +12,18 @@
   font-family: 'Arial', sans-serif;
 }
 
+.weatherHeader{
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 20px;
+}
+.weatherTitleWrapper p{
+  color: #9E9E9E;
+}
 .weather-tip {
-  background: #e9f5fb;
-  padding: 1rem;
+  background: #F7F7F7;
+  /* padding: 1rem; */
   border-radius: 8px;
   font-size: 0.9rem;
   color: #333;
@@ -21,6 +33,19 @@
   text-align: center;
 }
 
+.imgTipWrapper{
+  display: flex;
+  align-items: flex-start;
+  gap:0.3rem;
+}
+.imgTipWrapper p{
+  text-align: start;
+}
+.tipWrapper{
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap:1rem;
+}
 .weather-main {
   display: flex;
   gap: 30px;
@@ -30,13 +55,14 @@
 
 .weather-visualization {
   flex: 1;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem; /* Add space when stacked */
+  justify-content: center;
 }
 
 .temperature-display {
@@ -70,14 +96,14 @@
   padding: 1.5rem;
   background: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); */
 }
 
 .highlights-title {
   font-size: 1.5rem;
   color: #333;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem 0;
 }
 
 .highlights-grid {
@@ -98,15 +124,23 @@
 
 .highlight-box p:first-child {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: #9e9e9e;
+  text-align: left;
+  font-size: 1rem;
 }
 
 .highlight-box p:last-child {
   font-size: 1.5rem;
   color: #1f2937;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 2.5rem;
+  text-align: start;
 }
-
+.ssIconTextWrapper{
+  display: flex;
+    gap: 1rem;
+    align-items: center;
+}
 .go-back-button {
   margin-top: 20px;
   padding: 0.8rem 2rem;

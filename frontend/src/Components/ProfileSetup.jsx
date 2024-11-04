@@ -62,6 +62,7 @@ const ProfileSetup = () => {
     };
     const inputStyles={
         border:"1px solid black"
+
     }
 
     return (
@@ -189,7 +190,7 @@ const ProfileSetup = () => {
                     </select>
                 </div>
 
-                <button type="submit" style={inputStyles}>Submit</button>
+                <button type="submit" style={{marginTop:"1rem"}}>Submit</button>
             </form>
         </div>
     );

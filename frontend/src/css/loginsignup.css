@@ -107,6 +107,13 @@ input, textarea, select, button {
     font-size: 1rem;
 }
 
+button{
+    background-color:#33420B;
+    border-top-left-radius: 2rem !important;
+    border-top-right-radius: 2rem !important;
+    border-bottom-left-radius: 2rem !important;
+    border-bottom-right-radius: 2rem !important;
+}
 .authBtn {
     background-color: #33420B;
     color: white;
@@ -123,7 +130,7 @@ input, textarea, select, button {
     font-size: 1.25rem;
 }
 button:hover {
-    background-color: #2980b9;
+    background-color: #f0f0f0;
 }
 
 label {
@@ -140,6 +147,7 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: .5rem;
 }
 
 .flex-column {
@@ -276,3 +284,5 @@ label {
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
 }
+
+

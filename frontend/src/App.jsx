@@ -19,7 +19,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from "./Components/PrivateRoute";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import ForgotPassword from "./Components/ForgotPassword";
+import ForgotPassword from "./Components/passwordResetComponents/ForgotPassword";
 
 
 const userId = localStorage.getItem('userId');
