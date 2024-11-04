@@ -84,7 +84,7 @@ const MyFarms = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container my-5">
+    <div className="container ">
       <div className="MyFarmsHeading">
         <h4>
           <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />

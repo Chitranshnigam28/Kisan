@@ -1,62 +1,84 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../css/translation.css';
 
 const TranslationComponent = () => {
+  const [originalContent, setOriginalContent] = useState({});
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'en');
 
-  // Function to collect all text nodes from the page, excluding buttons and icons
+  // Function to collect all text nodes, excluding buttons/icons
   const getTextNodes = (element) => {
     let textNodes = [];
     element.childNodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() !== '') {
         textNodes.push(node);
-      } else if (node.nodeType === Node.ELEMENT_NODE) {
-        if (node.tagName !== 'BUTTON' && !node.classList.contains('translation-icon')) {
-          textNodes = textNodes.concat(getTextNodes(node));
-        }
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BUTTON' && !node.classList.contains('translation-icon')) {
+        textNodes = textNodes.concat(getTextNodes(node));
       }
     });
     return textNodes;
   };
 
-  // Handle language change and translation
+  // Save original content
+  const saveOriginalContent = () => {
+    const textNodes = getTextNodes(document.body);
+    const originalContentMap = {};
+    textNodes.forEach((node, index) => {
+      originalContentMap[index] = node.nodeValue;
+    });
+    setOriginalContent(originalContentMap);
+  };
+
+  // Translate and replace text without modifying layout
   const handleLanguageChange = async (language) => {
-    try {
-      const textNodes = getTextNodes(document.body);
-      const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
+    if (currentLanguage === 'en') saveOriginalContent();
 
-      const response = await axios.post('http://localhost:5001/api/translate', {
-        text: textToTranslate,
-        targetLanguage: language,
-      });
+    localStorage.setItem('language', language); // Save selected language
+    setShowLanguageOptions(false);
 
-      const translatedTextArray = response.data.translatedText.split(' || ');
-      textNodes.forEach((node, index) => {
-        if (translatedTextArray[index]) {
-          node.nodeValue = translatedTextArray[index];
-        }
-      });
-
-      setShowLanguageOptions(false);
-
-      // Reload only when switching back to English to reset layout
-      if (language === 'en') {
-        window.location.reload();
-      }
-    } catch (error) {
-      console.error('Translation error:', error);
+    if (currentLanguage !== language) {
+      window.location.reload(); // Refresh the page to apply the new language
     }
   };
 
+  // Apply saved language on page load
+  useEffect(() => {
+    if (currentLanguage !== 'en') {
+      const applyTranslation = async () => {
+        const textNodes = getTextNodes(document.body);
+        const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
+
+        try {
+          const response = await axios.post('http://localhost:5001/api/translate', {
+            text: textToTranslate,
+            targetLanguage: currentLanguage,
+          });
+
+          const translatedTextArray = response.data.translatedText.split(' || ');
+          textNodes.forEach((node, index) => {
+            if (translatedTextArray[index]) {
+              node.nodeValue = translatedTextArray[index];
+            }
+          });
+        } catch (error) {
+          console.error('Translation error:', error);
+        }
+      };
+      applyTranslation();
+    }
+  }, [currentLanguage]);
+
   return (
     <div className='translate'>
-      {/* Translation Icon */}
-      <div className="translation-icon" onClick={() => setShowLanguageOptions(!showLanguageOptions)}>
-        🌐 {/* You can replace this with an actual icon if you have one */}
+      <div
+        className="translation-icon"
+        style={{ fontSize: '3rem', position: 'fixed', bottom: '20px', right: '20px', cursor: 'pointer' }}
+        onClick={() => setShowLanguageOptions(!showLanguageOptions)}
+      >
+        🌐
       </div>
 
-      {/* Language Options */}
       {showLanguageOptions && (
         <div className='button-Separation'>
           <button onClick={() => handleLanguageChange('en')}>English (अंग्रेज़ी)</button>
