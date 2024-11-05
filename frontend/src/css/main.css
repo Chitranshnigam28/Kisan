@@ -49,6 +49,8 @@
   border-radius: 10px;
 }
 .dashboard-marketview{
+  display: flex;
+  justify-content: space-between;
   grid-column: span 8;
   background-color: #e3e9ec;
   padding: 20px;

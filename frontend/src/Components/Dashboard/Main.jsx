@@ -53,6 +53,7 @@ const Main = () => {
           </div>
         </div>
 
+
         <div className="dashboard-marketview">
           <div className="market-info">
             <MarketInsights />
