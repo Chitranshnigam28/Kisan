@@ -7,21 +7,15 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 20px;
-}
-
-.addFarmContainer h2 {
+.addFarmContainer h2, .addFarmContainer h5 {
     text-align: center;
     color: #333;
 }
 
-.addFarmContainer h5 {
-    text-align: center;
-    color: #555;
-    font-size: 1.1rem;
+.form-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
 }
 
 .form-label {
@@ -29,22 +23,19 @@
     color: #555;
 }
 
-.form-control,
-.form-select {
+.form-control, .form-select {
     border-radius: 4px;
     padding: 10px;
     font-size: 1rem;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.form-control:focus,
-.form-select:focus {
+.form-control:focus, .form-select:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-button,
-input[type="submit"] {
+button, input[type="submit"] {
     background-color: #28a745;
     color: #fff;
     padding: 10px 20px;
@@ -55,57 +46,164 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-button:hover,
-input[type="submit"]:hover {
+button:hover, input[type="submit"]:hover {
     background-color: #218838;
 }
 
-.save-btn,
-.add-new-farm-btn {
-    display: block;
-    margin: 15px auto;
-    width: 150px;
-    text-align: center;
-    
+/* General button styles */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
 }
 
+.custom-button {
+    flex: 1 1 150px;
+    max-width: 200px; /* Maximum width for buttons */
+    padding: 10px; 
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: #ffffff;
+    color: #000000;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.custom-button:hover {
+    background-color: #96C73D;
+    color: #ffffff;
+}
+
+.custom-button.selected {
+    background-color: #b5e48c;
+    border-color: #6a994e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Back Button */
 .back-btn {
     background-color: #ffc107;
     color: #fff;
-    width: 100px;
-    margin: 0 auto;
+    width: auto;
+    padding: 8px 12px;
+    border-radius: 4px;
     text-align: center;
+    cursor: pointer;
 }
 
 .back-btn:hover {
     background-color: #e0a800;
 }
 
-.btn {
-    width: auto;
+.widget-border {
+    height: 4px;
+    background-color: #96C73D;
+    margin-bottom: 20px;
 }
 
-.back-button {
-    display: inline-flex; /* Ensures content is in a row */
-    align-items: center; /* Vertical alignment */
-    justify-content: center; /* Center content horizontally */
-    gap: 5px; /* Spacing between icon and text */
-    white-space: nowrap; /* Prevents text from wrapping */
-    width: auto; /* Prevents full-width button */
+.widget-border.half {
+    width: 50%;
 }
 
-.back-icon {
-    font-size: 1.2em; /* Adjust icon size if needed */
-    display: inline-block; /* Ensures icon aligns inline */
+.widget-border.full {
+    width: 100%;
 }
 
+.upload-box {
+    position: relative;
+    width: 100%; /* Full width of its parent */
+    height: 200px; /* Fixed height for the box */
+    border: 2px dotted #97C73D; /* Dotted border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Indicate it's clickable */
+    margin-top: 10px; /* Space between label and upload box */
+    transition: border-color 0.3s; /* Smooth transition for hover effect */
+    grid-column: span 2; /* Make the upload box span across both columns */
+}
 
+.upload-label {
+    color: #999; /* Text color */
+    font-size: 16px; /* Adjust font size as needed */
+    text-align: center; /* Center the text */
+    /* Remove pointer-events to allow clicks */
+}
 
-@media (min-width: 768px) {
-    .save-btn,
-    .add-new-farm-btn,
-    .back-btn {
-        width: 180px;
+.upload-box:hover {
+    border-color: #999; /* Change border color on hover */
+}
+
+.upload-input {
+    display: none; /* Hide the actual file input */
+}
+
+.button-icon {
+    width: 24px; /* Adjust the size as needed */
+    height: 24px;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.button-container {
+    display: flex; /* Enable Flexbox */
+    flex-wrap: wrap; /* Allow buttons to wrap onto the next line if necessary */
+    gap: 10px; /* Space between buttons */
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Center the buttons vertically within the container */
+    padding: 20px; /* Add padding to the container for spacing around the buttons */
+    background-color: #f0f0f0; /* Change background color of the container (optional) */
+    border-radius: 10px; /* Optional: round the corners of the container */
+}
+
+.main-Btn {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px; /* Increase padding for height */
+    border-radius: 40px;
+    border: none; /* Remove border if not needed */
+    min-width: 100px; /* Minimum width based on expected character count */
+    max-width: 200px; /* Optional: maximum width */
+    flex: 0 1 auto; /* Prevent button from growing too large */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    text-align: center; /* Center text inside the button */
+    height: 50px; /* Set a fixed height for the buttons */
+    line-height: 25px;
+}
+
+.main-Btn:hover {
+    background-color: #333; 
+}
+
+.sec-Btn {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    color: inherit; /* Inherit text color from the parent */
+    font: inherit; /* Inherit font settings from the parent */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    text-decoration: none;
+}
+
+.sec-Btn:hover {
+    background: none; /* Remove background */
+}
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .form-group {
+        grid-template-columns: 1fr;
+    }
+
+    .button-group {
+        justify-content: flex-start;
     }
 }
-
