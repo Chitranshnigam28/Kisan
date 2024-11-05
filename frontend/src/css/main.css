@@ -8,61 +8,77 @@
 
 /* Weather Info */
 .weather-info {
-  background-color: #e3e9ec;
+
+ 
+  background-color: white;
+
   padding: 20px;
   border-radius: 10px;
 }
 
 /* My Farms */
 .my-farms {
-  background-color: #e3e9ec;
   grid-column: 2/11;
   padding: 20px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.MyFarmsHeading {
+  display: flex;
+  flex-direction: row; 
+  align-items: center; 
+  margin-bottom: 15px; 
+}
+
+.MyFarmsHeading h4 {
+  display: flex; 
+  align-items: center; 
+  margin: 0; 
+}
+
+
+/* Farms Cards Container */
+.card{
+  padding: 0;
+}
+
+.farms-cards-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
 }
 
 .farms-cards {
-  display: flex;
+  display: inline-flex;
   gap: 10px;
 }
 
 .farm-card {
-  width: 100px;
-  height: 80px;
-  background-color: #e3e9ec;
+  width: 20rem;
+  height: 300px;
   border-radius: 5px;
+  flex: 0 0 auto;
 }
 
-/* Crop Info */
-.crop-info {
-  grid-column: span 4;
-  background-color: #e3e9ec;
-  padding: 20px;
+/* Custom scrollbar for horizontal scrolling */
+.farms-cards-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.farms-cards-container::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
-/* Tips */
-.tips {
-  grid-column: span 4;
-  background-color: #e3e9ec;
-  padding: 20px;
-  border-radius: 10px;
-}
-.dashboard-marketview{
-  display: flex;
-  justify-content: space-between;
-  grid-column: span 8;
-  background-color: #e3e9ec;
-  padding: 20px;
+.farms-cards-container::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
-.market-info,.top-crops{
-  display: flex;
+.farms-cards-container:hover::-webkit-scrollbar-thumb {
+  background: #666;
 }
-/* .top-crops{
 
-} */
 /* Responsive Design for Mobile (below 700px) */
 @media (max-width: 850px) {
   .main-layout {
@@ -76,4 +92,49 @@
     grid-column: span 12;
     margin-bottom: 20px;
   }
+
+  .farms-cards-container {
+    padding-bottom: 15px;
+  }
+
+  .farm-card {
+    min-width: 150px;
+    height: 120px;
+  }
 }
+
+.tips {
+  grid-column: span 4;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.insightsWrapper{
+  display: flex;
+  justify-content: space-around;
+}
+
+.dashboard-marketview{
+  grid-column: span 9;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.market-info,.top-crops{
+  display: flex;
+}
+
+@media (max-width: 850px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-info,
+  .my-farms,
+  .crop-info,
+  .tips {
+    grid-column: span 12;
+    margin-bottom: 20px;
+  }
+}
+
