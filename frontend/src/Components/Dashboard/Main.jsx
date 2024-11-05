@@ -33,6 +33,9 @@ const Main = () => {
       <main className="main-layout">
         <div className="weather-info">
           <h3>Weather Information</h3>
+            <Link to="/weather">
+                <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+            </Link>
           <WeatherWidget />
         </div>
 
