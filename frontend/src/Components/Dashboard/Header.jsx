@@ -5,11 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import ProfileSetup from '../ProfileSetup';
 import ChangeLanguage from '../ChangeLanguage';
 import TranslationComponent from '../TranslationComponent';
+import ChangePassword from '../ChangePassword';
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [showChangeLanguage, setShowChangeLanguage] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('English'); // State for selected language
   const navigate = useNavigate();
 
@@ -26,6 +28,11 @@ const Header = () => {
 
   const handleChangeLanguageClick = () => {
     setShowChangeLanguage(true);
+    setShowDropdown(false);
+  };
+
+  const handleChangePasswordClick = () => {
+    setShowChangePassword(true);
     setShowDropdown(false);
   };
 
@@ -53,8 +60,8 @@ const Header = () => {
           {showDropdown && (
             <div className="dropdown">
               <div className="changePasswordWrapper">
-                <img src="./changePassword.png" alt="changePassword"/>
-                <button onClick={handleProfileClick} className="change-password">
+                <img src="./changePassword.png" alt="changePassword" />
+                <button onClick={handleChangePasswordClick} className="change-password">
                   Change Password
                 </button>
               </div>
@@ -90,6 +97,16 @@ const Header = () => {
           >
             Close
           </button>
+        </div>
+      )}
+
+{/* Show Change Password Modal */}
+{showChangePassword && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <ChangePassword onClose={() => setShowChangePassword(false)} />
+            {/* <button className="close-button" onClick={() => setShowChangePassword(false)}>&times;</button> */}
+          </div>
         </div>
       )}
 
