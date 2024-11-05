@@ -7,8 +7,9 @@ import MatchingTips, { deleteMyTips } from "../MatchingTips";
 import farmImage from "../../Assets/Images/farm.jpg";
 import MyFarmsSvg from "../../Assets/Logo/Myfarm.svg";
 import '../../css/main.css';
-import { IoIosAddCircleOutline } from "react-icons/io";
-import AddFarms from "./AddFarms";
+import { IoIosAddCircleOutline } from "react-icons/io"; 
+import { MdOutlineCancel } from "react-icons/md"; 
+import AddFarms from "./AddFarms"; 
 import { IoMdArrowBack } from "react-icons/io";
 
 const MyFarms = () => {
@@ -85,12 +86,11 @@ const MyFarms = () => {
     loadPriceData();
   }, [selectedFarm]);
 
-  // Placeholder data (simple, empty or mock data for 6 months)
   const placeholderData = [
     {
       crop_name: "Loading...",
-      months: ["Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024"],
-      prices: [0, 0, 0, 0, 0, 0]
+      months: ["Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024", "Jul 2024", "Sept 2024", "Oct 2024"],
+      prices: [0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   ];
 
@@ -154,17 +154,28 @@ const MyFarms = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container ">
+    <div className="container">
       <div className="MyFarmsHeading">
         <h4>
           <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />
           My Farms
         </h4>
-        <IoIosAddCircleOutline
-          className="add-icon"
-          onClick={() => setShowAddFarm(!showAddFarm)}
-          style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px' }}
-        />
+        
+        {location.pathname === "/my-farms" && ( 
+          showAddFarm ? (
+            <MdOutlineCancel
+              className="add-icon"
+              onClick={() => setShowAddFarm(false)} 
+              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }} 
+            />
+          ) : (
+            <IoIosAddCircleOutline
+              className="add-icon"
+              onClick={() => setShowAddFarm(true)} 
+              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }} 
+            />
+          )
+        )}
       </div>
 
       {showAddFarm ? (
@@ -172,7 +183,7 @@ const MyFarms = () => {
       ) : (
         <div className={location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"}>
           {location.pathname === "/" ? (
-            farms.slice(0, 3).map((farm) => (
+            farms.map((farm) => (
               <div className="me-3" key={farm._id}>
                 <div className="card border-success shadow farm-card" style={{ width: "18rem" }}>
                   <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
@@ -249,7 +260,7 @@ const MyFarms = () => {
                 </div>
               )}
 
-              {
+{
                 priceData && priceData.length >= 2 && (
                   <div id="chart" style={{ marginTop: "20px" }}>
                     {loading ? (

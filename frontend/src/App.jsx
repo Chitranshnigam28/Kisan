@@ -22,7 +22,6 @@ import { useEffect } from 'react';
 import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
 
-
 const userId = localStorage.getItem('userId');
 console.log(userId);
 
@@ -30,10 +29,11 @@ const App = () => {
   return (
     <Router>
       <ErrorBoundary>
-      <AppRoutes /> {/* Moved all routes into a new component */}
-      {/* <FloatingDockDemo /> */}
+        <AppRoutes /> {/* Moved all routes into a new component */}
+        {/* <FloatingDockDemo /> */}
       </ErrorBoundary>
     </Router>
+
   );
 };
 
@@ -58,7 +58,7 @@ const AppRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profilesetup' element={<ProfileSetup />} />
-        <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<GMaps />} />
@@ -71,7 +71,7 @@ const AppRoutes = () => {
           <Route path='/funfacts' element={<FunFact />} />
           <Route path='/tips' element={<Tips />} />
           <Route path="/profilesetup" element={<ProfileSetup />} />
-    
+
         </Route>
       </Routes>
     </>

@@ -1,5 +1,12 @@
 /* Global Layout */
+
 .main-layout {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: #FAFFFB;
+
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(10,1fr);
@@ -138,3 +145,24 @@
   }
 }
 
+.MyFarmsHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.MyFarmsHeading h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add space between image and heading */
+}
+
+.MyFarmsHeading img {
+  width: 40px;
+  height: 40px;
+}
+
+.MyFarmsHeading .add-icon {
+  font-size: 1.8rem; /* Increase icon size */
+  margin-left: 10px; /* Add space to the left of the icon */
+}

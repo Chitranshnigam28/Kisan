@@ -60,6 +60,9 @@ const Main = () => {
 
         <FunFacts />
 
+        <div className="translation-component">
+          <TranslationComponent />
+        </div>
         
 
       {/* <div className="my-farms ">

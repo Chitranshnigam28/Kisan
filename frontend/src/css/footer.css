@@ -1,9 +1,11 @@
+
 img{
   display: block;
   max-width: 100%;
   height: auto;
 }
 .floating-dock {
+  color: #28a745;
   position: fixed; /* Keep it fixed at the bottom */
   bottom: 10px; /* Align to the bottom of the viewport */
   left: 50%; /* Center the dock horizontally */
@@ -108,7 +110,7 @@ img{
 .farmImgWrapper{
   grid-row: 1 / -1;
   background: white;
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
 .fieldIconWrapper{
   display: flex;

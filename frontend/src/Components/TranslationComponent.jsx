@@ -34,11 +34,11 @@ const TranslationComponent = () => {
   const handleLanguageChange = async (language) => {
     if (currentLanguage === 'en') saveOriginalContent();
 
-    localStorage.setItem('language', language); // Save selected language
+    localStorage.setItem('language', language); 
     setShowLanguageOptions(false);
 
     if (currentLanguage !== language) {
-      window.location.reload(); // Refresh the page to apply the new language
+      window.location.reload(); 
     }
   };
 
