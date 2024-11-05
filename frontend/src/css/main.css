@@ -138,3 +138,7 @@
   }
 }
 
+.weather-info a{
+  display: flex;
+  justify-content: end;
+}

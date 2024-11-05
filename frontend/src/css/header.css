@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background-color: #e3e9ec;
+  padding: 1rem 2rem;
+  background-color: #FAFFFB;
+  position: relative; /* Ensures dropdown positions within header */
 }
 
 .logo {
@@ -45,7 +46,7 @@
 .profile {
   display: flex;
   align-items: center;
-  position: relative; /* Required to position the dropdown correctly */
+  position: relative; /* Keeps dropdown aligned with profile icon */
   cursor: pointer;
 }
 
@@ -56,16 +57,20 @@
 }
 
 .dropdown {
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
+  position: absolute !important;
+  
+    top: 4rem;
+    right: 0.5rem;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  padding: 0.5rem 0;
-  width: 200px; /* Adjust width as needed */
+  padding: 1rem;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .profile-btn, .logout-btn {
@@ -104,4 +109,15 @@
   border: none;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.changePasswordWrapper,.changeLanguageWrapper,.helpAndSupportWrapper,.logoutWrapper{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.changePasswordWrapper:hover,.changeLanguageWrapper:hover,.helpAndSupportWrapper:hover,.logoutWrapper:hover{
+  background-color: #F7F7F7;
 }
