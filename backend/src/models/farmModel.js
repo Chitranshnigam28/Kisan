@@ -5,7 +5,7 @@ const farmSchema = mongoose.Schema({
     cropType: { 
         type: String, 
         enum: [
-             'Vegetables', 'Fruits', 'Grain', 'Flower'
+             'Vegetable', 'Fruit', 'Grain', 'Flower'
         ], 
         required: true 
     },
