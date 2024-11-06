@@ -202,3 +202,14 @@ input[type="checkbox"]:checked {
   text-decoration: none;
   color: rgb(19, 86, 6);
 }
+
+
+
+@media screen and (max-width: 1100px) {
+  .image-logo-container {
+    display: none; /* Hide the logo container */
+  }
+  .containerlogin{
+    width: 100%;
+  }
+}

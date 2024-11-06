@@ -1,0 +1,112 @@
+/* Container Styling */
+.mobile-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    overflow: hidden;
+    width: 50%;
+    height: auto;
+    padding: 2rem 0;
+  }
+  
+  /* Background Video Styling */
+  .mobile-login video.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.5;
+  }
+  
+  .mobile-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: black; /* Background to match design */
+}
+
+.continue-button {
+  margin-top: 1rem; /* Spacing below logo */
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.continue-button:hover {
+  background-color: black;
+  color: white;
+}
+
+  /* Logo and Button Container */
+  .logo-and-button {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Adds spacing between logo and button */
+  }
+  
+
+  /* Centered Button Styling */
+  .continue-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    background-color: #00000040;
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .continue-button:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  
+  /* Mobile layout for screens under 800px */
+  @media (max-width: 800px) {
+    .mobile-login {
+      width: 100%;
+      height: 100vh;
+      padding: 0;
+    }
+  
+    .mobile-login video.background-video {
+      opacity: 0.6;
+    }
+  
+    .logo-and-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+  
+    .mobile-login img.logo {
+      width: 120px;
+    }
+  
+    .continue-button {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  

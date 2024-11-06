@@ -3,8 +3,7 @@ import Chart from "react-apexcharts";
 import "../css/dashboard.css";
 import "./SingleTips";
 import SingleTips from "./SingleTips";
-import TopCropsChart from "./TopCropChart";
-import "../css/marketInsights.css"; // Import the new CSS file
+import "../css/marketInsights.css";
 
 const CropPriceChart = ({ crop }) => {
   const [cropPrices, setCropPrices] = useState([]);
@@ -72,17 +71,11 @@ const CropPriceChart = ({ crop }) => {
     fetchCropPrices();
   };
 
-  // const handleLocationChange = (newLocation) => {
-  //   setLocation(newLocation);
-  //   console.log(`Location changed to: ${newLocation}`);
-  // };
-
   return (
     <div className="container">
       <div className="title">
         <h1>Market Insights</h1>
         <span className="title-icon">📈</span>{" "}
-        {/* Replace with an icon from React Icons */}
       </div>
 
       {loading ? (
