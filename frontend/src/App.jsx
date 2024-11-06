@@ -48,7 +48,7 @@ const AppRoutes = () => {
 
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/');  
+      navigate('/'); 
     }
   }, [navigate]);
 
