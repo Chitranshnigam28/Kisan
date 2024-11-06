@@ -30,7 +30,7 @@ userSchema.pre("save", async function (next) {
     const user = this;
     console.log("user "+user);
     if (!user.isModified("password")) {
-        next();
+       return next();
     }
 
     try {
@@ -59,10 +59,20 @@ userSchema.methods.generateToken = async function() {
 
 
 userSchema.methods.comparePassword = async function (password) {
-    console.log("password"+password+ "this.password"+this.password);
-    console.log("bcrypt.compare(password, this.password)"+bcrypt.compare(password, this.password));
-    const isMatch=await bcrypt.compare(password, this.password);
-    return isMatch;
+    // console.log("password"+password+ "this.password"+this.password);
+    // console.log("bcrypt.compare(password, this.password)"+bcrypt.compare(password, this.password));
+    // const isMatch=await bcrypt.compare(password, this.password);
+    // console.log("isMatch "+isMatch);
+    // return isMatch;
+
+    try {
+        const isMatch = await bcrypt.compare(password, this.password);
+        console.log("Password match:", isMatch); // Log the actual result (true/false)
+        return isMatch;
+    } catch (err) {
+        console.error("Error comparing passwords:", err);
+        return false;
+    }
 }
 const User = new mongoose.model("User", userSchema);
 

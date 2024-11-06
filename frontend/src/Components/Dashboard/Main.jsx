@@ -5,17 +5,14 @@ import ComponentPriceGraph from "../CropPriceGraph";
 import MyFarms from "../Farms/MyFarms";
 import "../../css/main.css";
 import FunFacts from "../FunFacts";
-import CropRecommendation from "../CropRecomendation";
-import Tips from "../Tips";
 import { BiRightTopArrowCircle } from "react-icons/bi";
-// import TopCropsChart from "../TopCropChart"; 
 import TopCropsChart from "../TopCropChart";
 import WeatherWidget from "../weatherWidget";
-// import TopCropsChart from "../TopCropChart";
 import TranslationComponent from "../TranslationComponent";
 import MarketInsights from "../MarketInsights";
 
 const Main = () => {
+
   const userId = localStorage.getItem("userId");
   console.log(userId);
 
@@ -32,7 +29,9 @@ const Main = () => {
     <>
       <main className="main-layout">
         <div className="weather-info">
-          <h3>Weather Information</h3>
+            <Link to="/weather">
+                <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+            </Link>
           <WeatherWidget />
         </div>
 

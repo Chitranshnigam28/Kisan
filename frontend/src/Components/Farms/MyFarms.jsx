@@ -185,14 +185,12 @@ const MyFarms = () => {
           {location.pathname === "/" ? (
             farms.map((farm) => (
               <div className="me-3" key={farm._id}>
-                <div className="card border-success shadow farm-card" style={{ width: "18rem" }}>
+                <div className="card shadow farm-card" style={{ width: "18rem" }}>
                   <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
                   <div className="card-body">
                     <div className="farm-details">
                       <h5 className="farm-name">{farm.farmName}</h5>
-                      <p className="farm-size">
-                        <strong>Size:</strong> {farm.sizeOfFarm} HA
-                      </p>
+                      <p className="farm-size">{farm.sizeOfFarm} HA</p>
                     </div>
                   </div>
                 </div>
@@ -293,3 +291,4 @@ const MyFarms = () => {
 };
 
 export default MyFarms;
+

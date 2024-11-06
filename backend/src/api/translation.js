@@ -1,22 +1,16 @@
 require('dotenv').config({path:'./../../.env'}); 
-
 const express = require('express');
 const { Translate } = require('@google-cloud/translate').v2;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const app = express();
-
-app.use(bodyParser.json());
-app.use(cors());
-
+const router = express.Router();
 const googleApiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
-
 const translate = new Translate({
-  key: googleApiKey, 
+  key: googleApiKey,
 });
 
-const translateText = async (req, res) => {
+router.post('/translate', async (req, res) => {
   const { text, targetLanguage } = req.body;
 
   if (!text || !targetLanguage) {
@@ -30,6 +24,6 @@ const translateText = async (req, res) => {
     console.error('Translation failed:', error);
     res.status(500).json({ message: 'Translation failed' });
   }
-};
+});
 
-module.exports = translateText
+module.exports = router;
