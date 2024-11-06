@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import "./App.css";
 import ComponentPriceGraph from "./Components/CropPriceGraph";
 import ProfileSetup from "./Components/ProfileSetup";
@@ -18,7 +18,6 @@ import CropRecommendation from "./Components/CropRecomendation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from "./Components/PrivateRoute";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
 import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
 
@@ -38,21 +37,24 @@ const App = () => {
 
   );
 };
-
 const AppRoutes = () => {
   const navigate = useNavigate();
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    console.log('Token received:', token);
+    const token = localStorage.getItem('token');
+    console.log('Token from localStorage:', token);
 
-
-    if (token) {
-      localStorage.setItem('token', token);
-      navigate('/');  // Redirect to a protected route
+    if (!token) {
+      // No token, redirect to login
+      navigate('/login');
     }
+    // Set flag to true after initial check
+    setIsTokenChecked(true);
   }, [navigate]);
+
+  // Wait until token check is complete before rendering routes
+  if (!isTokenChecked) return <div>Loading...</div>;
 
   return (
     <>
@@ -73,10 +75,10 @@ const AppRoutes = () => {
           <Route path='/funfacts' element={<FunFact />} />
           <Route path='/tips' element={<Tips />} />
           <Route path="/profilesetup" element={<ProfileSetup />} />
-
         </Route>
       </Routes>
     </>
   );
 };
-export default App;
+
+export default App
