@@ -3,69 +3,45 @@ import axios from 'axios';
 import '../css/translation.css';
 
 const TranslationComponent = () => {
-  const [originalContent, setOriginalContent] = useState({});
-  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'en');
+  const [translatedContent, setTranslatedContent] = useState('');
+  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
-  // Function to collect all text nodes, excluding buttons/icons
-  const getTextNodes = (element) => {
-    let textNodes = [];
-    element.childNodes.forEach((node) => {
-      if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() !== '') {
-        textNodes.push(node);
-      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BUTTON' && !node.classList.contains('translation-icon')) {
-        textNodes = textNodes.concat(getTextNodes(node));
+  // Fetch and set translated content
+  const fetchTranslation = async (language) => {
+    try {
+      console.log(`Fetching translation for language: ${language}`);
+
+      const originalText = document.querySelector('.content').innerText; // Get text from the specific content element
+
+      const response = await axios.post('http://localhost:5001/api/translate', {
+        text: originalText,
+        targetLanguage: language,
+      });
+
+      console.log('API response:', response.data);
+      if (response.data && response.data.translatedText) {
+        setTranslatedContent(response.data.translatedText);
+      } else {
+        console.error('Unexpected response format:', response.data);
       }
-    });
-    return textNodes;
-  };
-
-  // Save original content
-  const saveOriginalContent = () => {
-    const textNodes = getTextNodes(document.body);
-    const originalContentMap = {};
-    textNodes.forEach((node, index) => {
-      originalContentMap[index] = node.nodeValue;
-    });
-    setOriginalContent(originalContentMap);
-  };
-
-  // Translate and replace text without modifying layout
-  const handleLanguageChange = async (language) => {
-    if (currentLanguage === 'en') saveOriginalContent();
-
-    localStorage.setItem('language', language); // Save selected language
-    setShowLanguageOptions(false);
-
-    if (currentLanguage !== language) {
-      window.location.reload(); // Refresh the page to apply the new language
+    } catch (error) {
+      console.error('Translation error:', error);
     }
   };
 
-  // Apply saved language on page load
+  const handleLanguageChange = (language) => {
+    if (currentLanguage !== language) {
+      console.log(`Changing language to: ${language}`);
+      localStorage.setItem('language', language);
+      setCurrentLanguage(language);
+      fetchTranslation(language); // Fetch translation and set state
+    }
+  };
+
   useEffect(() => {
     if (currentLanguage !== 'en') {
-      const applyTranslation = async () => {
-        const textNodes = getTextNodes(document.body);
-        const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
-
-        try {
-          const response = await axios.post('http://localhost:5001/api/translate', {
-            text: textToTranslate,
-            targetLanguage: currentLanguage,
-          });
-
-          const translatedTextArray = response.data.translatedText.split(' || ');
-          textNodes.forEach((node, index) => {
-            if (translatedTextArray[index]) {
-              node.nodeValue = translatedTextArray[index];
-            }
-          });
-        } catch (error) {
-          console.error('Translation error:', error);
-        }
-      };
-      applyTranslation();
+      fetchTranslation(currentLanguage);
     }
   }, [currentLanguage]);
 
@@ -86,6 +62,11 @@ const TranslationComponent = () => {
           <button onClick={() => handleLanguageChange('pa')}>Punjabi (ਪੰਜਾਬੀ)</button>
         </div>
       )}
+
+      {/* Render content */}
+      <div className='content'>
+        {translatedContent || 'Your original content here'}
+      </div>
     </div>
   );
 };
