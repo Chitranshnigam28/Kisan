@@ -24,6 +24,24 @@ import WheatIcon from "../../Assets/Vegetables/wheat.png"
 import RiceIcon from "../../Assets/Vegetables/rice.png"
 import CornIcon from "../../Assets/Vegetables/Corn.svg"
 import TomatoIcon from "../../Assets/Vegetables/tomato.png"
+import { initializeApp } from "firebase/app";
+import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
+    authDomain: "art-asta-50475.firebaseapp.com",
+    projectId: "art-asta-50475",
+    storageBucket: "art-asta-50475.appspot.com",
+    messagingSenderId: "343332230219",
+    appId: "1:343332230219:web:efe5a85c164e5e461c69ce"
+};
+
+// Initialize Firebase with npm package
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
+
+
 
 const cropNameIcons = {
     Wheat: WheatIcon,
@@ -76,6 +94,52 @@ const AddFarms = () => {
         sizeOfFarm: "",
         farmImage: null,
     });
+    const [file, setFile] = useState(null);  // Declare the file state
+    const [downloadURL, setDownloadURL] = useState("");
+    // const [farmData, setFarmData] = useState({
+    //   farmImage: null,
+    // });
+  
+    // // Handle file selection and update the file state
+    // const handleFileChange = (e) => {
+    //   const selectedFile = e.target.files[0];  // Get the selected file from input
+    //   if (selectedFile) {
+    //     setFile(selectedFile);  // Update the state with the selected file
+    //   }
+    // };
+  
+    // Handle file upload
+    const handleUpload = () => {
+      if (!file) {
+        alert('Please select a file first');
+        return;
+      }
+  
+      const storageRef = ref(storage, `images/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+  
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        },
+        (error) => {
+          console.error('Upload failed:', error);
+        },
+        async () => {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          console.log('File available at', url);
+          setDownloadURL(url);
+  
+          // Update farmData after upload
+          setFarmData((prevData) => ({
+            ...prevData,
+            farmImage: url,  // Store the URL in farmData
+          }));
+        }
+      );
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -90,6 +154,13 @@ const AddFarms = () => {
             ...prevState,
             [field]: value
         }));
+    };
+
+    const handleImageChange = (e) => {
+        const selectedFile = e.target.files[0]; // Get the first selected file
+        if (selectedFile) {
+            setFile(selectedFile); // Update the file state
+        }
     };
 
     const handleFileChange = (e) => {
@@ -169,6 +240,7 @@ const AddFarms = () => {
         resetForm();
     };
 
+
     return (
         <div className='addFarmContainer container my-5'>
             <h2 className="mb-4">Add a New Farm</h2>
@@ -181,19 +253,13 @@ const AddFarms = () => {
                     <div>
                         <h5 className="mb-4">Step 1 of 2</h5>
                         <div className="mb-4">
-                            <label className="form-label">Upload Farm Image:</label>
-                            <div className="upload-box">
-                                <input
-                                    type="file"
-                                    name="farmImage"
-                                    className="upload-input"
-                                    onChange={handleFileChange}
-                                    id="file-upload"
-                                />
-                                <label htmlFor="file-upload" className="upload-label">
-                                    Upload your farm image
-                                </label>
-                            </div>
+                            <input
+                                type="file"
+                                accept="image/*" // Accept only image files
+                                onChange={handleImageChange}
+                            />
+
+                            <button type="button" className="Btn" onClick={handleUpload}>Upload</button>
                         </div>
                         <div className="form-group mb-4">
                             <div className="mb-4">
@@ -459,86 +525,3 @@ const AddFarms = () => {
 };
 
 export default AddFarms;
-
-
-
-
-
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert('No token found. Please log in again.');
-        return;
-    }
-
-    const farmDetails = {
-        farmName: farmData.farmName,
-        cropType: farmData.cropType,
-        cropName: farmData.cropName,
-        soilType: farmData.soilType,
-        location: farmData.location,
-        farmingMethod: farmData.farmingMethod,
-        waterSource: farmData.waterSource,
-        last_crop_sowed: farmData.last_crop_sowed,
-        soilQuality: farmData.soilQuality,
-        currentSeason: farmData.currentSeason,
-        dateOfPlanting: farmData.dateOfPlanting,
-        dateOfHarvest: farmData.dateOfHarvest,
-        sizeOfFarm: farmData.sizeOfFarm,
-    };
-
-    try {
-        let response;
-        if (farmData.farmImage) {
-            const farmFormData = new FormData();
-            farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
-            farmFormData.append('farmDetails', JSON.stringify(farmDetails));
-
-            response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-        }
-        else {
-            response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-        }
-        console.log('Farm added:', response.data);
-
-        setFarmData({
-            farmName: "",
-            cropType: "",
-            cropName: "",
-            soilType: "",
-            location: "",
-            farmingMethod: "",
-            waterSource: "",
-            last_crop_sowed: "",
-            soilQuality: "",
-            currentSeason: "",
-            dateOfPlanting: "",
-            dateOfHarvest: "",
-            sizeOfFarm: "",
-            farmImage: null,
-        });
-
-        alert('Farm added successfully!');
-    } catch (error) {
-        console.error('Error adding farm:', error.response?.data || error.message);
-
-        if (error.response?.data?.message) {
-            alert(`Error: ${error.response.data.message}`);
-        } else {
-            alert('Failed to add farm. Please try again.');
-        }
-    }
-};
