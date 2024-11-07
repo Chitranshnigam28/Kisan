@@ -1,0 +1,272 @@
+.container {
+    padding: 20px;
+  }
+  
+  .MyFarmsHeading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .MyFarmsHeading h4 {
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #333;
+  }
+  
+  .add-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: black;
+  }
+  
+  .farm-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .farm-details {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .farm-name {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .farm-size {
+    font-size: 0.9em;
+    color: #777;
+  }
+  
+  .row.g-3 {
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .card.border-success {
+    border-width: 2px;
+  }
+  
+  .card-header {
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .btn {
+    font-size: 0.9em;
+  }
+  
+  .selected-farm {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .selected-farm h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+  }
+  
+  .selected-farm p {
+    margin-bottom: 5px;
+  }
+  
+  .text-muted {
+    font-size: 1em;
+    color: #6c757d;
+  }
+  
+  #chart {
+    margin-top: 20px;
+  }
+  
+  .back-icon {
+    margin-right: 5px;
+  }
+  
+  .d-flex.justify-content-center.align-items-center.vh-50 {
+    height: 50vh;
+  }
+  
+  .card-title {
+    font-size: 1.1em;
+  }
+  
+  .btn-outline-warning,
+  .btn-outline-danger {
+    font-size: 0.9em;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  
+  .btn-outline-warning:hover,
+  .btn-outline-danger:hover {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+  }
+  
+  
+  .btn-dark {
+    background-color: #000000;
+    color: white;
+    padding: 10px;/* Increase padding for height */
+    border-radius: 40px;
+    border: none; /* Remove border if not needed */
+    min-width: 100px; /* Minimum width based on expected character count */
+    max-width: fit-content; /* Optional: maximum width */
+    flex: 0 1 auto; /* Prevent button from growing too large */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    text-align: center; /* Center text inside the button */
+    height: 50px; /* Set a fixed height for the buttons */
+    line-height: 25px;
+  }
+
+  .h5{
+    opacity: 0.3;
+  }
+  
+  @media (max-width: 768px) {
+    .col-md-4 {
+      max-width: 30%;
+    }
+
+    .totalBox {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center; /* Vertically centers the content */
+        gap: 20px;
+        padding: 20px;
+      }
+  }
+  
+
+
+
+
+  /* Styles for the farm card container */
+.farm-card {
+    border: 1px solid #28a745; /* Border color matching 'success' theme */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .farm-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Styles for the card header with the farm name */
+  .card-header {
+    background-color: transparent !important; /* Removes background color */
+    color: black !important; /* Sets text color to black */
+    text-align: left;
+    padding: 10px;
+  }
+  
+  /* Style for the farm name and size */
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: black; /* Black text for farm name */
+    margin-bottom: 5px;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: black; /* Black text for farm size */
+  }
+  
+  /* Aligns the delete button to the right without background */
+  .delete-btn {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .delete-btn:hover {
+    color: red;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+
+
+  .tipsBox {
+    display: flex;
+    align-items: center; /* Vertically centers the content */
+    padding: 20px;
+    background-color: #F7F7F7;
+    border-radius: 30px;
+    color: black;
+    width: fit-content;
+    max-width: 100%;
+  }
+  
+  .tipsBox h1 {
+    margin-right: 10px; /* Adds space between the bulb and the rest of the content */
+    font-size: 2rem; /* Adjusts the size of the bulb */
+  }
+  
+  .MatchingTips {
+    flex-grow: 1; /* Ensures the MatchingTips component takes remaining space */
+  }
+
+
+
+  .soilBox {
+    background-color: #DBEFB8;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 30px;
+    align-items: center; /* Vertically centers the content */
+    padding: 20px;
+  }
+
+  .waterBox{
+    background-color: #DBEFB8;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 30px;
+    align-items: center; /* Vertically centers the content */
+    padding: 20px;
+  }
+
+  .farmBox{
+    background-color: #DBEFB8;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 30px;
+    align-items: center; /* Vertically centers the content */
+    padding: 20px;
+  }
+
+  .totalBox {
+    display: flex;
+    align-items: center; /* Vertically centers the content */
+    gap: 20px;
+    padding: 20px;
+  }
