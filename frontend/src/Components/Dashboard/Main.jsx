@@ -42,7 +42,11 @@ const Main = () => {
         </div>
 
         <div className="dashboard-marketview">
+        <Link to="/charts">
+            <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey",float : "right" }} />
+          </Link>
           <div className="insightsWrapper">
+          
             <div className="market-info">
               <MarketInsights />
             </div>

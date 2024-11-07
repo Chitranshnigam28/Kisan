@@ -150,7 +150,7 @@ const TopCropsChart = ({ onLocationChange }) => {
                     offsetY: 5,
                   },
                   value: {
-                    show: true,
+                    show: false,
                     fontSize: '16px',
                     color: 'black',
                     offsetY: -5,
@@ -199,20 +199,22 @@ const TopCropsChart = ({ onLocationChange }) => {
       };
 
   return (
-    <div>
-      <label htmlFor="state-dropdown">{translatedLocationHeading || 'Select Location'}: </label>
-      <select
-        id="state-dropdown"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      >
-        <option value="">Select Location</option>
-        {Object.entries(translatedStates).map(([originalState, translatedState]) => (
-          <option key={originalState} value={originalState}>
-            {translatedState || originalState} {/* Fallback to original if translation is missing */}
-          </option>
-        ))}
-      </select>
+    <div className='top-crop-container'>
+      <div className="location-topCrop">
+        <label htmlFor="state-dropdown">{translatedLocationHeading || 'Select Location'}: </label>
+        <select
+          id="state-dropdown"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="">Select Location</option>
+          {Object.entries(translatedStates).map(([originalState, translatedState]) => (
+            <option key={originalState} value={originalState}>
+              {translatedState || originalState} {/* Fallback to original if translation is missing */}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {loading ? (
         <p>Loading top crops...</p>

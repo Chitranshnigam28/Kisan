@@ -16,6 +16,9 @@ import "react-toastify/dist/ReactToastify.css";
 import TopCropsChart from "./TopCropChart"; //Matching the location for both weather and
 import { format } from "date-fns";
 import WeatherWidget from "./weatherWidget";
+import { Footer } from "./Dashboard/Footer";
+import Header from "./Dashboard/Header";
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -138,13 +141,14 @@ function Weather() {
     ],
   };
 
-
   const highlightsMessages = {
     Clear: "Now is a good weather for spraying pesticides.",
     Rain: "Rainy weather is ideal for root fertilization but not for pesticides.",
-    Clouds: "Cloudy weather is great for some pesticide applications, check humidity levels first.",
+    Clouds:
+      "Cloudy weather is great for some pesticide applications, check humidity levels first.",
     Snow: "Snowy conditions require caution, wait until snow clears for pesticide application.",
-    Thunderstorm: "Avoid applying pesticides during thunderstorms due to strong winds and rain.",
+    Thunderstorm:
+      "Avoid applying pesticides during thunderstorms due to strong winds and rain.",
     Haze: "Hazy weather can affect pesticide efficacy; ensure good ventilation.",
     Fog: "Foggy conditions are not ideal for spraying pesticides; wait until it clears.",
   };
@@ -156,110 +160,118 @@ function Weather() {
   const tipToDisplay = Math.floor(Math.random() * 3);
   // console.log("tipToDisplay " + tipToDisplay);
   // console.log("displayTips " + displayTips[tipToDisplay]);
-  const highlightsMessage = highlightsMessages[currentCondition] || "Check conditions before applying pesticides.";
+  const highlightsMessage =
+    highlightsMessages[currentCondition] ||
+    "Check conditions before applying pesticides.";
 
   const getCurrentDate = () => {
     return format(new Date(), "do MMMM yyyy, EEEE");
   };
   return (
-    <div className="weather-details-container">
-      <div className="weatherHeader">
-        <img src="./weatherlogo.png" alt="weather logo" />
-        <div className="weatherTitleWrapper">
-          <h2>Weather</h2>
-          <p>Explore key market trends and insights to stay ahead.</p>
+    <>
+    <Header />
+    <Footer />
+      <div className="weather-details-container">
+        <div className="weatherHeader">
+          <img src="./weatherlogo.png" alt="weather logo" />
+          <div className="weatherTitleWrapper">
+            <h2>Weather</h2>
+            <p>Explore key market trends and insights to stay ahead.</p>
+          </div>
         </div>
-      </div>
 
-      {loading ? (
-        <p className="loading-text">Loading...</p>
-      ) : (
-        weather && (
-          <div className="weather-main">
-            <div
-              className="weather-visualization"
-              style={{ backgroundColor: weather.bgColor }}
-            >
-              <div className="location">
-                <FaMapMarkerAlt size={18} color="#fff" />
-                <span>{`${weather.name}, ${weather.country}`}</span>
-              </div>
-              <div className="dateWeatherIconWrapper">
-                <p className="date">{getCurrentDate()}</p>
-                {getWeatherIcon()}
-              </div>
-              <div className="temperature-display">
-                {/* {getWeatherIcon()} */}
-                <p className="temperature">{`${weather.temp.toFixed()}°C`}</p>
-              </div>
+        {loading ? (
+          <p className="loading-text">Loading...</p>
+        ) : (
+          weather && (
+            <div className="weather-main">
+              <div
+                className="weather-visualization"
+                style={{ backgroundColor: weather.bgColor }}
+              >
+                <div className="location">
+                  <FaMapMarkerAlt size={18} color="#fff" />
+                  <span>{`${weather.name}, ${weather.country}`}</span>
+                </div>
+                <div className="dateWeatherIconWrapper">
+                  <p className="date">{getCurrentDate()}</p>
+                  {getWeatherIcon()}
+                </div>
+                <div className="temperature-display">
+                  {/* {getWeatherIcon()} */}
+                  <p className="temperature">{`${weather.temp.toFixed()}°C`}</p>
+                </div>
 
-              <Forecast title="Hourly Forecast" data={weather.hourly} />
-            </div>
-            {/* <WeatherWidget showSearch={false} /> */}
+                <Forecast title="Hourly Forecast" data={weather.hourly} />
+              </div>
+              {/* <WeatherWidget showSearch={false} /> */}
 
-            <div className="weather-info">
-              <div className="tipWrapper">
-                <h3 className="highlights-title">
-                 {highlightsMessage}
-                </h3>
-                <div className="weather-tip">
-                  <div className="imgTipWrapper">
-                    <img src="./Light.svg" alt="light" />
-                    {displayTips.length > 0 ? (
-                      <p>{displayTips[tipToDisplay]}</p>
-                    ) : (
-                      <p>No specific tips for today's weather condition.</p>
-                    )}
+              <div className="weather-info">
+                <div className="tipWrapper">
+                  <h3 className="highlights-title">{highlightsMessage}</h3>
+                  <div className="weather-tip">
+                    <div className="imgTipWrapper">
+                      <img src="./Light.svg" alt="light" />
+                      {displayTips.length > 0 ? (
+                        <p>{displayTips[tipToDisplay]}</p>
+                      ) : (
+                        <p>No specific tips for today's weather condition.</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <h3 className="highlights-title">Today's Highlights</h3>
+                <div className="highlights-grid">
+                  <div className="highlight-box">
+                    <p>UV Index</p>
+                    <p>{weather.uvi}</p>
+                  </div>
+                  <div className="highlight-box">
+                    <p>Wind Status</p>
+                    <p>{weather.speed} Km/hr</p>
+                  </div>
+                  <div className="highlight-box">
+                    <p>Sunrise & Sunset</p>
+                    <p style={{ fontSize: "1.25rem", fontWeight: "600" }}>
+                      <div className="ssIconTextWrapper">
+                        <BsFillSunriseFill /> {weather.sunrise}
+                      </div>
+                      <div className="ssIconTextWrapper">
+                        {" "}
+                        <BsFillSunsetFill /> {weather.sunset}
+                      </div>
+                    </p>
+                  </div>
+                  <div className="highlight-box">
+                    <p>Humidity</p>
+                    <p>{weather.humidity}%</p>
+                  </div>
+                  <div className="highlight-box">
+                    <p>Visibility</p>
+                    <p>{weather.visibility} Km</p>
+                  </div>
+                  <div className="highlight-box">
+                    <p>Air Quality</p>
+                    <p>{weather.aqi || "N/A"}</p>
                   </div>
                 </div>
               </div>
-              <h3 className="highlights-title">Today's Highlights</h3>
-              <div className="highlights-grid">
-                <div className="highlight-box">
-                  <p>UV Index</p>
-                  <p>{weather.uvi}</p>
-                </div>
-                <div className="highlight-box">
-                  <p>Wind Status</p>
-                  <p>{weather.speed} Km/hr</p>
-                </div>
-                <div className="highlight-box">
-                  <p>Sunrise & Sunset</p>
-                  <p style={{ fontSize: "1.25rem", fontWeight: "600" }}>
-                    <div className="ssIconTextWrapper">
-                      <BsFillSunriseFill /> {weather.sunrise}
-                    </div>
-                    <div className="ssIconTextWrapper">
-                      {" "}
-                      <BsFillSunsetFill /> {weather.sunset}
-                    </div>
-                  </p>
-                </div>
-                <div className="highlight-box">
-                  <p>Humidity</p>
-                  <p>{weather.humidity}%</p>
-                </div>
-                <div className="highlight-box">
-                  <p>Visibility</p>
-                  <p>{weather.visibility} Km</p>
-                </div>
-                <div className="highlight-box">
-                  <p>Air Quality</p>
-                  <p>{weather.aqi || "N/A"}</p>
-                </div>
-              </div>
             </div>
-          </div>
-        )
-      )}
-      <div className="d-flex justify-content-center align-items-center vh-50">
-        <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
-          Go Back
-        </Link>
-      </div>
+          )
+        )}
+        <div className="d-flex justify-content-center align-items-center vh-50">
+          <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
+            Go Back
+          </Link>
+        </div>
 
-      <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" />
-    </div>
+        <ToastContainer
+          autoClose={2500}
+          hideProgressBar={true}
+          theme="colored"
+        />
+      </div>
+    </>
   );
 }
 

@@ -1,134 +1,15 @@
-// import React, { useEffect, useState } from "react";
-// import Chart from "react-apexcharts";
-// import "../css/dashboard.css";
-// import "./SingleTips";
-// import SingleTips from "./SingleTips";
-// import "../css/marketInsights.css";
-
-// const CropPriceChart = ({ crop }) => {
-//   const [cropPrices, setCropPrices] = useState([]);
-//   const [cropName, setCropName] = useState("");
-//   const [loading, setLoading] = useState(true);
-
-//   const fetchCropPrices = async () => {
-//     try {
-//       const cropSent = cropName ? cropName : "Wheat";
-//       const response = await fetch(
-//         `http://localhost:5001/api/crops/price?crop=${cropSent}`
-//       );
-//       if (!response.ok) {
-//         throw new Error("Network response was not ok");
-//       }
-//       const data = await response.json();
-//       const allPrices =
-//         data[0]?.historical_prices.flatMap((yearData) =>
-//           yearData.monthly_prices.map((priceData) => ({
-//             month: `${priceData.month} ${yearData.year}`,
-//             price: priceData.price,
-//           }))
-//         ) || [];
-//       setCropPrices(allPrices);
-//     } catch (error) {
-//       console.error("Error fetching crop prices:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchCropPrices();
-//   }, [crop]);
-
-//   const chartData = {
-//     series: [
-//       {
-//         name: "Price",
-//         data: cropPrices.map((item) => item.price),
-//       },
-//     ],
-//     options: {
-//       chart: {
-//         type: "line",
-//         height: 350,
-//       },
-//       title: {
-//         text: "", 
-//       },
-//       xaxis: {
-//         categories: cropPrices.map((item) => item.month),
-//       },
-//     },
-//   };
-
-//   const handleCropName = (e) => {
-//     setCropName(e.target.value);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     fetchCropPrices();
-//   };
-
-//   return (
-//     <div className="container">
-//       <div className="title">
-//         <h1>Market Insights</h1>
-//         <span className="title-icon">📈</span>{" "}
-//       </div>
-
-//       {loading ? (
-//         <p>Loading...</p>
-//       ) : (
-//         <div className="content">
-//           <div className="chart">
-//             <form
-//               onSubmit={handleSubmit}
-//               className="flex flex-col m-auto w-full place-items-center mt-4"
-//             >
-//               <input
-//                 type="text"
-//                 value={cropName}
-//                 onChange={handleCropName}
-//                 className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
-//                 placeholder="Enter crop name"
-//               />
-//               <button
-//                 type="submit"
-//                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//               >
-//                 Get Prices
-//               </button>
-//             </form>
-//             <Chart
-//               options={chartData.options}
-//               series={chartData.series}
-//               type="line"
-//               height={350}
-//             />
-//           </div>
-//         </div>
-//       )}
-
-//       <div className="content2">
-//           <div className="tips">
-//             <SingleTips cropName={cropName} />
-//           </div>
-
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CropPriceChart;
-
-
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import "../css/dashboard.css";
 import "./SingleTips";
 import SingleTips from "./SingleTips";
 import "../css/marketInsights.css";
+import { Footer } from "./Dashboard/Footer";
+import Header from "./Dashboard/Header";
+import TopCropsChart from "./TopCropChart";
+import marketInsights from "../Assets/marketinsights.svg";
+import '../css/topCropChart.css';
+
 
 const CropPriceChart = ({ crop }) => {
   const [cropPrices, setCropPrices] = useState([]);
@@ -151,13 +32,14 @@ const CropPriceChart = ({ crop }) => {
       const data = await response.json();
       console.log("Fetched data:", data);
 
-      const allPrices = data[0]?.historical_prices.flatMap((yearData) =>
-        yearData.monthly_prices.map((priceData) => ({
-          month: `${priceData.month} ${yearData.year}`,
-          year: yearData.year.toString(),
-          price: priceData.price,
-        }))
-      ) || [];
+      const allPrices =
+        data[0]?.historical_prices.flatMap((yearData) =>
+          yearData.monthly_prices.map((priceData) => ({
+            month: `${priceData.month} ${yearData.year}`,
+            year: yearData.year.toString(),
+            price: priceData.price,
+          }))
+        ) || [];
 
       setCropPrices(allPrices);
     } catch (error) {
@@ -246,7 +128,6 @@ const CropPriceChart = ({ crop }) => {
       },
     },
   };
-  
 
   const handleCropName = (e) => {
     setCropName(e.target.value);
@@ -263,60 +144,68 @@ const CropPriceChart = ({ crop }) => {
   };
 
   return (
-    <div className="container">
-      <div className="title">
-        <h1>Market Insights</h1>
-        <span className="title-icon">📈</span>
-      </div>
+    <>
+      <Header />
+      <Footer />
+      <div className="container">
+        <div className="title">
+        <img
+          src={marketInsights}
+          alt="Market Insights"
+          className="market-insights-icon"
+        />          <h1>Market Insights</h1>
+        </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="content">
-          <div className="chart">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col m-auto w-full place-items-center mt-4"
-            >
-              <input
-                type="text"
-                value={cropName}
-                onChange={handleCropName}
-                className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
-                placeholder="Enter crop name"
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="content">
+            <div className="chart">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col m-auto w-full place-items-center mt-4"
               >
-                Get Prices
-              </button>
-            </form>
-            <select
-              value={selectedYear}
-              onChange={handleYearChange}
-              className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
-            >
-              <option value="2023">2023</option>
-              <option value="2022">2022</option>
-              <option value="2021">2021</option>
-            </select>
-            <Chart
-              options={chartData.options}
-              series={chartData.series}
-              type="line"
-              height={350}
-            />
+                <input
+                  type="text"
+                  value={cropName}
+                  onChange={handleCropName}
+                  className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
+                  placeholder="Enter crop name"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  Get Prices
+                </button>
+              </form>
+              <select
+                value={selectedYear}
+                onChange={handleYearChange}
+                className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
+              >
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+              </select>
+              <Chart
+                options={chartData.options}
+                series={chartData.series}
+                type="line"
+                height={350}
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="content2">
+          <TopCropsChart />
+          <div className="tips">
+            <SingleTips cropName={cropName} />
           </div>
         </div>
-      )}
-
-      <div className="content2">
-        <div className="tips">
-          <SingleTips cropName={cropName} />
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 
