@@ -6,18 +6,16 @@ import { format } from "date-fns";
 import "../css/weatherWidget.css";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import axios from "axios";
-import Weather from "./Weather";
 
 const getCurrentDate = () => format(new Date(), "do MMMM yyyy, EEEE");
+
 function WeatherWidget({ showSearch = true }) {
-  const [query, setQuery] = useState({ q: "Delhi" });
-  const [searchCity, setSearchCity] = useState("");
+  const [query, setQuery] = useState({ q: localStorage.getItem("searchCity") || "Delhi" });
+  const [searchCity, setSearchCity] = useState(localStorage.getItem("searchCity") || "Delhi");
   const [units, setUnits] = useState("metric");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [language, setLanguage] = useState(
-    localStorage.getItem("language") || "en"
-  );
+  const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
   const [translatedLocation, setTranslatedLocation] = useState("Delhi");
   const [translatedDate, setTranslatedDate] = useState(getCurrentDate());
   const [translatedLabels, setTranslatedLabels] = useState({
@@ -31,13 +29,8 @@ function WeatherWidget({ showSearch = true }) {
   const fetchWeatherData = async () => {
     try {
       setLoading(true);
-      const queryString =
-        query.lat && query.lon
-          ? `lat=${query.lat}&lon=${query.lon}`
-          : `q=${query.q}`;
-      const response = await fetch(
-        `http://localhost:5001/api/weather?${queryString}&units=${units}`
-      );
+      const queryString = query.lat && query.lon ? `lat=${query.lat}&lon=${query.lon}` : `q=${query.q}`;
+      const response = await fetch(`http://localhost:5001/api/weather?${queryString}&units=${units}`);
       if (!response.ok) throw new Error("Failed to fetch weather data");
 
       const data = await response.json();
@@ -51,9 +44,7 @@ function WeatherWidget({ showSearch = true }) {
       });
 
       // Translate location and date once weather data is available
-      translateText(`${data.name}, ${data.country}`, language).then(
-        setTranslatedLocation
-      );
+      translateText(`${data.name}, ${data.country}`, language).then(setTranslatedLocation);
       translateText(getCurrentDate(), language).then(setTranslatedDate);
     } catch (error) {
       toast.error(`Error fetching weather data: ${error.message}`);
@@ -81,23 +72,22 @@ function WeatherWidget({ showSearch = true }) {
       const labels = {
         searchPlaceholder: await translateText("Search city", language),
         hourlyForecastLabel: await translateText("Hourly Forecast", language),
-        noData: await translateText(
-          "No hourly forecast data available",
-          language
-        ),
+        noData: await translateText("No hourly forecast data available", language),
       };
-
       setTranslatedLabels(labels); // Update translated labels state
     };
-
     translateLabels(); // Call to update labels
   }, [query, units, language]);
 
-  
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    setQuery({ q: searchCity });
-    localStorage.setItem("searchCity", searchCity); // Store the city in localStorage
+    if (searchCity.trim()) {
+      setQuery({ q: searchCity.trim() });
+      localStorage.setItem("searchCity", searchCity.trim()); // Store city in localStorage
+    } else {
+      setQuery({ q: "Delhi" });
+      localStorage.removeItem("searchCity"); // Clear localStorage if no search is entered
+    }
   };
 
   const getBackgroundColor = () => {
@@ -106,16 +96,13 @@ function WeatherWidget({ showSearch = true }) {
 
     const isRainy = weather?.icon && weather.icon.includes("10");
     const isHazy = weather?.icon && weather.icon.includes("50");
-    const isCloudy =
-      weather?.icon &&
-      (weather.icon.includes("03") || weather.icon.includes("04"));
+    const isCloudy = weather?.icon && (weather.icon.includes("03") || weather.icon.includes("04"));
     const isSunny = weather?.icon && weather.icon.includes("01");
 
     if (isRainy) return { backgroundColor: "#627685", color: "#FFFFFF" };
     if (isHazy) return { backgroundColor: "#627685", color: "#FFFFFF" };
     if (isCloudy) return { backgroundColor: "#A9A9A9", color: "#FFFFFF" };
-    if (isSunny && !isNightTime)
-      return { backgroundColor: "#84B8EA", color: "#333333" };
+    if (isSunny && !isNightTime) return { backgroundColor: "#84B8EA", color: "#333333" };
     if (isNightTime) return { backgroundColor: "#1E3146", color: "#FFFFFF" };
 
     return { backgroundColor: "#FF6347", color: "#FFFFFF" };
@@ -125,11 +112,7 @@ function WeatherWidget({ showSearch = true }) {
     <div>
       <div
         className={`weather-widget ${weather?.condition}`}
-        style={
-          weather
-            ? getBackgroundColor()
-            : { backgroundColor: "#87CEFA", color: "#FFFFFF" }
-        }
+        style={weather ? getBackgroundColor() : { backgroundColor: "#87CEFA", color: "#FFFFFF" }}
       >
         {loading ? (
           <p>Loading...</p>
@@ -147,10 +130,7 @@ function WeatherWidget({ showSearch = true }) {
                       type="text"
                       placeholder={translatedLabels.searchPlaceholder}
                       value={searchCity}
-                      onChange={(e) => {
-                        setSearchCity(e.target.value);
-                        localStorage.setItem("searchCity", e.target.value); // Update localStorage on input change
-                      }}
+                      onChange={(e) => setSearchCity(e.target.value)}
                       className="search-input"
                     />
                     <button type="submit" className="search-button">
@@ -161,25 +141,15 @@ function WeatherWidget({ showSearch = true }) {
               </div>
               <div className="widgetDateWeatherIconWrapper">
                 <p className="date">{translatedDate}</p>
-                <img
-                  src={weather.icon}
-                  alt="weather-icon"
-                  className="weather-icon"
-                />
+                <img src={weather.icon} alt="weather-icon" className="weather-icon" />
               </div>
               <div className="temp-icon">
-                <p className="widgetTemperature">{`+${Math.round(
-                  weather.temp
-                )}°`}</p>
+                <p className="widgetTemperature">{`+${Math.round(weather.temp)}°`}</p>
               </div>
               <div className="hourly-forecast">
                 {weather.hourlyForecast ? (
                   <>
-                    <h3>
-                      {translatedLabels.hourlyForecastLabel ||
-                        "Hourly Forecast"}
-                    </h3>{" "}
-                    {/* Fallback in case translation fails */}
+                    <h3>{translatedLabels.hourlyForecastLabel || "Hourly Forecast"}</h3>
                     {weather.hourlyForecast.map((hour, index) => (
                       <div key={index} className="hour">
                         <p>{hour.title}</p>
@@ -195,12 +165,7 @@ function WeatherWidget({ showSearch = true }) {
             </div>
           )
         )}
-        {/* <Weather location={query.q} /> */}
-        <ToastContainer
-          autoClose={2500}
-          hideProgressBar={true}
-          theme="colored"
-        />
+        <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" />
       </div>
     </div>
   );
