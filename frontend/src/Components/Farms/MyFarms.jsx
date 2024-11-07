@@ -6,11 +6,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import MatchingTips, { deleteMyTips } from "../MatchingTips";
 import farmImage from "../../Assets/Images/farm.jpg";
 import MyFarmsSvg from "../../Assets/Logo/Myfarm.svg";
-import '../../css/main.css';
-import { IoIosAddCircleOutline } from "react-icons/io"; 
-import { MdOutlineCancel } from "react-icons/md"; 
-import AddFarms from "./AddFarms"; 
+import '../../css/myFarms.css';
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { MdOutlineCancel } from "react-icons/md";
+import AddFarms from "./AddFarms";
 import { IoMdArrowBack } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -152,7 +153,6 @@ const MyFarms = () => {
 
   if (loading) return <p>Loading farms...</p>;
   if (error) return <p>Error: {error}</p>;
-
   return (
     <div className="container">
       <div className="MyFarmsHeading">
@@ -160,23 +160,25 @@ const MyFarms = () => {
           <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />
           My Farms
         </h4>
-        
-        {location.pathname === "/my-farms" && ( 
+
+
+        {location.pathname === "/my-farms" && (
           showAddFarm ? (
             <MdOutlineCancel
               className="add-icon"
-              onClick={() => setShowAddFarm(false)} 
-              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }} 
+              onClick={() => setShowAddFarm(true)}
+              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
             />
           ) : (
             <IoIosAddCircleOutline
               className="add-icon"
-              onClick={() => setShowAddFarm(true)} 
-              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }} 
+              onClick={() => setShowAddFarm(true)}
+              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
             />
           )
         )}
       </div>
+      <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
 
       {showAddFarm ? (
         <AddFarms />
@@ -184,53 +186,48 @@ const MyFarms = () => {
         <div className={location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"}>
           {location.pathname === "/" ? (
             farms.map((farm) => (
-              <div className="me-3" key={farm._id}>
-                <div className="card shadow farm-card" style={{ width: "18rem" }}>
+              <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
+                <div className="card shadow farm-card">
                   <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
                   <div className="card-body">
-                    <div className="farm-details">
-                      <h5 className="farm-name">{farm.farmName}</h5>
-                      <p className="farm-size">{farm.sizeOfFarm} HA</p>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex flex-column">
+                        <h5 className="card-title mb-0">{farm.farmName}</h5>
+                        <p className="card-text mb-0"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
             ))
           ) : (
             <>
               <div className="row g-3">
-                <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
-
                 {farms.map((farm) => (
                   <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
-                    <div className="card border-success shadow">
-                      <div className="card-header text-white bg-success">
-                        <h5 className="card-title">{farm.farmName}</h5>
+                  <div className="card shadow farm-card">
+                    <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
+                    <div className="card-header d-flex justify-content-between align-items-center">
+                      <div className="d-flex flex-column">
+                        <h5 className="card-title mb-0">{farm.farmName}</h5>
+                        <p className="card-text mb-0"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
                       </div>
-                      <div className="card-body">
-                        <p className="card-text">
-                          <strong>Size:</strong> {farm.sizeOfFarm} HA
-                        </p>
-                        <div className="d-flex justify-content-between mt-3">
-                          <Link to={`/edit-farm/${farm._id}`} className="btn btn-outline-warning me-2">
-                            <FaEdit /> Edit
-                          </Link>
-                          <button className="btn btn-outline-danger" onClick={() => handleDelete(farm._id)}>
-                            <FaTrash /> Delete
-                          </button>
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
+                </div>
                 ))}
                 {farms.length === 0 && (
                   <div className="col-12 text-center">
                     <p className="text-muted">No farms found.</p>
                   </div>
+
                 )}
               </div>
 
               {selectedFarm && (
+                
                 <div className="selected-farm mt-5 p-4 border border-success">
                   <h3>{selectedFarm.farmName}</h3>
                   <div>
@@ -238,14 +235,27 @@ const MyFarms = () => {
                       <strong>{selectedFarm.sizeOfFarm} HA</strong> .
                     </span>
                     <span>
-                      <strong>{new Date(selectedFarm.dateOfPlanting).toLocaleDateString()} Date Of Planting</strong>
+
                     </span>
                   </div>
                   <br />
-                  <div>
+                  <div className="totalBox">
+                    <div className="soilBox">
+                    <h2>🏜️</h2>
                     <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
+                    </div>
+                    <div className="waterBox">
+                      <h2>💧</h2>
                     <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
+                    </div>
+                    <div className="farmBox">
+                      <h2>🚜</h2>
                     <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
+                  </div>
+                  </div>
+                  <div className="tipsBox">
+                  <h1>💡</h1>
+                  <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
                   </div>
                 </div>
               )}
@@ -258,13 +268,13 @@ const MyFarms = () => {
                 </div>
               )}
 
-{
+              {
                 priceData && priceData.length >= 2 && (
                   <div id="chart" style={{ marginTop: "20px" }}>
                     {loading ? (
-                      <p>Loading data...</p> 
+                      <p>Loading data...</p>
                     ) : error ? (
-                      <p>{error}</p> 
+                      <p>{error}</p>
                     ) : (
                       <Chart
                         options={chartOptions.options}
@@ -278,8 +288,7 @@ const MyFarms = () => {
 
               <div className="d-flex justify-content-center align-items-center vh-50">
                 <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
-                  <IoMdArrowBack className="back-icon" />
-                  Go Back
+                  Back
                 </Link>
               </div>
             </>
