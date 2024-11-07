@@ -5,10 +5,16 @@ import { Link } from "react-router-dom";
 import '../../css/footer.css';
 import CropRecommendation from "../CropRecomendation";
 
-export function Footer() {
+export function Footer({ setShowOverlay }) {
   const [showDock, setShowDock] = useState(true);
   const [showCropDiv,setShowCropDiv]=useState(false);
   // Detect scroll to show/hide the floating dock
+
+   // Toggle the global overlay when `showCropDiv` changes
+   useEffect(() => {
+    setShowOverlay(showCropDiv);
+  }, [showCropDiv, setShowOverlay]);
+  
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -77,10 +83,10 @@ export function Footer() {
     </div>
     {showCropDiv && <div className="crop-recommendation-div">
     <div className="crTitleWrapper">
-    <h2 className="crTitle">
+    {/* <h2 className="crTitle">
       Crop Recommendation
-    </h2>
-      <button className="close-btn" onClick={() => setShowCropDiv(false)}>✕</button>
+    </h2> */}
+      {/* <button className="close-btn" onClick={() => setShowCropDiv(false)}>✕</button> */}
       </div>
     <CropRecommendation />
     {/* <button className="recommend-btn">Recommend Crops!</button> */}
