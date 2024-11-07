@@ -45,7 +45,7 @@ const farmSchema = mongoose.Schema({
     waterSource: { 
         type: String, 
         enum: ['Well', 'River', 'Lake', 'Rainwater', 'Municipal Supply', 
-                'Borewell', 'Drip', 'Canal'], 
+                'Borewell', 'Drip', 'Canal', 'Irrigation'], 
         required: true
     },
     last_crop_sowed: { type: String, required: true },

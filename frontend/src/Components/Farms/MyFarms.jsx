@@ -203,31 +203,31 @@ const MyFarms = () => {
             ))
           ) : (
             <>
-              <div className="row g-3">
-                {farms.map((farm) => (
-                  <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
-                  <div className="card shadow farm-card">
-                    <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
-                    <div className="card-header d-flex justify-content-between align-items-center">
-                      <div className="d-flex flex-column">
-                        <h5 className="card-title mb-0">{farm.farmName}</h5>
-                        <p className="card-text mb-0"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
+              <div className="overflow-x-auto">
+                <div className="flex gap-3">
+                  {farms.map((farm) => (
+                    <div className="flex-none w-64" key={farm._id} onClick={() => setSelectedFarm(farm)}>
+                      <div className="card shadow farm-card">
+                        <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
+                        <div className="card-header d-flex justify-content-between align-items-center">
+                          <div className="d-flex flex-column">
+                            <h5 className="card-title mb-0">{farm.farmName}</h5>
+                            <p className="card-text mb-0"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
+                          </div>
+                        </div>
                       </div>
-                      
                     </div>
-                  </div>
+                  ))}
+                  {farms.length === 0 && (
+                    <div className="col-12 text-center">
+                      <p className="text-muted">No farms found.</p>
+                    </div>
+                  )}
                 </div>
-                ))}
-                {farms.length === 0 && (
-                  <div className="col-12 text-center">
-                    <p className="text-muted">No farms found.</p>
-                  </div>
-
-                )}
               </div>
 
+
               {selectedFarm && (
-                
                 <div className="selected-farm mt-5 p-4 border border-success">
                   <h3>{selectedFarm.farmName}</h3>
                   <div>
@@ -241,21 +241,21 @@ const MyFarms = () => {
                   <br />
                   <div className="totalBox">
                     <div className="soilBox">
-                    <h2>🏜️</h2>
-                    <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
+                      <h2>🏜️</h2>
+                      <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
                     </div>
                     <div className="waterBox">
                       <h2>💧</h2>
-                    <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
+                      <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
                     </div>
                     <div className="farmBox">
                       <h2>🚜</h2>
-                    <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
-                  </div>
+                      <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
+                    </div>
                   </div>
                   <div className="tipsBox">
-                  <h1>💡</h1>
-                  <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
+                    <h1>💡</h1>
+                    <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
                   </div>
                 </div>
               )}

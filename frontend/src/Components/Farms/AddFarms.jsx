@@ -101,25 +101,25 @@ const AddFarms = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (currentStep === 2) {
             const token = localStorage.getItem('token');
             if (!token) {
                 alert('No token found. Please log in again.');
                 return;
             }
-    
+
             const farmDetails = { ...farmData }; // Make sure all necessary data is included
-    
+
             try {
                 let response;
-    
+
                 // Create FormData only if there is an image
                 if (farmData.farmImage) {
                     const farmFormData = new FormData();
                     farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
                     farmFormData.append('farmDetails', JSON.stringify(farmDetails));
-    
+
                     response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -134,7 +134,7 @@ const AddFarms = () => {
                         },
                     });
                 }
-    
+
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
                 resetForm(); // Reset form after successful submission
@@ -166,7 +166,7 @@ const AddFarms = () => {
 
     const handleCancel = () => {
         console.log("Cancelled");
-        resetForm(); 
+        resetForm();
     };
 
     return (
@@ -196,92 +196,92 @@ const AddFarms = () => {
                             </div>
                         </div>
                         <div className="form-group mb-4">
-                        <div className="mb-4">
-                            <label className="form-label">Farm Name:</label>
-                            <input
-                                type="text"
-                                name="farmName"
-                                className="form-control"
-                                value={farmData.farmName}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Farm Name:</label>
+                                <input
+                                    type="text"
+                                    name="farmName"
+                                    className="form-control"
+                                    value={farmData.farmName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Size of Farm:</label>
-                            <input
-                                type="text"
-                                name="sizeOfFarm"
-                                className="form-control"
-                                value={farmData.sizeOfFarm}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Size of Farm:</label>
+                                <input
+                                    type="text"
+                                    name="sizeOfFarm"
+                                    className="form-control"
+                                    value={farmData.sizeOfFarm}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Location:</label>
-                            <select
-                                name="location"
-                                className="form-select"
-                                value={farmData.location}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">Select Location</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="West Bengal">West Bengal</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                <option value="Chandigarh">Chandigarh</option>
-                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                                <option value="Daman and Diu">Daman and Diu</option>
-                                <option value="Lakshadweep">Lakshadweep</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Puducherry">Puducherry</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                <option value="Ladakh">Ladakh</option>
-                                {/* Add location options here */}
-                            </select>
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Location:</label>
+                                <select
+                                    name="location"
+                                    className="form-select"
+                                    value={farmData.location}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Select Location</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Ladakh">Ladakh</option>
+                                    {/* Add location options here */}
+                                </select>
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Last Crop Sowed:</label>
-                            <input
-                                type="text"
-                                name="last_crop_sowed"
-                                className="form-control"
-                                value={farmData.last_crop_sowed}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Last Crop Sowed:</label>
+                                <input
+                                    type="text"
+                                    name="last_crop_sowed"
+                                    className="form-control"
+                                    value={farmData.last_crop_sowed}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <div className="button-container">
@@ -307,6 +307,10 @@ const AddFarms = () => {
                                         className={`custom-button ${farmData.soilQuality === quality ? "selected" : ""}`}
                                         onClick={() => handleSelection("soilQuality", quality)}
                                     >
+                                        {/* Add emoji in front of the text */}
+                                        {quality === "Low" && "🌱"} {/* Emoji for Low */}
+                                        {quality === "Moderate" && "🌿"} {/* Emoji for Moderate */}
+                                        {quality === "High" && "🌳"} {/* Emoji for High */}
                                         {quality}
                                     </button>
                                 ))}
@@ -314,20 +318,23 @@ const AddFarms = () => {
                         </div>
 
                         {/* Crop Type */}
-                        <div className="form-grp mb-4">
-                            <label className="form-label">Crop Type:</label>
-                            <div className="button-group">
-                                {["Vegetable", "Fruit", "Grain", "Flower"].map((type) => (
-                                    <button
-                                        key={type}
-                                        type="button"
-                                        className={`custom-button ${farmData.cropType === type ? "selected" : ""}`}
-                                        onClick={() => handleSelection("cropType", type)}
-                                    >
-                                        {type}
-                                    </button>
-                                ))}
-                            </div>
+                        <label className="form-label">Crop Type:</label>
+                        <div className="button-group">
+                            {["Vegetable", "Fruit", "Grain", "Flower"].map((type) => (
+                                <button
+                                    key={type}
+                                    type="button"
+                                    className={`custom-button ${farmData.cropType === type ? "selected" : ""}`}
+                                    onClick={() => handleSelection("cropType", type)}
+                                >
+                                    {/* Add emoji in front of the text based on crop type */}
+                                    {type === "Vegetable" && "🥕"} {/* Emoji for Vegetable */}
+                                    {type === "Fruit" && "🍓"}      {/* Emoji for Fruit */}
+                                    {type === "Grain" && "🌾"}      {/* Emoji for Grain */}
+                                    {type === "Flower" && "🌸"}     {/* Emoji for Flower */}
+                                    {type}
+                                </button>
+                            ))}
                         </div>
 
                         {/* Crop Name */}
@@ -363,12 +370,18 @@ const AddFarms = () => {
                                         className={`custom-button ${farmData.soilType === soil ? "selected" : ""}`}
                                         onClick={() => handleSelection("soilType", soil)}
                                     >
-                                        <img src={soilTypeIcons[soil]} alt={`${soil} icon`} className="button-icon" />
+                                        {/* Add emoji in front of the text based on soil type */}
+                                        {soil === "Clay" && "🪨"}   {/* Emoji for Clay */}
+                                        {soil === "Sandy" && "🏖️"}  {/* Emoji for Sandy */}
+                                        {soil === "Loamy" && "🌱"}   {/* Emoji for Loamy */}
+                                        {soil === "Silt" && "💧"}    {/* Emoji for Silt */}
+
                                         {soil}
                                     </button>
                                 ))}
                             </div>
                         </div>
+
 
                         {/* Current Season */}
                         <div className="form-grp mb-4">
@@ -381,11 +394,18 @@ const AddFarms = () => {
                                         className={`custom-button ${farmData.currentSeason === season ? "selected" : ""}`}
                                         onClick={() => handleSelection("currentSeason", season)}
                                     >
+                                        {/* Add emoji in front of the text based on the season */}
+                                        {season === "Spring" && "🌸"}   {/* Emoji for Spring */}
+                                        {season === "Summer" && "☀️"}   {/* Emoji for Summer */}
+                                        {season === "Autumn" && "🍁"}   {/* Emoji for Autumn */}
+                                        {season === "Winter" && "❄️"}   {/* Emoji for Winter */}
+
                                         {season}
                                     </button>
                                 ))}
                             </div>
                         </div>
+
 
                         {/* Farming Method */}
                         <div className="form-grp mb-4">
@@ -475,49 +495,50 @@ const handleSubmit = async (e) => {
         if (farmData.farmImage) {
             const farmFormData = new FormData();
             farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
-            farmFormData.append('farmDetails', JSON.stringify(farmDetails)); 
+            farmFormData.append('farmDetails', JSON.stringify(farmDetails));
 
             response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`,
                 },
-            });} 
-            else {
-                response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-            }
-            console.log('Farm added:', response.data);
-    
-            setFarmData({
-                farmName: "",
-                cropType: "",
-                cropName: "",
-                soilType: "",
-                location: "",
-                farmingMethod: "",
-                waterSource: "",
-                last_crop_sowed: "",
-                soilQuality: "",
-                currentSeason: "",
-                dateOfPlanting: "",
-                dateOfHarvest: "",
-                sizeOfFarm: "",
-                farmImage: null,
             });
-    
-            alert('Farm added successfully!');
-        } catch (error) {
-            console.error('Error adding farm:', error.response?.data || error.message);
-    
-            if (error.response?.data?.message) {
-                alert(`Error: ${error.response.data.message}`);
-            } else {
-                alert('Failed to add farm. Please try again.');
-            }
         }
-    };
+        else {
+            response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+        }
+        console.log('Farm added:', response.data);
+
+        setFarmData({
+            farmName: "",
+            cropType: "",
+            cropName: "",
+            soilType: "",
+            location: "",
+            farmingMethod: "",
+            waterSource: "",
+            last_crop_sowed: "",
+            soilQuality: "",
+            currentSeason: "",
+            dateOfPlanting: "",
+            dateOfHarvest: "",
+            sizeOfFarm: "",
+            farmImage: null,
+        });
+
+        alert('Farm added successfully!');
+    } catch (error) {
+        console.error('Error adding farm:', error.response?.data || error.message);
+
+        if (error.response?.data?.message) {
+            alert(`Error: ${error.response.data.message}`);
+        } else {
+            alert('Failed to add farm. Please try again.');
+        }
+    }
+};

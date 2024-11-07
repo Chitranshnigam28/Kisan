@@ -10,9 +10,9 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');  // Clear token
-    localStorage.removeItem('userId'); // Clear userId if you're storing it
-    navigate('/login');                // Redirect to login page
+    localStorage.removeItem('token');  
+    localStorage.removeItem('userId'); 
+    navigate('/login');               
   };
 
   return (
