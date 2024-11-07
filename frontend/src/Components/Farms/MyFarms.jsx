@@ -105,7 +105,7 @@ const MyFarms = () => {
           )
         )}
       </div>
-      <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
+      <h5 className="h5">Track crops, monitor soil, and get personalized insights</h5>
 
       {showAddFarm ? (
         <AddFarms />

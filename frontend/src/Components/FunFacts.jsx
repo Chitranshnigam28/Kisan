@@ -31,7 +31,7 @@ const FunFacts = () => {
         },
       };
   
-      setTranslatedFunFact(translatedFact); // Save the translated fun fact
+      setTranslatedFunFact(translatedFact);
     } catch (error) {
       console.error("Error translating text:", error.response || error);
     }
@@ -52,6 +52,11 @@ const FunFacts = () => {
   };
 
   const headingTranslationMapping = {
+    'didYouKnow': {
+      en: 'Did you know?',
+      hi: 'क्या आप जानते हैं?',
+      pa: 'ਕੀ ਤੁਸੀਂ ਜਾਣਦੇ ਹੋ?'
+    },
     'scientificName': {
       en: 'Scientific Name',
       hi: 'वैज्ञानिक नाम',
@@ -77,13 +82,13 @@ const FunFacts = () => {
     fetchRandomFunFact();
     const intervalId = setInterval(fetchRandomFunFact, 5000);
     return () => clearInterval(intervalId);
-  }, [language]); 
+  }, [language]);
 
   return (
     <div className="funfacts-container">
       {funFact ? (
         <div className="funFactsDiv">
-          <p className="title">Did you know?</p>
+          <p className="title">{getTranslatedHeading('didYouKnow')}</p>
           <div className="fun-fact-card">
             <p className="fact-item"><strong>{getTranslatedHeading('scientificName')}:</strong> {translatedFunFact ? translatedFunFact.scientificName : funFact.scientificName}</p>
             <p className="fact-item"><strong>{getTranslatedHeading('funFact')}:</strong> {translatedFunFact ? translatedFunFact.funFact.general : funFact.funFact.general}</p>

@@ -120,83 +120,81 @@ const TopCropsChart = ({ onLocationChange }) => {
   ];
 
   const chartData = topCrops.length > 0
-    ? {
-        series: topCrops.map((crop) => crop?.percentage ?? 0),
-        options: {
-          chart: {
-            type: 'donut',
-            height: 350,
-          },
-          title: {
-            text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`,
-            align: 'center',
-          },
-          labels: translatedData
-            ? translatedData.cropNames
-            : topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
-          legend: { position: 'bottom' },
-          plotOptions: {
-            pie: {
-              expandOnClick: true,
-              customScale: 1,
-              donut: {
-                size: '70%',
-                labels: {
+  ? {
+      series: topCrops.map((crop) => crop?.percentage ?? 0),
+      options: {
+        chart: {
+          type: 'donut',
+          height: 350,
+        },
+        title: {
+          text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`,
+          align: 'center',
+        },
+        labels: translatedData
+          ? translatedData.cropNames
+          : topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
+        legend: { position: 'bottom' },
+        plotOptions: {
+          pie: {
+            expandOnClick: true,
+            customScale: 1,
+            donut: {
+              size: '70%',
+              labels: {
+                show: true,
+                name: {
                   show: true,
-                  name: {
-                    show: true,
-                    fontSize: '22px',
-                    color: undefined,
-                    offsetY: 5,
-                  },
-                  value: {
-                    show: true,
-                    fontSize: '16px',
-                    color: 'black',
-                    offsetY: -5,
-                  },
+                  fontSize: '22px',
+                  color: undefined,
+                  offsetY: 5,
+                },
+                value: {
+                  show: false,
                 },
               },
             },
           },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              shade: 'light',
-              type: 'vertical',
-              shadeIntensity: 0.5,
-              gradientToColors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
-              stops: [0, 100, 100, 100, 100],
-            },
-          },
-          colors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
         },
-      }
-    : {
-        series: defaultCrops.map((crop) => crop.percentage),
-        options: {
-          labels: defaultCrops.map((crop) => crop.crop_name),
-          chart: {
-            type: 'donut',
-            height: 350,
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shade: 'light',
+            type: 'vertical',
+            shadeIntensity: 0.5,
+            gradientToColors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],
+            stops: [0, 100, 100, 100, 100],
           },
-          title: {
-            text: `Top 5 Crops in Delhi`,
-            align: 'center',
-          },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              shade: 'light',
-              type: 'vertical',
-              shadeIntensity: 0.5,
-              gradientToColors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
-              stops: [0, 100, 100, 100, 100],
-            },
-          },
-          colors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
         },
-      };
+        colors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],
+      },
+    }
+  : {
+      series: defaultCrops.map((crop) => crop.percentage),
+      options: {
+        labels: defaultCrops.map((crop) => crop.crop_name),
+        chart: {
+          type: 'donut',
+          height: 350,
+        },
+        title: {
+          text: `Top Selling Crops in Delhi`,
+          align: 'center',
+        },
+        fill: { 
+          type: 'gradient',
+          gradient: {
+            shade: 'dark',
+            type: 'vertical',
+            shadeIntensity: 0.5,
+            gradientToColors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],
+            stops: [0, 100, 100, 100, 100],
+          },
+        },
+        colors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],        
+      },
+    };
+
 
   return (
     <div>

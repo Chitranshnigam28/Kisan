@@ -125,7 +125,7 @@ const MarketInsights = () => {
         return rice;
       case "wheat":
       case "गेहूँ": // Hindi translation for Wheat
-      case "ਗਹੂ": // Punjabi translation for Wheat
+      case "ਕਣਕ": // Punjabi translation for Wheat
         return wheatImg;
       case "maize":
       case "मक्का": // Hindi translation for Maize
@@ -133,7 +133,7 @@ const MarketInsights = () => {
         return cornImg;
       case "cotton":
       case "कपास": // Hindi translation for Cotton
-      case "ਕਪਾਸ": // Punjabi translation for Cotton
+      case "ਕਪਾਹ": // Punjabi translation for Cotton
         return cotton;
       case "sugarcane":
       case "गन्ना": // Hindi translation for Sugarcane
@@ -189,11 +189,11 @@ const MarketInsights = () => {
         return bitterGourdImg;
       case "tea":
       case "चाय": // Hindi translation for Tea
-      case "ਚਾਏ": // Punjabi translation for Tea
+      case "ਚਾਹ": // Punjabi translation for Tea
         return greenTeaImg;
       case "coffee":
       case "कॉफ़ी": // Hindi translation for Coffee
-      case "ਕੌਫੀ": // Punjabi translation for Coffee
+      case "ਕਾਫੀ": // Punjabi translation for Coffee
         return coffeeBeansImg;
       case "jowar":
       case "ज्वार": // Hindi translation for Jowar
