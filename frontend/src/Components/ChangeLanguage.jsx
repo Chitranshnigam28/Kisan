@@ -70,9 +70,9 @@ const ChangeLanguage = ({ onSelectLanguage, onClose }) => {
   }, [currentLanguage]);
 
   const languages = [
-    { language: 'English', icon: "./languages/A.png" },
-    { language: 'Hindi', icon: "./languages/Hindi.png" },
-    { language: 'Punjabi', icon: "./languages/Punjabi.png" },
+    { language: 'en', icon: "./languages/A.png" },
+    { language: 'hi', icon: "./languages/Hindi.png" },
+    { language: 'pa', icon: "./languages/Punjabi.png" },
   ];
 
   return (

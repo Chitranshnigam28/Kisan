@@ -20,10 +20,10 @@ import OrganicIcon from "../../Assets/Farming Method/Organic.svg";
 import ConventionalIcon from "../../Assets/Farming Method/gardening-tools.svg";
 import AgroforestryIcon from "../../Assets/Farming Method/Agroforestry.svg";
 import PermacultureIcon from "../../Assets/Farming Method/Permaculture.svg";
-import WheatIcon from "../../Assets/Vegetables/wheat.png"
-import RiceIcon from "../../Assets/Vegetables/rice.png"
-import CornIcon from "../../Assets/Vegetables/Corn.svg"
-import TomatoIcon from "../../Assets/Vegetables/tomato.png"
+import WheatIcon from "../../Assets/Vegetables/wheat.png";
+import RiceIcon from "../../Assets/Vegetables/rice.png";
+import CornIcon from "../../Assets/Vegetables/Corn.svg";
+import TomatoIcon from "../../Assets/Vegetables/tomato.png";
 
 const cropNameIcons = {
     Wheat: WheatIcon,
@@ -59,7 +59,7 @@ const waterSourceIcons = {
 };
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1); // Step state
+    const [currentStep, setCurrentStep] = useState(1);
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
@@ -101,25 +101,24 @@ const AddFarms = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (currentStep === 2) {
             const token = localStorage.getItem('token');
             if (!token) {
                 alert('No token found. Please log in again.');
                 return;
             }
-    
-            const farmDetails = { ...farmData }; // Make sure all necessary data is included
-    
+
+            const farmDetails = { ...farmData };
+
             try {
                 let response;
-    
-                // Create FormData only if there is an image
+
                 if (farmData.farmImage) {
                     const farmFormData = new FormData();
                     farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
                     farmFormData.append('farmDetails', JSON.stringify(farmDetails));
-    
+
                     response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -134,10 +133,10 @@ const AddFarms = () => {
                         },
                     });
                 }
-    
+
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
-                resetForm(); // Reset form after successful submission
+                resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
                 alert('Failed to add farm. Please try again.');
@@ -161,12 +160,12 @@ const AddFarms = () => {
             sizeOfFarm: "",
             farmImage: null,
         });
-        setCurrentStep(1); // Reset to step 1 after submission
+        setCurrentStep(1);
     };
 
     const handleCancel = () => {
         console.log("Cancelled");
-        resetForm(); 
+        resetForm();
     };
 
     return (
@@ -196,92 +195,91 @@ const AddFarms = () => {
                             </div>
                         </div>
                         <div className="form-group mb-4">
-                        <div className="mb-4">
-                            <label className="form-label">Farm Name:</label>
-                            <input
-                                type="text"
-                                name="farmName"
-                                className="form-control"
-                                value={farmData.farmName}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Farm Name:</label>
+                                <input
+                                    type="text"
+                                    name="farmName"
+                                    className="form-control"
+                                    value={farmData.farmName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Size of Farm:</label>
-                            <input
-                                type="text"
-                                name="sizeOfFarm"
-                                className="form-control"
-                                value={farmData.sizeOfFarm}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Size of Farm:</label>
+                                <input
+                                    type="text"
+                                    name="sizeOfFarm"
+                                    className="form-control"
+                                    value={farmData.sizeOfFarm}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Location:</label>
-                            <select
-                                name="location"
-                                className="form-select"
-                                value={farmData.location}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">Select Location</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="West Bengal">West Bengal</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                <option value="Chandigarh">Chandigarh</option>
-                                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                                <option value="Daman and Diu">Daman and Diu</option>
-                                <option value="Lakshadweep">Lakshadweep</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Puducherry">Puducherry</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                <option value="Ladakh">Ladakh</option>
-                                {/* Add location options here */}
-                            </select>
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Location:</label>
+                                <select
+                                    name="location"
+                                    className="form-select"
+                                    value={farmData.location}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">Select Location</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Ladakh">Ladakh</option>
+                                </select>
+                            </div>
 
-                        <div className="mb-4">
-                            <label className="form-label">Last Crop Sowed:</label>
-                            <input
-                                type="text"
-                                name="last_crop_sowed"
-                                className="form-control"
-                                value={farmData.last_crop_sowed}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-4">
+                                <label className="form-label">Last Crop Sowed:</label>
+                                <input
+                                    type="text"
+                                    name="last_crop_sowed"
+                                    className="form-control"
+                                    value={farmData.last_crop_sowed}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <div className="button-container">
@@ -291,12 +289,9 @@ const AddFarms = () => {
                     </div>
                 )}
 
-                {/* Step 2 */}
                 {currentStep === 2 && (
                     <div>
                         <h5 className="mb-4">Step 2 of 2</h5>
-
-                        {/* Soil Quality */}
                         <div className="form-grp mb-4">
                             <label className="form-label">Soil Quality:</label>
                             <div className="button-group">
