@@ -86,7 +86,6 @@ const TopCropsChart = ({ onLocationChange }) => {
         
         // Convert array of objects into a single object
         const translatedStatesMap = Object.assign({}, ...translatedStatesObj);
-        console.log("Translated States:", translatedStatesMap);  // Debugging translated states
         setTranslatedStates(translatedStatesMap);
       } catch (error) {
         console.error("Error translating states:", error);

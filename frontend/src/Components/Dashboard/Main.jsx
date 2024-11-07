@@ -8,7 +8,6 @@ import FunFacts from "../FunFacts";
 import { BiRightTopArrowCircle } from "react-icons/bi";
 import TopCropsChart from "../TopCropChart";
 import WeatherWidget from "../weatherWidget";
-import TranslationComponent from "../TranslationComponent";
 import MarketInsights from "../MarketInsights";
 
 const Main = () => {
@@ -29,21 +28,20 @@ const Main = () => {
     <>
       <main className="main-layout">
         <div className="weather-info">
-            <Link to="/weather">
-                <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
-            </Link>
+          <Link to="/weather">
+            <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+          </Link>
           <WeatherWidget />
         </div>
 
-      <div className="my-farms ">
-        <Link to="/my-farms">
-          <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
-        </Link>
-        <MyFarms userId={userId} />
-        {/* <Link to="/add-farm">Add a New Farm</Link> */}
-      </div>
+        <div className="my-farms ">
+          <Link to="/my-farms">
+            <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+          </Link>
+          <MyFarms userId={userId} />
+        </div>
 
-      <div className="dashboard-marketview">
+        <div className="dashboard-marketview">
           <div className="insightsWrapper">
             <div className="market-info">
               <MarketInsights />
@@ -58,59 +56,6 @@ const Main = () => {
         </div>
 
         <FunFacts />
-
-        {/* <div className="translation-component"> */}
-          {/* <TranslationComponent /> */}
-        {/* </div> */}
-        
-
-      {/* <div className="my-farms ">
-        <h3>My Farms</h3>
-        <Link to="/my-farms">
-          <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
-        </Link>
-        <MyFarms userId={userId} />
-        <Link to="/add-farm">Add a New Farm</Link>
-      </div>
-
-        <div className="crop-info">
-          <div className="line-graph">
-            <h3>Crop Price Graph</h3>
-            <ComponentPriceGraph />
-          </div>
-        </div>
-
-
-        <div className="dashboard-marketview">
-          <div className="market-info">
-            <MarketInsights />
-          </div>
-          <div className="top-crops">
-            <TopCropsChart
-              onLocationChange={handleLocationChange}
-              location={location}
-            />
-          </div>
-        </div>
-
-      {/* <div className="top-crops-chart">
-        <h3>Top 5 Crops by Estimated Revenue</h3>
-        <TopCropsChart onLocationChange={handleLocationChange} location={location} />
-      </div>
-
-        {/* <div className="fun-facts">
-        <FunFacts />
-        <Tips />
-      </div>
-
-      {/* <div className="cropRecomendation">
-        <h3>Crop Recommendation</h3>
-        <div className="cropRecomendation-content">
-          <CropRecommendation ownerId={userId} />
-        </div> */}
-        {/* <div className="translation-component">
-        <TranslationComponent />
-      </div> */}
       </main>
     </>
   );

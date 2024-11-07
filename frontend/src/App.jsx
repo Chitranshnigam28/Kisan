@@ -7,7 +7,6 @@ import GMaps from "./Components/GMaps";
 import TranslationComponent from "./Components/TranslationComponent";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Weather from './Components/Weather';
-// import WeatherWidget from './Components/weatherWidget'
 import FunFact from "./Components/FunFacts";
 import Tips from './Components/Tips';
 import AddFarms from "./Components/Farms/AddFarms";
@@ -34,8 +33,7 @@ const App = () => {
   return (
     <Router>
       <ErrorBoundary>
-        <AppRoutes /> {/* Moved all routes into a new component */}
-        {/* <FloatingDockDemo /> */}
+        <AppRoutes /> 
       </ErrorBoundary>
     </Router>
 
