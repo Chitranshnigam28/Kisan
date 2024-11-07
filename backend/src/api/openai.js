@@ -34,7 +34,7 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             return { error: 'No farm data found for this user.' };
         }
 
-        const { farmName, cropType, location, soilType, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason, dateOfPlanting } = farm;
+        const { farmName, cropType, location, soilType, farmingMethod, waterSource, last_crop_sowed, soilQuality, currentSeason } = farm;
 
         console.log('Farm data fetched successfully:', farm);
 
@@ -49,7 +49,6 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             - Last Crop Sowed: ${last_crop_sowed}
             - Soil Quality: ${soilQuality}
             - Current Season: ${currentSeason}
-            - Date of Planting: ${dateOfPlanting}
 
         Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. Provide the data in the following JSON array format:
 

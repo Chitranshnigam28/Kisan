@@ -8,7 +8,6 @@ import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import axios from "axios";
 import Weather from "./Weather";
 
-
 const getCurrentDate = () => format(new Date(), "do MMMM yyyy, EEEE");
 function WeatherWidget({ showSearch = true }) {
   const [query, setQuery] = useState({ q: "Delhi" });
@@ -87,15 +86,18 @@ function WeatherWidget({ showSearch = true }) {
           language
         ),
       };
+
       setTranslatedLabels(labels); // Update translated labels state
     };
 
     translateLabels(); // Call to update labels
   }, [query, units, language]);
 
+  
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setQuery({ q: searchCity });
+    localStorage.setItem("searchCity", searchCity); // Store the city in localStorage
   };
 
   const getBackgroundColor = () => {
@@ -145,7 +147,10 @@ function WeatherWidget({ showSearch = true }) {
                       type="text"
                       placeholder={translatedLabels.searchPlaceholder}
                       value={searchCity}
-                      onChange={(e) => setSearchCity(e.target.value)}
+                      onChange={(e) => {
+                        setSearchCity(e.target.value);
+                        localStorage.setItem("searchCity", e.target.value); // Update localStorage on input change
+                      }}
                       className="search-input"
                     />
                     <button type="submit" className="search-button">

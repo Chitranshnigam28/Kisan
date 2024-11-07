@@ -19,8 +19,7 @@ const CropRecommendation = ({ ownerId }) => {
       }
 
 
-      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${ownerId}}`);
-
+      const response = await axios.get(`http://localhost:5001/api/recommend-crop/${ownerId}`);
 
       setFarmDetails(response.data);
     } catch (error) {

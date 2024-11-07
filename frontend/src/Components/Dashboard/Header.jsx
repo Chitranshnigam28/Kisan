@@ -115,7 +115,7 @@ const Header = () => {
       )}
 
       {/* Pass the selected language to the TranslationComponent */}
-      <TranslationComponent selectedLanguage={selectedLanguage} />
+      {/* <TranslationComponent selectedLanguage={selectedLanguage} /> */}
     </div>
   );
 };
