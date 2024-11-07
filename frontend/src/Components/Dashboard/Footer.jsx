@@ -51,11 +51,6 @@ export function Footer() {
       icon: <FaMapMarkerAlt className="footer-icon" />,
       href: "/maps", // React Router path for maps
     },
-    {
-      title: "Translate",
-      icon: <FaLanguage className="footer-icon" />,
-      href: "/translate", // React Router path for translate
-    },
   ];
 
   return (
