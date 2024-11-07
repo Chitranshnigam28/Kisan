@@ -26,6 +26,7 @@ const MyFarms = () => {
 
   const userId = localStorage.getItem("userId");
 
+  
   useEffect(() => {
     const fetchFarms = async () => {
       try {
@@ -166,7 +167,7 @@ const MyFarms = () => {
           showAddFarm ? (
             <MdOutlineCancel
               className="add-icon"
-              onClick={() => setShowAddFarm(true)}
+              onClick={() => setShowAddFarm(false)}
               style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
             />
           ) : (
@@ -234,9 +235,7 @@ const MyFarms = () => {
                     <span>
                       <strong>{selectedFarm.sizeOfFarm} HA</strong> .
                     </span>
-                    <span>
 
-                    </span>
                   </div>
                   <br />
                   <div className="totalBox">
@@ -257,14 +256,6 @@ const MyFarms = () => {
                     <h1>💡</h1>
                     <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
                   </div>
-                </div>
-              )}
-
-              {farms.length > 2 && (
-                <div className="text-center">
-                  <button onClick={() => navigate(`/my-farms?userId=${userId}`)} className="btn btn-success mt-4">
-                    View All Farms
-                  </button>
                 </div>
               )}
 
