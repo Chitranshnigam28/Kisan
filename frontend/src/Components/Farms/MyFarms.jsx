@@ -58,9 +58,8 @@ const MyFarms = () => {
     };
 
     fetchFarms();
-    const intervalId = setInterval(fetchFarms, 1000);
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(fetchFarms);
   }, [userId, location.pathname]);
 
   useEffect(() => {
