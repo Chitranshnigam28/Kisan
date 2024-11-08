@@ -61,6 +61,7 @@ const AppRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profilesetup' element={<ProfileSetup />} />
+        <Route path="/add-farm" element={<AddFarms />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />

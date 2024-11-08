@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
 import axios from 'axios';
@@ -26,6 +26,8 @@ import CornIcon from "../../Assets/Vegetables/Corn.svg"
 import TomatoIcon from "../../Assets/Vegetables/tomato.png"
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -96,6 +98,11 @@ const AddFarms = () => {
     });
     const [file, setFile] = useState(null);  // Declare the file state
     const [downloadURL, setDownloadURL] = useState("");
+    const navigate = useNavigate();
+    const location = useLocation();
+
+      // Check if the user came from the sign-up process
+      const fromSignup = new URLSearchParams(location.search).get("fromSignup") === "true";
     // const [farmData, setFarmData] = useState({
     //   farmImage: null,
     // });
@@ -211,6 +218,7 @@ const AddFarms = () => {
 
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
+                
                 resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
@@ -218,6 +226,13 @@ const AddFarms = () => {
             }
         }
     };
+
+       // Show alert only if coming from signup
+       useEffect(() => {
+        if (fromSignup) {
+            alert("Sign Up Successful! Please add your farm details.");
+        }
+    }, [fromSignup]);
     const resetForm = () => {
         setFarmData({
             farmName: "",
@@ -236,10 +251,13 @@ const AddFarms = () => {
             farmImage: null,
         });
         setCurrentStep(1);
+
+        
     };
 
     const handleCancel = () => {
         console.log("Cancelled");
+        navigate('/login');
         resetForm();
         resetForm();
     };

@@ -59,12 +59,12 @@ const Header = () => {
           </div>
           {showDropdown && (
             <div className="dropdown">
-              <div className="changePasswordWrapper">
+              {/* <div className="changePasswordWrapper">
                 <img src="./changePassword.png" alt="changePassword" />
                 <button onClick={handleChangePasswordClick} className="change-password">
                   Change Password
                 </button>
-              </div>
+              </div> */}
               <div className="changeLanguageWrapper">
                 <img src="./changeLanguage.png" alt="changeLanguage"/>
                 <button onClick={handleChangeLanguageClick} className="change-language">
