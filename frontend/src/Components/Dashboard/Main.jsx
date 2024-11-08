@@ -28,7 +28,11 @@ const Main = () => {
     <>
       <main className="main-layout">
         <div className="weather-info">
-          <Link to="/weather">
+          <Link to="/weather" onClick={() => {
+    if (typeof setShowOverlay === "function") {
+      setShowOverlay(false);
+    }
+  }}>
             <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
           </Link>
           <WeatherWidget />

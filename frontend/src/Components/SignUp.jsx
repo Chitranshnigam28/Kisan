@@ -46,7 +46,8 @@ const SignUp = () => {
         if (res.status === 200) {
           console.log("registration succesfull");
           console.log("${data.userId} " + data.userId);
-          navigate(`/profilesetup?userId=${data.userId}`);
+          // navigate(`/add-farm?userId=${data.userId}`);
+          navigate(`/add-farm?userId=${data.userId}&fromSignup=true`);
         }
       } catch (error) {
         console.log(error);
@@ -77,7 +78,7 @@ const SignUp = () => {
         <div className="containersignup">
           <h3>Create Your Account</h3>
           <p style={{ color: "#818898", fontWeight: 400 }}>
-            Please Input to your account
+            Please Enter your account details
           </p>
           <form onSubmit={handleSubmit}>
             <label htmlFor="uname">
@@ -138,7 +139,7 @@ const SignUp = () => {
             </p>
 
             <button type="submit" className="authBtn">
-              Sign Up
+              Next
             </button>
             <p id="hvact" style={{ color: "#818898", fontWeight: 600 }}>
               Already have an account?{" "}

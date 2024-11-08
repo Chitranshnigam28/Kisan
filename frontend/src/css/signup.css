@@ -5,6 +5,7 @@
   /* width: 100%; */
   margin: 1rem 3rem;
   padding: 0 2rem 0 0;
+  justify-content: space-around;
 }
 
 /* Signup Items */
@@ -12,7 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  width: 50%;
+  width: 40%;
   padding: 2rem;
   border-radius: 1rem;
 }
@@ -39,6 +40,7 @@ h2 {
 form {
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
 }
 
 label {
