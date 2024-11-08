@@ -11,7 +11,6 @@ import WeatherWidget from "../weatherWidget";
 import MarketInsights from "../MarketInsights";
 
 const Main = () => {
-
   const userId = localStorage.getItem("userId");
   console.log(userId);
 
@@ -27,30 +26,39 @@ const Main = () => {
   return (
     <>
       <main className="main-layout">
+        
         <div className="weather-info">
-          <Link to="/weather" onClick={() => {
-    if (typeof setShowOverlay === "function") {
-      setShowOverlay(false);
-    }
-  }}>
-            <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+          <Link
+            to="/weather"
+            onClick={() => {
+              if (typeof setShowOverlay === "function") {
+                setShowOverlay(false);
+              }
+            }}
+          >
+            <BiRightTopArrowCircle
+              style={{ fontSize: "30px", color: "grey" }}
+            />
           </Link>
           <WeatherWidget />
         </div>
 
         <div className="my-farms ">
           <Link to="/my-farms">
-            <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey" }} />
+            <BiRightTopArrowCircle
+              style={{ fontSize: "30px", color: "grey" }}
+            />
           </Link>
           <MyFarms userId={userId} />
         </div>
 
         <div className="dashboard-marketview">
-        <Link to="/charts">
-            <BiRightTopArrowCircle style={{ fontSize: "30px", color: "grey",float : "right" }} />
+          <Link to="/charts">
+            <BiRightTopArrowCircle
+              style={{ fontSize: "30px", color: "grey", float: "right" }}
+            />
           </Link>
           <div className="insightsWrapper">
-          
             <div className="market-info">
               <MarketInsights />
             </div>
@@ -63,7 +71,9 @@ const Main = () => {
           </div>
         </div>
 
-        <FunFacts />
+        <div className="funFacts-Container">
+          <FunFacts />
+        </div>
       </main>
     </>
   );
