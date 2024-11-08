@@ -27,6 +27,7 @@ import TomatoIcon from "../../Assets/Vegetables/tomato.png"
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
@@ -80,6 +81,7 @@ const waterSourceIcons = {
 
 const AddFarms = () => {
     const [currentStep, setCurrentStep] = useState(1); // Step state
+    const navigate = useNavigate();
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
@@ -251,10 +253,13 @@ const AddFarms = () => {
     };
 
     const handleCancel = () => {
-        console.log("Cancelled");
+        navigate('/');
         resetForm();
     };
 
+    const farmAdded = ()=>{
+        navigate('/')
+    }
 
 
     return (
@@ -370,8 +375,8 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue</button>
-                            <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
+                            <button type="button" className="main-Btn" onClick={ () => setCurrentStep(2)}>Continue</button>
+                                <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
                         </div>
                     </div>
                 )}
@@ -539,7 +544,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="submit" className="main-Btn">Submit</button>
+                            <button type="submit" className="main-Btn" >Submit</button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Back</button>
                         </div>
                     </div>

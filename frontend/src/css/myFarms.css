@@ -299,3 +299,10 @@
   color: #333; 
   
 }
+
+.d-flex{
+  gap: 3rem;
+}
+.my-farms .container{
+  margin: 0;
+}

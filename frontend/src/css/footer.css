@@ -151,6 +151,7 @@ img{
 .carouselBtnWrapper{
   display: flex;
   gap: 0.5rem;
+  margin-top: 2rem;
 }
 .carousel-button:hover{
   background-color: transparent;

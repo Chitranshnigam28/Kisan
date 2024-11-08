@@ -1,0 +1,17 @@
+.allContainer{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.content2{
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+
+
+@media only screen and (max-width:1000px) {
+    .allContainer{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+}

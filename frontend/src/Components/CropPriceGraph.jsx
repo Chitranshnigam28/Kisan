@@ -6,8 +6,7 @@ import { Footer } from "./Dashboard/Footer";
 import Header from "./Dashboard/Header";
 import TopCropsChart from "./TopCropChart";
 import marketInsights from "../Assets/marketinsights.svg";
-import '../css/marketInsights.css';
-
+import "../css/topCropChart.css";
 
 const CropPriceChart = ({ crop }) => {
   const [cropPrices, setCropPrices] = useState([]);
@@ -145,68 +144,66 @@ const CropPriceChart = ({ crop }) => {
     <>
       <Header />
       <Footer />
-      <div className="MarketDashboardContainer">
-      <div className="title">
-            <img
-              src={marketInsights}
-              alt="Market Insights"
-              className="market-insights-icon"
-            />          <h1>Market Insights</h1>
-          </div>
-        <div className="container marketContainer">
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
-              <div className="content">
-                <div className="chart">
-                  <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col m-auto w-full place-items-center mt-4"
-                  >
-                    <input
-                      type="text"
-                      value={cropName}
-                      onChange={handleCropName}
-                      className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
-                      placeholder="Enter crop name"
-                    />
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                      Get Prices
-                    </button>
-                  </form>
-                  <select
-                    value={selectedYear}
-                    onChange={handleYearChange}
-                    className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
-                  >
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                  </select>
-                  <Chart
-                    options={chartData.options}
-                    series={chartData.series}
-                    type="line"
-                    height={350}
-                  />
-                </div>
-              </div>
+      <div className="container">
+        <div className="title">
+          <img
+            src={marketInsights}
+            alt="Market Insights"
+            className="market-insights-icon"
+          />{" "}
+          <h1>Market Insights</h1>
+        </div>
 
-              <div className="tips MarketTips">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="allContainer">
+            <div className="content">
+              <div className="chart">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col m-auto w-full place-items-center mt-4"
+                >
+                  <input
+                    type="text"
+                    value={cropName}
+                    onChange={handleCropName}
+                    className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
+                    placeholder="Enter crop name"
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Get Prices
+                  </button>
+                </form>
+                <select
+                  value={selectedYear}
+                  onChange={handleYearChange}
+                  className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 my-4"
+                >
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                </select>
+                <Chart
+                  options={chartData.options}
+                  series={chartData.series}
+                  type="line"
+                  height={350}
+                />
+              </div>
+            </div>
+
+            <div className="content2">
+              <TopCropsChart />
+              <div className="tips">
                 <SingleTips cropName={cropName} />
               </div>
-            </>
-          )}
-
-          <div className="content2">
-            <TopCropsChart />
-
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
 
