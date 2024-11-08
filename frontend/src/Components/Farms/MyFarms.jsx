@@ -76,7 +76,7 @@ const MyFarms = () => {
             },
           });
 
-          console.log("API Response:", response.data);
+          // console.log("API Response:", response.data);
           setPriceData(response.data.crops);
         } catch (error) {
           console.error("Error fetching historical price data:", error);

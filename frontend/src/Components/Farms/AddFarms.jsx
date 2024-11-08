@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
 import axios from 'axios';
@@ -29,7 +29,7 @@ import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/
 import { IoIosCloudUpload } from "react-icons/io";
 
 const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
+    apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
     authDomain: "art-asta-50475.firebaseapp.com",
     projectId: "art-asta-50475",
     storageBucket: "art-asta-50475.appspot.com",
@@ -79,7 +79,7 @@ const waterSourceIcons = {
 
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(1); // Step state
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
@@ -96,11 +96,6 @@ const AddFarms = () => {
     });
     const [file, setFile] = useState(null);  // Declare the file state
     const [downloadURL, setDownloadURL] = useState("");
-    const navigate = useNavigate();
-    const location = useLocation();
-
-      // Check if the user came from the sign-up process
-      const fromSignup = new URLSearchParams(location.search).get("fromSignup") === "true";
     // const [farmData, setFarmData] = useState({
     //   farmImage: null,
     // });
@@ -253,14 +248,11 @@ const AddFarms = () => {
             sizeOfFarm: "",
             farmImageUrl: "",
         });
-        setCurrentStep(1);
-
-        
+        setCurrentStep(1); // Reset to step 1 after submission
     };
 
     const handleCancel = () => {
         console.log("Cancelled");
-        navigate('/');
         resetForm();
     };
 
@@ -313,7 +305,6 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
-                            
 
                             <div className="mb-4">
                                 <label className="form-label">Location:</label>
@@ -377,7 +368,6 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
-                            
                         </div>
 
                         <div className="button-container">
@@ -387,9 +377,12 @@ const AddFarms = () => {
                     </div>
                 )}
 
+                {/* Step 2 */}
                 {currentStep === 2 && (
                     <div>
                         <h5 className="mb-4">Step 2 of 2</h5>
+
+                        {/* Soil Quality */}
                         <div className="form-grp mb-4">
                             <label className="form-label">Soil Quality:</label>
                             <div className="button-group">
