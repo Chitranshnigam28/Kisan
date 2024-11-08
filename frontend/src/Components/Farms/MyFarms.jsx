@@ -10,8 +10,10 @@ import '../../css/myFarms.css';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import AddFarms from "./AddFarms";
+import EmptyFarms from "./EmptyFarms";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -26,7 +28,7 @@ const MyFarms = () => {
 
   const userId = localStorage.getItem("userId");
 
-  
+
   useEffect(() => {
     const fetchFarms = async () => {
       try {
@@ -97,10 +99,10 @@ const MyFarms = () => {
   ];
 
   const isValidPriceData = Array.isArray(priceData) && priceData.length >= 2 &&
-  priceData.every(item => item && Array.isArray(item.prices) && item.prices.every(value => typeof value === 'number'));
+    priceData.every(item => item && Array.isArray(item.prices) && item.prices.every(value => typeof value === 'number'));
 
   const chartSeries = isValidPriceData
-  ? [
+    ? [
       {
         name: priceData[0].crop_name,
         data: priceData[0].prices,
@@ -110,7 +112,7 @@ const MyFarms = () => {
         data: priceData[1].prices,
       },
     ]
-  : [
+    : [
       {
         name: placeholderData[0].crop_name,
         data: placeholderData[0].prices,
@@ -145,7 +147,7 @@ const MyFarms = () => {
       fill: {
         opacity: 0.5,
       },
-      colors: ["#008FFB", "#FEB019"],
+      colors: ["#28a745", "#8B4513"]
     },
   };
 
@@ -187,12 +189,16 @@ const MyFarms = () => {
           )
         )}
       </div>
-      <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
 
-      {showAddFarm ? (
+
+      {location.pathname === "/" && farms.length === 0 ? (
+        <EmptyFarms />
+      ) : showAddFarm ? (
         <AddFarms />
       ) : (
         <div className={location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"}>
+          <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
+
           {location.pathname === "/" ? (
             farms.map((farm) => (
               <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>

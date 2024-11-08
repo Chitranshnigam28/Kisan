@@ -257,8 +257,7 @@ const AddFarms = () => {
 
     const handleCancel = () => {
         console.log("Cancelled");
-        navigate('/login');
-        resetForm();
+        navigate('/');
         resetForm();
     };
 
@@ -295,17 +294,6 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label className="form-label">Farm Name:</label>
-                                <input
-                                    type="text"
-                                    name="farmName"
-                                    className="form-control"
-                                    value={farmData.farmName}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
 
                             <div className="mb-4">
                                 <label className="form-label">Size of Farm:</label>
@@ -318,17 +306,7 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label className="form-label">Size of Farm:</label>
-                                <input
-                                    type="text"
-                                    name="sizeOfFarm"
-                                    className="form-control"
-                                    value={farmData.sizeOfFarm}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            
 
                             <div className="mb-4">
                                 <label className="form-label">Location:</label>
@@ -392,17 +370,7 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label className="form-label">Last Crop Sowed:</label>
-                                <input
-                                    type="text"
-                                    name="last_crop_sowed"
-                                    className="form-control"
-                                    value={farmData.last_crop_sowed}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            
                         </div>
 
                         <div className="button-container">
