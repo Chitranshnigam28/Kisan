@@ -30,6 +30,7 @@ import rice from "../Assets/Vegetables/rice.png";
 import ragi from "../Assets/Vegetables/ragi.png";
 import groundnut from "../Assets/Vegetables/groundnut.png";
 import marketInsights from "../Assets/marketinsights.svg";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const MarketInsights = () => {
   const [insights, setInsights] = useState([]);

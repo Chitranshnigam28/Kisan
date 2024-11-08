@@ -5,12 +5,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import MatchingTips, { deleteMyTips } from "../MatchingTips";
 import farmImage from "../../Assets/Images/farm.jpg";
 import MyFarmsSvg from "../../Assets/Logo/Myfarm.svg";
-import '../../css/myFarms.css';
+import "../../css/myFarms.css";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import AddFarms from "./AddFarms";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import EmptyFarms from "./EmptyFarms";
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -19,12 +20,13 @@ const MyFarms = () => {
   const [selectedFarm, setSelectedFarm] = useState(null);
   const [matchedTips, setMatchedTips] = useState([]);
   const [showAddFarm, setShowAddFarm] = useState(false);
+  const [priceData, setPriceData] = useState(null);
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId");
 
-  
   useEffect(() => {
     if (!userId) {
       setError("User ID not found");
@@ -67,16 +69,94 @@ const MyFarms = () => {
     return () => clearInterval(intervalId);
   }, [userId, location.pathname]);
 
-  const handleDelete = async (farmId) => {
-    try {
-      await deleteMyTips(farmId);
-      setFarms((prevFarms) => prevFarms.filter((farm) => farm._id !== farmId));
-      setMatchedTips((prevTips) => prevTips.filter((tip) => tip.farmId !== farmId));
-    } catch (err) {
-      console.error("Error deleting farm:", err);
-      alert("Failed to delete farm: " + err.message);
-    }
-  };
+  useEffect(() => {
+        const loadPriceData = async () => {
+          if (selectedFarm) {
+            try {
+              const response = await axios.get("http://localhost:5001/api/historical-price", {
+                params: {
+                  crop_name: selectedFarm.cropName,
+                  last_crop_sowed: selectedFarm.last_crop_sowed,
+                },
+              });
+    
+              console.log("API Response:", response.data);
+              setPriceData(response.data.crops);
+            } catch (error) {
+              console.error("Error fetching historical price data:", error);
+              setError("Failed to load historical price data.");
+            }
+          } else {
+            console.log("No selected farm");
+          }
+        };
+    
+        loadPriceData();
+      }, [selectedFarm]);
+    
+      const placeholderData = [
+        {
+          crop_name: "Loading...",
+          months: ["Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024", "Jul 2024", "Sept 2024", "Oct 2024"],
+          prices: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      ];
+    
+      const chartOptions = {
+        series: priceData || loading
+          ? [
+            {
+              name: priceData ? priceData[0].crop_name : placeholderData[0].crop_name,
+              data: priceData ? priceData[0].prices : placeholderData[0].prices,
+            },
+            {
+              name: priceData ? priceData[1].crop_name : placeholderData[0].crop_name,
+              data: priceData ? priceData[1].prices : placeholderData[0].prices,
+            },
+          ]
+          : [],
+        options: {
+          chart: {
+            type: "area",
+            height: 350,
+          },
+          xaxis: {
+            categories: priceData ? priceData[0].months : placeholderData[0].months,
+            title: {
+              text: "Months",
+            },
+          },
+          yaxis: {
+            title: {
+              text: "Price (INR per kg)",
+            },
+          },
+          stroke: {
+            curve: "smooth",
+          },
+          tooltip: {
+            x: {
+              format: "MMM YYYY",
+            },
+          },
+          fill: {
+            opacity: 0.5,
+          },
+          colors: ["#008FFB", "#FEB019"],
+        },
+      };
+    
+      const handleDelete = async (farmId) => {
+        try {
+          await deleteMyTips(farmId);
+          setFarms((prevFarms) => prevFarms.filter((farm) => farm._id !== farmId));
+          setMatchedTips((prevTips) => prevTips.filter((tip) => tip.farmId !== farmId));
+        } catch (err) {
+          console.error("Error deleting farm:", err);
+          alert("Failed to delete farm: " + err.message);
+        }
+      };
+    
 
   if (loading) return <p>Loading farms...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -84,62 +164,101 @@ const MyFarms = () => {
     <div className="container">
       <div className="MyFarmsHeading">
         <h4>
-          <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />
+          <img
+            src={MyFarmsSvg}
+            alt="My Farm"
+            style={{ width: "40px", height: "40px" }}
+          />
           My Farms
         </h4>
 
-
-        {location.pathname === "/my-farms" && (
-          showAddFarm ? (
+        {location.pathname === "/my-farms" &&
+          (showAddFarm ? (
             <MdOutlineCancel
               className="add-icon"
               onClick={() => setShowAddFarm(false)}
-              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
+              style={{
+                fontSize: "1.5em",
+                cursor: "pointer",
+                marginLeft: "10px",
+                color: "black",
+              }}
             />
           ) : (
             <IoIosAddCircleOutline
               className="add-icon"
               onClick={() => setShowAddFarm(true)}
-              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
+              style={{
+                fontSize: "1.5em",
+                cursor: "pointer",
+                marginLeft: "10px",
+                color: "black",
+              }}
             />
-          )
-        )}
+          ))}
       </div>
-      <h5 className="h5">Track crops, monitor soil, and get personalized insights</h5>
 
-      {showAddFarm ? (
+      {location.pathname === "/" && farms.length === 0 ? (
+        <EmptyFarms />
+      ) : showAddFarm ? (
         <AddFarms />
       ) : (
-        <div className={location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"}>
+        <div
+          className={
+            location.pathname === "/" ? "d-flex overflow-auto" : "row g-3"
+          }
+        >
+          <h5 className="h5">
+            Track crops, monitor soil, and get personalized insights
+          </h5>
           {location.pathname === "/" ? (
             farms.map((farm) => (
-              <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
+              <div
+                className="col-md-4"
+                key={farm._id}
+                onClick={() => setSelectedFarm(farm)}
+              >
                 <div className="card shadow farm-card">
-                  <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
+                  <img
+                    src={farmImage}
+                    alt={farm.farmName}
+                    className="card-img-top rounded-top"
+                  />
                   <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="d-flex flex-column">
                         <h5 className="card-title mb-0">{farm.farmName}</h5>
-                        <p className="card-text mb-0"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
+                        <p className="card-text mb-0">
+                          <strong>Size:</strong> {farm.sizeOfFarm} HA
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
             ))
           ) : (
             <>
               <div className="overflow-x-auto">
                 <div className="flex gap-3">
                   {farms.map((farm) => (
-                    <div className="flex-none w-64" key={farm._id} onClick={() => setSelectedFarm(farm)}>
+                    <div
+                      className="flex-none w-64"
+                      key={farm._id}
+                      onClick={() => setSelectedFarm(farm)}
+                    >
                       <div className="card shadow farm-card">
-                        <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
+                        <img
+                          src={farmImage}
+                          alt={farm.farmName}
+                          className="card-img-top rounded-top"
+                        />
                         <div className="card-header d-flex justify-content-between align-items-center">
                           <div className="d-flex flex-column">
                             <h5 className="card-title mb-0">{farm.farmName}</h5>
-                            <p className="card-text mb-0"><strong>Size:</strong> {farm.sizeOfFarm} HA</p>
+                            <p className="card-text mb-0">
+                              <strong>Size:</strong> {farm.sizeOfFarm} HA
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -153,7 +272,6 @@ const MyFarms = () => {
                 </div>
               </div>
 
-
               {selectedFarm && (
                 <div className="selected-farm mt-5 p-4 border border-success">
                   <h3>{selectedFarm.farmName}</h3>
@@ -161,47 +279,56 @@ const MyFarms = () => {
                     <span>
                       <strong>{selectedFarm.sizeOfFarm} HA</strong> .
                     </span>
-
                   </div>
                   <br />
                   <div className="totalBox">
                     <div className="soilBox">
                       <h2>🏜️</h2>
-                      <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
+                      <p>
+                        <strong>Soil:</strong> {selectedFarm.soilType}
+                      </p>
                     </div>
                     <div className="waterBox">
                       <h2>💧</h2>
-                      <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
+                      <p>
+                        <strong>Water Source:</strong>{" "}
+                        {selectedFarm.waterSource}
+                      </p>
                     </div>
                     <div className="farmBox">
                       <h2>🚜</h2>
-                      <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
+                      <p>
+                        <strong>Farming Method:</strong>{" "}
+                        {selectedFarm.farmingMethod}
+                      </p>
                     </div>
                   </div>
                   <div className="tipsBox">
                     <h1>💡</h1>
-                    <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
+                    <MatchingTips
+                      matchedTips={matchedTips}
+                      setMatchedTips={setMatchedTips}
+                    />
                   </div>
                 </div>
               )}
 
-              {
-                priceData && priceData.length >= 2 && (
-                  <div id="chart" style={{ marginTop: "20px" }}>
-                    {loading ? (
-                      <p>Loading data...</p>
-                    ) : error ? (
-                      <p>{error}</p>
-                    ) : (
-                      <Chart
-                        options={chartOptions.options}
-                        series={chartOptions.series}
-                        type="area"
-                        height={350}
-                      />
-                    )}
-                  </div>
-                )}
+              {priceData && priceData.length >= 2 && (
+                <div id="chart" style={{ marginTop: "20px" }}>
+                  {loading ? (
+                    <p>Loading data...</p>
+                  ) : error ? (
+                    <p>{error}</p>
+                  ) : (
+                    <Chart
+                      options={chartOptions.options}
+                      series={chartOptions.series}
+                      type="area"
+                      height={350}
+                    />
+                  )}
+                </div>
+              )}
 
               <div className="d-flex justify-content-center align-items-center vh-50">
                 <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">

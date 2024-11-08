@@ -200,17 +200,7 @@ const AddFarms = () => {
                             </div>
                         </div>
                         <div className="form-group mb-4">
-                            <div className="mb-4">
-                                <label className="form-label">Farm Name:</label>
-                                <input
-                                    type="text"
-                                    name="farmName"
-                                    className="form-control"
-                                    value={farmData.farmName}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                            
                             <div className="mb-4">
                                 <label className="form-label">Farm Name:</label>
                                 <input
@@ -223,17 +213,6 @@ const AddFarms = () => {
                                 />
                             </div>
 
-                            <div className="mb-4">
-                                <label className="form-label">Size of Farm:</label>
-                                <input
-                                    type="text"
-                                    name="sizeOfFarm"
-                                    className="form-control"
-                                    value={farmData.sizeOfFarm}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
                             <div className="mb-4">
                                 <label className="form-label">Size of Farm:</label>
                                 <input
@@ -297,17 +276,7 @@ const AddFarms = () => {
                                 </select>
                             </div>
 
-                            <div className="mb-4">
-                                <label className="form-label">Last Crop Sowed:</label>
-                                <input
-                                    type="text"
-                                    name="last_crop_sowed"
-                                    className="form-control"
-                                    value={farmData.last_crop_sowed}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                           
                             <div className="mb-4">
                                 <label className="form-label">Last Crop Sowed:</label>
                                 <input
@@ -493,86 +462,3 @@ const AddFarms = () => {
 };
 
 export default AddFarms;
-
-
-
-
-
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert('No token found. Please log in again.');
-        return;
-    }
-
-    const farmDetails = {
-        farmName: farmData.farmName,
-        cropType: farmData.cropType,
-        cropName: farmData.cropName,
-        soilType: farmData.soilType,
-        location: farmData.location,
-        farmingMethod: farmData.farmingMethod,
-        waterSource: farmData.waterSource,
-        last_crop_sowed: farmData.last_crop_sowed,
-        soilQuality: farmData.soilQuality,
-        currentSeason: farmData.currentSeason,
-        dateOfPlanting: farmData.dateOfPlanting,
-        dateOfHarvest: farmData.dateOfHarvest,
-        sizeOfFarm: farmData.sizeOfFarm,
-    };
-
-    try {
-        let response;
-        if (farmData.farmImage) {
-            const farmFormData = new FormData();
-            farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
-            farmFormData.append('farmDetails', JSON.stringify(farmDetails));
-
-            response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-        }
-        else {
-            response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-        }
-        console.log('Farm added:', response.data);
-
-        setFarmData({
-            farmName: "",
-            cropType: "",
-            cropName: "",
-            soilType: "",
-            location: "",
-            farmingMethod: "",
-            waterSource: "",
-            last_crop_sowed: "",
-            soilQuality: "",
-            currentSeason: "",
-            dateOfPlanting: "",
-            dateOfHarvest: "",
-            sizeOfFarm: "",
-            farmImage: null,
-        });
-
-        alert('Farm added successfully!');
-    } catch (error) {
-        console.error('Error adding farm:', error.response?.data || error.message);
-
-        if (error.response?.data?.message) {
-            alert(`Error: ${error.response.data.message}`);
-        } else {
-            alert('Failed to add farm. Please try again.');
-        }
-    }
-};
