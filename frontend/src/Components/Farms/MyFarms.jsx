@@ -147,7 +147,7 @@ const MyFarms = () => {
       fill: {
         opacity: 0.5,
       },
-      colors: ["#28a745", "#8B4513"]
+      colors: ["#28a745", "#8B4513"],
     },
   };
 
@@ -204,7 +204,7 @@ const MyFarms = () => {
             farms.map((farm) => (
               <div className="col-md-4" key={farm._id} onClick={() => setSelectedFarm(farm)}>
                 <div className="card shadow farm-card">
-                  <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
+                  <img src={farm.farmImageUrl} alt={farm.farmName} className="card-img-top rounded-top" />
                   <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="d-flex flex-column">
@@ -224,7 +224,7 @@ const MyFarms = () => {
                   {farms.map((farm) => (
                     <div className="flex-none w-64" key={farm._id} onClick={() => setSelectedFarm(farm)}>
                       <div className="card shadow farm-card">
-                        <img src={farmImage} alt={farm.farmName} className="card-img-top rounded-top" />
+                        <img src={farm.farmImageUrl} alt={farm.farmName} className="card-img-top rounded-top" />
                         <div className="card-header d-flex justify-content-between align-items-center">
                           <div className="d-flex flex-column">
                             <h5 className="card-title mb-0">{farm.farmName}</h5>
@@ -244,32 +244,38 @@ const MyFarms = () => {
 
 
               {selectedFarm && (
-                <div className="selected-farm mt-5 p-4 border border-success">
-                  <h3>{selectedFarm.farmName}</h3>
-                  <div>
-                    <span>
-                      <strong>{selectedFarm.sizeOfFarm} HA</strong> .
-                    </span>
 
-                  </div>
-                  <br />
-                  <div className="totalBox">
-                    <div className="soilBox">
-                      <h2>🏜️</h2>
-                      <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
-                    </div>
-                    <div className="waterBox">
-                      <h2>💧</h2>
-                      <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
-                    </div>
-                    <div className="farmBox">
-                      <h2>🚜</h2>
-                      <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
+                <div className="selected-farm mt-5 p-4 border border-success">
+                  <div className="sub1">
+                    <img src={selectedFarm.farmImageUrl} alt={selectedFarm.farmName} className="card-img-top rounded-top" />
+                    <h3>{selectedFarm.farmName}</h3>
+                    <div>
+                      <span>
+                        <strong>{selectedFarm.sizeOfFarm} HA</strong> .
+                      </span>
                     </div>
                   </div>
-                  <div className="tipsBox">
-                    <h1>💡</h1>
-                    <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
+                  <div className="sub2">
+                    
+                    <br />
+                    <div className="totalBox">
+                      <div className="soilBox">
+                        <h2>🏜️</h2>
+                        <p><strong>Soil:</strong> {selectedFarm.soilType}</p>
+                      </div>
+                      <div className="waterBox">
+                        <h2>💧</h2>
+                        <p><strong>Water Source:</strong> {selectedFarm.waterSource}</p>
+                      </div>
+                      <div className="farmBox">
+                        <h2>🚜</h2>
+                        <p><strong>Farming Method:</strong> {selectedFarm.farmingMethod}</p>
+                      </div>
+                    </div>
+                    <div className="tipsBox">
+                      <h1>💡</h1>
+                      <MatchingTips matchedTips={matchedTips} setMatchedTips={setMatchedTips} />
+                    </div>
                   </div>
                 </div>
               )}

@@ -3,7 +3,7 @@ const Farm = require("../models/farmModel");
 
 const createFarm = async (req, res) => {
     try {
-        console.log(req.user);
+        console.log(JSON.stringify(req.body) + "checking farm controller"); 
         const {
             farmName,
             cropType,
@@ -18,7 +18,7 @@ const createFarm = async (req, res) => {
             dateOfPlanting,
             dateOfHarvest,
             sizeOfFarm,
-            farmImage
+            farmImageUrl
         } = req.body;
 
         if (!req.user || !req.user._id) {
@@ -39,8 +39,8 @@ const createFarm = async (req, res) => {
             dateOfPlanting,
             dateOfHarvest,
             sizeOfFarm,
-            farmImage,
-            owner: req.user._id 
+            farmImageUrl,
+            owner: req.user.UserId 
         });
 
         const savedFarm = await newFarm.save();

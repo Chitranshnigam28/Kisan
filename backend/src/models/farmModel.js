@@ -60,7 +60,7 @@ const farmSchema = mongoose.Schema({
         required: true 
     },
     sizeOfFarm: { type: Number, required: true },
-    farmImage: { type: mongoose.Schema.Types.ObjectId, ref: 'Image' }, 
+    farmImageUrl: { type: String, required: true }, 
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true
