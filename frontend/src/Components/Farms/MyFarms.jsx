@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Chart from "react-apexcharts";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import MatchingTips, { deleteMyTips } from "../MatchingTips";
@@ -19,6 +20,7 @@ const MyFarms = () => {
   const [selectedFarm, setSelectedFarm] = useState(null);
   const [matchedTips, setMatchedTips] = useState([]);
   const [showAddFarm, setShowAddFarm] = useState(false);
+  const [priceData, setPriceData] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,12 +28,6 @@ const MyFarms = () => {
 
   
   useEffect(() => {
-    if (!userId) {
-      setError("User ID not found");
-      setLoading(false);
-      return;
-    }
-
     const fetchFarms = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -66,6 +62,135 @@ const MyFarms = () => {
 
     return () => clearInterval(intervalId);
   }, [userId, location.pathname]);
+
+  useEffect(() => {
+    const loadPriceData = async () => {
+      if (selectedFarm) {
+        try {
+          const response = await axios.get("http://localhost:5001/api/historical-price", {
+            params: {
+              crop_name: selectedFarm.cropName,
+              last_crop_sowed: selectedFarm.last_crop_sowed,
+            },
+          });
+
+          console.log("API Response:", response.data);
+          setPriceData(response.data.crops);
+        } catch (error) {
+          console.error("Error fetching historical price data:", error);
+          setError("Failed to load historical price data.");
+        }
+      } else {
+        console.log("No selected farm");
+      }
+    };
+
+    loadPriceData();
+  }, [selectedFarm]);
+
+  const placeholderData = [
+    {
+      crop_name: "Loading...",
+      months: ["Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024", "Jul 2024", "Sept 2024", "Oct 2024"],
+      prices: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }
+  ];
+
+  const isValidPriceData = Array.isArray(priceData) && priceData.length >= 2 &&
+  priceData.every(item => item && Array.isArray(item.prices) && item.prices.every(value => typeof value === 'number'));
+
+  const chartSeries = isValidPriceData
+  ? [
+      {
+        name: priceData[0].crop_name,
+        data: priceData[0].prices,
+      },
+      {
+        name: priceData[1].crop_name,
+        data: priceData[1].prices,
+      },
+    ]
+  : [
+      {
+        name: placeholderData[0].crop_name,
+        data: placeholderData[0].prices,
+      },
+    ];
+  // const chartOptions = {
+  //   series: priceData || loading
+  //     ? [
+  //       {
+  //         name: priceData ? priceData[0].crop_name : placeholderData[0].crop_name,
+  //         data: priceData ? priceData[0].prices : placeholderData[0].prices,
+  //       },
+  //       {
+  //         name: priceData ? priceData[1].crop_name : placeholderData[0].crop_name,
+  //         data: priceData ? priceData[1].prices : placeholderData[0].prices,
+  //       },
+  //     ]
+  //     : [],
+  //   options: {
+  //     chart: {
+  //       type: "area",
+  //       height: 350,
+  //     },
+  //     xaxis: {
+  //       categories: priceData ? priceData[0].months : placeholderData[0].months,
+  //       title: {
+  //         text: "Months",
+  //       },
+  //     },
+  //     yaxis: {
+  //       title: {
+  //         text: "Price (INR per kg)",
+  //       },
+  //     },
+  //     stroke: {
+  //       curve: "smooth",
+  //     },
+  //     tooltip: {
+  //       x: {
+  //         format: "MMM YYYY",
+  //       },
+  //     },
+  //     fill: {
+  //       opacity: 0.5,
+  //     },
+  //     colors: ["#008FFB", "#FEB019"],
+  //   },
+  // };
+  const chartOptions = {
+    series: chartSeries,
+    options: {
+      chart: {
+        type: "area",
+        height: 350,
+      },
+      xaxis: {
+        categories: isValidPriceData ? priceData[0].months : placeholderData[0].months,
+        title: {
+          text: "Months",
+        },
+      },
+      yaxis: {
+        title: {
+          text: "Price (INR per kg)",
+        },
+      },
+      stroke: {
+        curve: "smooth",
+      },
+      tooltip: {
+        x: {
+          format: "MMM YYYY",
+        },
+      },
+      fill: {
+        opacity: 0.5,
+      },
+      colors: ["#008FFB", "#FEB019"],
+    },
+  };
 
   const handleDelete = async (farmId) => {
     try {
@@ -105,7 +230,7 @@ const MyFarms = () => {
           )
         )}
       </div>
-      <h5 className="h5">Track crops, monitor soil, and get personalized insights</h5>
+      <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
 
       {showAddFarm ? (
         <AddFarms />

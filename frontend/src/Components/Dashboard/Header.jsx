@@ -39,7 +39,7 @@ const Header = () => {
   // Function to handle language selection
   const handleLanguageSelect = (language) => {
     setSelectedLanguage(language);
-    setShowChangeLanguage(false); 
+    setShowChangeLanguage(false); // Close language modal after selection
   };
 
   return (
