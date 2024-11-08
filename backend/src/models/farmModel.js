@@ -12,7 +12,7 @@ const farmSchema = mongoose.Schema({
     cropName: { 
         type: String, 
         enum: [
-            'Rice', 'Wheat', 'Corn', 'Tomato'
+            'Rice', 'Wheat', 'Corn', 'Tomato','Potato','Carrot','Onion','Lettuce','Peas','Cabbage'
         ], 
         required: true
     },

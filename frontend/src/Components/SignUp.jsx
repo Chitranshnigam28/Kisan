@@ -47,7 +47,8 @@ const SignUp = () => {
           console.log("registration succesfull");
           console.log("${data.userId} " + data.userId);
           // navigate(`/add-farm?userId=${data.userId}`);
-          navigate(`/add-farm?userId=${data.userId}&fromSignup=true`);
+          // navigate(`/add-farm?userId=${data.userId}&fromSignup=true`);
+          navigate(`/login`);
         }
       } catch (error) {
         console.log(error);
