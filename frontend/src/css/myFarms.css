@@ -169,8 +169,13 @@
     }
 }
 
+.d-flex{
+  gap: 3rem;
+}
 
-
+.my-farms .container{
+  margin: 0;
+}
 
 
 /* Styles for the farm card container */

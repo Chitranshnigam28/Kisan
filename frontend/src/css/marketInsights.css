@@ -86,3 +86,8 @@
   padding: 20px;
   border-radius: 10px;
 } */
+
+.marketContainer{
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+}

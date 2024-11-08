@@ -154,8 +154,6 @@ const CropPriceChart = ({ crop }) => {
             />          <h1>Market Insights</h1>
           </div>
         <div className="container marketContainer">
-          
-
           {loading ? (
             <p>Loading...</p>
           ) : (
