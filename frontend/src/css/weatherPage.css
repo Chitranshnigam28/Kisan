@@ -53,6 +53,7 @@ padding-left: 1.4rem;
   /* align-items: center; */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem; /* Add space when stacked */
+  justify-content: center;
 }
 .dateWeatherIconWrapper{
   display: flex;
