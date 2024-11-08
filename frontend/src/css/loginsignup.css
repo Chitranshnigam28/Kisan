@@ -39,17 +39,26 @@ label {
   display: block;
 }
 
-input[type="text"],
-input[type="password"] {
+input[type="text"]#uname,
+input[type="password"]#password ,
+input[type="text"]#email
+{
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
+  margin-top: 0.5rem;
   border: 2px solid #ccc;
   background-color: #f9f9f9;
   border-radius: 24px;
   font-size: 1rem;
 }
-
+.login-items>form{
+  margin-top: 1rem;
+}
+.login-items>form>label{
+  width: 100%;
+  margin-top: 0.5rem;
+}
 /* Buttons */
 .authBtn {
   background-color: #33420b;
@@ -72,6 +81,7 @@ input[type="password"] {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
+  width: 100%;
 }
 
 .optionsWrapper div {
@@ -105,6 +115,7 @@ input[type="checkbox"]:checked {
   padding: 0.75rem;
   border-radius: 2rem;
   cursor: pointer;
+  width: 100%;
 }
 
 #googleBtn:hover {

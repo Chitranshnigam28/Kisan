@@ -58,7 +58,7 @@ const getFarms = async (req, res) => {
         if (!farms || farms.length === 0) {
             return res.status(404).json({ message: "No farms found" });
         }
-
+        console.log("getFarms "+JSON.stringify(farms));
         res.json(farms);
     } catch (error) {
         console.error('Error fetching farms:', error);  

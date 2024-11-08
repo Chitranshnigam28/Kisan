@@ -96,78 +96,26 @@ const MyFarms = () => {
     }
   ];
 
-  const isValidPriceData = Array.isArray(priceData) && priceData.length >= 2 &&
-  priceData.every(item => item && Array.isArray(item.prices) && item.prices.every(value => typeof value === 'number'));
-
-  const chartSeries = isValidPriceData
-  ? [
-      {
-        name: priceData[0].crop_name,
-        data: priceData[0].prices,
-      },
-      {
-        name: priceData[1].crop_name,
-        data: priceData[1].prices,
-      },
-    ]
-  : [
-      {
-        name: placeholderData[0].crop_name,
-        data: placeholderData[0].prices,
-      },
-    ];
-  // const chartOptions = {
-  //   series: priceData || loading
-  //     ? [
-  //       {
-  //         name: priceData ? priceData[0].crop_name : placeholderData[0].crop_name,
-  //         data: priceData ? priceData[0].prices : placeholderData[0].prices,
-  //       },
-  //       {
-  //         name: priceData ? priceData[1].crop_name : placeholderData[0].crop_name,
-  //         data: priceData ? priceData[1].prices : placeholderData[0].prices,
-  //       },
-  //     ]
-  //     : [],
-  //   options: {
-  //     chart: {
-  //       type: "area",
-  //       height: 350,
-  //     },
-  //     xaxis: {
-  //       categories: priceData ? priceData[0].months : placeholderData[0].months,
-  //       title: {
-  //         text: "Months",
-  //       },
-  //     },
-  //     yaxis: {
-  //       title: {
-  //         text: "Price (INR per kg)",
-  //       },
-  //     },
-  //     stroke: {
-  //       curve: "smooth",
-  //     },
-  //     tooltip: {
-  //       x: {
-  //         format: "MMM YYYY",
-  //       },
-  //     },
-  //     fill: {
-  //       opacity: 0.5,
-  //     },
-  //     colors: ["#008FFB", "#FEB019"],
-  //   },
-  // };
   const chartOptions = {
-    series: chartSeries,
+    series: priceData || loading
+      ? [
+        {
+          name: priceData ? priceData[0].crop_name : placeholderData[0].crop_name,
+          data: priceData ? priceData[0].prices : placeholderData[0].prices,
+        },
+        {
+          name: priceData ? priceData[1].crop_name : placeholderData[0].crop_name,
+          data: priceData ? priceData[1].prices : placeholderData[0].prices,
+        },
+      ]
+      : [],
     options: {
       chart: {
         type: "area",
         height: 350,
       },
       xaxis: {
-        categories: isValidPriceData ? priceData[0].months : placeholderData[0].months,
+        categories: priceData ? priceData[0].months : placeholderData[0].months,
         title: {
           text: "Months",
         },
@@ -191,6 +139,7 @@ const MyFarms = () => {
       colors: ["#008FFB", "#FEB019"],
     },
   };
+
 
   const handleDelete = async (farmId) => {
     try {

@@ -35,7 +35,7 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-button, input[type="submit"] {
+button.main-Btn {
     background-color: #28a745;
     color: #fff;
     padding: 10px 20px;
