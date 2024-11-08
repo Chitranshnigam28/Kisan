@@ -20,6 +20,7 @@
 //       }
 
 //       const response = await axios.get(`http://localhost:5001/api/recommend-crop/${ownerId}`);
+
 //       setFarmDetails(response.data);
 //     } catch (error) {
 //       console.error('Error fetching farm details:', error);
@@ -147,6 +148,28 @@ const CropRecommendation = ({ ownerId }) => {
   const [error, setError] = useState(null);
   const [step, setStep] = useState(1); // Step control
   
+  const [translatedFarmDetails, setTranslatedFarmDetails] = useState(null);
+  
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en'); // Get language from localStorage
+
+  // Translation mapping for headings
+  const headingTranslationMapping = {
+    soil: {
+      en: 'Soil',
+      hi: 'मिट्टी',
+      pa: 'ਮਿੱਟੀ',
+    },
+    waterSource: {
+      en: 'Water Source',
+      hi: 'जल स्रोत',
+      pa: 'ਪਾਣੀ ਦਾ ਸਰੋਤ',
+    },
+    recommendedCrop: {
+      en: 'Recommended Crop',
+      hi: 'सुझाई गई फसल',
+      pa: 'ਸੁਝਾਈ ਗਈ ਫਸਲ',
+    },
+  };
 
   // Ref for the farmCardWrapper div to control scroll
   const farmCardWrapperRef = useRef(null);

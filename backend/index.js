@@ -30,7 +30,7 @@ app.use(express.json());
 
 // Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET, // Use a strong secret
+    secret: process.env.SESSION_SECRET, 
     resave: false,
     saveUninitialized: true,
 }));

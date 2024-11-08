@@ -33,98 +33,219 @@ import marketInsights from "../Assets/marketinsights.svg";
 
 const MarketInsights = () => {
   const [insights, setInsights] = useState([]);
+  const [translatedInsights, setTranslatedInsights] = useState([]);
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
 
   useEffect(() => {
     const fetchMarketInsights = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5001/api/get-market-insights/"
-        );
-        setInsights(response.data.crops); // Access the data directly
+        const response = await axios.get("http://localhost:5001/api/get-market-insights/");
+        setInsights(response.data.crops); 
+        translateMarketInsights(response.data.crops, language); 
       } catch (error) {
         console.error("Error fetching market insights:", error);
       }
     };
 
     fetchMarketInsights();
-  }, []);
+  }, [language]); 
 
-  // Function to get crop icons
+  const translateText = async (text, targetLanguage) => {
+    try {
+      const response = await axios.post('http://localhost:5001/api/translate', {
+        text: text,
+        targetLanguage: targetLanguage,
+      });
+      return response.data.translatedText; 
+    } catch (error) {
+      console.error("Error translating text:", error);
+      return text; 
+    }
+  };
+
+  const translateMarketInsights = async (crops, targetLanguage) => {
+    try {
+      const translatedCrops = await Promise.all(crops.map(async (crop) => {
+        const translatedCrop = {
+          ...crop,
+          crop_name: await translateText(crop.crop_name, targetLanguage),
+          state: await translateState(crop.state, targetLanguage), 
+        };
+        return translatedCrop;
+      }));
+      setTranslatedInsights(translatedCrops); 
+    } catch (error) {
+      console.error("Error translating market insights:", error);
+    }
+  };
+
+  const stateTranslationMapping = {
+    "Andhra Pradesh": { hi: "आंध्र प्रदेश", pa: "ਅੰਦ੍ਰਾ ਪ੍ਰਦੇਸ਼" },
+    "Arunachal Pradesh": { hi: "अरुणाचल प्रदेश", pa: "ਅਰੁਣਾਚਲ ਪ੍ਰਦੇਸ਼" },
+    "Assam": { hi: "असम", pa: "ਅਸਮ" },
+    "Bihar": { hi: "बिहार", pa: "ਬਿਹਾਰ" },
+    "Chhattisgarh": { hi: "छत्तीसगढ़", pa: "ਛੱਤੀਸਗੜ੍ਹ" },
+    "Goa": { hi: "गोवा", pa: "ਗੋਆ" },
+    "Gujarat": { hi: "गुजरात", pa: "ਗੁਜਰਾਤ" },
+    "Haryana": { hi: "हरियाणा", pa: "ਹਰਿਆਣਾ" },
+    "Himachal Pradesh": { hi: "हिमाचल प्रदेश", pa: "ਹਿਮਾਚਲ ਪ੍ਰਦੇਸ਼" },
+    "Jharkhand": { hi: "झारखंड", pa: "ਝਾਰਖੰਡ" },
+    "Karnataka": { hi: "कर्नाटका", pa: "ਕਰਨਾਟਕਾ" },
+    "Kerala": { hi: "केरल", pa: "ਕੇਰਲ" },
+    "Madhya Pradesh": { hi: "मध्य प्रदेश", pa: "ਮੱਧ ਪ੍ਰਦੇਸ਼" },
+    "Maharashtra": { hi: "महाराष्ट्र", pa: "ਮਹਾਰਾਸ਼ਟਰ" },
+    "Manipur": { hi: "मणिपुर", pa: "ਮਣੀਪੁਰ" },
+    "Meghalaya": { hi: "मेघालय", pa: "ਮੇਘਾਲਯਾ" },
+    "Mizoram": { hi: "मिजोरम", pa: "ਮਿਜ਼ੋਰਮ" },
+    "Nagaland": { hi: "नगालैंड", pa: "ਨਾਗਾਲੈਂਡ" },
+    "Odisha": { hi: "ओडिशा", pa: "ਓਡੀਸ਼ਾ" },
+    "Punjab": { hi: "पंजाब", pa: "ਪੰਜਾਬ" },
+    "Rajasthan": { hi: "राजस्थान", pa: "ਰਾਜਸਥਾਨ" },
+    "Sikkim": { hi: "सिक्किम", pa: "ਸਿਕਕਿਮ" },
+    "Tamil Nadu": { hi: "तमिलनाडु", pa: "ਤਮਿਲਨਾਡੁ" },
+    "Telangana": { hi: "तेलंगाना", pa: "ਤੇਲੰਗਾਨਾ" },
+    "Tripura": { hi: "त्रिपुरा", pa: "ਤ੍ਰਿਪੁਰਾ" },
+    "Uttar Pradesh": { hi: "उत्तर प्रदेश", pa: "ਉੱਤਰ ਪ੍ਰਦੇਸ਼" },
+    "Uttarakhand": { hi: "उत्तराखंड", pa: "ਉੱਤਰਾਖੰਡ" },
+    "West Bengal": { hi: "पश्चिम बंगाल", pa: "ਪਸ਼ਚਿਮ ਬੰਗਾਲ" },
+  }
+
+  const translateState = (stateName, targetLanguage) => {
+    if (stateTranslationMapping[stateName]) {
+      return stateTranslationMapping[stateName][targetLanguage] || stateName;
+    }
+    return stateName; 
+  };
+
   const getCropIcon = (cropName) => {
     switch (cropName.toLowerCase()) {
       case "rice":
+      case "चावल": // Hindi translation for Rice
+      case "ਚਾਵਲ": // Punjabi translation for Rice
         return rice;
       case "wheat":
+      case "गेहूँ": // Hindi translation for Wheat
+      case "ਕਣਕ": // Punjabi translation for Wheat
         return wheatImg;
       case "maize":
+      case "मक्का": // Hindi translation for Maize
+      case "ਮੱਕੀ": // Punjabi translation for Maize
         return cornImg;
       case "cotton":
+      case "कपास": // Hindi translation for Cotton
+      case "ਕਪਾਹ": // Punjabi translation for Cotton
         return cotton;
       case "sugarcane":
+      case "गन्ना": // Hindi translation for Sugarcane
+      case "ਗੰਨਾ": // Punjabi translation for Sugarcane
         return sugarCaneImg;
       case "barley":
+      case "जौ": // Hindi translation for Barley
+      case "ਜੌ": // Punjabi translation for Barley
         return barleyImg;
       case "millet":
-        return cornImg;
+      case "बाजरा": // Hindi translation for Millet
+      case "ਬਾਜਰਾ": // Punjabi translation for Millet
+        return cornImg; // Same icon for millet
       case "tobacco":
+      case "तंबाकू": // Hindi translation for Tobacco
+      case "ਤਮਾਕੂ": // Punjabi translation for Tobacco
         return tobaccoImg;
       case "cabbage":
+      case "पत्ता गोभी": // Hindi translation for Cabbage
+      case "ਪੱਤਾ ਗੋਭੀ": // Punjabi translation for Cabbage
         return cabbageImg;
       case "onion":
+      case "प्याज": // Hindi translation for Onion
+      case "ਪਿਆਜ਼": // Punjabi translation for Onion
         return onionImg;
       case "garlic":
+      case "लहसुन": // Hindi translation for Garlic
+      case "ਲਹਸੁਨ": // Punjabi translation for Garlic
         return garlicImg;
       case "cauliflower":
+      case "फूलगोभी": // Hindi translation for Cauliflower
+      case "ਫੂਲਗੋਭੀ": // Punjabi translation for Cauliflower
         return cauliflowerImg;
       case "spinach":
+      case "पालक": // Hindi translation for Spinach
+      case "ਪਾਲਕ": // Punjabi translation for Spinach
         return spinachImg;
       case "tomato":
+      case "टमाटर": // Hindi translation for Tomato
+      case "ਟਮਾਟਰ": // Punjabi translation for Tomato
         return tomatoImg;
       case "pumpkin":
+      case "कद्दू": // Hindi translation for Pumpkin
+      case "ਕਦੂ": // Punjabi translation for Pumpkin
         return pumpkinImg;
       case "eggplant":
+      case "बैंगन": // Hindi translation for Eggplant
+      case "ਬੈੰਗਣ": // Punjabi translation for Eggplant
         return eggplantImg;
       case "bitter gourd":
+      case "करेला": // Hindi translation for Bitter Gourd
+      case "ਕਰੇਲਾ": // Punjabi translation for Bitter Gourd
         return bitterGourdImg;
       case "tea":
+      case "चाय": // Hindi translation for Tea
+      case "ਚਾਹ": // Punjabi translation for Tea
         return greenTeaImg;
       case "coffee":
+      case "कॉफ़ी": // Hindi translation for Coffee
+      case "ਕਾਫੀ": // Punjabi translation for Coffee
         return coffeeBeansImg;
       case "jowar":
+      case "ज्वार": // Hindi translation for Jowar
+      case "ਜਵਾਰ": // Punjabi translation for Jowar
         return jowarImg;
       case "bajra":
+      case "बाजरा": // Hindi translation for Bajra
+      case "ਬਾਜਰਾ": // Punjabi translation for Bajra
         return bajra;
       case "potato":
+      case "आलू": // Hindi translation for Potato
+      case "ਆਲੂ": // Punjabi translation for Potato
         return potatoImg;
       case "peas":
+      case "मटर": // Hindi translation for Peas
+      case "ਮਟਰ": // Punjabi translation for Peas
         return peaImg;
       case "ragi":
+      case "रागी": // Hindi translation for Ragi
+      case "ਰਾਗੀ": // Punjabi translation for Ragi
         return ragi;
       case "soybean":
+      case "सोयाबीन": // Hindi translation for Soybean
+      case "ਸੋਯਾਬੀਨ": // Punjabi translation for Soybean
         return soybeanImg;
       case "sesame":
+      case "तिल": // Hindi translation for Sesame
+      case "ਤਿਲ": // Punjabi translation for Sesame
         return sesameImg;
       case "groundnut":
+      case "मूंगफली": // Hindi translation for Groundnut
+      case "ਮੂੰਗਫਲੀ": // Punjabi translation for Groundnut
         return groundnut;
       default:
-        return "🌿"; // Default icon for other crops
+        return "🌿"; // Default icon for any undefined crop
     }
   };
+
 
   return (
     <div className="market-insights-container">
       <h2 className="market-insights-title">
-        {" "}
         <img
           src={marketInsights}
           alt="Market Insights"
           className="market-insights-icon"
         />
-        Market Insights
+        {language === 'en' ? "Market Insights" : language === 'hi' ? "बाजार जानकारी" : "ਬਾਜਾਰ ਜਾਣਕਾਰੀ"}
       </h2>
-      {insights.length > 0 ? (
+      {translatedInsights.length > 0 ? (
         <ul className="market-insights-list">
-          {insights.map((crop, index) => (
+          {translatedInsights.map((crop, index) => (
             <li key={index} className="market-insights-item">
               <img
                 src={getCropIcon(crop.crop_name)}
@@ -136,9 +257,7 @@ const MarketInsights = () => {
                 <p className="crop-location">{crop.state}</p>
               </div>
               <p
-                className={`price-trend ${
-                  crop.price_trend.startsWith("+") ? "positive" : "negative"
-                }`}
+                className={`price-trend ${crop.price_trend.startsWith("+") ? "positive" : "negative"}`}
               >
                 {crop.price_trend}
               </p>

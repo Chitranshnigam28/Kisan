@@ -1,64 +1,78 @@
-// // ChangeLanguage.js
-// import React from 'react';
-// import '../css/changeLanguage.css';
-
-// const ChangeLanguage = ({ onSelectLanguage, onClose }) => {
-//   const languages = [
-//     {language:'English',icon:"./languages/A.png"},{language: 'Hindi',icon:"./languages/Hindi.png"}, 
-//     {language:'Bengali',icon:"./languages/Bengali.png"},
-//     {language:'Telugu',icon:"./languages/Telugu.png"},
-//     {language:'Marathi', icon:"./languages/Hindi.png"},
-//     {language:'Tamil',icon:"./languages/Tamil.png"},
-//     {language:'Gujarati',icon:"./languages/gujrati.png"},
-//     {language:'Kannada',icon:"./languages/kannada.png"},
-//     {language:'Malayalam',icon:"./languages/Malayalam.png"},
-//     {language:'Punjabi',icon:"./languages/Punjabi.png"},
-//     {language:'Urdu',icon:"./languages/Urdu.png"}
-//   ];
-
-//   return (
-//     <div className="change-language-overlay">
-//       <div className="change-language-modal">
-//         <h4>Choose your language</h4>
-//         <div className="language-options">
-//           {languages.map(language => (
-//             <div className="languageWrapper">
-              
-//               <button
-//                 key={language.language}
-//                 className="language-option"
-//                 onClick={() => onSelectLanguage(language)} // Call onSelectLanguage
-//               >
-//                 <img src={language.icon}/>
-//                 {language.language}
-//               </button>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//         <button onClick={onClose} className="close-button">X</button>
-//     </div>
-//   );
-// };
-
-// export default ChangeLanguage;
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../css/changeLanguage.css';
 
 const ChangeLanguage = ({ onSelectLanguage, onClose }) => {
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'en');
+  const [originalContent, setOriginalContent] = useState({});
+
+  // Function to collect all text nodes, excluding buttons/icons
+  const getTextNodes = (element) => {
+    let textNodes = [];
+    element.childNodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() !== '') {
+        textNodes.push(node);
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BUTTON' && !node.classList.contains('translation-icon')) {
+        textNodes = textNodes.concat(getTextNodes(node));
+      }
+    });
+    return textNodes;
+  };
+
+  // Save original content before translation
+  const saveOriginalContent = () => {
+    const textNodes = getTextNodes(document.body);
+    const originalContentMap = {};
+    textNodes.forEach((node, index) => {
+      originalContentMap[index] = node.nodeValue;
+    });
+    setOriginalContent(originalContentMap);
+  };
+
+  // Translate and replace text on page
+  const handleLanguageChange = async (language) => {
+    if (currentLanguage === 'en') saveOriginalContent();
+    
+    localStorage.setItem('language', language);
+    setCurrentLanguage(language);
+
+    if (currentLanguage !== language) {
+      window.location.reload();
+    }
+  };
+
+  // Apply translation on language change
+  useEffect(() => {
+    if (currentLanguage !== 'en') {
+      const applyTranslation = async () => {
+        const textNodes = getTextNodes(document.body);
+        const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
+
+        try {
+          const response = await axios.post('http://localhost:5001/api/translate', {
+            text: textToTranslate,
+            targetLanguage: currentLanguage,
+          });
+          console.log(response)
+
+          const translatedTextArray = response.data.translatedText.split(' || ');
+          textNodes.forEach((node, index) => {
+            if (translatedTextArray[index]) {
+              node.nodeValue = translatedTextArray[index];
+            }
+          });
+        } catch (error) {
+          console.error('Translation error:', error);
+        }
+      };
+      applyTranslation();
+    }
+  }, [currentLanguage]);
+
   const languages = [
-    { language: 'English', icon: "./languages/A.png" },
-    { language: 'Hindi', icon: "./languages/Hindi.png" },
-    { language: 'Bengali', icon: "./languages/Bengali.png" },
-    { language: 'Telugu', icon: "./languages/Telugu.png" },
-    { language: 'Marathi', icon: "./languages/Hindi.png" },
-    { language: 'Tamil', icon: "./languages/Tamil.png" },
-    { language: 'Gujarati', icon: "./languages/gujrati.png" },
-    { language: 'Kannada', icon: "./languages/kannada.png" },
-    { language: 'Malayalam', icon: "./languages/Malayalam.png" },
-    { language: 'Punjabi', icon: "./languages/Punjabi.png" },
-    { language: 'Urdu', icon: "./languages/Urdu.png" },
+    { language: 'en', icon: "./languages/A.png" },
+    { language: 'hi', icon: "./languages/Hindi.png" },
+    { language: 'pa', icon: "./languages/Punjabi.png" },
   ];
 
   return (
@@ -66,11 +80,11 @@ const ChangeLanguage = ({ onSelectLanguage, onClose }) => {
       <div className="change-language-modal">
         <h4>Choose your language</h4>
         <div className="language-options">
-          {languages.map(lang => (
+          {languages.map((lang) => (
             <div className="languageWrapper" key={lang.language}>
               <button
                 className="language-option"
-                onClick={() => onSelectLanguage(lang.language)}
+                onClick={() => handleLanguageChange(lang.language.toLowerCase())}
               >
                 <img src={lang.icon} alt={lang.language} />
                 {lang.language}

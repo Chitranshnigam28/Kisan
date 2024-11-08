@@ -21,7 +21,7 @@ const createFarm = async (req, res) => {
             farmImage
         } = req.body;
 
-        if (!req.user || !req.user.UserId) {
+        if (!req.user || !req.user._id) {
             return res.status(401).json({ message: 'User not authenticated' });
         }
 
@@ -40,7 +40,7 @@ const createFarm = async (req, res) => {
             dateOfHarvest,
             sizeOfFarm,
             farmImage,
-            owner: req.user.UserId 
+            owner: req.user._id 
         });
 
         const savedFarm = await newFarm.save();

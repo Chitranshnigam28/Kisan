@@ -77,7 +77,7 @@ const waterSourceIcons = {
 };
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1); // Step state
+    const [currentStep, setCurrentStep] = useState(1);
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
@@ -173,6 +173,7 @@ const AddFarms = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         if (currentStep === 2) {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -191,6 +192,7 @@ const AddFarms = () => {
                     farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
                     farmFormData.append('farmDetails', JSON.stringify(farmDetails));
 
+
                     response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -206,9 +208,10 @@ const AddFarms = () => {
                     });
                 }
 
+
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
-                resetForm(); // Reset form after successful submission
+                resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
                 alert('Failed to add farm. Please try again.');
@@ -232,11 +235,12 @@ const AddFarms = () => {
             sizeOfFarm: "",
             farmImage: null,
         });
-        setCurrentStep(1); // Reset to step 1 after submission
+        setCurrentStep(1);
     };
 
     const handleCancel = () => {
         console.log("Cancelled");
+        resetForm();
         resetForm();
     };
 
@@ -273,7 +277,29 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label className="form-label">Farm Name:</label>
+                                <input
+                                    type="text"
+                                    name="farmName"
+                                    className="form-control"
+                                    value={farmData.farmName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
+                            <div className="mb-4">
+                                <label className="form-label">Size of Farm:</label>
+                                <input
+                                    type="text"
+                                    name="sizeOfFarm"
+                                    className="form-control"
+                                    value={farmData.sizeOfFarm}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                             <div className="mb-4">
                                 <label className="form-label">Size of Farm:</label>
                                 <input
@@ -348,6 +374,17 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label className="form-label">Last Crop Sowed:</label>
+                                <input
+                                    type="text"
+                                    name="last_crop_sowed"
+                                    className="form-control"
+                                    value={farmData.last_crop_sowed}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <div className="button-container">
@@ -357,12 +394,9 @@ const AddFarms = () => {
                     </div>
                 )}
 
-                {/* Step 2 */}
                 {currentStep === 2 && (
                     <div>
                         <h5 className="mb-4">Step 2 of 2</h5>
-
-                        {/* Soil Quality */}
                         <div className="form-grp mb-4">
                             <label className="form-label">Soil Quality:</label>
                             <div className="button-group">

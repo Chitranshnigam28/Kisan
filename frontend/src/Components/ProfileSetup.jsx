@@ -188,7 +188,7 @@ const ProfileSetup = () => {
                         <option value="Winter">Winter</option>
                     </select>
                 </div>
-
+                
                 <button type="submit" style={inputStyles}>Submit</button>
             </form>
         </div>

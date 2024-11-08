@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaThLarge, FaSeedling, FaLeaf,FaMapMarkerAlt, FaLanguage } from "react-icons/fa";
-import { FloatingDock } from '../FloatingDeck'; // Ensure you have the FloatingDock component
+import { FloatingDock } from '../FloatingDeck'; 
 import { Link } from "react-router-dom";
 import '../../css/footer.css';
 import CropRecommendation from "../CropRecomendation";

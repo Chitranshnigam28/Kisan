@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../css/tipsSlider.css'; // Make sure to import your CSS
+import '../css/tipsSlider.css'; 
 
 const SingleTips = ({ cropName }) => {
   const [tipsData, setTipsData] = useState([]);
-  const [filteredTip, setFilteredTip] = useState(null); // Changed to single tip
+  const [filteredTip, setFilteredTip] = useState(null); // Single tip
+  const [translatedTip, setTranslatedTip] = useState(null); // Store translated tip
   const [error, setError] = useState('');
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en'); // Get current language
 
   const fetchTips = async () => {
     try {
@@ -32,17 +34,39 @@ const SingleTips = ({ cropName }) => {
       );
       setFilteredTip(cropTips.length > 0 ? cropTips[0] : null); // Only set the first matched tip
     } else {
-      // If no cropName is provided, show a random tip
-      // if (tipsData.length > 0) {
-      //   const randomIndex = Math.floor(Math.random() * tipsData.length);
-      //   setFilteredTip(tipsData[randomIndex]); // Set a random tip
-      // } else {
-      //   setFilteredTip(null); // No tips to show
-      // }
+      // Fallback to a specific crop's tips
       const wheatTip = tipsData.find(
         tip => tip && tip.crop_name && tip.crop_name.toLowerCase() === 'wheat'
       );
       setFilteredTip(wheatTip || null);
+    }
+  };
+
+  const translateTip = async (tip) => {
+    try {
+      const cropNameTranslation = await translateText(tip.crop_name, language);
+      const tipsTranslation = await Promise.all(tip.tips.map(tipText => translateText(tipText, language)));
+      const translatedTip = {
+        ...tip,
+        crop_name: cropNameTranslation,
+        tips: tipsTranslation,
+      };
+      setTranslatedTip(translatedTip); // Save the translated tip
+    } catch (error) {
+      console.error("Error translating text:", error.response || error);
+    }
+  };
+
+  const translateText = async (text, targetLanguage) => {
+    try {
+      const response = await axios.post('http://localhost:5001/api/translate', {
+        text: text,
+        targetLanguage: targetLanguage, 
+      });
+      return response.data.translatedText; 
+    } catch (error) {
+      console.error("Error translating text:", error);
+      return text; // Return original text on error
     }
   };
 
@@ -54,15 +78,21 @@ const SingleTips = ({ cropName }) => {
     filterTips();
   }, [tipsData, cropName]); // Re-filter when tipsData or cropName changes
 
+  useEffect(() => {
+    if (filteredTip) {
+      translateTip(filteredTip); // Translate tip whenever it changes
+    }
+  }, [filteredTip, language]); // Re-translate when filteredTip or language changes
+
   return (
     <div className="carousel-container">
       {error && <div>{error}</div>}
       <div className="cards-track">
-        {filteredTip ? (  // Render only one tip
-          <div key={filteredTip._id} className="card">
-            <div className="crop-name">{filteredTip.crop_name}</div>
+        {translatedTip ? ( // Render the translated tip
+          <div key={translatedTip._id} className="card">
+            <div className="crop-name">{translatedTip.crop_name}</div>
             <div className="crop-tips">
-              {filteredTip.tips.map((tipText, tipIndex) => (
+              {translatedTip.tips.map((tipText, tipIndex) => (
                 <p key={tipIndex}>{tipText}</p>
               ))}
             </div>

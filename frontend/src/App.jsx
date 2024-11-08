@@ -7,7 +7,6 @@ import GMaps from "./Components/GMaps";
 import TranslationComponent from "./Components/TranslationComponent";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Weather from './Components/Weather';
-// import WeatherWidget from './Components/weatherWidget'
 import FunFact from "./Components/FunFacts";
 import Tips from './Components/Tips';
 import AddFarms from "./Components/Farms/AddFarms";
@@ -24,17 +23,20 @@ import ErrorBoundary from "./Components/ErrorBoundary";
 
 
 
+
 const userId = localStorage.getItem('userId');
 console.log(userId);
 
 const App = () => {
+
+  
   return (
     <Router>
       <ErrorBoundary>
-      <AppRoutes /> {/* Moved all routes into a new component */}
-      {/* <FloatingDockDemo /> */}
+        <AppRoutes /> 
       </ErrorBoundary>
     </Router>
+
   );
 };
 
@@ -49,7 +51,7 @@ const AppRoutes = () => {
 
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/');  // Redirect to a protected route
+      navigate('/'); 
     }
   }, [navigate]);
 
@@ -59,7 +61,7 @@ const AppRoutes = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profilesetup' element={<ProfileSetup />} />
-        <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<GMaps />} />
@@ -72,7 +74,7 @@ const AppRoutes = () => {
           <Route path='/funfacts' element={<FunFact />} />
           <Route path='/tips' element={<Tips />} />
           <Route path="/profilesetup" element={<ProfileSetup />} />
-    
+
         </Route>
       </Routes>
     </>
