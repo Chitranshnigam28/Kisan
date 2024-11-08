@@ -207,3 +207,9 @@ button:hover, input[type="submit"]:hover {
         justify-content: flex-start;
     }
 }
+
+.mb-3 {
+    display: flex;
+    gap: 5px;
+}
+

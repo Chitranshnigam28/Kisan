@@ -26,6 +26,7 @@ import CornIcon from "../../Assets/Vegetables/Corn.svg"
 import TomatoIcon from "../../Assets/Vegetables/tomato.png"
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { IoIosCloudUpload } from "react-icons/io";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
@@ -76,6 +77,7 @@ const waterSourceIcons = {
     "Municipal Supply": MunicipalSupplyIcon
 };
 
+
 const AddFarms = () => {
     const [currentStep, setCurrentStep] = useState(1); // Step state
     const [farmData, setFarmData] = useState({
@@ -89,10 +91,8 @@ const AddFarms = () => {
         last_crop_sowed: "",
         soilQuality: "",
         currentSeason: "",
-        dateOfPlanting: "",
-        dateOfHarvest: "",
         sizeOfFarm: "",
-        farmImage: null,
+        farmImageUrl: "",
     });
     const [file, setFile] = useState(null);  // Declare the file state
     const [downloadURL, setDownloadURL] = useState("");
@@ -110,42 +110,50 @@ const AddFarms = () => {
   
     // Handle file upload
     const handleUpload = () => {
-      if (!file) {
-        alert('Please select a file first');
-        return;
-      }
-  
-      const storageRef = ref(storage, `images/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-  
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
-        },
-        (error) => {
-          console.error('Upload failed:', error);
-        },
-        async () => {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log('File available at', url);
-          setDownloadURL(url);
-  
-          // Update farmData after upload
-          setFarmData((prevData) => ({
-            ...prevData,
-            farmImage: url,  // Store the URL in farmData
-          }));
-        }
-      );
-    }
+        return new Promise((resolve, reject) => {
+            if (!file) {
+                alert('Please select a file first');
+                reject(new Error('No file selected'));
+                return;
+            }
+    
+            const storageRef = ref(storage, `images/${file.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+    
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                },
+                (error) => {
+                    console.error('Upload failed:', error);
+                    reject(error);
+                },
+                async () => {
+                    const url = await getDownloadURL(uploadTask.snapshot.ref);
+                    console.log('File available at', url);
+    
+                    // Update farmData after upload with the correct field
+                    setFarmData((prevData) => ({
+                        ...prevData,
+                        farmImageUrl: url,
+                    }));
+    
+                    setDownloadURL(url);
+                    resolve(url);
+                }
+            );
+        });
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFarmData(prevState => ({
+    
+        // Ensure that sizeOfFarm is properly set as a number
+        setFarmData((prevState) => ({
             ...prevState,
-            [name]: value
+            [name]: name === 'sizeOfFarm' ? parseFloat(value) : value,
         }));
     };
 
@@ -156,10 +164,18 @@ const AddFarms = () => {
         }));
     };
 
-    const handleImageChange = (e) => {
-        const selectedFile = e.target.files[0]; // Get the first selected file
+    const [previewURL, setPreviewURL] = useState(null);
+    const handleImageChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+
+        // Generate a preview URL using FileReader
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewURL(reader.result); // Set the preview URL
+        };
         if (selectedFile) {
-            setFile(selectedFile); // Update the file state
+            reader.readAsDataURL(selectedFile); // Read the file as a data URL
         }
     };
 
@@ -172,49 +188,49 @@ const AddFarms = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (currentStep === 2) {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('No token found. Please log in again.');
-                return;
-            }
-
-            const farmDetails = { ...farmData }; // Make sure all necessary data is included
-
             try {
-                let response;
-
-                // Create FormData only if there is an image
-                if (farmData.farmImage) {
-                    const farmFormData = new FormData();
-                    farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
-                    farmFormData.append('farmDetails', JSON.stringify(farmDetails));
-
-                    response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                    });
-                } else {
-                    response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                    });
+                // Ensure the image is uploaded before submitting
+                if (!farmData.farmImageUrl) {
+                    alert('Farm image is required. Please upload an image.');
+                    return;
                 }
-
+    
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('No token found. Please log in again.');
+                    return;
+                }
+    
+                // Ensure that sizeOfFarm is a number
+                if (isNaN(farmData.sizeOfFarm) || farmData.sizeOfFarm <= 0) {
+                    alert('Please enter a valid size for the farm.');
+                    return;
+                }
+    
+                const farmDetails = { ...farmData };
+                console.log("farm details of mongo" + JSON.stringify(farmDetails));
+    
+                // Send the farm data to the backend
+                const response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+    
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
-                resetForm(); // Reset form after successful submission
+                resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
                 alert('Failed to add farm. Please try again.');
             }
         }
     };
+    
+
     const resetForm = () => {
         setFarmData({
             farmName: "",
@@ -230,7 +246,7 @@ const AddFarms = () => {
             dateOfPlanting: "",
             dateOfHarvest: "",
             sizeOfFarm: "",
-            farmImage: null,
+            farmImageUrl: "",
         });
         setCurrentStep(1); // Reset to step 1 after submission
     };
@@ -239,6 +255,7 @@ const AddFarms = () => {
         console.log("Cancelled");
         resetForm();
     };
+
 
 
     return (
@@ -252,14 +269,17 @@ const AddFarms = () => {
                 {currentStep === 1 && (
                     <div>
                         <h5 className="mb-4">Step 1 of 2</h5>
-                        <div className="mb-4">
+                        
+                        <div className="mb-3">
                             <input
                                 type="file"
                                 accept="image/*" // Accept only image files
                                 onChange={handleImageChange}
                             />
-
-                            <button type="button" className="Btn" onClick={handleUpload}>Upload</button>
+                            <div className='up'>
+                            <IoIosCloudUpload type="button" // Optional, for styling purposes (using Bootstrap in this example)
+                            onClick={() => handleUpload()}/>
+                            </div>
                         </div>
                         <div className="form-group mb-4">
                             <div className="mb-4">
@@ -351,7 +371,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue</button>
+                            <button type="button" className="main-Btn" onClick={ () => setCurrentStep(2)}>Continue</button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
                         </div>
                     </div>
