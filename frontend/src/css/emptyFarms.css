@@ -1,4 +1,5 @@
-.empty-farms-title {
+
+  .empty-farms-title {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
@@ -51,3 +52,4 @@
     border-radius: 50%;
     background-color: #ffa726;
   }
+  

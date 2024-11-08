@@ -107,7 +107,6 @@ const AddFarms = () => {
     //     setFile(selectedFile);  // Update the state with the selected file
     //   }
     // };
-  
     // Handle file upload
     const handleUpload = () => {
         return new Promise((resolve, reject) => {

@@ -279,3 +279,18 @@
   gap: 20px;
   padding: 20px;
 }
+
+
+/* H5 under my farms heading  */
+.full-width-text {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.h5 {
+  font-size: 1rem;
+  opacity: 0.8;
+  text-align: center; 
+  color: #333; 
+  
+}

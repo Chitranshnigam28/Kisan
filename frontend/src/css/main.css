@@ -5,7 +5,7 @@
   grid-template-columns: repeat(12, 1fr);
   gap: 20px;
   padding: 20px;
-  background-color: #FAFFFB;
+  background-color: #fafffb;
 
   padding: 20px;
   display: grid;
@@ -64,7 +64,6 @@
   border-radius: 5px;
   flex: 0 0 auto;
   justify-content: space-between;
-  
 }
 
 .farm-card .card-img-top {
@@ -109,7 +108,6 @@
   }
 
   .farm-card {
-    
     min-width: 200px;
     height: auto;
     border-radius: 5px;
@@ -117,7 +115,6 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 0.25fr;
-
   }
   .farm-card img.placeholderImg {
     max-width: 100%;
@@ -149,24 +146,29 @@
 .top-crops {
   display: flex;
 }
+.market-info{
+  margin-right: 3rem;
+}
 
 @media (max-width: 850px) {
-  .main-layout {
+  /* .main-layout {
     grid-template-columns: 1fr;
-  }
+  } */
 
   .weather-info,
   .my-farms,
   .crop-info,
   .tips {
-    grid-column: span 12;
-    margin-bottom: 20px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-.weather-info a{
+.weather-info a {
   display: flex;
-  justify-content: end;}
+  justify-content: end;
+}
 .MyFarmsHeading {
   display: flex;
   align-items: center;
@@ -191,4 +193,32 @@
 .weather-info a {
   display: flex;
   justify-content: end;
+}
+
+@media only screen and (max-width: 1000px) {
+  /* .main-layout {
+    grid-template-columns: 1fr;
+  } */
+  .insightsWrapper,
+  .dashboard-marketview,.weather-info {
+    display: grid;
+    grid-column: span 12;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  .top-crops {
+    display: grid;
+    margin-top: 3rem;
+    justify-content: center;
+  }
+  .location-topCrop {
+    margin-bottom: 2rem;
+  }
+  .funFacts-Container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-column: span 12;
+  }
 }

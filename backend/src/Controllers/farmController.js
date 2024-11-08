@@ -3,7 +3,7 @@ const Farm = require("../models/farmModel");
 
 const createFarm = async (req, res) => {
     try {
-        console.log(JSON.stringify(req.body) + "checking farm controller"); 
+        // console.log(JSON.stringify(req.body) + "checking farm controller"); 
         const {
             farmName,
             cropType,
@@ -15,8 +15,6 @@ const createFarm = async (req, res) => {
             last_crop_sowed,
             soilQuality,
             currentSeason,
-            dateOfPlanting,
-            dateOfHarvest,
             sizeOfFarm,
             farmImageUrl
         } = req.body;
@@ -36,8 +34,6 @@ const createFarm = async (req, res) => {
             last_crop_sowed,
             soilQuality,
             currentSeason,
-            dateOfPlanting,
-            dateOfHarvest,
             sizeOfFarm,
             farmImageUrl,
             owner: req.user._id 
@@ -58,7 +54,7 @@ const getFarms = async (req, res) => {
         if (!farms || farms.length === 0) {
             return res.status(404).json({ message: "No farms found" });
         }
-
+        // console.log("getFarms "+JSON.stringify(farms));
         res.json(farms);
     } catch (error) {
         console.error('Error fetching farms:', error);  
