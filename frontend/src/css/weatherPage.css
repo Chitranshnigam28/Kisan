@@ -27,7 +27,7 @@ body{
 
 .tipWrapper{
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 .weather-main {
@@ -35,6 +35,9 @@ body{
   gap: 30px;
   padding: 20px;
   flex-direction: column; /* Stacks vertically by default for smaller screens */
+}
+.weatherHeader{
+padding-left: 1.4rem;
 }
 
 .imgTipWrapper{
@@ -118,7 +121,7 @@ body{
   margin-bottom: 1rem;
 }
 
-.highlights-grid {
+.weather-highlights {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 20px;
@@ -213,8 +216,13 @@ body{
     flex-direction: row; /* Horizontal layout for tablets and above */
   }
   
-  .highlights-grid {
+  .weather-highlights {
     grid-template-columns: repeat(1, 1fr); /* Adjust grid for medium screens */
+  }
+  .tipWrapper{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 1rem;
   }
 }
 
@@ -224,7 +232,12 @@ body{
     gap: 30px;
   }
 
-  .highlights-grid {
+  .weather-highlights {
     grid-template-columns: repeat(3, 1fr); /* 3-column grid for larger screens */
   }
+/* .weather-highlights{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+} */
 }
