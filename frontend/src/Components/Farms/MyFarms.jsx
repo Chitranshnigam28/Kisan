@@ -56,8 +56,8 @@ const MyFarms = () => {
         }
 
         // Translate farm data after fetching
-        translateFarms(userFarms, language);
-        translateHeading(language);
+        // translateFarms(userFarms, language);
+        // translateHeading(language);
       } catch (err) {
         console.error("Error fetching farms:", err);
         setError(err.response ? err.response.data.message : err.message);
