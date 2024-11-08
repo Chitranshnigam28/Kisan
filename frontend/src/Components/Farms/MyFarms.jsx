@@ -126,7 +126,7 @@ const MyFarms = () => {
         height: 350,
       },
       xaxis: {
-        categories: isValidPriceData ? priceData[0].months : placeholderData[0].months,
+        categories: priceData ? priceData[0].months : placeholderData[0].months,
         title: {
           text: "Months",
         },
@@ -150,6 +150,7 @@ const MyFarms = () => {
       colors: ["#28a745", "#8B4513"]
     },
   };
+
 
   const handleDelete = async (farmId) => {
     try {

@@ -41,7 +41,7 @@ img{
 
 .crop-recommendation-div {
   position: fixed;
-  bottom: 100px; /* Positions the modal above the floating dock */
+  bottom: 9rem;/* Positions the modal above the floating dock */
   left: 50%;
   transform: translateX(-50%);
   background-color: #96C73D; /* Background color similar to your design */
@@ -150,9 +150,10 @@ img{
 }
 .carouselBtnWrapper{
   display: flex;
+  gap: 0.5rem;
 }
 .carousel-button:hover{
-  background-color: unset;
+  background-color: transparent;
 }
 
 .farmTitleSize{

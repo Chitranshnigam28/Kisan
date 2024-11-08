@@ -215,7 +215,7 @@ const CropRecommendation = ({ ownerId }) => {
                 farms.map((farm) => (<>
 
                   <div key={farm._id} onClick={() => handleSelectFarm(farm)} className="farm-card-cr">
-                    <img src={farm.farmImageUrl} alt="placeholderImg" className="placeholderImg" />
+                    <img src={farm.farmImageUrl} alt="placeholderImg" className="placeholderImg"/>
                     <div className="farmTitleSizeImgWrapper">
                       <div className="farmTitleSize">
                         <p>{farm.farmName}</p>

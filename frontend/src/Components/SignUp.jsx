@@ -78,7 +78,7 @@ const SignUp = () => {
         <div className="containersignup">
           <h3>Create Your Account</h3>
           <p style={{ color: "#818898", fontWeight: 400 }}>
-            Please Input to your account
+            Please Enter your account details
           </p>
           <form onSubmit={handleSubmit}>
             <label htmlFor="uname">
