@@ -15,10 +15,7 @@
 
 /* Weather Info */
 .weather-info {
-
-
   background-color: white;
-
   padding: 20px;
   border-radius: 10px;
 }
@@ -44,7 +41,6 @@
   align-items: center;
   margin: 0;
 }
-
 
 /* Farms Cards Container */
 .card {
@@ -132,6 +128,7 @@
   padding: 20px;
   border-radius: 10px;
 }
+
 
 .market-info,
 .top-crops {
