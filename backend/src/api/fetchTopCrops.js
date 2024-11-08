@@ -20,7 +20,7 @@ router.get('/recommend-crop', async (req, res) => {
     }
 
     try {
-        const prompt = `Based on the state "${location}" in India, provide the top 5 crops with their approximate growth suitability percentages. Ensure these percentages add up close to 100% but allow for slight variability between 3-5%. Structure the response as a JSON array where each crop is an object containing "crop_name" and "percentage". Format example:
+        const prompt = `Based on the state "${location}" in India, provide the top 5 crops with their approximate growth suitability percentages as a JSON array. Ensure the percentages add up close to 100%, allowing for slight variability between 3-5%. The response should ONLY contain a JSON array. Example format:
         [
             { "crop_name": "Wheat", "percentage": 40 },
             { "crop_name": "Rice", "percentage": 30 },

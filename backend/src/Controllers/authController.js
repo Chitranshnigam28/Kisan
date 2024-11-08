@@ -47,14 +47,16 @@ const login = async (req,res)=>{
     try{
         const {email,password}=req.body;
         const userExist=await User.findOne({email:email});
-        console.log(userExist);
+        console.log("userExist "+userExist);
         
 
         if(!userExist){
             return res.status(400).json({msg:"Invalid credentials"});
         }
 
-        // const user=await bcrypt.compare(password,userExist.password);
+        //const user=await bcrypt.compare(password,userExist.password);
+        console.log("password "+password);
+        console.log("userExist.password "+userExist.password);
         const user=await userExist.comparePassword(password);
         console.log("user 55 "+user);
         if(user){

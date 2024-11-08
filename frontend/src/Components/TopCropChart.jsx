@@ -6,6 +6,10 @@ const TopCropsChart = ({ onLocationChange }) => {
   const [location, setLocation] = useState("Delhi");
   const [topCrops, setTopCrops] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en'); // Track the selected language
+  const [translatedData, setTranslatedData] = useState(null);
+  const [translatedLocationHeading, setTranslatedLocationHeading] = useState('');
+  const [translatedStates, setTranslatedStates] = useState({});
 
   useEffect(() => {
     const fetchTopCrops = async () => {
@@ -22,8 +26,8 @@ const TopCropsChart = ({ onLocationChange }) => {
           setTopCrops([]);
         }
       } catch (error) {
-        console.error('Error fetching top crops:', error);
-        setTopCrops([]);
+        console.error('Error fetching top crops:', error.response ? error.response.data : error.message);
+        setTopCrops([]); // Set to empty on error
       } finally {
         setLoading(false);
       }
@@ -31,14 +35,78 @@ const TopCropsChart = ({ onLocationChange }) => {
   
     fetchTopCrops();
   }, [location]);
-  
 
-  // Handle location change
-  const handleLocationChange = (e) => {
-    const newLocation = e.target.value;
-    setLocation(newLocation);
-    if (onLocationChange) {
-      onLocationChange(newLocation);
+  useEffect(() => {
+    const translateChartData = async () => {
+      if (topCrops.length === 0) return; // Avoid translation if there's no data
+
+      try {
+        const cropNames = topCrops.map(crop => crop?.crop_name ?? "Unknown");
+        const translatedNames = await Promise.all(
+          cropNames.map((name) => translateText(name, language))
+        );
+
+        const titleTranslation = await translateText(`Top Selling Crops in ${location}`, language);
+        setTranslatedData({
+          cropNames: translatedNames,
+          title: titleTranslation,
+        });
+      } catch (error) {
+        console.error('Error translating chart data:', error);
+      }
+    };
+
+    translateChartData();
+  }, [topCrops, location, language]);
+
+  useEffect(() => {
+    const translateLocationHeading = async () => {
+      const headingTranslation = await translateText('Select Location', language);
+      setTranslatedLocationHeading(headingTranslation);
+    };
+
+    const translateStates = async () => {
+      const states = [
+        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+        "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+        "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
+        "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
+        "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
+        "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli",
+        "Daman and Diu", "Lakshadweep", "Delhi", "Puducherry", "Jammu and Kashmir", "Ladakh"
+      ];
+
+      try {
+        const translatedStatesObj = await Promise.all(
+          states.map(async (state) => {
+            const translatedState = await translateText(state, language);
+            return { [state]: translatedState };
+          })
+        );
+        
+        // Convert array of objects into a single object
+        const translatedStatesMap = Object.assign({}, ...translatedStatesObj);
+        setTranslatedStates(translatedStatesMap);
+      } catch (error) {
+        console.error("Error translating states:", error);
+      }
+    };
+
+    translateLocationHeading();
+    translateStates();
+  }, [language]);
+
+  const translateText = async (text, targetLanguage) => {
+    try {
+      const response = await axios.post('http://localhost:5001/api/translate', {
+        text: text,
+        targetLanguage: targetLanguage,
+      });
+
+      return response.data.translatedText;
+    } catch (error) {
+      console.error("Error translating text:", error);
+      return text; // Fallback to original text in case of error
     }
   };
 
@@ -50,7 +118,7 @@ const TopCropsChart = ({ onLocationChange }) => {
     { crop_name: "Sugarcane", percentage: 5 },
     { crop_name: "Cotton", percentage: 5 }
   ];
-  
+
   const chartData = topCrops.length > 0
   ? {
       series: topCrops.map((crop) => crop?.percentage ?? 0),
@@ -60,10 +128,12 @@ const TopCropsChart = ({ onLocationChange }) => {
           height: 350,
         },
         title: {
-          text: `Top 5 Crops in ${location}`,
+          text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`,
           align: 'center',
         },
-        labels: topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
+        labels: translatedData
+          ? translatedData.cropNames
+          : topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
         legend: { position: 'bottom' },
         plotOptions: {
           pie: {
@@ -80,10 +150,7 @@ const TopCropsChart = ({ onLocationChange }) => {
                   offsetY: 5,
                 },
                 value: {
-                  show: true,
-                  fontSize: '16px',
-                  color: 'black',
-                  offsetY: -5,
+                  show: false,
                 },
               },
             },
@@ -95,11 +162,11 @@ const TopCropsChart = ({ onLocationChange }) => {
             shade: 'light',
             type: 'vertical',
             shadeIntensity: 0.5,
-            gradientToColors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
+            gradientToColors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],
             stops: [0, 100, 100, 100, 100],
           },
         },
-        colors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
+        colors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],
       },
     }
   : {
@@ -111,65 +178,60 @@ const TopCropsChart = ({ onLocationChange }) => {
           height: 350,
         },
         title: {
-          text: `Top 5 Crops in Delhi`,
+          text: `Top Selling Crops in Delhi`,
           align: 'center',
         },
-        fill: {
+        fill: { 
           type: 'gradient',
           gradient: {
-            shade: 'light',
+            shade: 'dark',
             type: 'vertical',
             shadeIntensity: 0.5,
-            gradientToColors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
+            gradientToColors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],
             stops: [0, 100, 100, 100, 100],
           },
         },
-        colors: ['#B2EBF2', '#81C784', '#4CAF50', '#388E3C', '#1B5E20'],
+        colors: ['#1B5E20', '#2E7D32', '#43A047', '#66BB6A', '#81C784'],        
       },
     };
 
-  
 
   return (
-    <div>
-      <label htmlFor="state-dropdown">Select Location: </label>
-      <select
-        id="state-dropdown"
-        value={location}
-        onChange={handleLocationChange}
-      >
-        <option value="">Select Location</option>
-        {[
-          "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-          "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
-          "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
-          "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
-          "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
-          "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli",
-          "Daman and Diu", "Lakshadweep", "Delhi", "Puducherry", "Jammu and Kashmir", "Ladakh"
-        ].map((state) => (
-          <option key={state} value={state}>{state}</option>
-        ))}
-      </select>
+    <div className='top-crop-container'>
+      <div className="location-topCrop">
+        <label htmlFor="state-dropdown">{translatedLocationHeading || 'Select Location'}: </label>
+        <select
+          id="state-dropdown"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="">Select Location</option>
+          {Object.entries(translatedStates).map(([originalState, translatedState]) => (
+            <option key={originalState} value={originalState}>
+              {translatedState || originalState} {/* Fallback to original if translation is missing */}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {loading ? (
-      <p>Loading top crops...</p>
-    ) : (
-      topCrops.length > 0 ? (
-        <>
-          <Chart
-            options={chartData.options}
-            series={chartData.series}
-            type="donut"
-            height={350}
-          />
-          {console.log("Chart data series:", chartData.series)}
-          {console.log("Chart data labels:", chartData.options.labels)}
-        </>
+        <p>Loading top crops...</p>
       ) : (
-        <p>No data available for the selected location.</p>
-      )
-    )}
+        topCrops.length > 0 ? (
+          <>
+            <Chart
+              options={chartData.options}
+              series={chartData.series}
+              type="donut"
+              height={350}
+            />
+            {console.log("Chart data series:", chartData.series)}
+            {console.log("Chart data labels:", chartData.options.labels)}
+          </>
+        ) : (
+          <p>No data available for the selected location.</p>
+        )
+      )}
     </div>
   );
 };

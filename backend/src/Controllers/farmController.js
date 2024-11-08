@@ -21,7 +21,7 @@ const createFarm = async (req, res) => {
             farmImageUrl
         } = req.body;
 
-        if (!req.user || !req.user.UserId) {
+        if (!req.user || !req.user._id) {
             return res.status(401).json({ message: 'User not authenticated' });
         }
 
@@ -40,7 +40,7 @@ const createFarm = async (req, res) => {
             dateOfHarvest,
             sizeOfFarm,
             farmImageUrl,
-            owner: req.user.UserId 
+            owner: req.user._id 
         });
 
         const savedFarm = await newFarm.save();
@@ -58,7 +58,7 @@ const getFarms = async (req, res) => {
         if (!farms || farms.length === 0) {
             return res.status(404).json({ message: "No farms found" });
         }
-
+        console.log("getFarms "+JSON.stringify(farms));
         res.json(farms);
     } catch (error) {
         console.error('Error fetching farms:', error);  

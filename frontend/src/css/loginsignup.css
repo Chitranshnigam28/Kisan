@@ -1,278 +1,226 @@
-.containerlogin{
-    
-    width: 40%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    margin-top: 20vh;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 1rem;
-}
-.containersignup{
-    
-    width: 40%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    margin-top: 10vh;
-    background-color: #f9f9f9;
-    border-radius: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-/* General resets */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    color: #333;
+/* Container Styling */
+.containerlogin {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  width: 50%;
+  /* max-width: 1200px;
+        margin: 0 auto; */
+  padding: 2rem;
+  /* margin-top: 20vh; */
+  /* background-color: #f9f9f9; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+  border-radius: 1rem;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 1rem;
-    font-weight: 600;
+.login-subtitle {
+  color: #818898;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 1rem;
 }
 
-h1 {
-    font-size: 2.5rem;
-    text-align: center;
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.75rem;
-}
-
-h4 {
-    font-size: 1.5rem;
-}
-
-h5 {
-    font-size: 1.25rem;
-}
-
-h6 {
-    font-size: 1rem;
-}
-
-
-
-/* p {
-    margin-bottom: 1.25rem;
-    font-weight: lighter;
-    color: rgb(142, 105, 105);
-} */
-#hvact{
-    text-align: center;
-}
-p>b{
-    font-weight: bold;
-    color: black;
-}
-/* Links */
-a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Forms */
-input, textarea, select, button {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    /* border: 1px solid #ccc; */
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.authBtn {
-    background-color: #33420B;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-}
-
-#descriptiveHeading{
-    font-size: 1.25rem;
-}
-button:hover {
-    background-color: #2980b9;
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
-/* Layout */
-
-
-/* Flexbox utilities */
-.flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+input[type="text"]#uname,
+input[type="password"]#password ,
+input[type="text"]#email
+{
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  border: 2px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 24px;
+  font-size: 1rem;
 }
-
-.flex-column {
-    flex-direction: column;
+.login-items>form{
+  margin-top: 1rem;
 }
-
-/* Grids */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+.login-items>form>label{
+  width: 100%;
+  margin-top: 0.5rem;
 }
-
-.grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-1 {
-    grid-template-columns: 1fr;
-}
-
 /* Buttons */
-.btn {
-    display: inline-block;
-    background-color: #3498db;
-    color: #fff;
-    padding: 0.75rem 1.25rem;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.authBtn {
+  background-color: #33420b;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 2rem;
+  padding: 0.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-.btn:hover {
-    background-color: #2980b9;
+.authBtn:hover {
+  background-color: #2a370a;
 }
 
-.btn-primary {
-    background-color: #3498db;
+/* Options Wrapper */
+.optionsWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  width: 100%;
 }
 
-.btn-secondary {
-    background-color: #2ecc71;
+.optionsWrapper div {
+  display: flex;
+  align-items: center;
+  color: #818898;
 }
 
-/* Utility classes */
-.text-center {
-    text-align: center;
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  /* accent-color: transparent;  */
 }
 
-.mt-1 {
-    margin-top: 1rem;
+/* Style the checkbox when checked */
+input[type="checkbox"]:checked {
+  accent-color: green;
 }
 
-.mt-2 {
-    margin-top: 2rem;
+/* Google Button */
+#googleBtn {
+  background-color: white;
+  color: #33420b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  border: 2px solid #dfe1e7;
+  padding: 0.75rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  width: 100%;
 }
 
-.mb-1 {
-    margin-bottom: 1rem;
+#googleBtn:hover {
+  background-color: #f7f7f7;
+  color: #33420b;
 }
 
-.mb-2 {
-    margin-bottom: 2rem;
+/* Video and Logo Styling */
+/* Container Styling */
+.image-logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border-radius: 1rem;
+  overflow: hidden;
+  /* margin-top: 2rem; */
+  width: 50%; /* Ensure container size is fixed */
 }
 
-.ml-1 {
-    margin-left: 1rem;
+/* Logo Styling */
+.image-logo-container img.logo {
+  position: relative;
+  z-index: 2;
+  width: 150px; /* Set a fixed width for the logo */
+  max-width: 100%; /* Prevents overflow if container is too small */
+  margin-bottom: 1rem;
+  height: auto; /* Maintains aspect ratio */
 }
 
-.ml-2 {
-    margin-left: 2rem;
+/* Background Video Styling */
+.image-logo-container video.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.5;
 }
 
-.mr-1 {
-    margin-right: 1rem;
+/* Signup Prompt */
+#hvact.signup-prompt {
+  color: #818898;
+  font-weight: 600;
+  text-align: center;
 }
 
-.mr-2 {
-    margin-right: 2rem;
+.all-content {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin: 1rem 3rem;
+  padding: 0 2rem 0 0;
+  /* height: 90vh; */
 }
 
-.iagree{
-    display: flex;
-}
-.iagree>input{
-    padding: 0;
+.login-items {
+  margin: 4rem 4rem;
 }
 
-.optionsWrapper{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.5rem;
+.optionsWrapper p {
+  margin: 0;
 }
-.optionsWrapper div{
-    display: grid;
-    grid-template-columns: .15fr 1fr;
-    gap: .5rem;
-    align-items: baseline;
+.optionsWrapper {
+  margin-bottom: rem;
 }
 
-#googleIcon{
-    width: 12%;
-}
-#googleBtn{
-    border: 2px solid #DFE1E7;
-    display: flex;
-    
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin-bottom: 1rem;
+.or-signin {
+  border-top: 1px solid #818898;
+  margin: 1rem 0 2rem;
+  height: 0;
+  width: 100%;
+  display: block;
+  text-align: center;
 }
 
-.descriptiveHeading{
-    color: #818898;
-    
+.or-signin::after {
+  content: " Or Sign in with ";
+  position: relative;
+  top: -0.6em;
+  background-color: #f9f9f9;
+  padding: 0 10px;
+  color: #818898;
 }
 
-.forgotMainWrapper{
-    display: flex;
-    flex-direction: column;
-    gap:1rem;
+.forgot-password-link {
+  text-decoration: none;
+  color: black;
 }
 
-.forgotEmailWrapper #email{
-    border :2px solid #DFE1E7;
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
+.signup-btn {
+  text-decoration: none;
+  color: rgb(19, 86, 6);
+}
+
+
+
+@media screen and (max-width: 1100px) {
+  .image-logo-container {
+    display: none; /* Hide the logo container */
+  }
+  .containerlogin{
+    width: 100%;
+  }
 }
