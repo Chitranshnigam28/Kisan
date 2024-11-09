@@ -109,6 +109,11 @@ padding-left: 1.4rem;
   /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); */
 }
 
+.weather-highlights{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .highlights-title {
   font-size: 1.5rem;
   color: #333;
@@ -153,7 +158,6 @@ padding-left: 1.4rem;
   margin-top: 20px;
   padding: 0.8rem 2rem;
   background-color: #4B5563;
-  /* color: #ffffff; */
   border: none;
   border-radius: 10px;
   cursor: pointer;

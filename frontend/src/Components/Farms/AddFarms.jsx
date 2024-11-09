@@ -28,10 +28,11 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import EmptyFarms from "./EmptyFarms";
 
 
 const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
+    apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
     authDomain: "art-asta-50475.firebaseapp.com",
     projectId: "art-asta-50475",
     storageBucket: "art-asta-50475.appspot.com",
@@ -81,7 +82,8 @@ const waterSourceIcons = {
 
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(1); // Step state
+    const navigate = useNavigate();
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
@@ -98,7 +100,7 @@ const AddFarms = () => {
     });
     const [file, setFile] = useState(null);  // Declare the file state
     const [downloadURL, setDownloadURL] = useState("");
-    const navigate = useNavigate();
+
     const location = useLocation();
 
     // Check if the user came from the sign-up process
@@ -124,8 +126,10 @@ const AddFarms = () => {
                 return;
             }
 
+
             const storageRef = ref(storage, `images/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
+
 
             uploadTask.on(
                 'state_changed',
@@ -141,11 +145,13 @@ const AddFarms = () => {
                     const url = await getDownloadURL(uploadTask.snapshot.ref);
                     console.log('File available at', url);
 
+
                     // Update farmData after upload with the correct field
                     setFarmData((prevData) => ({
                         ...prevData,
                         farmImageUrl: url,
                     }));
+
 
                     setDownloadURL(url);
                     resolve(url);
@@ -156,6 +162,7 @@ const AddFarms = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+
 
         // Ensure that sizeOfFarm is properly set as a number
         setFarmData((prevState) => ({
@@ -196,6 +203,7 @@ const AddFarms = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         if (currentStep === 2) {
             try {
                 // Ensure the image is uploaded before submitting
@@ -204,11 +212,13 @@ const AddFarms = () => {
                     return;
                 }
 
+
                 const token = localStorage.getItem('token');
                 if (!token) {
                     alert('No token found. Please log in again.');
                     return;
                 }
+
 
                 // Ensure that sizeOfFarm is a number
                 if (isNaN(farmData.sizeOfFarm) || farmData.sizeOfFarm <= 0) {
@@ -216,8 +226,10 @@ const AddFarms = () => {
                     return;
                 }
 
+
                 const farmDetails = { ...farmData };
                 console.log("farm details of mongo" + JSON.stringify(farmDetails));
+
 
                 // Send the farm data to the backend
                 const response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
@@ -227,8 +239,10 @@ const AddFarms = () => {
                     },
                 });
 
+
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
+                navigate('/');
                 resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
@@ -266,12 +280,13 @@ const AddFarms = () => {
     };
 
     const handleCancel = () => {
-        console.log("Cancelled");
-        navigate('/login');
-        resetForm();
+        navigate('/');
         resetForm();
     };
 
+    const farmAdded = ()=>{
+        navigate('/')
+    }
 
 
     return (
@@ -285,6 +300,7 @@ const AddFarms = () => {
                 {currentStep === 1 && (
                     <div>
                         <h5 className="mb-4">Step 1 of 2</h5>
+
 
                         <div className="mb-3">
                             <input
@@ -309,6 +325,7 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
+
 
                             <div className="mb-4">
                                 <label className="form-label">Size of Farm:</label>
@@ -393,9 +410,12 @@ const AddFarms = () => {
                     </div>
                 )}
 
+                {/* Step 2 */}
                 {currentStep === 2 && (
                     <div>
                         <h5 className="mb-4">Step 2 of 2</h5>
+
+                        {/* Soil Quality */}
                         <div className="form-grp mb-4">
                             <label className="form-label">Soil Quality:</label>
                             <div className="button-group">
@@ -436,7 +456,6 @@ const AddFarms = () => {
                             ))}
                         </div>
 
-                        {/* Crop Name */}
                         <div className="form-grp mb-4">
                             <label className="form-label">Crop Name:</label>
                             <div className="button-group">
@@ -463,6 +482,7 @@ const AddFarms = () => {
                                 ))}
                             </div>
                         </div>
+
 
 
                         {/* Soil Type */}
@@ -554,7 +574,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="submit" className="main-Btn">Submit</button>
+                            <button type="submit" className="main-Btn" >Submit</button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Back</button>
                         </div>
                     </div>

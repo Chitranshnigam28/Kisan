@@ -1,3 +1,35 @@
+// import React from "react";
+// import "../../css/emptyFarms.css";
+// import { Link } from "react-router-dom";
+
+// const EmptyFarms = () => {
+//   return (
+//     <div className="empty-farms-container">
+//       <h2 className="empty-farms-title">
+//         Ready to Get Started?{" "}
+//         <span role="img" aria-label="sprout">
+//           🌱
+//         </span>
+//       </h2>
+//       <p className="empty-farms-message">
+//         It looks like you haven’t added any farms yet. <br />
+//         Add your farm to start managing it effortlessly.
+//       </p>
+//       <Link to="/my-farms">
+//       <button className="add-farm-button">Add your First Farm</button>
+//                 </Link>
+//       <div className="hay-bales">
+//         <div className="hay-bale"></div>
+//         <div className="hay-bale"></div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default EmptyFarms;
+
+
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chart from "react-apexcharts";
@@ -12,9 +44,6 @@ import { MdOutlineCancel } from "react-icons/md";
 import AddFarms from "./AddFarms";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import EmptyFarms from "./EmptyFarms";
-import {Footer} from "../Dashboard/Footer";
-import Header from "../Dashboard/Header";
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -61,8 +90,9 @@ const MyFarms = () => {
     };
 
     fetchFarms();
+    const intervalId = setInterval(fetchFarms, 1000);
 
-    return () => clearInterval(fetchFarms);
+    return () => clearInterval(intervalId);
   }, [userId, location.pathname]);
 
   useEffect(() => {
@@ -153,32 +183,11 @@ const MyFarms = () => {
       alert("Failed to delete farm: " + err.message);
     }
   };
-  const handleAddFarm=()=>{
-    navigate('/add-farm');
-  }
 
   if (loading) return <p>Loading farms...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (farms.length === 0) {
-    return (
-        <div className="no-farms-container">
-            <h3>No Farms Found</h3>
-            <p>You currently have no farms added. Click the button below to add your first farm.</p>
-            <button className="main-Btn" onClick={handleAddFarm}>
-                Add Farm
-            </button>
-        </div>
-    );
-}
-  return (<>
-  {location.pathname === "/my-farms" && (
-        <>
-          <Header />
-          
-        </>
-      )}
+  return (
     <div className="container">
-      
       <div className="MyFarmsHeading">
         <h4>
           <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />
@@ -187,26 +196,20 @@ const MyFarms = () => {
 
 
         {location.pathname === "/my-farms" && (
-  <>
-    {showAddFarm ? (
-      <>
-        {console.log("AddFarms is rendered")}
-        <MdOutlineCancel
-          className="add-icon"
-          onClick={() => setShowAddFarm(false)}
-          style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
-        />
-      </>
-    ) : (
-      <IoIosAddCircleOutline
-        className="add-icon"
-        onClick={() => setShowAddFarm(true)}
-        style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
-      />
-    )}
-  </>
-)}
-
+          showAddFarm ? (
+            <MdOutlineCancel
+              className="add-icon"
+              onClick={() => setShowAddFarm(false)}
+              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
+            />
+          ) : (
+            <IoIosAddCircleOutline
+              className="add-icon"
+              onClick={() => setShowAddFarm(true)}
+              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
+            />
+          )
+        )}
       </div>
       <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
 
@@ -321,9 +324,7 @@ const MyFarms = () => {
           )}
         </div>
       )}
-      <Footer/>
     </div>
-    </>
   );
 };
 

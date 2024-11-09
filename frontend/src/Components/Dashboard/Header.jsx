@@ -49,10 +49,10 @@ const Header = () => {
           <img src="./logo.png" alt="Kisan Logo" className="logo-image" />
         </div>
         <div className="header-right">
-          <div className="notification">
+          {/* <div className="notification">
             <FaBell className="icon" />
             <span className="notification-dot"></span>
-          </div>
+          </div> */}
           <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
             <FaUserCircle className="icon" />
             <span className="profile-arrow">&#x25BC;</span>
@@ -71,12 +71,12 @@ const Header = () => {
                   Change Language
                 </button>
               </div>
-              <div className="helpAndSupportWrapper">
+              {/* <div className="helpAndSupportWrapper">
                 <img src="./helpAndSupport.png" alt="helpAndSupport"/>
                 <button onClick={handleProfileClick} className="helpAndSupport">
                   Help and Support
                 </button>
-              </div>
+              </div> */}
               <div className="logoutWrapper">
                 <img src="./logout.png" alt="logout"/>
                 <button onClick={handleLogout} className="logout-btn">

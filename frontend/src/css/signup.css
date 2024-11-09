@@ -111,6 +111,9 @@ input[type="password"] {
   opacity: 0.5;
 }
 
+form>label{
+  width: 100%;
+}
 /* Terms and Sign Up Prompt */
 #hvact {
   color: #818898;
