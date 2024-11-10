@@ -306,3 +306,7 @@
 .my-farms .container{
   margin: 0;
 }
+
+.apexcharts-toolbar{
+  display: none;
+}
