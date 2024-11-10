@@ -144,8 +144,7 @@ padding-left: 1.4rem;
 }
 
 .highlight-box p:last-child {
-  font-size: 2.5rem;
-
+  font-size: 1.5rem;
   color: #1f2937;
   font-weight: 500;
 }
@@ -154,6 +153,7 @@ padding-left: 1.4rem;
   gap: 1rem;
   align-items: center;
 }
+
 .go-back-button {
   margin-top: 20px;
   padding: 0.8rem 2rem;

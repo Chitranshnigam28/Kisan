@@ -307,6 +307,6 @@
   margin: 0;
 }
 
-.apexcharts-toolbar{
+.apexcharts-toolbar, .apexcharts-tooltip, .apexcharts-menu-icon, .apexcharts-reset-icon, .apexcharts-zoom-icon, .apexcharts-zoomin-icon, .apexcharts-zoomout-icon{
   display: none;
 }
