@@ -43,6 +43,9 @@ form {
   margin-top: 1rem;
 }
 
+form>label{
+  width: 100%;
+}
 label {
   font-weight: bold;
   margin-bottom: 0.5rem;

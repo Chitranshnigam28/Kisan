@@ -27,9 +27,8 @@ import TomatoIcon from "../../Assets/Vegetables/tomato.png"
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import EmptyFarms from "./EmptyFarms";
-
+import { useNavigate } from 'react-router-dom';
+import EmptyFarms from '../Farms/EmptyFarms'
 
 const firebaseConfig = {
     apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
@@ -242,7 +241,7 @@ const AddFarms = () => {
 
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
-                navigate('/');
+                navigate('/')
                 resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
