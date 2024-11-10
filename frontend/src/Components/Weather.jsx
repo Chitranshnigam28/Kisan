@@ -282,7 +282,7 @@ function Weather() {
                   </div>
                   <div className="highlight-box">
                     <p>{translatedContent.labels?.visibility || "Visibility"}</p>
-                    <p>{weather.visibility / 1000} km</p>
+                    <p>{weather.visibility } km</p>
                   </div>
                   <div className="highlight-box">
                     <p>{translatedContent.labels?.aqi || "Air Quality"}</p>

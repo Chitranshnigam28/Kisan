@@ -434,6 +434,9 @@ import { MdOutlineCancel } from "react-icons/md";
 import AddFarms from "./AddFarms";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import EmptyFarms from "./EmptyFarms";
+import {Footer} from "../Dashboard/Footer";
+import Header from "../Dashboard/Header";
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -572,11 +575,32 @@ const MyFarms = () => {
       alert("Failed to delete farm: " + err.message);
     }
   };
+  const handleAddFarm=()=>{
+    navigate('/add-farm');
+  }
 
   if (loading) return <p>Loading farms...</p>;
   if (error) return <p>Error: {error}</p>;
-  return (
+  if (farms.length === 0) {
+    return (
+        <div className="no-farms-container">
+            <h3>No Farms Found</h3>
+            <p>You currently have no farms added. Click the button below to add your first farm.</p>
+            <button className="main-Btn" onClick={handleAddFarm}>
+                Add Farm
+            </button>
+        </div>
+    );
+}
+  return (<>
+  {location.pathname === "/my-farms" && (
+        <>
+          <Header />
+          
+        </>
+      )}
     <div className="container">
+      
       <div className="MyFarmsHeading">
         <h4>
           <img src={MyFarmsSvg} alt="My Farm" style={{ width: '40px', height: '40px' }} />
@@ -585,22 +609,28 @@ const MyFarms = () => {
 
 
         {location.pathname === "/my-farms" && (
-          showAddFarm ? (
-            <MdOutlineCancel
-              className="add-icon"
-              onClick={() => setShowAddFarm(false)}
-              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
-            />
-          ) : (
-            <IoIosAddCircleOutline
-              className="add-icon"
-              onClick={() => setShowAddFarm(true)}
-              style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
-            />
-          )
-        )}
+  <>
+    {showAddFarm ? (
+      <>
+        {console.log("AddFarms is rendered")}
+        <MdOutlineCancel
+          className="add-icon"
+          onClick={() => setShowAddFarm(false)}
+          style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
+        />
+      </>
+    ) : (
+      <IoIosAddCircleOutline
+        className="add-icon"
+        onClick={() => setShowAddFarm(true)}
+        style={{ fontSize: '1.5em', cursor: 'pointer', marginLeft: '10px', color: 'black' }}
+      />
+    )}
+  </>
+)}
+
       </div>
-      <h5 className="h5">Track crops, monitor soil, and get personalized insight</h5>
+      <h5 className="h5">Track crops, monitor soil, and get personalized insigh</h5>
 
       {showAddFarm ? (
         <AddFarms />
@@ -713,7 +743,9 @@ const MyFarms = () => {
           )}
         </div>
       )}
+      <Footer/>
     </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
 import axios from 'axios';
@@ -27,7 +27,9 @@ import TomatoIcon from "../../Assets/Vegetables/tomato.png"
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import EmptyFarms from "./EmptyFarms";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
@@ -98,6 +100,11 @@ const AddFarms = () => {
     });
     const [file, setFile] = useState(null);  // Declare the file state
     const [downloadURL, setDownloadURL] = useState("");
+
+    const location = useLocation();
+
+    // Check if the user came from the sign-up process
+    const fromSignup = new URLSearchParams(location.search).get("fromSignup") === "true";
     // const [farmData, setFarmData] = useState({
     //   farmImage: null,
     // });
@@ -109,6 +116,7 @@ const AddFarms = () => {
     //     setFile(selectedFile);  // Update the state with the selected file
     //   }
     // };
+
     // Handle file upload
     const handleUpload = () => {
         return new Promise((resolve, reject) => {
@@ -118,8 +126,10 @@ const AddFarms = () => {
                 return;
             }
 
+
             const storageRef = ref(storage, `images/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
+
 
             uploadTask.on(
                 'state_changed',
@@ -135,11 +145,13 @@ const AddFarms = () => {
                     const url = await getDownloadURL(uploadTask.snapshot.ref);
                     console.log('File available at', url);
 
+
                     // Update farmData after upload with the correct field
                     setFarmData((prevData) => ({
                         ...prevData,
                         farmImageUrl: url,
                     }));
+
 
                     setDownloadURL(url);
                     resolve(url);
@@ -150,6 +162,7 @@ const AddFarms = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+
 
         // Ensure that sizeOfFarm is properly set as a number
         setFarmData((prevState) => ({
@@ -190,6 +203,7 @@ const AddFarms = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         if (currentStep === 2) {
             try {
                 // Ensure the image is uploaded before submitting
@@ -198,11 +212,13 @@ const AddFarms = () => {
                     return;
                 }
 
+
                 const token = localStorage.getItem('token');
                 if (!token) {
                     alert('No token found. Please log in again.');
                     return;
                 }
+
 
                 // Ensure that sizeOfFarm is a number
                 if (isNaN(farmData.sizeOfFarm) || farmData.sizeOfFarm <= 0) {
@@ -210,8 +226,10 @@ const AddFarms = () => {
                     return;
                 }
 
+
                 const farmDetails = { ...farmData };
                 console.log("farm details of mongo" + JSON.stringify(farmDetails));
+
 
                 // Send the farm data to the backend
                 const response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
@@ -221,8 +239,10 @@ const AddFarms = () => {
                     },
                 });
 
+
                 console.log('Farm added:', response.data);
                 alert('Farm added successfully!');
+                navigate('/');
                 resetForm();
             } catch (error) {
                 console.error('Error adding farm:', error.response?.data || error.message);
@@ -231,7 +251,12 @@ const AddFarms = () => {
         }
     };
 
-
+    // Show alert only if coming from signup
+    useEffect(() => {
+        if (fromSignup) {
+            alert("Sign Up Successful! Please add your farm details.");
+        }
+    }, [fromSignup]);
     const resetForm = () => {
         setFarmData({
             farmName: "",
@@ -249,7 +274,9 @@ const AddFarms = () => {
             sizeOfFarm: "",
             farmImageUrl: "",
         });
-        setCurrentStep(1); // Reset to step 1 after submission
+        setCurrentStep(1);
+
+
     };
 
     const handleCancel = () => {
@@ -274,6 +301,7 @@ const AddFarms = () => {
                     <div>
                         <h5 className="mb-4">Step 1 of 2</h5>
 
+
                         <div className="mb-3">
                             <input
                                 type="file"
@@ -297,6 +325,7 @@ const AddFarms = () => {
                                     required
                                 />
                             </div>
+
 
                             <div className="mb-4">
                                 <label className="form-label">Size of Farm:</label>
@@ -375,8 +404,8 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="button" className="main-Btn" onClick={ () => setCurrentStep(2)}>Continue</button>
-                                <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
+                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue</button>
+                            <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
                         </div>
                     </div>
                 )}
@@ -453,6 +482,7 @@ const AddFarms = () => {
                                 ))}
                             </div>
                         </div>
+
 
 
                         {/* Soil Type */}
