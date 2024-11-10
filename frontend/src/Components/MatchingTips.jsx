@@ -148,11 +148,12 @@ export const deleteMyTips = async (farmId) => {
   }
 };
 
-const MatchingTips = ({ matchedTips, setMatchedTips }) => {
+const MatchingTips = ({ matchedTips, setMatchedTips,selectedFarm  }) => {
   const [farms, setFarms] = useState([]);
   const [tipsData, setTipsData] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  // const [selectedFarm, setSelectedFarm] = useState(null);
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
   const [translatedMatchedTips, setTranslatedMatchedTips] = useState([]);
 
@@ -232,7 +233,7 @@ const MatchingTips = ({ matchedTips, setMatchedTips }) => {
 
   const matchCropsWithTips = () => {
     const matched = [];
-    const userFarms = farms.filter(farm => farm.owner === userId);
+    const userFarms = selectedFarm ? [selectedFarm] : farms.filter(farm => farm.owner === userId);
 
     userFarms.forEach((farm) => {
       const farmCrop = farm.cropName?.toLowerCase();
@@ -263,10 +264,11 @@ const MatchingTips = ({ matchedTips, setMatchedTips }) => {
   }, []);
 
   useEffect(() => {
-    if (farms.length > 0 && tipsData.length > 0) {
+    if ((farms.length > 0 || selectedFarm) && tipsData.length > 0) {
+      setMatchedTips([]);  // Clear previous matches
       matchCropsWithTips();
     }
-  }, [farms, tipsData]);
+  }, [farms, tipsData, selectedFarm]);
 
   useEffect(() => {
     if (matchedTips.length > 0) {
