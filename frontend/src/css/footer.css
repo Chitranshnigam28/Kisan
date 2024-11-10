@@ -556,11 +556,11 @@ img{
   border-top-right-radius: 1rem;
 }
 
-.soilWrapper,.waterWrapper,.rcWrapper{
+/* .soilWrapper,.waterWrapper,.rcWrapper{
 background: #DBEFB8;
 border-radius: 1rem;
 padding: 1rem;
-}
+} */
 
 .wrcsWrapper{
 grid-row: 1/-1;
