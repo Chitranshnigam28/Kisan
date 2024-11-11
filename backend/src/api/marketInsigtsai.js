@@ -11,7 +11,7 @@ router.get('/get-market-insights', async (req, res) => {
     console.log('Request received');
 
     try {
-        const prompt = `Based on random states in India, provide only the top 5 crops chosen from the following list: 'Rice', 'Wheat', 'Maize', 'Cotton', 'Sugarcane', 'Barley', 'Millet', 'Tobacco', 'Cabbage', 'Onion', 'Garlic', 'Cauliflower', 'Spinach', 'Tomato', 'Pumpkin', 'Eggplant', 'Bitter Gourd', 'Tea', 'Coffee', 'Jowar', 'Bajra', 'Potato', 'Peas', 'Ragi', 'Soybean', 'Sesame', 'Groundnut'. For each crop, provide:
+        const prompt = `Based on random states in India, provide only the top 4 crops chosen from the following list: 'Rice', 'Wheat', 'Maize', 'Cotton', 'Sugarcane', 'Barley', 'Millet', 'Tobacco', 'Cabbage', 'Onion', 'Garlic', 'Cauliflower', 'Spinach', 'Tomato', 'Pumpkin', 'Eggplant', 'Bitter Gourd', 'Tea', 'Coffee', 'Jowar', 'Bajra', 'Potato', 'Peas', 'Ragi', 'Soybean', 'Sesame', 'Groundnut'. For each crop, provide:
         - "crop_name": name of the crop
         - "state": name of the state where it is commonly grown
         - "percentage": growth suitability percentage

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
-import "../css/topCropChart.css";
+import Loader from './Loader';
 
 const TopCropsChart = ({ onLocationChange }) => {
   const [location, setLocation] = useState("Delhi");
@@ -216,7 +216,7 @@ const TopCropsChart = ({ onLocationChange }) => {
       </div>
 
       {loading ? (
-        <p>Loading top crops...</p>
+        <p>Thanks For waiting AI is generating best Insights for you...</p>
       ) : (
         topCrops.length > 0 ? (
           <>

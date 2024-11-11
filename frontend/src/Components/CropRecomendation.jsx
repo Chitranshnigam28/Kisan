@@ -281,45 +281,45 @@ const CropRecommendation = ({ ownerId }) => {
               Choose your farms where
               <br /> you want to grow a crop?
             </h4>
-            <div className="carouselBtnWrapper">
-              <button className="carousel-button left" onClick={scrollLeft}>
-                <img src="./buttons/leftBtn.png" alt="Scroll Left" />
-              </button>
-              <button className="carousel-button right" onClick={scrollRight}>
-                <img src="./buttons/rightBtn.png" alt="Scroll Right" />
-              </button>
-            </div>
+            {farms.length >= 3 && ( // Only show buttons if there are 3 or more farms
+              <div className="carouselBtnWrapper">
+                <button className="carousel-button left" onClick={scrollLeft}>
+                  <img src="./buttons/leftBtn.png" alt="Scroll Left" />
+                </button>
+                <button className="carousel-button right" onClick={scrollRight}>
+                  <img src="./buttons/rightBtn.png" alt="Scroll Right" />
+                </button>
+              </div>
+            )}
           </div>
           <div className="carousel">
             <div className="farmCardWrapper" ref={farmCardWrapperRef}>
               {farms.length > 0 ? (
                 farms.map((farm) => (
-                  <>
-                    <div
-                      key={farm._id}
-                      onClick={() => handleSelectFarm(farm)}
-                      className="farm-card-cr"
-                    >
-                      <img
-                        src={farm.farmImageUrl}
-                        alt="placeholderImg"
-                        className="placeholderImg"
-                      />
-                      <div className="farmTitleSizeImgWrapper">
-                        <div className="farmTitleSize">
-                          <p>{farm.farmName}</p>
-                          <p>{farm.sizeOfFarm} HA</p>
-                        </div>
-                        <img
-                          src={
-                            cropImageMap[farm.cropName] || "./default-image.png"
-                          }
-                          alt={farm.cropName}
-                          className="cropImage"
-                        />
+                  <div
+                    key={farm._id}
+                    onClick={() => handleSelectFarm(farm)}
+                    className="farm-card-cr"
+                  >
+                    <img
+                      src={farm.farmImageUrl}
+                      alt="placeholderImg"
+                      className="placeholderImg"
+                    />
+                    <div className="farmTitleSizeImgWrapper">
+                      <div className="farmTitleSize">
+                        <p>{farm.farmName}</p>
+                        <p>{farm.sizeOfFarm} HA</p>
                       </div>
+                      <img
+                        src={
+                          cropImageMap[farm.cropName] || "./default-image.png"
+                        }
+                        alt={farm.cropName}
+                        className="cropImage"
+                      />
                     </div>
-                  </>
+                  </div>
                 ))
               ) : (
                 <p>No farms found. Please add a farm to proceed.</p>
@@ -328,7 +328,7 @@ const CropRecommendation = ({ ownerId }) => {
           </div>
         </div>
       )}
-
+  
       {step === 2 && selectedFarm && (
         <div className="farm-details">
           <h4>Overview</h4>
@@ -356,7 +356,6 @@ const CropRecommendation = ({ ownerId }) => {
                 </div>
               </div>
             </div>
-            {/* <h2>{selectedFarm.farmName} Details</h2> */}
             <div className="ov-details">
               <div className="soilWrapper">
                 {soilImg[selectedFarm.soilType]}
@@ -389,7 +388,7 @@ const CropRecommendation = ({ ownerId }) => {
                 <FaArrowLeft style={{ color: "#FFF", fontSize: "24px" }} />
                 <span>Go Back</span>
               </button>
-
+  
               <button onClick={handleRecommendCrops}>
                 <img src={aiIcon} alt="" />{" "}
                 <span className="rcBtn">Recommend Crops</span>
@@ -398,21 +397,16 @@ const CropRecommendation = ({ ownerId }) => {
           </div>
         </div>
       )}
-
+  
       {step === 3 && farmDetails && (
         <div className="crop-recommendation-result">
           <h4>
             <img src={aiIcon} alt="" />
             You should Grow!
           </h4>
-
-          {console.log(farmDetails)}
+  
           <div className="rcWrapper">
             <div className="rcImgText">
-              {console.log(
-                "img step 3 " +
-                  cropImageMap[JSON.parse(farmDetails.recommendedCrop)[0]]
-              )}
               <img
                 src={cropImageMap[JSON.parse(farmDetails.recommendedCrop)[0]]}
                 alt=""
@@ -443,12 +437,11 @@ const CropRecommendation = ({ ownerId }) => {
               </div>
             </div>
           </div>
-
-          {/* <button onClick={() => setStep(1)}>Start Over</button> */}
         </div>
       )}
     </div>
   );
+  
 };
 
 // Prop validation

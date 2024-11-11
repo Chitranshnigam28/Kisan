@@ -30,8 +30,9 @@ import rice from "../Assets/Vegetables/rice.png";
 import ragi from "../Assets/Vegetables/ragi.png";
 import groundnut from "../Assets/Vegetables/groundnut.png";
 import marketInsights from "../Assets/marketinsights.svg";
+import Loader from "./Loader";
 
-const TopCropIndia = () => {
+const MarketInsights = () => {
   const [insights, setInsights] = useState([]);
   const [translatedInsights, setTranslatedInsights] = useState([]);
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
@@ -266,10 +267,10 @@ const TopCropIndia = () => {
           ))}
         </ul>
       ) : (
-        <p className="loading-text">Loading market insights...</p>
+        <p className="loading-text">Thanks For waiting AI is generating best Insights for you...</p>
       )}
     </div>
   );
 };
 
-export default TopCropIndia;
+export default MarketInsights;

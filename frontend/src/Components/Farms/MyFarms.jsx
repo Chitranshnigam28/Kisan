@@ -12,6 +12,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import AddFarms from "./AddFarms";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import EmptyFarms from "./EmptyFarms";
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -208,12 +209,11 @@ const MyFarms = () => {
             />
           ))}
       </div>
-      <h5 className="h5">
-        Track crops, monitor soil, and get personalized insight
-      </h5>
 
       {showAddFarm ? (
         <AddFarms />
+      ) : farms.length === 0 ? (
+        <EmptyFarms />
       ) : (
         <div
           className={
@@ -227,6 +227,9 @@ const MyFarms = () => {
                 key={farm._id}
                 onClick={() => setSelectedFarm(farm)}
               >
+                <h5 className="h5">
+                  Track crops, monitor soil, and get personalized insight
+                </h5>
                 <div className="card shadow farm-card">
                   <img
                     src={farm.farmImageUrl}
