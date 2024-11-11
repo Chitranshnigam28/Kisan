@@ -17,9 +17,10 @@ const passport = require('passport');
 const topCropRoutes = require('./src/api/fetchTopCrops');
 const marketInsights = require('./src/api/marketInsigtsai')
 const splineChart = require('./src/api/splineChart')
-
+const chatBot = require('./src/api/chatBot');
 const passportSetup=require('./src/middlewares/passport');
 const translateRoute = require('./src/Routes/translationRoutes');
+const chatRoutes = require('./src/Routes/chatBotRoute'); 
 
 const app = express();
 const cors = require('cors');
@@ -53,6 +54,7 @@ app.use("/api",translateRoute);
 app.use('/api', topCropRoutes);
 app.use('/api', marketInsights);
 app.use('/api', splineChart);
+app.use("/api", chatRoutes);
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to Kisan');

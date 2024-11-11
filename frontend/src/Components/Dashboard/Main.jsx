@@ -9,6 +9,7 @@ import { BiRightTopArrowCircle } from "react-icons/bi";
 import TopCropsChart from "../TopCropChart";
 import WeatherWidget from "../weatherWidget";
 import MarketInsights from "../MarketInsights";
+import ChatBot from "../ChatBot";
 
 const Main = () => {
   const userId = localStorage.getItem("userId");
@@ -67,6 +68,9 @@ const Main = () => {
                 onLocationChange={handleLocationChange}
                 location={location}
               />
+            </div>
+            <div className="chat-bot">
+              <ChatBot/>
             </div>
           </div>
         </div>
