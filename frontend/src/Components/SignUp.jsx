@@ -46,9 +46,9 @@ const SignUp = () => {
         if (res.status === 200) {
           console.log("registration succesfull");
           console.log("${data.userId} " + data.userId);
-          // navigate(`/add-farm?userId=${data.userId}`);
+          navigate(`/add-farm?userId=${data.userId}`);
           // navigate(`/add-farm?userId=${data.userId}&fromSignup=true`);
-          navigate(`/login`);
+          // navigate(`/add-farm`);
         }
       } catch (error) {
         console.log(error);

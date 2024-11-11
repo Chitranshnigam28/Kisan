@@ -101,6 +101,7 @@ import ragi from "../Assets/Vegetables/ragi.png";
 import groundnut from "../Assets/Vegetables/groundnut.png";
 import placeholderImg from "../Assets/Images/placeholderImage.webp";
 import aiIcon from "../Assets/Images/aiicon.png";
+import '../css/cropRecomendation.css'
 import {
   FaSeedling,
   FaWater,

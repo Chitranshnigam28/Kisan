@@ -31,7 +31,7 @@ import ragi from "../Assets/Vegetables/ragi.png";
 import groundnut from "../Assets/Vegetables/groundnut.png";
 import marketInsights from "../Assets/marketinsights.svg";
 
-const MarketInsights = () => {
+const TopCropIndia = () => {
   const [insights, setInsights] = useState([]);
   const [translatedInsights, setTranslatedInsights] = useState([]);
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
@@ -272,4 +272,4 @@ const MarketInsights = () => {
   );
 };
 
-export default MarketInsights;
+export default TopCropIndia;

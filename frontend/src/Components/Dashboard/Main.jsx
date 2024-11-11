@@ -8,7 +8,7 @@ import FunFacts from "../FunFacts";
 import { BiRightTopArrowCircle } from "react-icons/bi";
 import TopCropsChart from "../TopCropChart";
 import WeatherWidget from "../weatherWidget";
-import MarketInsights from "../MarketInsights";
+import TopCropIndia from "../TopCropIndia";
 
 const Main = () => {
   const userId = localStorage.getItem("userId");
@@ -60,7 +60,7 @@ const Main = () => {
           </Link>
           <div className="insightsWrapper">
             <div className="market-info">
-              <MarketInsights />
+              <TopCropIndia />
             </div>
             <div className="top-crops">
               <TopCropsChart

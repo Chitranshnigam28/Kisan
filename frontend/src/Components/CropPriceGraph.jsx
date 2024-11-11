@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import "./SingleTips";
+// import "./SingleTips";
 import SingleTips from "./SingleTips";
-import { Footer } from "./Dashboard/Footer";
-import Header from "./Dashboard/Header";
-import TopCropsChart from "./TopCropChart";
 import marketInsights from "../Assets/marketinsights.svg";
-import "../css/topCropChart.css";
 
 const CropPriceChart = ({ crop }) => {
   const [cropPrices, setCropPrices] = useState([]);
@@ -143,8 +139,6 @@ const CropPriceChart = ({ crop }) => {
 
   return (
     <>
-      <Header />
-      <Footer />
       <div className="container">
         <div className="title">
           <img
@@ -198,7 +192,7 @@ const CropPriceChart = ({ crop }) => {
             </div>
 
             <div className="content2">
-              <TopCropsChart />
+              
               <div className="tips">
                 <SingleTips cropName={cropName} />
               </div>
