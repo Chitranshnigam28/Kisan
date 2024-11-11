@@ -700,73 +700,74 @@ const MyFarms = () => {
                 </div>
               </div>
 
-              {selectedFarm && (
-                <div className="selected-farm mt-5 p-4 border border-success">
-                  <div className="sub1">
-                    <img
-                      src={selectedFarm.farmImageUrl}
-                      alt={selectedFarm.farmName}
-                      className="card-img-top rounded-top"
-                    />
-                    <h3>{selectedFarm.farmName}</h3>
-                    <div>
-                      <span>
-                        <strong>{selectedFarm.sizeOfFarm} HA</strong> .
-                      </span>
-                    </div>
-                  </div>
-                  <div className="sub2">
-                    <br />
-                    <div className="totalBox">
-                      <div className="soilBox">
-                        <h2>🏜️</h2>
-                        <p>
-                          <strong>Soil:</strong> {selectedFarm.soilType}
-                        </p>
-                      </div>
-                      <div className="waterBox">
-                        <h2>💧</h2>
-                        <p>
-                          <strong>Water Source:</strong>{" "}
-                          {selectedFarm.waterSource}
-                        </p>
-                      </div>
-                      <div className="farmBox">
-                        <h2>🚜</h2>
-                        <p>
-                          <strong>Farming Method:</strong>{" "}
-                          {selectedFarm.farmingMethod}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="tipsBox">
-                      <h1>💡</h1>
-                      <MatchingTips
-                        matchedTips={matchedTips}
-                        setMatchedTips={setMatchedTips}
-                        selectedFarm={selectedFarm}
+              <div className="myFarms_info">
+                {selectedFarm && (
+                  <div className="selected-farm mt-5 p-4 border border-success">
+                    <div className="sub1">
+                      <img
+                        src={selectedFarm.farmImageUrl}
+                        alt={selectedFarm.farmName}
+                        className="card-img-top rounded-top"
                       />
+                      <h3>{selectedFarm.farmName}</h3>
+                      <div>
+                        <span>
+                          <strong>{selectedFarm.sizeOfFarm} HA</strong> .
+                        </span>
+                      </div>
+                    </div>
+                    <div className="sub2">
+                      <br />
+                      <div className="totalBox">
+                        <div className="soilBox">
+                          <h2>🏜️</h2>
+                          <p>
+                            <strong>Soil:</strong> {selectedFarm.soilType}
+                          </p>
+                        </div>
+                        <div className="waterBox">
+                          <h2>💧</h2>
+                          <p>
+                            <strong>Water Source:</strong>{" "}
+                            {selectedFarm.waterSource}
+                          </p>
+                        </div>
+                        <div className="farmBox">
+                          <h2>🚜</h2>
+                          <p>
+                            <strong>Farming Method:</strong>{" "}
+                            {selectedFarm.farmingMethod}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="tipsBox">
+                        <h1>💡</h1>
+                        <MatchingTips
+                          matchedTips={matchedTips}
+                          setMatchedTips={setMatchedTips}
+                          selectedFarm={selectedFarm}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-
-              {priceData && priceData.length >= 2 && (
-                <div id="chart" style={{ marginTop: "20px" }}>
-                  {loading ? (
-                    <p>Loading data...</p>
-                  ) : error ? (
-                    <p>{error}</p>
-                  ) : (
-                    <Chart
-                      options={chartOptions.options}
-                      series={chartOptions.series}
-                      type="area"
-                      height={350}
-                    />
-                  )}
-                </div>
-              )}
+                )}
+                {priceData && priceData.length >= 2 && (
+                  <div id="chart" style={{ marginTop: "20px" }}>
+                    {loading ? (
+                      <p>Loading data...</p>
+                    ) : error ? (
+                      <p>{error}</p>
+                    ) : (
+                      <Chart
+                        options={chartOptions.options}
+                        series={chartOptions.series}
+                        type="area"
+                        height={350}
+                      />
+                    )}
+                  </div>
+                )}
+              </div>
 
               <div className="d-flex justify-content-center align-items-center vh-50">
                 <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">

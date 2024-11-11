@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
+import MarketInsigtsDashboard from "./Components/MarketInsigtsDashboard";
 
 
 
@@ -66,7 +67,7 @@ const AppRoutes = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<GMaps />} />
-          <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />} />
+          <Route path='/charts' element={<MarketInsigtsDashboard />} />
           <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
           <Route path="/translate" element={<TranslationComponent />} />
           <Route path='/weather' element={<Weather />} />
