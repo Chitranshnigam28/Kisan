@@ -307,6 +307,6 @@
   margin: 0;
 }
 
-.apexcharts-toolbar, .apexcharts-tooltip, .apexcharts-menu-icon, .apexcharts-reset-icon, .apexcharts-zoom-icon, .apexcharts-zoomin-icon, .apexcharts-zoomout-icon{
+.apexcharts-toolbar, .apexcharts-tooltip, .apexcharts-menu-icon, .apexcharts-reset-icon, .apexcharts-zoom-icon, .apexcharts-zoomin-icon, .apexcharts-zoomout-icon, .apexcharts-pan-icon{
   display: none;
 }

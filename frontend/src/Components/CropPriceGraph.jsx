@@ -80,15 +80,15 @@ const CropPriceChart = ({ crop }) => {
         text: `${cropName || "Wheat"} Prices in ${selectedYear}`,
         align: "center",
         style: {
-          color: "#003300", // Dark forest green for title
+          color: "#003300", 
           fontWeight: "bold",
         },
       },
       xaxis: {
-        categories: filteredPrices.map((item) => item.month),
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Hardcoded months
         labels: {
           style: {
-            colors: "#003300", // Dark green for labels
+            colors: "#003300", 
           },
         },
       },
@@ -125,6 +125,7 @@ const CropPriceChart = ({ crop }) => {
       },
     },
   };
+  
 
   const handleCropName = (e) => {
     setCropName(e.target.value);
