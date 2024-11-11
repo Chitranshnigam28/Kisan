@@ -7,7 +7,10 @@ import TopCropIndia from "../TopCropIndia";
 import Loader from "../Loader";
 import FunFacts from "../FunFacts";
 import { BiRightTopArrowCircle } from "react-icons/bi";
-import "../../css/main.css";
+import TopCropsChart from "../TopCropChart";
+import WeatherWidget from "../weatherWidget";
+import MarketInsights from "../MarketInsights";
+import ChatBot from "../ChatBot";
 
 const Main = () => {
   const userId = localStorage.getItem("userId");
@@ -84,6 +87,9 @@ const Main = () => {
                 </div>
               </>
             )}
+            <div className="chat-bot">
+              <ChatBot/>
+            </div>
           </div>
         </div>
 
