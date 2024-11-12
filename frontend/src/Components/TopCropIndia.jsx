@@ -233,7 +233,6 @@ const MarketInsights = () => {
     }
   };
 
-
   return (
     <div className="market-insights-container">
       <h2 className="market-insights-title">

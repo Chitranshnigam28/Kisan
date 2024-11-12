@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import React, { useState } from "react";
 import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
@@ -399,7 +398,7 @@ const AddFarms = () => {
             </div>
 
             <div className="button-container">
-              <button type="button" className="setUpbtn" onClick={setUpLater}>Set up Later</button>
+              <button type="button" className="setUpbtn" onClick={handleCancel}>Set up Later</button>
               <button
                 type="button"
                 className="main-Btn"

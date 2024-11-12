@@ -37,4 +37,4 @@ const EmptyFarms = () => {
   );
 };
 
-export default MyFarms;
+export default EmptyFarms;
