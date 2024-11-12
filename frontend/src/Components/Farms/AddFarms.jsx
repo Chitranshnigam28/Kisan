@@ -31,6 +31,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import EmptyFarms from "./EmptyFarms";
 
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
     authDomain: "art-asta-50475.firebaseapp.com",
@@ -43,7 +44,6 @@ const firebaseConfig = {
 // Initialize Firebase with npm package
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-
 
 
 
@@ -191,6 +191,7 @@ const AddFarms = () => {
         if (selectedFile) {
             reader.readAsDataURL(selectedFile); // Read the file as a data URL
         }
+
     };
 
     const handleFileChange = (e) => {
@@ -293,8 +294,9 @@ const AddFarms = () => {
         <div className='addFarmContainer container my-5'>
             <h2 className="mb-4">Add a New Farm</h2>
             <h5 className="mb-5">Create an account to access and start to set up your farm and garden.</h5>
+            <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
             <form onSubmit={handleSubmit}>
-                <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
+                
 
                 {/* Step 1 */}
                 {currentStep === 1 && (
@@ -304,9 +306,12 @@ const AddFarms = () => {
 
                         <div className="mb-3">
                             <input
+                            
                                 type="file"
                                 accept="image/*" // Accept only image files
                                 onChange={handleImageChange}
+                                id="fileInput"
+                                className="file-input"
                             />
                             <div className='up'>
                                 <IoIosCloudUpload type="button" // Optional, for styling purposes (using Bootstrap in this example)
@@ -404,7 +409,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue</button>
+                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue → </button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
                         </div>
                     </div>
@@ -574,7 +579,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="submit" className="main-Btn" >Submit</button>
+                            <button type="submit" className="main-Btn" >Submit → </button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Back</button>
                         </div>
                     </div>
