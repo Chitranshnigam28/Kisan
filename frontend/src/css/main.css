@@ -2,15 +2,10 @@
 
 .main-layout {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(10, 1fr);
   padding: 20px;
   background-color: #fafffb;
-
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 1rem;
+  align-items: center;
 }
 
 /* Weather Info */
@@ -29,48 +24,6 @@
   flex-direction: row-reverse;
 }
 
-.MyFarmsHeading {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.MyFarmsHeading h4 {
-  display: flex;
-  align-items: center;
-  margin: 0;
-}
-
-/* Farms Cards Container */
-.card {
-  padding: 0;
-}
-
-.farms-cards-container {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding-bottom: 10px;
-}
-
-.farms-cards {
-  display: inline-flex;
-  gap: 10px;
-}
-
-.farm-card {
-  width: 20rem;
-  height: 240px;
-  border-radius: 5px;
-  flex: 0 0 auto;
-  justify-content: space-between;
-}
-
-.farm-card .card-img-top {
-  height: 150px;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
 
 /* Custom scrollbar for horizontal scrolling */
 .farms-cards-container::-webkit-scrollbar {
@@ -116,10 +69,11 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 0.25fr;
   }
+
   .farm-card img.placeholderImg {
     max-width: 100%;
-    max-height: 80px; /* Limits the height of the image */
-    object-fit: contain; /* Ensures image scales proportionally */
+    max-height: 80px;
+    object-fit: contain;
     border-radius: 5px;
   }
 }
@@ -146,14 +100,12 @@
 .top-crops {
   display: flex;
 }
-.market-info{
+
+.market-info {
   margin-right: 3rem;
 }
 
 @media (max-width: 850px) {
-  /* .main-layout {
-    grid-template-columns: 1fr;
-  } */
 
   .weather-info,
   .my-farms,
@@ -169,6 +121,7 @@
   display: flex;
   justify-content: end;
 }
+
 .MyFarmsHeading {
   display: flex;
   align-items: center;
@@ -178,7 +131,8 @@
 .MyFarmsHeading h4 {
   display: flex;
   align-items: center;
-  gap: 10px; /* Add space between image and heading */
+  gap: 10px;
+  /* Add space between image and heading */
 }
 
 .MyFarmsHeading img {
@@ -187,34 +141,42 @@
 }
 
 .MyFarmsHeading .add-icon {
-  font-size: 1.8rem; /* Increase icon size */
-  margin-left: 10px; /* Add space to the left of the icon */
+  font-size: 1.8rem;
+  /* Increase icon size */
+  margin-left: 10px;
+  /* Add space to the left of the icon */
 }
+
 .weather-info a {
   display: flex;
   justify-content: end;
 }
 
 @media only screen and (max-width: 1000px) {
+
   /* .main-layout {
     grid-template-columns: 1fr;
   } */
   .insightsWrapper,
-  .dashboard-marketview,.weather-info {
+  .dashboard-marketview,
+  .weather-info {
     display: grid;
     grid-column: span 12;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
+
   .top-crops {
     display: grid;
     margin-top: 3rem;
     justify-content: center;
   }
+
   .location-topCrop {
     margin-bottom: 2rem;
   }
+
   .funFacts-Container {
     display: grid;
     align-items: center;
@@ -222,3 +184,4 @@
     grid-column: span 12;
   }
 }
+

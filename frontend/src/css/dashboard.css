@@ -40,7 +40,6 @@ form {
 
 input[type="text"] {
   padding: 8px;
-  width: 80%;
   border-radius: 6px;
   border: 1px solid #b2c2b1;
   transition: border-color 0.3s;
@@ -56,12 +55,13 @@ button[type="submit"] {
   padding: 0.75rem;
   font-weight: bold;
   color: #ffffff;
-  background-color: #4b8c4a;
+  background-color: #96C73D;
   border: none;
   border-radius: 2rem;
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
+  justify-items: center;
 }
 
 button[type="submit"]:hover {

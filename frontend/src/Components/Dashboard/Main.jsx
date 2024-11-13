@@ -7,29 +7,29 @@ import TopCropIndia from "../TopCropIndia";
 import Loader from "../Loader";
 import FunFacts from "../FunFacts";
 import { BiRightTopArrowCircle } from "react-icons/bi";
-import "../../css/main.css";
+import ChatBot from "../ChatBot";
+import '../../css/dashboard.css';
+import '../../css/main.css';
+
+
 
 const Main = () => {
   const userId = localStorage.getItem("userId");
   console.log(userId);
 
-  // State to manage location and loading states
   const [location, setLocation] = useState("Delhi");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Function to handle location change
   const handleLocationChange = (newLocation) => {
     setLocation(newLocation);
     console.log(`Location changed to: ${newLocation}`);
   };
 
-  // Set a timeout to simulate loading for TopCropIndia and TopCropsChart
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 4000); // 10 seconds
 
-    // Clean up timer on unmount
     return () => clearTimeout(timer);
   }, []);
 
@@ -38,7 +38,7 @@ const Main = () => {
       <main className="main-layout">
         
         <div className="weather-info">
-          <Link
+          {/* <Link
             to="/weather"
             onClick={() => {
               if (typeof setShowOverlay === "function") {
@@ -49,16 +49,11 @@ const Main = () => {
             <BiRightTopArrowCircle
               style={{ fontSize: "30px", color: "grey" }}
             />
-          </Link>
+          </Link> */}
           <WeatherWidget />
         </div>
 
         <div className="my-farms">
-          <Link to="/my-farms">
-            <BiRightTopArrowCircle
-              style={{ fontSize: "30px", color: "grey" }}
-            />
-          </Link>
           <MyFarms userId={userId} />
         </div>
 
@@ -70,7 +65,7 @@ const Main = () => {
           </Link>
           <div className="insightsWrapper">
             {isLoading ? (
-              <Loader /> // Show a single loader while components are loading
+              <Loader /> 
             ) : (
               <>
                 <div className="market-info">
@@ -84,6 +79,9 @@ const Main = () => {
                 </div>
               </>
             )}
+            {/* <div className="chat-bot">
+              <ChatBot/>
+            </div> */}
           </div>
         </div>
 

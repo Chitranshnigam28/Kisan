@@ -5,7 +5,7 @@
 }
 
 .empty-farms-title {
-  font-size: 2rem; /* Reduced font size */
+  font-size: 2rem; 
   color: #2e7d32;
   margin-bottom: 8px;
   font-weight: bold;
@@ -17,7 +17,7 @@
 }
 
 .empty-farms-message {
-  font-size: 1rem; /* Reduced font size */
+  font-size: 1rem; 
   color: #555;
   margin-bottom: 18px;
   line-height: 1.4;
@@ -50,10 +50,9 @@
 
 .empty-farms-background-video {
   width: 100%;
-  max-width: 400px; /* Increased max width */
-  max-height: 300px; /* Increased max height */
+  max-width: 400px; 
+  max-height: 300px; 
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   object-fit: cover;
 }
 

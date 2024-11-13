@@ -32,8 +32,10 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
-import EmptyFarms from "../Farms/EmptyFarms";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import EmptyFarms from "./EmptyFarms";
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
@@ -47,6 +49,8 @@ const firebaseConfig = {
 // Initialize Firebase with npm package
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
+
+
 
 const cropNameIcons = {
   Wheat: WheatIcon,
@@ -172,15 +176,16 @@ const AddFarms = () => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
 
-    // Generate a preview URL using FileReader
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPreviewURL(reader.result); // Set the preview URL
+        // Generate a preview URL using FileReader
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewURL(reader.result); // Set the preview URL
+        };
+        if (selectedFile) {
+            reader.readAsDataURL(selectedFile); // Read the file as a data URL
+        }
+
     };
-    if (selectedFile) {
-      reader.readAsDataURL(selectedFile); // Read the file as a data URL
-    }
-  };
 
   const handleFileChange = (e) => {
     setFarmData((prevState) => ({
@@ -275,47 +280,46 @@ const AddFarms = () => {
     resetForm();
   };
 
-  return (
-    <div className="addFarmContainer container my-5">
-      <h2 className="mb-4">Add a New Farm</h2>
-      <h5 className="mb-5">
-        Create an account to access and start to set up your farm and garden.
-      </h5>
-      <form onSubmit={handleSubmit}>
-        <div
-          className={`widget-border ${currentStep === 1 ? "half" : "full"}`}
-        />
+    return (
+        <div className='addFarmContainer container my-5'>
+            <h2 className="mb-4">Add a New Farm</h2>
+            <h5 className="mb-5">Create an account to access and start to set up your farm and garden.</h5>
+            <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
+            <form onSubmit={handleSubmit}>
+                
 
         {/* Step 1 */}
         {currentStep === 1 && (
           <div>
             <h5 className="mb-4">Step 1 of 2</h5>
 
-            <div className="mb-3">
-              <input
-                type="file"
-                accept="image/*" // Accept only image files
-                onChange={handleImageChange}
-              />
-              <div className="up">
-                <IoIosCloudUpload
-                  type="button" // Optional, for styling purposes (using Bootstrap in this example)
-                  onClick={() => handleUpload()}
-                />
-              </div>
-            </div>
-            <div className="form-group mb-4">
-              <div className="mb-4">
-                <label className="form-label">Farm Name:</label>
-                <input
-                  type="text"
-                  name="farmName"
-                  className="form-control"
-                  value={farmData.farmName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                        <div className="mb-3">
+                            <input
+                            
+                                type="file"
+                                accept="image/*" 
+                                onChange={handleImageChange}
+                                id="fileInput"
+                                className="file-input"
+                            />
+                            <div className='up'>
+                                <IoIosCloudUpload type="button" 
+                                    onClick={() => handleUpload()} />
+                            </div>
+                        </div>
+                        <div className="form-group mb-4">
+                            <div className="mb-4">
+                                <label className="form-label">Farm Name:</label>
+                                <input
+                                    type="text"
+                                    name="farmName"
+                                    className="form-control"
+                                    value={farmData.farmName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+
 
               <div className="mb-4">
                 <label className="form-label">Size of Farm:</label>
@@ -397,21 +401,12 @@ const AddFarms = () => {
               </div>
             </div>
 
-            <div className="button-container">
-              <button type="button" className="setUpbtn" onClick={setUpLater}>Set up Later</button>
-              <button
-                type="button"
-                className="main-Btn"
-                onClick={() => setCurrentStep(2)}
-              >
-                Continue
-              </button>
-              <button type="button" className="sec-Btn" onClick={handleCancel}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
+                        <div className="button-container">
+                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue → </button>
+                            <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
+                        </div>
+                    </div>
+                )}
 
         {/* Step 2 */}
         {currentStep === 2 && (
@@ -602,19 +597,16 @@ const AddFarms = () => {
               </div>
             </div>
 
-            <div className="button-container">
-              <button type="submit" className="main-Btn">
-                Submit
-              </button>
-              <button type="button" className="sec-Btn" onClick={handleCancel}>
-                Back
-              </button>
-            </div>
-          </div>
-        )}
-      </form>
-    </div>
-  );
+                        <div className="button-container">
+                            <button type="submit" className="main-Btn" onClick={handleCancel}>Set Up Later → </button>
+                            <button type="submit" className="main-Btn" >Submit → </button>
+                            <button type="button" className="sec-Btn" onClick={handleCancel}>Back</button>
+                        </div>
+                    </div>
+                )}
+            </form>
+        </div>
+    );
 };
 
 export default AddFarms;
