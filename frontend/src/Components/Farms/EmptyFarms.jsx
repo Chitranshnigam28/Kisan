@@ -30,7 +30,7 @@ const EmptyFarms = () => {
           autoPlay
           loop
           muted
-          className="background-video"
+          className="empty-farms-background-video"
         ></video>
       </div>
     </div>
