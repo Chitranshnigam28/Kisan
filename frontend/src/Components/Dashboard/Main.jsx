@@ -17,11 +17,9 @@ const Main = () => {
   const userId = localStorage.getItem("userId");
   console.log(userId);
 
-  // State to manage location and loading states
   const [location, setLocation] = useState("Delhi");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Function to handle location change
   const handleLocationChange = (newLocation) => {
     setLocation(newLocation);
     console.log(`Location changed to: ${newLocation}`);

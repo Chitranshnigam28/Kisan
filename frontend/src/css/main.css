@@ -2,15 +2,10 @@
 
 .main-layout {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(10, 1fr);
   padding: 20px;
   background-color: #fafffb;
-
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 1rem;
+  align-items: center;
 }
 
 /* Weather Info */
@@ -78,9 +73,7 @@
   .farm-card img.placeholderImg {
     max-width: 100%;
     max-height: 80px;
-    /* Limits the height of the image */
     object-fit: contain;
-    /* Ensures image scales proportionally */
     border-radius: 5px;
   }
 }
@@ -191,3 +184,4 @@
     grid-column: span 12;
   }
 }
+

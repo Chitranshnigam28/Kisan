@@ -22,19 +22,16 @@ import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import MarketInsigtsDashboard from "./Components/MarketInsigtsDashboard";
 
-
-
-
 const userId = localStorage.getItem('userId');
 console.log(userId);
 
 const App = () => {
 
-  
+
   return (
     <Router>
       <ErrorBoundary>
-        <AppRoutes /> 
+        <AppRoutes />
       </ErrorBoundary>
     </Router>
 
@@ -52,7 +49,7 @@ const AppRoutes = () => {
 
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/'); 
+      navigate('/');
     }
   }, [navigate]);
 
@@ -65,18 +62,17 @@ const AppRoutes = () => {
         <Route path="/add-farm" element={<AddFarms />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/maps" element={<GMaps />} />
-          <Route path='/charts' element={<MarketInsigtsDashboard />} />
-          <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
-          <Route path="/translate" element={<TranslationComponent />} />
-          <Route path='/weather' element={<Weather />} />
-          <Route path="/add-farm" element={<AddFarms />} />
-          <Route path="/my-farms" element={<MyFarms />} />
-          <Route path='/funfacts' element={<FunFact />} />
-          <Route path='/tips' element={<Tips />} />
-          <Route path="/profilesetup" element={<ProfileSetup />} />
-
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/maps" element={<GMaps />} />
+        <Route path='/charts' element={<MarketInsigtsDashboard />} />
+        <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
+        <Route path="/translate" element={<TranslationComponent />} />
+        <Route path='/weather' element={<Weather />} />
+        <Route path="/add-farm" element={<AddFarms />} />
+        <Route path="/my-farms" element={<MyFarms />} />
+        <Route path='/funfacts' element={<FunFact />} />
+        <Route path='/tips' element={<Tips />} />
+        <Route path="/profilesetup" element={<ProfileSetup />} />
         </Route>
       </Routes>
     </>
