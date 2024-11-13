@@ -297,13 +297,13 @@ const AddFarms = () => {
                             <input
                             
                                 type="file"
-                                accept="image/*" // Accept only image files
+                                accept="image/*" 
                                 onChange={handleImageChange}
                                 id="fileInput"
                                 className="file-input"
                             />
                             <div className='up'>
-                                <IoIosCloudUpload type="button" // Optional, for styling purposes (using Bootstrap in this example)
+                                <IoIosCloudUpload type="button" 
                                     onClick={() => handleUpload()} />
                             </div>
                         </div>
@@ -598,6 +598,7 @@ const AddFarms = () => {
             </div>
 
                         <div className="button-container">
+                            <button type="submit" className="main-Btn" onClick={handleCancel}>Set Up Later → </button>
                             <button type="submit" className="main-Btn" >Submit → </button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Back</button>
                         </div>
