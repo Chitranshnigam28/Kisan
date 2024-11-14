@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
+import FirstPage from "./Components/ProfileSetup/FirstPage";
+import SecondPage from "./Components/ProfileSetup/SecondPage";
 
 
 
@@ -75,6 +77,8 @@ const AppRoutes = () => {
           <Route path='/funfacts' element={<FunFact />} />
           <Route path='/tips' element={<Tips />} />
           <Route path="/profilesetup" element={<ProfileSetup />} />
+          <Route path="/first" element={<FirstPage />} />
+          <Route path="/second" element={<SecondPage />} />
 
         </Route>
       </Routes>
