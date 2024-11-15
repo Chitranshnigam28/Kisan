@@ -1,19 +1,37 @@
-.allContainer{
+.allContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.content2 {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.apexcharts-toolbar,
+.apexcharts-tooltip,
+.apexcharts-menu-icon,
+.apexcharts-reset-icon,
+.apexcharts-zoom-icon,
+.apexcharts-zoomin-icon,
+.apexcharts-zoomout-icon {
+  display: none;
+}
+
+.top-crop-title-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 2rem;
+}
+.top-crop-title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 1000px) {
+  .allContainer {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-}
-.content2{
-    display: flex;
-    flex-flow: column nowrap;
-}
-
-.apexcharts-toolbar, .apexcharts-tooltip, .apexcharts-menu-icon, .apexcharts-reset-icon, .apexcharts-zoom-icon, .apexcharts-zoomin-icon, .apexcharts-zoomout-icon{
-    display: none;
+    grid-template-columns: repeat(1, 1fr);
   }
-
-@media only screen and (max-width:1000px) {
-    .allContainer{
-        display: grid;
-        grid-template-columns: repeat(1,1fr);
-    }
 }

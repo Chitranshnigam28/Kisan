@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import "../css/weatherWidget.css";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import axios from "axios";
+import SimpleLoader from "./SimpleLoader";
 
 const getCurrentDate = () => format(new Date(), "do MMMM yyyy, EEEE");
 
@@ -116,8 +117,8 @@ function WeatherWidget({ showSearch = true }) {
         onClick={() => navigate("/weather")}
       >
         {loading ? (
-          <p>Loading...</p>
-        ) : (
+          <SimpleLoader />
+) : (
           weather && (
             <div className="widget-content">
               <div className="locationSearchWrapper">

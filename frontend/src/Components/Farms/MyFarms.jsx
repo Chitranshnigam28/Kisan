@@ -40,6 +40,7 @@ import AddFarms from "./AddFarms";
 import EmptyFarms from "./EmptyFarms";
 import Header from './../Dashboard/Header';
 import { Footer } from './../Dashboard/Footer';
+import SimpleLoader from '../SimpleLoader';
 
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
@@ -429,7 +430,7 @@ const MyFarms = () => {
     }
   };
 
-  if (loading) return <p>{getTranslatedHeading('loadingData')}</p>;
+  if (loading) return <SimpleLoader />;
   if (error) return <p>Error: {error}</p>;
 
   return (

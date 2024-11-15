@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import ComponentPriceGraph from "./Components/CropPriceGraph";
+// import ComponentPriceGraph from "./Components/CropPriceGraph";
 import ProfileSetup from "./Components/ProfileSetup";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import GMaps from "./Components/GMaps";
