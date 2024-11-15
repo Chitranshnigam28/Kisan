@@ -46,7 +46,7 @@
     border-radius: 8px;
 }
 
-.button-container {
+.button-con{
     display: grid;
     gap: 10px;
     width: 100%;

@@ -15,7 +15,7 @@ const FirstPage = ({ imageUrl }) => {
     };
 
     return (
-        <div className="welcome-container">
+        <div className="welcome-con">
             <div className="welcome-content">
                 <h1>Welcome to Kisan</h1>
                 <p>

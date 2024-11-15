@@ -285,7 +285,7 @@ const AddFarms = () => {
         resetForm();
     };
 
-    const farmAdded = ()=>{
+    const farmAdded = () => {
         navigate('/')
     }
 
@@ -296,7 +296,7 @@ const AddFarms = () => {
             <h5 className="mb-5">Create an account to access and start to set up your farm and garden.</h5>
             <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
             <form onSubmit={handleSubmit}>
-                
+
 
                 {/* Step 1 */}
                 {currentStep === 1 && (
@@ -306,21 +306,23 @@ const AddFarms = () => {
 
                         <div className="mb-3">
                             <input
-                            
                                 type="file"
-                                accept="image/*" // Accept only image files
-                                onChange={handleImageChange}
+                                accept="image/*"
+                                onChange={(e) => {
+                                    handleImageChange(e);
+                                    handleUpload();
+                                }}
                                 id="fileInput"
                                 className="file-input"
+                                style={{ display: 'none' }} // Hide the default input
                             />
-                            <div className='up'>
-                                <IoIosCloudUpload type="button" // Optional, for styling purposes (using Bootstrap in this example)
-                                    onClick={() => handleUpload()} />
+                            <div className="up" onClick={() => document.getElementById('fileInput').click()}>
+                                <IoIosCloudUpload /> {/* Icon as "choose image" button */}
                             </div>
                         </div>
                         <div className="form-group mb-4">
                             <div className="mb-4">
-                                <label className="form-label">Farm Name:</label>
+                                <label className="form-label">Enter your Farm Name:</label>
                                 <input
                                     type="text"
                                     name="farmName"
@@ -333,7 +335,7 @@ const AddFarms = () => {
 
 
                             <div className="mb-4">
-                                <label className="form-label">Size of Farm:</label>
+                                <label className="form-label">How large is your farm?</label>
                                 <input
                                     type="text"
                                     name="sizeOfFarm"
@@ -345,7 +347,7 @@ const AddFarms = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="form-label">Location:</label>
+                                <label className="form-label">Where is your farm located?</label>
                                 <select
                                     name="location"
                                     className="form-select"
@@ -396,7 +398,7 @@ const AddFarms = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="form-label">Last Crop Sowed:</label>
+                                <label className="form-label">What crop did you last sowed?</label>
                                 <input
                                     type="text"
                                     name="last_crop_sowed"
@@ -422,7 +424,7 @@ const AddFarms = () => {
 
                         {/* Soil Quality */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Soil Quality:</label>
+                            <label className="form-label">How is your Soil Quality?</label>
                             <div className="button-group">
                                 {["Low", "Moderate", "High"].map((quality) => (
                                     <button
@@ -462,7 +464,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="form-grp mb-4">
-                            <label className="form-label">Crop Name:</label>
+                            <label className="form-label">What Crop are you going to grow?</label>
                             <div className="button-group">
                                 {[
                                     { name: "Wheat", emoji: "🌾" },
@@ -492,7 +494,7 @@ const AddFarms = () => {
 
                         {/* Soil Type */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Soil Type:</label>
+                            <label className="form-label">Choose your Soil Type:</label>
                             <div className="button-group">
                                 {["Clay", "Sandy", "Loamy", "Silt"].map((soil) => (
                                     <button
@@ -540,7 +542,7 @@ const AddFarms = () => {
 
                         {/* Farming Method */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Farming Method:</label>
+                            <label className="form-label">Choose your Farming Method:</label>
                             <div className="button-group">
                                 {["Organic", "Conventional", "Agroforestry", "Permaculture"].map((method) => (
                                     <button
@@ -558,7 +560,7 @@ const AddFarms = () => {
 
                         {/* Water Source */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Water Source:</label>
+                            <label className="form-label">Choose your Water Source:</label>
                             <div className="button-group">
                                 {["Well", "River", "Rainwater", "Irrigation", "Canal", "Lake", "Borewell", "Municipal Supply"].map((source) => (
                                     <button

@@ -286,9 +286,10 @@ const AddFarms = () => {
         resetForm();
     };
 
-    const farmAdded = ()=>{
+    const farmAdded = () => {
         navigate('/')
     }
+
 
 
     return (
@@ -297,7 +298,7 @@ const AddFarms = () => {
             <h5 className="mb-5">Create an account to access and start to set up your farm and garden.</h5>
             <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
             <form onSubmit={handleSubmit}>
-                
+
 
                 {/* Step 1 */}
                 {currentStep === 1 && (
@@ -307,16 +308,18 @@ const AddFarms = () => {
 
                         <div className="mb-3">
                             <input
-                            
                                 type="file"
-                                accept="image/*" // Accept only image files
-                                onChange={handleImageChange}
+                                accept="image/*"
+                                onChange={(e) => {
+                                    handleImageChange(e);
+                                    handleUpload();
+                                }}
                                 id="fileInput"
                                 className="file-input"
+                                style={{ display: 'none' }} // Hide the default input
                             />
-                            <div className='up'>
-                                <IoIosCloudUpload type="button" // Optional, for styling purposes (using Bootstrap in this example)
-                                    onClick={() => handleUpload()} />
+                            <div className="up" onClick={() => document.getElementById('fileInput').click()}>
+                                <IoIosCloudUpload /> {/* Icon as "choose image" button */}
                             </div>
                         </div>
                         <div className="form-group mb-4">
