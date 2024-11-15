@@ -55,63 +55,65 @@ const MyFarms = () => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
+
   useEffect(() => {
     const fetchFarms = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setError("Token not found");
-          return;
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                setError("Token not found");
+                return;
+            }
+
+            const response = await axios.get("http://localhost:5001/api/farms", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const userFarms = response.data.filter((farm) => farm.owner === userId);
+            setFarms(userFarms);
+
+            // Only set selectedFarm if it’s not already set
+            if (!selectedFarm && userFarms.length > 0 && location.pathname === "/my-farms") {
+                setSelectedFarm(userFarms[0]);
+            }
+        } catch (err) {
+            console.error("Error fetching farms:", err);
+            setError(err.response ? err.response.data.message : err.message);
+        } finally {
+            setLoading(false);
         }
-
-        const response = await axios.get("http://localhost:5001/api/farms", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const userFarms = response.data.filter((farm) => farm.owner === userId);
-        setFarms(userFarms);
-
-        // Set selected farm only if it’s not already set
-        if (!selectedFarm && userFarms.length > 0 && location.pathname === "/my-farms") {
-          setSelectedFarm(userFarms[0]);
-        }
-      } catch (err) {
-        console.error("Error fetching farms:", err);
-        setError(err.response ? err.response.data.message : err.message);
-      } finally {
-        setLoading(false);
-      }
     };
 
     fetchFarms();
-  }, [userId, location.pathname]);
+}, [userId, location.pathname, selectedFarm]);
 
   useEffect(() => {
     if (!selectedFarm) return;
 
     const loadPriceData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get("http://localhost:5001/api/historical-price", {
-          params: {
-            crop_name: selectedFarm.cropName,
-            last_crop_sowed: selectedFarm.last_crop_sowed,
-          },
-        });
+        try {
+            setLoading(true);
+            const response = await axios.get("http://localhost:5001/api/historical-price", {
+                params: {
+                    crop_name: selectedFarm.cropName,
+                    last_crop_sowed: selectedFarm.last_crop_sowed,
+                },
+            });
 
-        setPriceData(response.data.crops);
-      } catch (error) {
-        console.error("Error fetching historical price data:", error);
-        setError("Failed to load historical price data.");
-      } finally {
-        setLoading(false);
-      }
+            setPriceData(response.data.crops);
+        } catch (error) {
+            console.error("Error fetching historical price data:", error);
+            setError("Failed to load historical price data.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     loadPriceData();
-  }, [selectedFarm]);
+}, [selectedFarm]); // Only trigger this when selectedFarm changes
+
 
   useEffect(() => {
     if (selectedFarm) {
@@ -346,68 +348,6 @@ const MyFarms = () => {
       default:
         return "🌿"; // Default icon for any undefined crop
     }
-  };
-
-  const placeholderData = [
-    {
-      crop_name: "Loading...",
-      months: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Sept",
-        "Oct",
-      ],
-      prices: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    },
-  ];
-
-  const chartOptions = {
-    series:
-      priceData || loading
-        ? [
-          {
-            name: priceData
-              ? priceData[0].crop_name
-              : placeholderData[0].crop_name,
-            data: priceData ? priceData[0].prices : placeholderData[0].prices,
-          },
-          {
-            name: priceData
-              ? priceData[1].crop_name
-              : placeholderData[0].crop_name,
-            data: priceData ? priceData[1].prices : placeholderData[0].prices,
-          },
-        ]
-        : [],
-    options: {
-      chart: {
-        type: "area",
-        height: 350,
-      },
-      xaxis: {
-        categories: priceData ? priceData[0].months : placeholderData[0].months,
-        title: {
-          text: "Months (2024)",
-        },
-      },
-      stroke: {
-        curve: "smooth",
-      },
-      tooltip: {
-        x: {
-          format: "MMM YYYY",
-        },
-      },
-      fill: {
-        opacity: 0.5,
-      },
-      colors: ["#28a745", "#8B4513"],
-    },
   };
 
   if (loading) return <SimpleLoader />;
