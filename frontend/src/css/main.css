@@ -47,19 +47,11 @@
   border-radius: 10px;
 }
 .dashboard-marketview-part {
-  grid-column: span 9;
+  /* grid-column: span 9; */
+  grid-column: 1/9;
   padding: 20px;
   border-radius: 10px;
 }
-
-/* .market-info,
-.top-crops {
-  display: flex;
-}
-
-.market-info {
-  margin-right: 3rem;
-} */
 
 @media (max-width: 850px) {
   .weather-info,
@@ -107,9 +99,9 @@
 /* marketView section */
 .dashboard-marketview-part {
   position: relative;
-  /* display: flex; */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   background: white;
+  margin-left: 1.5rem;
 }
 
 .navigation-to-charts {
@@ -121,17 +113,35 @@
 .market-section-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  align-items: center;
+  /* align-items: center; */
+  align-items: baseline;
   justify-content: center;
 }
 
 .main-market-container {
   grid-column: span 2;
 }
-.topCropIndia-container {
+
+.funFacts-Container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-column: 10 / 11;
+  align-self: baseline;
+  margin-top: 0.2rem;
 }
 
-.topCropChart-container {
+.topCropIndia-container{
+  grid-column: 1 / 2;
+}
+
+.LinkToCharts{
+  grid-column: 2/ 3;
+}
+
+h4{
+  font-weight: 500;
+  line-height: 1.2
 }
 
 @media only screen and (max-width: 1000px) {

@@ -181,108 +181,105 @@ const TopCropsChart = ({ onLocationChange }) => {
   const chartData =
     topCrops.length > 0
       ? {
-          series: topCrops.map((crop) => crop?.percentage ?? 0),
-          options: {
-            chart: {
-              type: "donut",
-              height: 350,
-            },
-            // title: {
-            //   text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`,
-            //   align: 'center',
-            // },
-            labels: translatedData
-              ? translatedData.cropNames
-              : topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
-            legend: { position: "bottom" },
-            plotOptions: {
-              pie: {
-                expandOnClick: true,
-                customScale: 1,
-                donut: {
-                  size: "70%",
-                  labels: {
+        series: topCrops.map((crop) => crop?.percentage ?? 0),
+        options: {
+          chart: {
+            type: "donut",
+            height: 350,
+          },
+          // title: {
+          //   text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`,
+          //   align: 'center',
+          // },
+          labels: translatedData
+            ? translatedData.cropNames
+            : topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
+          legend: { position: "bottom" },
+          plotOptions: {
+            pie: {
+              expandOnClick: true,
+              customScale: 1,
+              donut: {
+                size: "70%",
+                labels: {
+                  show: true,
+                  name: {
                     show: true,
-                    name: {
-                      show: true,
-                      fontSize: "22px",
-                      color: undefined,
-                      offsetY: 5,
-                    },
-                    value: {
-                      show: false,
-                    },
+                    fontSize: "22px",
+                    color: undefined,
+                    offsetY: 5,
+                  },
+                  value: {
+                    show: false,
                   },
                 },
               },
             },
-            fill: {
-              type: "gradient",
-              gradient: {
-                shade: "light",
-                type: "vertical",
-                shadeIntensity: 0.5,
-                gradientToColors: [
-                  "#1B5E20",
-                  "#2E7D32",
-                  "#43A047",
-                  "#66BB6A",
-                  "#81C784",
-                ],
-                stops: [0, 100, 100, 100, 100],
-              },
-            },
-            colors: ["#1B5E20", "#2E7D32", "#43A047", "#66BB6A", "#81C784"],
           },
-        }
+          fill: {
+            type: "gradient",
+            gradient: {
+              shade: "light",
+              type: "vertical",
+              shadeIntensity: 0.5,
+              gradientToColors: [
+                "#1B5E20",
+                "#2E7D32",
+                "#43A047",
+                "#66BB6A",
+                "#81C784",
+              ],
+              stops: [0, 100, 100, 100, 100],
+            },
+          },
+          colors: ["#1B5E20", "#2E7D32", "#43A047", "#66BB6A", "#81C784"],
+        },
+      }
       : {
-          series: defaultCrops.map((crop) => crop.percentage),
-          options: {
-            labels: defaultCrops.map((crop) => crop.crop_name),
-            chart: {
-              type: "donut",
-              height: 350,
-            },
-            // title: {
-            //   text: `Top Selling Crops in Delhi`,
-            //   align: 'center',
-            // },
-            fill: {
-              type: "gradient",
-              gradient: {
-                shade: "dark",
-                type: "vertical",
-                shadeIntensity: 0.5,
-                gradientToColors: [
-                  "#1B5E20",
-                  "#2E7D32",
-                  "#43A047",
-                  "#66BB6A",
-                  "#81C784",
-                ],
-                stops: [0, 100, 100, 100, 100],
-              },
-            },
-            colors: ["#1B5E20", "#2E7D32", "#43A047", "#66BB6A", "#81C784"],
+        series: defaultCrops.map((crop) => crop.percentage),
+        options: {
+          labels: defaultCrops.map((crop) => crop.crop_name),
+          chart: {
+            type: "donut",
+            height: 350,
           },
-        };
+
+          fill: {
+            type: "gradient",
+            gradient: {
+              shade: "dark",
+              type: "vertical",
+              shadeIntensity: 0.5,
+              gradientToColors: [
+                "#1B5E20",
+                "#2E7D32",
+                "#43A047",
+                "#66BB6A",
+                "#81C784",
+              ],
+              stops: [0, 100, 100, 100, 100],
+            },
+          },
+          colors: ["#1B5E20", "#2E7D32", "#43A047", "#66BB6A", "#81C784"],
+        },
+      };
 
   return (
     <div className="top-crop-container">
-      {/* <h1> text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`</h1> */}
       <div className="top-crop-title-container">
-      <img
+        <img
           src={starIcon}
           alt="Top crop"
           className="top-crop-icon"
         />
-        <h1 className="top-crop-title">
+        <br/>
+        <h4 className="top-crop-title">
           {translatedData
             ? translatedData.title
             : `Top Selling Crops in ${location}`}
-        </h1>
+        </h4>
       </div>
-      {/* Only show the dropdown on the /charts route */}
+      
       {currentLocation.pathname === "/charts" && (
         <div className="location-topCrop">
           <label htmlFor="state-dropdown">
@@ -298,7 +295,7 @@ const TopCropsChart = ({ onLocationChange }) => {
               ([originalState, translatedState]) => (
                 <option key={originalState} value={originalState}>
                   {translatedState || originalState}{" "}
-                  {/* Fallback to original if translation is missing */}
+                  
                 </option>
               )
             )}

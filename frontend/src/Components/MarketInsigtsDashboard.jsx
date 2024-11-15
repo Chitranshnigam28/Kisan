@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { BsArrowUpRightCircle } from "react-icons/bs";
 import CropPriceGraph from "./CropPriceGraph";
 import { Footer } from "./Dashboard/Footer";
 import Header from "./Dashboard/Header";
@@ -6,7 +8,6 @@ import { useLocation } from "react-router-dom";
 import TopCropsChart from "./TopCropChart";
 import TopCropIndia from "./TopCropIndia";
 import Loader from "./CropLoader";
-// import '../css/dashboard.css'
 import "../css/main.css";
 import Demo from "./Demo";
 
@@ -30,6 +31,9 @@ const MarketInsigtsDashboard = () => {
       <div className="market-section-container">
         {weblocation.pathname === "/" ? (
           <>
+          <Link to="charts" className="LinkToCharts">
+            <BsArrowUpRightCircle style={{ fontSize: "30px", color: "grey", float: "right" }} />
+          </Link>
             <div className="topCropIndia-container">
               <TopCropIndia />
             </div>
