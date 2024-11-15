@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-// import "./SingleTips";
-import SingleTips from "./SingleTips";
-import marketInsights from "../Assets/marketinsights.svg";
 import Demo from "./Demo";
+import SimpleLoader from "./SimpleLoader"
 
 
-
-const CropPriceChart = (crop) => {
+const CropPriceChart = (crop,{cropName, handleCropName}) => {
   const {getCropData} = crop
   console.log(
     crop,
     "safasfssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
   );
   const [cropPrices, setCropPrices] = useState([]);
-  const [cropName, setCropName] = useState("");
   const [selectedYear, setSelectedYear] = useState("2023");
   const [loading, setLoading] = useState(true);
   const [nameCrop, setNameCrop] = useState(crop);
@@ -160,9 +156,7 @@ const CropPriceChart = (crop) => {
     },
   };
 
-  const handleCropName = (e) => {
-    setCropName(e.target.value);
-  };
+ 
 
   const handleYearChange = (e) => {
     setSelectedYear(e.target.value);
@@ -176,19 +170,12 @@ const CropPriceChart = (crop) => {
 
   return (
     <>
-      <div className="container">
-        <div className="title">
-          <img
-            src={marketInsights}
-            alt="Market Insights"
-            className="market-insights-icon"
-          />{" "}
-          <h1>Market Insights</h1>
+      <div className="container-tips-graph">
           {/* <Demo /> */}
-        </div>
 
         {loading ? (
-          <p>Loading...</p>
+          // <p>Loading...</p>
+          <SimpleLoader />
         ) : (
           <div className="allContainer">
             <div className="content">
@@ -229,12 +216,11 @@ const CropPriceChart = (crop) => {
               </div>
             </div>
 
-            <div className="content2">
+            {/* <div className="content2">
               <div className="tips">
-
                 <SingleTips cropName={cropName} />
               </div>
-            </div>
+            </div> */}
           </div>
         )}
       </div>

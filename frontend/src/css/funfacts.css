@@ -16,11 +16,9 @@
   position: relative;
   padding: 20px;
   margin-right: 1rem;
-
 }
 
 .funfacts-container::after {
-
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -28,8 +26,6 @@
   height: auto;
   opacity: 0.8;
 }
-
-
 
 .funFactsDiv{
   align-self: normal;

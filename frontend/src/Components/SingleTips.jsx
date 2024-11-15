@@ -1,41 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-// import '../css/tipsSlider.css'; 
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+// import '../css/tipsSlider.css';
 
 const SingleTips = ({ cropName }) => {
   const [tipsData, setTipsData] = useState([]);
   const [filteredTip, setFilteredTip] = useState(null);
   const [translatedTip, setTranslatedTip] = useState(null);
-  const [error, setError] = useState('');
-  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
+  const [error, setError] = useState("");
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
 
   const fetchTips = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/tips');
+      const response = await axios.get("http://localhost:5001/api/tips");
       const data = response.data;
 
       if (Array.isArray(data)) {
         const duplicatedData = [...data, ...data, ...data];
         setTipsData(duplicatedData);
       } else {
-        console.error('Data is not an array:', data);
+        console.error("Data is not an array:", data);
         setTipsData([]);
       }
     } catch (error) {
-      console.error('Error fetching tips:', error);
-      setError('Failed to fetch tips');
+      console.error("Error fetching tips:", error);
+      setError("Failed to fetch tips");
     }
   };
 
   const filterTips = () => {
     if (cropName) {
       const cropTips = tipsData.filter(
-        tip => tip && tip.crop_name && tip.crop_name.toLowerCase() === cropName.toLowerCase()
+        (tip) =>
+          tip &&
+          tip.crop_name &&
+          tip.crop_name.toLowerCase() === cropName.toLowerCase()
       );
       setFilteredTip(cropTips.length > 0 ? cropTips[0] : null);
     } else {
       const wheatTip = tipsData.find(
-        tip => tip && tip.crop_name && tip.crop_name.toLowerCase() === 'wheat'
+        (tip) => tip && tip.crop_name && tip.crop_name.toLowerCase() === "wheat"
       );
       setFilteredTip(wheatTip || null);
     }
@@ -44,7 +49,9 @@ const SingleTips = ({ cropName }) => {
   const translateTip = async (tip) => {
     try {
       const cropNameTranslation = await translateText(tip.crop_name, language);
-      const tipsTranslation = await Promise.all(tip.tips.map(tipText => translateText(tipText, language)));
+      const tipsTranslation = await Promise.all(
+        tip.tips.map((tipText) => translateText(tipText, language))
+      );
       const translatedTip = {
         ...tip,
         crop_name: cropNameTranslation,
@@ -58,7 +65,7 @@ const SingleTips = ({ cropName }) => {
 
   const translateText = async (text, targetLanguage) => {
     try {
-      const response = await axios.post('http://localhost:5001/api/translate', {
+      const response = await axios.post("http://localhost:5001/api/translate", {
         text: text,
         targetLanguage: targetLanguage,
       });
@@ -88,11 +95,11 @@ const SingleTips = ({ cropName }) => {
       {error && <div>{error}</div>}
       {translatedTip ? (
         <div key={translatedTip._id} className="tip-card">
-          <div className="icon-container">
-            <span className="tip-icon">💡</span>
-          </div>
           <div className="tip-content">
-            <h3 className="crop-name">{translatedTip.crop_name}</h3>
+            <div className="icon-cropName">
+              <span className="tip-icon">💡</span>
+              <h3 className="crop-name">{translatedTip.crop_name}</h3>
+            </div>
             {translatedTip.tips.map((tipText, tipIndex) => (
               <p key={tipIndex}>{tipText}</p>
             ))}

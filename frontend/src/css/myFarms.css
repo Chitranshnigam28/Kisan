@@ -36,9 +36,6 @@
    -webkit-overflow-scrolling: touch;
  }
 
- .farms-cards-container::-webkit-scrollbar {
-   display: none;
- }
 
  .farm-card {
    width: 20rem;
@@ -72,6 +69,37 @@
    margin-top: 2rem;
  }
 
+ .farms-cards-container::-webkit-scrollbar,
+ .farms-card-container::-webkit-scrollbar {
+   display: none;
+ }
+
+ .farms-card-container {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+ }
+
+ .farms-card-paragraph-container {
+   width: 100%;
+ }
+
+ .farms-card-paragraph {
+   width: 100%;
+   font-size: 1rem;
+   margin: 0;
+   padding: 10px;
+ }
+
+ .farms-cards-container {
+   display: flex;
+   gap: 10px;
+   overflow-x: auto;
+   padding-bottom: 10px;
+   white-space: nowrap;
+   -webkit-overflow-scrolling: touch;
+ }
+
  .farms-cards-container::-webkit-scrollbar {
    display: none;
  }
@@ -99,7 +127,7 @@
  .myFarms_info {
    display: grid;
    grid-template-columns: 2fr 0.8fr;
-   box-shadow: 5px 10px 50px rgba(150, 199, 61, 0.25);
+   /* box-shadow: 5px 10px 50px rgba(150, 199, 61, 0.25); */
  }
 
  .selected-farm {
@@ -135,7 +163,9 @@
  }
 
  .sub1 img {
+   width: 100%;
    height: 100%;
+   object-fit: cover;
  }
 
  .btn-outline-warning,
@@ -231,7 +261,6 @@
    display: flex;
    align-items: center;
    padding-top: 2rem;
-   /* padding: 20px; */
    background-color: #F7F7F7;
    border-radius: 30px;
    color: black;
@@ -256,6 +285,10 @@
    text-align: left;
  }
 
+ .boxHeading {
+   text-align: center;
+ }
+
  .boxHeading::first-line {
    color: #96C73D;
    font-weight: 600;
@@ -273,6 +306,12 @@
    align-content: center;
  }
 
+ .soilBox h2,
+ .waterBox h2,
+ .farmBox h2 {
+   justify-self: center;
+ }
+
  .full-width-text {
    width: 100%;
    margin-bottom: 1rem;
@@ -283,8 +322,8 @@
    opacity: 0.8;
    text-align: center;
    color: #333;
-
  }
+
 
  .totalBox {
    justify-content: baseline;
@@ -292,6 +331,11 @@
 
  .my-farms .container {
    margin: 0;
+ }
+
+ .splineChart h4 {
+   margin-left: 1rem;
+   text-align: center;
  }
 
  .apexcharts-toolbar,
@@ -311,3 +355,23 @@
    border-bottom-left-radius: var(--bs-border-radius) !important;
    border-bottom-right-radius: var(--bs-border-radius) !important;
  }
+
+ @media screen and (max-width: 1300px) {
+   .myFarms_info {
+     grid-template-columns: repeat(1, 1fr);
+   }
+ }
+
+
+ @media screen and (max-width: 1000px) {
+   .selected-farm {
+     grid-template-columns: repeat(1, 1fr);
+   }
+ }
+
+ @media (max-width: 768px) {
+  .sub1 img {
+     height: 300px; 
+     object-fit: cover;
+  }
+}

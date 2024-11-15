@@ -1,13 +1,12 @@
 /* Container styling */
-.container {
+/* .container {
   width: 90%;
   max-width: 800px;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   margin-top: 40px;
-}
+} */
 
 /* Title styling */
 .title {
@@ -15,7 +14,6 @@
   align-items: baseline;
   justify-content: left;
   gap: 8px;
-  color: #2d5e2e;
   margin-left: 3rem;
 }
 
@@ -110,11 +108,11 @@ button[type="submit"]:hover {
 }
 
 /* Responsive Styling */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .container {
     width: 95%;
   }
   .title h1 {
     font-size: 1.5rem;
   }
-}
+} */

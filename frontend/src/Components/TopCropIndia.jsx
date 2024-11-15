@@ -217,7 +217,7 @@ const MarketInsights = () => {
       case "ਚਾਹ": // Punjabi translation for Tea
         return greenTeaImg;
       case "coffee":
-      case "कॉफ़ी": // Hindi translation for Coffee
+      case "कॉफी": // Hindi translation for Coffee
       case "ਕਾਫੀ": // Punjabi translation for Coffee
         return coffeeBeansImg;
       case "jowar":
@@ -259,7 +259,7 @@ const MarketInsights = () => {
 
   return (
     <div className="market-insights-container">
-      <h2 className="market-insights-title">
+      <h4 className="market-insights-title">
         <img
           src={marketInsights}
           alt="Market Insights"
@@ -270,7 +270,7 @@ const MarketInsights = () => {
           : language === "hi"
           ? "बाजार जानकारी"
           : "ਬਾਜਾਰ ਜਾਣਕਾਰੀ"}
-      </h2>
+      </h4>
       {translatedInsights.length > 0 ? (
         <ul className="market-insights-list">
           {translatedInsights.map((crop, index) => (

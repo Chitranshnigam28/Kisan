@@ -86,19 +86,20 @@ function Weather() {
   function getWeatherIcon(condition) {
     switch (condition) {
       case "Clear":
-        return <WiDaySunny size={64} color="#FFD700" />;
+        return <WiDaySunny size={64} color="#84B8EA" />; // Matches the sunny daytime color
       case "Clouds":
-        return <WiCloud size={64} color="#A9A9A9" />;
+        return <WiCloud size={64} color="#A9A9A9" />; // Matches the cloudy color
       case "Rain":
-        return <WiRain size={64} color="#1E90FF" />;
+        return <WiRain size={64} color="#627685" />; // Matches the rainy/hazy color
       case "Snow":
-        return <WiSnow size={64} color="#ADD8E6" />;
+        return <WiSnow size={64} color="#ADD8E6" />; // Light blue to represent snow
       case "Thunderstorm":
-        return <WiThunderstorm size={64} color="#00008B" />;
+        return <WiThunderstorm size={64} color="#1E3146" />; // Dark blue for stormy night representation
       default:
-        return <WiCloud size={64} color="#A9A9A9" />;
+        return <WiCloud size={64} color="#A9A9A9" />; // Matches default cloudy color
     }
   }
+  
 
   const getWeather = async () => {
     try {
@@ -143,6 +144,7 @@ function Weather() {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     getWeather();
