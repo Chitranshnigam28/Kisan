@@ -21,6 +21,7 @@
 .form-label {
     font-weight: 600;
     color: #555;
+    padding-top: 10px;
 }
 
 .form-control, .form-select {
@@ -155,12 +156,12 @@ button:hover, input[type="submit"]:hover {
 
 .button-container {
     display: flex; /* Enable Flexbox */
-    flex-wrap: wrap; /* Allow buttons to wrap onto the next line if necessary */
+    flex-direction: column;
     gap: 10px; /* Space between buttons */
     justify-content: center; /* Center the buttons horizontally */
     align-items: center; /* Center the buttons vertically within the container */
     padding: 20px; /* Add padding to the container for spacing around the buttons */
-    background-color: #f0f0f0; /* Change background color of the container (optional) */
+    background-color: transparent; /* Change background color of the container (optional) */
     border-radius: 10px; /* Optional: round the corners of the container */
 }
 
