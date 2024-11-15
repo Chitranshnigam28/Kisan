@@ -5,7 +5,7 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
   const prices = crops.map((item) => item.price);
   const months = crops.map((item) => item.month.slice(0, 3));
 
-  console.log(">>>>", crops)
+  console.log(">>>>", crops, cropName, selectedYear)
   const [series] = useState([{ name: "Price", data: prices }]);
   const [options] = useState({
     chart: {
@@ -78,4 +78,3 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
 };
 
 export default ApexLineChart;
-
