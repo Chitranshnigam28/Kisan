@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowUpRightCircle } from "react-icons/bs";
-import CropPriceGraph from "./CropPriceGraph";
+import CropPriceChart from "./CropPriceGraph";
 import { Footer } from "./Dashboard/Footer";
 import Header from "./Dashboard/Header";
 import { useLocation } from "react-router-dom";
 import TopCropsChart from "./TopCropChart";
 import TopCropIndia from "./TopCropIndia";
-import Loader from "./CropLoader";
 import "../css/main.css";
-import Demo from "./Demo";
 import marketInsights from "../Assets/marketinsights.svg";
 import SingleTips from "./SingleTips";
 
@@ -17,7 +15,8 @@ const MarketInsigtsDashboard = () => {
   const [location, setLocation] = useState("Delhi");
   const weblocation = useLocation();
   const [getCropAllData, setcropAllData] = useState([]);
-  const [cropName, setCropName] = useState("");
+  const [cropName, setCropName] = useState("Wheat");
+  const [selectedYear, setSelectedYear] = useState("2023");
 
   const handleLocationChange = (newLocation) => {
     setLocation(newLocation);
@@ -25,12 +24,15 @@ const MarketInsigtsDashboard = () => {
   };
 
   const handlegetCropdata = (data) => {
-    console.log(data, "chota --------------------------------");
     setcropAllData(data);
   };
 
-  const handleCropName = (e) => {
-    setCropName(e.target.value);
+  const handleCropNameChange = (newCropName) => {
+    setCropName(newCropName);
+  };
+
+  const handleYearChange = (newYear) => {
+    setSelectedYear(newYear);
   };
 
   return (
@@ -73,11 +75,18 @@ const MarketInsigtsDashboard = () => {
               </div>
               <div className="both-chart-container">
                 <div className="container-tips-graph">
-                  <CropPriceGraph
+                  {/* <CropPriceChart
                     crop="wheat"
                     getCropData={handlegetCropdata}
                     cropName={cropName}        // Pass cropName as a prop
-                    handleCropName={handleCropName} // Pass handleCropName as a prop
+                    handleCropName={handleCropNameChange} // Pass handleCropName as a prop
+                  /> */}
+                  <CropPriceChart
+                    getCropData={handlegetCropdata}
+                    cropName={cropName}
+                    selectedYear={selectedYear}
+                    onCropNameChange={handleCropNameChange}
+                    onYearChange={handleYearChange}
                   />
                 </div>
                 <div className="top-crop-container">

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-// import ComponentPriceGraph from "./Components/CropPriceGraph";
+import ComponentPriceGraph from "./Components/CropPriceGraph";
 import ProfileSetup from "./Components/ProfileSetup";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import GMaps from "./Components/GMaps";
@@ -20,7 +20,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
+import FirstPage from "./Components/ProfileSetup/FirstPage";
+import SecondPage from "./Components/ProfileSetup/SecondPage";
 import MarketInsigtsDashboard from "./Components/MarketInsigtsDashboard";
+
+
+
 
 const userId = localStorage.getItem('userId');
 console.log(userId);
@@ -62,17 +67,20 @@ const AppRoutes = () => {
         <Route path="/add-farm" element={<AddFarms />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/maps" element={<GMaps />} />
-        <Route path='/charts' element={<MarketInsigtsDashboard />} />
-        <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
-        <Route path="/translate" element={<TranslationComponent />} />
-        <Route path='/weather' element={<Weather />} />
-        <Route path="/add-farm" element={<AddFarms />} />
-        <Route path="/my-farms" element={<MyFarms />} />
-        <Route path='/funfacts' element={<FunFact />} />
-        <Route path='/tips' element={<Tips />} />
-        <Route path="/profilesetup" element={<ProfileSetup />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/maps" element={<GMaps />} />
+          <Route path='/charts' element={<MarketInsigtsDashboard />} />
+          <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
+          <Route path="/translate" element={<TranslationComponent />} />
+          <Route path='/weather' element={<Weather />} />
+          <Route path="/add-farm" element={<AddFarms />} />
+          <Route path="/my-farms" element={<MyFarms />} />
+          <Route path='/funfacts' element={<FunFact />} />
+          <Route path='/tips' element={<Tips />} />
+          <Route path="/profilesetup" element={<ProfileSetup />} />
+          <Route path="/first" element={<FirstPage />} />
+          <Route path="/second" element={<SecondPage />} />
+
         </Route>
       </Routes>
     </>
