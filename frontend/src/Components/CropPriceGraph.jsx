@@ -3,12 +3,22 @@ import Chart from "react-apexcharts";
 // import "./SingleTips";
 import SingleTips from "./SingleTips";
 import marketInsights from "../Assets/marketinsights.svg";
+import Demo from "./Demo";
 
-const CropPriceChart = ({ crop }) => {
+
+
+const CropPriceChart = (crop) => {
+  const {getCropData} = crop
+  console.log(
+    crop,
+    "safasfssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+  );
   const [cropPrices, setCropPrices] = useState([]);
   const [cropName, setCropName] = useState("");
   const [selectedYear, setSelectedYear] = useState("2023");
   const [loading, setLoading] = useState(true);
+  const [nameCrop, setNameCrop] = useState(crop);
+  const [filterPrice, setFilterPrice] = useState([]);
 
   const fetchCropPrices = async () => {
     try {
@@ -23,7 +33,7 @@ const CropPriceChart = ({ crop }) => {
       }
 
       const data = await response.json();
-      console.log("Fetched data:", data);
+      console.log("Fetched data++++++++++++++++++++++++++++++++:", data);
 
       const allPrices =
         data[0]?.historical_prices.flatMap((yearData) =>
@@ -35,6 +45,12 @@ const CropPriceChart = ({ crop }) => {
         ) || [];
 
       setCropPrices(allPrices);
+      const filteredPrices = allPrices.filter(
+        (item) => item.year === selectedYear
+      );
+      setFilterPrice(filteredPrices);
+      // getCropData("abcdddddddddddddddd")
+      console.log("Filtered Prices for year", selectedYear, filteredPrices);
     } catch (error) {
       console.error("Error fetching crop prices:", error);
     } finally {
@@ -44,84 +60,105 @@ const CropPriceChart = ({ crop }) => {
 
   useEffect(() => {
     fetchCropPrices();
-  }, [crop]);
+  }, [nameCrop]);
+
+
+  
+  useEffect(() => {
+    // console.log(filterPrice,"---------------filter---------------")
+    if (filterPrice.length > 0){
+      getCropData(filterPrice)
+    }
+  }, [filterPrice]);
 
   // Filter the data based on the selected year
-  const filteredPrices = cropPrices.filter(
-    (item) => item.year === selectedYear
-  );
-  console.log("Filtered Prices for year", selectedYear, filteredPrices);
 
-  const chartData = {
-    series: [
-      {
-        name: "Price",
-        data: filteredPrices.map((item) => item.price),
-      },
-    ],
-    options: {
-      chart: {
-        type: "line",
-        height: 350,
-        dropShadow: {
-          enabled: true,
-          color: "#000",
-          top: 10,
-          left: 0,
-          blur: 6,
-          opacity: 0.4,
-        },
-      },
-      title: {
-        text: `${cropName || "Wheat"} Prices in ${selectedYear}`,
-        align: "center",
-        style: {
-          color: "#003300", 
-          fontWeight: "bold",
-        },
-      },
-      xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Hardcoded months
-        labels: {
-          style: {
-            colors: "#003300", 
-          },
-        },
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: "#003300",
-          },
-        },
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shade: "dark",
-          type: "vertical",
-          shadeIntensity: 0.9,
-          gradientToColors: ["#003300", "#001a00"], // Very dark greens for gradient contrast
-          inverseColors: false,
-          opacityFrom: 0.9,
-          opacityTo: 0.5,
-          stops: [0, 100],
-        },
-      },
-      stroke: {
-        curve: "smooth",
-        colors: ["#004d00"], // Dark green line color
-        width: 3,
-      },
-      tooltip: {
-        theme: "dark",
-        style: {
-          fontSize: "13px",
-        },
-      },
-    },
-  };
-  
+  // const chartData = {
+  //   series: [
+  //     {
+  //       name: "Price",
+  //       // data: filterPrice.map((item) => {console.log(item.price,"item++++++++++++")
+  //       //   return item.price
+  //       // }),
+  //       data: [6,44,232,31,12,12,13,14]
+  //     },
+  //   ],
+  //   options: {
+  //     chart: {
+  //       id: 'realtime',
+  //       type: "line",
+  //       height: 350,
+  //       dropShadow: {
+  //         enabled: true,
+  //         color: "#000",
+  //         top: 10,
+  //         left: 0,
+  //         blur: 6,
+  //         opacity: 0.4,
+  //       },
+  //     },
+  //     title: {
+  //       text: `${cropName || "Wheat"} Prices in ${selectedYear}`,
+  //       align: "center",
+  //       style: {
+  //         color: "#003300",
+  //         fontWeight: "bold",
+  //       },
+  //     },
+  //     xaxis: {
+  //       categories: [
+  //         "Jan",
+  //         "Feb",
+  //         "Mar",
+  //         "Apr",
+  //         "May",
+  //         "Jun",
+  //         "Jul",
+  //         "Aug",
+  //         "Sep",
+  //         "Oct",
+  //         "Nov",
+  //         "Dec",
+  //       ],
+  //       labels: {
+  //         style: {
+  //           colors: "#003300",
+  //         },
+  //       },
+  //     },
+  //     yaxis: {
+  //       labels: {
+  //         style: {
+  //           colors: "#003300",
+  //         },
+  //       },
+  //     },
+  //     fill: {
+  //       type: "gradient",
+  //       gradient: {
+  //         shade: "dark",
+  //         type: "vertical",
+  //         shadeIntensity: 0.9,
+  //         gradientToColors: ["#003300", "#001a00"], // Very dark greens for gradient contrast
+  //         inverseColors: false,
+  //         opacityFrom: 0.9,
+  //         opacityTo: 0.5,
+  //         stops: [0, 100],
+  //       },
+  //     },
+  //     stroke: {
+  //       curve: "smooth",
+  //       colors: ["#004d00"], // Dark green line color
+  //       width: 3,
+  //     },
+  //     tooltip: {
+  //       theme: "dark",
+  //       style: {
+  //         fontSize: "13px",
+  //       },
+  //     },
+  //   },
+  // };
 
   const handleCropName = (e) => {
     setCropName(e.target.value);
@@ -147,6 +184,7 @@ const CropPriceChart = ({ crop }) => {
             className="market-insights-icon"
           />{" "}
           <h1>Market Insights</h1>
+          {/* <Demo /> */}
         </div>
 
         {loading ? (
@@ -182,18 +220,18 @@ const CropPriceChart = ({ crop }) => {
                   <option value="2022">2022</option>
                   <option value="2021">2021</option>
                 </select>
-                <Chart
+                {/* <Chart
                   options={chartData.options}
                   series={chartData.series}
                   type="line"
                   height={350}
-                />
+                /> */}
               </div>
             </div>
 
             <div className="content2">
-              
               <div className="tips">
+
                 <SingleTips cropName={cropName} />
               </div>
             </div>
@@ -201,7 +239,6 @@ const CropPriceChart = ({ crop }) => {
         )}
       </div>
     </>
-
   );
 };
 

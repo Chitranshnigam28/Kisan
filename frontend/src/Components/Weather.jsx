@@ -18,6 +18,7 @@ import { format } from "date-fns";
 import axios from "axios";
 import Header from './Dashboard/Header';
 import { Footer } from './Dashboard/Footer';
+import SimpleLoader from "./SimpleLoader";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -224,7 +225,8 @@ function Weather() {
         </div>
 
         {loading ? (
-          <p className="loading-text">{translatedContent.labels?.loading || "Loading..."}</p>
+          // <p className="loading-text">{translatedContent.labels?.loading || "Loading..."}</p>
+          <SimpleLoader />
         ) : (
           weather && (
             <div className="weather-main">
