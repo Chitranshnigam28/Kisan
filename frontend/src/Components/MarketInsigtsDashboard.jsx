@@ -45,9 +45,9 @@ const MarketInsigtsDashboard = () => {
             <>
               <Header />
               <Footer />
-              <div>
+              <div className="both-chart-container">
                 <CropPriceGraph crop="wheat" getCropData = {handlegetCropdata} />
-                {getCropAllData && getCropAllData.length>0  ? <Demo  crops = {getCropAllData}/>:<></>}
+                {/* {getCropAllData && getCropAllData.length>0  ? <Demo  crops = {getCropAllData}/>:<></>} */}
                 
                 <TopCropsChart />
               </div>

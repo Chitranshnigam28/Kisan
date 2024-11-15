@@ -91,3 +91,11 @@
   display: grid;
   grid-template-columns: 1.5fr 1fr;
 }
+
+/* .title {
+  justify-content: center;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+} */

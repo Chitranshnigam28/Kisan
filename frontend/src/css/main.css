@@ -167,10 +167,16 @@
 .main-market-container {
   grid-column: span 2;
 }
-.topCropIndia-container {
+/* .topCropIndia-container {
 }
 
 .topCropChart-container {
+} */
+
+
+
+.both-chart-container{
+  position: absolute;
 }
 
 @media only screen and (max-width: 1000px) {

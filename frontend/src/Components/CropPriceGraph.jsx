@@ -73,92 +73,92 @@ const CropPriceChart = (crop) => {
 
   // Filter the data based on the selected year
 
-  // const chartData = {
-  //   series: [
-  //     {
-  //       name: "Price",
-  //       // data: filterPrice.map((item) => {console.log(item.price,"item++++++++++++")
-  //       //   return item.price
-  //       // }),
-  //       data: [6,44,232,31,12,12,13,14]
-  //     },
-  //   ],
-  //   options: {
-  //     chart: {
-  //       id: 'realtime',
-  //       type: "line",
-  //       height: 350,
-  //       dropShadow: {
-  //         enabled: true,
-  //         color: "#000",
-  //         top: 10,
-  //         left: 0,
-  //         blur: 6,
-  //         opacity: 0.4,
-  //       },
-  //     },
-  //     title: {
-  //       text: `${cropName || "Wheat"} Prices in ${selectedYear}`,
-  //       align: "center",
-  //       style: {
-  //         color: "#003300",
-  //         fontWeight: "bold",
-  //       },
-  //     },
-  //     xaxis: {
-  //       categories: [
-  //         "Jan",
-  //         "Feb",
-  //         "Mar",
-  //         "Apr",
-  //         "May",
-  //         "Jun",
-  //         "Jul",
-  //         "Aug",
-  //         "Sep",
-  //         "Oct",
-  //         "Nov",
-  //         "Dec",
-  //       ],
-  //       labels: {
-  //         style: {
-  //           colors: "#003300",
-  //         },
-  //       },
-  //     },
-  //     yaxis: {
-  //       labels: {
-  //         style: {
-  //           colors: "#003300",
-  //         },
-  //       },
-  //     },
-  //     fill: {
-  //       type: "gradient",
-  //       gradient: {
-  //         shade: "dark",
-  //         type: "vertical",
-  //         shadeIntensity: 0.9,
-  //         gradientToColors: ["#003300", "#001a00"], // Very dark greens for gradient contrast
-  //         inverseColors: false,
-  //         opacityFrom: 0.9,
-  //         opacityTo: 0.5,
-  //         stops: [0, 100],
-  //       },
-  //     },
-  //     stroke: {
-  //       curve: "smooth",
-  //       colors: ["#004d00"], // Dark green line color
-  //       width: 3,
-  //     },
-  //     tooltip: {
-  //       theme: "dark",
-  //       style: {
-  //         fontSize: "13px",
-  //       },
-  //     },
-  //   },
-  // };
+  const chartData = {
+    series: [
+      {
+        name: "Price",
+        // data: filterPrice.map((item) => {console.log(item.price,"item++++++++++++")
+        //   return item.price
+        // }),
+        data: [6,44,232,31,12,12,13,14]
+      },
+    ],
+    options: {
+      chart: {
+        id: 'realtime',
+        type: "line",
+        height: 350,
+        dropShadow: {
+          enabled: true,
+          color: "#000",
+          top: 10,
+          left: 0,
+          blur: 6,
+          opacity: 0.4,
+        },
+      },
+      title: {
+        text: `${cropName || "Wheat"} Prices in ${selectedYear}`,
+        align: "center",
+        style: {
+          color: "#003300",
+          fontWeight: "bold",
+        },
+      },
+      xaxis: {
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
+        labels: {
+          style: {
+            colors: "#003300",
+          },
+        },
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: "#003300",
+          },
+        },
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          type: "vertical",
+          shadeIntensity: 0.9,
+          gradientToColors: ["#003300", "#001a00"], // Very dark greens for gradient contrast
+          inverseColors: false,
+          opacityFrom: 0.9,
+          opacityTo: 0.5,
+          stops: [0, 100],
+        },
+      },
+      stroke: {
+        curve: "smooth",
+        colors: ["#004d00"], // Dark green line color
+        width: 3,
+      },
+      tooltip: {
+        theme: "dark",
+        style: {
+          fontSize: "13px",
+        },
+      },
+    },
+  };
 
   const handleCropName = (e) => {
     setCropName(e.target.value);
@@ -220,12 +220,12 @@ const CropPriceChart = (crop) => {
                   <option value="2022">2022</option>
                   <option value="2021">2021</option>
                 </select>
-                {/* <Chart
+                <Chart
                   options={chartData.options}
                   series={chartData.series}
                   type="line"
                   height={350}
-                /> */}
+                />
               </div>
             </div>
 
