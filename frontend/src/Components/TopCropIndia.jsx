@@ -193,7 +193,7 @@ const MarketInsights = () => {
       case "ਚਾਹ": // Punjabi translation for Tea
         return greenTeaImg;
       case "coffee":
-      case "कॉफ़ी": // Hindi translation for Coffee
+      case "कॉफी": // Hindi translation for Coffee
       case "ਕਾਫੀ": // Punjabi translation for Coffee
         return coffeeBeansImg;
       case "jowar":

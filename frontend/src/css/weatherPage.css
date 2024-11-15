@@ -36,7 +36,7 @@ body {
   gap: 30px;
   padding: 20px;
   flex-direction: column;
-  /* Stacks vertically by default for smaller screens */
+
 }
 
 .weatherHeader {
@@ -79,15 +79,12 @@ body {
 .temperature-display {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
-  /* margin-top: 1.5rem; */
 }
 
 .temperature {
   font-size: 4rem;
   font-weight: bold;
   color: #333;
-  margin-left: 10px;
 }
 
 .location {

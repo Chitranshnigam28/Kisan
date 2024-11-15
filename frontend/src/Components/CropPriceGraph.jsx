@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-// import "./SingleTips";
 import SingleTips from "./SingleTips";
 import marketInsights from "../Assets/marketinsights.svg";
 
@@ -81,7 +80,7 @@ const CropPriceChart = ({ crop }) => {
         },
       },
       xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // Hardcoded months
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], 
         labels: {
           style: {
             colors: "#003300", 
@@ -101,7 +100,7 @@ const CropPriceChart = ({ crop }) => {
           shade: "dark",
           type: "vertical",
           shadeIntensity: 0.9,
-          gradientToColors: ["#003300", "#001a00"], // Very dark greens for gradient contrast
+          gradientToColors: ["#003300", "#001a00"], 
           inverseColors: false,
           opacityFrom: 0.9,
           opacityTo: 0.5,
@@ -110,7 +109,7 @@ const CropPriceChart = ({ crop }) => {
       },
       stroke: {
         curve: "smooth",
-        colors: ["#004d00"], // Dark green line color
+        colors: ["#004d00"], 
         width: 3,
       },
       tooltip: {

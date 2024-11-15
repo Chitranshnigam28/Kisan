@@ -85,11 +85,10 @@
 }
 
 .weather-widget {
-    border-radius: 10px;
     padding: 20px;
     color: #fff;
     cursor: pointer;
-    width: 30rem;
+    width: 29rem;
     max-width: 700px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
@@ -142,6 +141,10 @@
     color: white;
     font-size: 48px;
     font-weight: bold;
+}
+
+.weather-search-button:hover{
+    color: white;
 }
 
 .search-button:hover{
