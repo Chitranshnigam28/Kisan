@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import "../css/weatherWidget.css";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import axios from "axios";
+import SimpleLoader from "./SimpleLoader";
 
 const getCurrentDate = () => format(new Date(), "do MMMM yyyy, EEEE");
 
@@ -113,10 +114,11 @@ function WeatherWidget({ showSearch = true }) {
       <div
         className={`weather-widget ${weather?.condition}`}
         style={weather ? getBackgroundColor() : { backgroundColor: "#87CEFA", color: "#FFFFFF" }}
+        onClick={() => navigate("/weather")}
       >
         {loading ? (
-          <p>Loading...</p>
-        ) : (
+          <SimpleLoader />
+) : (
           weather && (
             <div className="widget-content">
               <div className="locationSearchWrapper">
@@ -125,15 +127,20 @@ function WeatherWidget({ showSearch = true }) {
                   <p className="location">{translatedLocation}</p>
                 </div>
                 {showSearch && (
-                  <form onSubmit={handleSearchSubmit} className="search-form">
+                  <form onSubmit={handleSearchSubmit} className="search-form" onClick={(e) => e.stopPropagation()}>
                     <input
                       type="text"
                       placeholder={translatedLabels.searchPlaceholder}
                       value={searchCity}
                       onChange={(e) => setSearchCity(e.target.value)}
                       className="search-input"
+                      onClick={(e) => e.stopPropagation()} // Prevents redirection when clicking in the search input
                     />
-                    <button type="submit" className="search-button">
+                    <button
+                      type="submit"
+                      className="search-button weather-search-button"
+                      onClick={(e) => e.stopPropagation()} // Prevents redirection when clicking on the search button
+                    >
                       <FaSearch />
                     </button>
                   </form>
@@ -165,10 +172,11 @@ function WeatherWidget({ showSearch = true }) {
             </div>
           )
         )}
-        <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" />
+        {/* <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" /> */}
       </div>
     </div>
   );
 }
 
 export default WeatherWidget;
+

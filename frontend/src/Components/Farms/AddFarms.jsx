@@ -1,8 +1,10 @@
-import React, { useState,useEffect } from 'react';
+
+
+import React, { useState } from "react";
 import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
-import axios from 'axios';
-import '../../css/addFarms.css';
+import axios from "axios";
+import "../../css/addFarms.css";
 import { IoMdArrowBack } from "react-icons/io";
 import WellIcon from "../../Assets/Water Source/Well.svg";
 import RiverIcon from "../../Assets/Water Source/River.svg";
@@ -12,30 +14,38 @@ import CanalIcon from "../../Assets/Water Source/Canal.svg";
 import LakeIcon from "../../Assets/Water Source/Lake.svg";
 import BorewellIcon from "../../Assets/Water Source/Borewell.svg";
 import MunicipalSupplyIcon from "../../Assets/Water Source/Municipal Supply.svg";
-import ClayIcon from "../../Assets/Soil type/Clay.svg"
-import SandyIcon from "../../Assets/Soil type/🏜️.svg"
-import LoamyIcon from "../../Assets/Soil type/💧.svg"
-import SiltIcon from "../../Assets/Soil type/🧱.svg"
+import ClayIcon from "../../Assets/Soil type/Clay.svg";
+import SandyIcon from "../../Assets/Soil type/🏜️.svg";
+import LoamyIcon from "../../Assets/Soil type/💧.svg";
+import SiltIcon from "../../Assets/Soil type/🧱.svg";
 import OrganicIcon from "../../Assets/Farming Method/Organic.svg";
 import ConventionalIcon from "../../Assets/Farming Method/gardening-tools.svg";
 import AgroforestryIcon from "../../Assets/Farming Method/Agroforestry.svg";
 import PermacultureIcon from "../../Assets/Farming Method/Permaculture.svg";
-import WheatIcon from "../../Assets/Vegetables/wheat.png"
-import RiceIcon from "../../Assets/Vegetables/rice.png"
-import CornIcon from "../../Assets/Vegetables/Corn.svg"
-import TomatoIcon from "../../Assets/Vegetables/tomato.png"
+import WheatIcon from "../../Assets/Vegetables/wheat.png";
+import RiceIcon from "../../Assets/Vegetables/rice.png";
+import CornIcon from "../../Assets/Vegetables/Corn.svg";
+import TomatoIcon from "../../Assets/Vegetables/tomato.png";
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import {
+    getStorage,
+    ref,
+    getDownloadURL,
+    uploadBytesResumable,
+} from "firebase/storage";
+import { IoIosCloudUpload } from "react-icons/io";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import EmptyFarms from "./EmptyFarms";
+
 
 
 const firebaseConfig = {
-    apiKey: process.env.FIREBASE_API_KEY,
+    apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
     authDomain: "art-asta-50475.firebaseapp.com",
     projectId: "art-asta-50475",
     storageBucket: "art-asta-50475.appspot.com",
     messagingSenderId: "343332230219",
-    appId: "1:343332230219:web:efe5a85c164e5e461c69ce"
+    appId: "1:343332230219:web:efe5a85c164e5e461c69ce",
 };
 
 // Initialize Firebase with npm package
@@ -44,28 +54,26 @@ const storage = getStorage(app);
 
 
 
-
 const cropNameIcons = {
     Wheat: WheatIcon,
     Corn: CornIcon,
     Rice: RiceIcon,
-    Tomato: TomatoIcon
+    Tomato: TomatoIcon,
 };
 
 const soilTypeIcons = {
     Clay: ClayIcon,
     Sandy: SandyIcon,
     Loamy: LoamyIcon,
-    Silt: SiltIcon
+    Silt: SiltIcon,
 };
 
 const farmingMethodIcons = {
     Organic: OrganicIcon,
     Conventional: ConventionalIcon,
     Agroforestry: AgroforestryIcon,
-    Permaculture: PermacultureIcon
+    Permaculture: PermacultureIcon,
 };
-
 
 const waterSourceIcons = {
     Well: WellIcon,
@@ -75,11 +83,12 @@ const waterSourceIcons = {
     Canal: CanalIcon,
     Lake: LakeIcon,
     Borewell: BorewellIcon,
-    "Municipal Supply": MunicipalSupplyIcon
+    "Municipal Supply": MunicipalSupplyIcon,
 };
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(1); // Step state
+    const navigate = useNavigate();
     const [farmData, setFarmData] = useState({
         farmName: "",
         cropType: "",
@@ -91,22 +100,15 @@ const AddFarms = () => {
         last_crop_sowed: "",
         soilQuality: "",
         currentSeason: "",
-        dateOfPlanting: "",
-        dateOfHarvest: "",
         sizeOfFarm: "",
-        farmImage: null,
+        farmImageUrl: "",
     });
-    const [file, setFile] = useState(null);  // Declare the file state
+    const [file, setFile] = useState(null); // Declare the file state
     const [downloadURL, setDownloadURL] = useState("");
-    const navigate = useNavigate();
-    const location = useLocation();
-
-      // Check if the user came from the sign-up process
-      const fromSignup = new URLSearchParams(location.search).get("fromSignup") === "true";
     // const [farmData, setFarmData] = useState({
     //   farmImage: null,
     // });
-  
+
     // // Handle file selection and update the file state
     // const handleFileChange = (e) => {
     //   const selectedFile = e.target.files[0];  // Get the selected file from input
@@ -114,125 +116,128 @@ const AddFarms = () => {
     //     setFile(selectedFile);  // Update the state with the selected file
     //   }
     // };
-  
     // Handle file upload
-    const handleUpload = () => {
-      if (!file) {
-        alert('Please select a file first');
-        return;
-      }
-  
-      const storageRef = ref(storage, `images/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-  
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
-        },
-        (error) => {
-          console.error('Upload failed:', error);
-        },
-        async () => {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log('File available at', url);
-          setDownloadURL(url);
-  
-          // Update farmData after upload
-          setFarmData((prevData) => ({
-            ...prevData,
-            farmImage: url,  // Store the URL in farmData
-          }));
+    const handleUpload = (fileToUpload) => {
+        if (!fileToUpload) {
+            alert("No file selected.");
+            return;
         }
-      );
-    }
+
+        const storageRef = ref(storage, `images/${fileToUpload.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, fileToUpload);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                if (progress % 10 === 0) {
+                    console.log(`Upload is ${Math.round(progress)}% done`);
+                }
+            },
+            (error) => {
+                console.error("Upload failed:", error);
+            },
+            async () => {
+                const url = await getDownloadURL(uploadTask.snapshot.ref);
+                console.log("File available at", url);
+                setFarmData((prevData) => ({
+                    ...prevData,
+                    farmImageUrl: url,
+                }));
+                setDownloadURL(url);
+            }
+        );
+    };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFarmData(prevState => ({
+
+        // Ensure that sizeOfFarm is properly set as a number
+        setFarmData((prevState) => ({
             ...prevState,
-            [name]: value
+            [name]: name === "sizeOfFarm" ? parseFloat(value) : value,
         }));
     };
 
     const handleSelection = (field, value) => {
-        setFarmData(prevState => ({
+        setFarmData((prevState) => ({
             ...prevState,
-            [field]: value
+            [field]: value,
         }));
     };
 
-    const handleImageChange = (e) => {
-        const selectedFile = e.target.files[0]; // Get the first selected file
-        if (selectedFile) {
-            setFile(selectedFile); // Update the file state
+    const [previewURL, setPreviewURL] = useState(null);
+    const handleImageChange = (event) => {
+        const selectedFile = event.target.files[0];
+        if (!selectedFile) {
+            alert("Please select a file.");
+            return;
         }
+
+        setFile(selectedFile);
+
+        // Use modern API for preview
+        const preview = URL.createObjectURL(selectedFile);
+        setPreviewURL(preview);
+
+        handleUpload(selectedFile);
     };
 
-    const handleFileChange = (e) => {
-        setFarmData(prevState => ({
-            ...prevState,
-            farmImage: e.target.files[0]
-        }));
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-
         if (currentStep === 2) {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('No token found. Please log in again.');
-                return;
-            }
-
-            const farmDetails = { ...farmData }; // Make sure all necessary data is included
-
             try {
-                let response;
-
-                // Create FormData only if there is an image
-                if (farmData.farmImage) {
-                    const farmFormData = new FormData();
-                    farmFormData.append('farmImage', farmData.farmImage, farmData.farmImage.name);
-                    farmFormData.append('farmDetails', JSON.stringify(farmDetails));
-
-
-                    response = await axios.post('http://localhost:5001/api/farms', farmFormData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                    });
-                } else {
-                    response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                    });
+                // Ensure the image is uploaded before submitting
+                if (!farmData.farmImageUrl) {
+                    alert("Farm image is required. Please upload an image.");
+                    return;
                 }
 
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("No token found. Please log in again.");
+                    return;
+                }
 
-                console.log('Farm added:', response.data);
-                alert('Farm added successfully!');
-                
+                // Ensure that sizeOfFarm is a number
+                if (isNaN(farmData.sizeOfFarm) || farmData.sizeOfFarm <= 0) {
+                    alert("Please enter a valid size for the farm.");
+                    return;
+                }
+
+                const farmDetails = { ...farmData };
+                console.log("farm details of mongo" + JSON.stringify(farmDetails));
+
+                // Send the farm data to the backend
+                const response = await axios.post(
+                    "http://localhost:5001/api/farms",
+                    farmDetails,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                console.log("Farm added:", response.data);
+                alert("Farm added successfully!");
+                navigate("/");
                 resetForm();
             } catch (error) {
-                console.error('Error adding farm:', error.response?.data || error.message);
-                alert('Failed to add farm. Please try again.');
+                console.error(
+                    "Error adding farm:",
+                    error.response?.data || error.message
+                );
+                alert("Failed to add farm. Please try again.");
             }
         }
     };
 
-       // Show alert only if coming from signup
-       useEffect(() => {
-        if (fromSignup) {
-            alert("Sign Up Successful! Please add your farm details.");
-        }
-    }, [fromSignup]);
     const resetForm = () => {
         setFarmData({
             farmName: "",
@@ -248,55 +253,54 @@ const AddFarms = () => {
             dateOfPlanting: "",
             dateOfHarvest: "",
             sizeOfFarm: "",
-            farmImage: null,
+            farmImageUrl: "",
         });
-        setCurrentStep(1);
-
-        
+        setCurrentStep(1); // Reset to step 1 after submission
     };
 
     const handleCancel = () => {
-        console.log("Cancelled");
-        navigate('/login');
-        resetForm();
+        navigate("/");
         resetForm();
     };
+
+    const farmAdded = () => {
+        navigate('/')
+    }
 
 
     return (
         <div className='addFarmContainer container my-5'>
             <h2 className="mb-4">Add a New Farm</h2>
             <h5 className="mb-5">Create an account to access and start to set up your farm and garden.</h5>
+            <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
             <form onSubmit={handleSubmit}>
-                <div className={`widget-border ${currentStep === 1 ? 'half' : 'full'}`} />
+
 
                 {/* Step 1 */}
                 {currentStep === 1 && (
                     <div>
                         <h5 className="mb-4">Step 1 of 2</h5>
-                        <div className="mb-4">
+
+                        <div className="mb-3">
                             <input
                                 type="file"
-                                accept="image/*" // Accept only image files
+                                accept="image/*"
                                 onChange={handleImageChange}
+                                id="fileInput"
+                                className="file-input"
+                                style={{ display: "none" }}
                             />
-
-                            <button type="button" className="Btn" onClick={handleUpload}>Upload</button>
+                            <div
+                                className="up"
+                                onClick={() => document.getElementById("fileInput").click()}
+                            >
+                                <IoIosCloudUpload />
+                            </div>
                         </div>
+
                         <div className="form-group mb-4">
                             <div className="mb-4">
-                                <label className="form-label">Farm Name:</label>
-                                <input
-                                    type="text"
-                                    name="farmName"
-                                    className="form-control"
-                                    value={farmData.farmName}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label">Farm Name:</label>
+                                <label className="form-label">Enter your Farm Name:</label>
                                 <input
                                     type="text"
                                     name="farmName"
@@ -307,19 +311,9 @@ const AddFarms = () => {
                                 />
                             </div>
 
+
                             <div className="mb-4">
-                                <label className="form-label">Size of Farm:</label>
-                                <input
-                                    type="text"
-                                    name="sizeOfFarm"
-                                    className="form-control"
-                                    value={farmData.sizeOfFarm}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label">Size of Farm:</label>
+                                <label className="form-label">How large is your farm?</label>
                                 <input
                                     type="text"
                                     name="sizeOfFarm"
@@ -331,7 +325,7 @@ const AddFarms = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="form-label">Location:</label>
+                                <label className="form-label">Where is your farm located?</label>
                                 <select
                                     name="location"
                                     className="form-select"
@@ -382,18 +376,7 @@ const AddFarms = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label className="form-label">Last Crop Sowed:</label>
-                                <input
-                                    type="text"
-                                    name="last_crop_sowed"
-                                    className="form-control"
-                                    value={farmData.last_crop_sowed}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label">Last Crop Sowed:</label>
+                                <label className="form-label">What crop did you last sowed?</label>
                                 <input
                                     type="text"
                                     name="last_crop_sowed"
@@ -406,17 +389,20 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue</button>
+                            <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue → </button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
                         </div>
                     </div>
                 )}
 
+                {/* Step 2 */}
                 {currentStep === 2 && (
                     <div>
                         <h5 className="mb-4">Step 2 of 2</h5>
+
+                        {/* Soil Quality */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Soil Quality:</label>
+                            <label className="form-label">How is your Soil Quality?</label>
                             <div className="button-group">
                                 {["Low", "Moderate", "High"].map((quality) => (
                                     <button
@@ -442,44 +428,52 @@ const AddFarms = () => {
                                 <button
                                     key={type}
                                     type="button"
-                                    className={`custom-button ${farmData.cropType === type ? "selected" : ""}`}
+                                    className={`custom-button ${farmData.cropType === type ? "selected" : ""
+                                        }`}
                                     onClick={() => handleSelection("cropType", type)}
                                 >
                                     {/* Add emoji in front of the text based on crop type */}
                                     {type === "Vegetable" && "🥕"} {/* Emoji for Vegetable */}
-                                    {type === "Fruit" && "🍓"}      {/* Emoji for Fruit */}
-                                    {type === "Grain" && "🌾"}      {/* Emoji for Grain */}
-                                    {type === "Flower" && "🌸"}     {/* Emoji for Flower */}
+                                    {type === "Fruit" && "🍓"} {/* Emoji for Fruit */}
+                                    {type === "Grain" && "🌾"} {/* Emoji for Grain */}
+                                    {type === "Flower" && "🌸"} {/* Emoji for Flower */}
                                     {type}
                                 </button>
                             ))}
                         </div>
 
-                        {/* Crop Name */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Crop Name:</label>
+                            <label className="form-label">What Crop are you going to grow?</label>
                             <div className="button-group">
-                                {["Wheat", "Corn", "Rice", "Tomato"].map((name) => (
+                                {[
+                                    { name: "Wheat", emoji: "🌾" },
+                                    { name: "Corn", emoji: "🌽" },
+                                    { name: "Rice", emoji: "🍚" },
+                                    { name: "Tomato", emoji: "🍅" },
+                                    { name: "Potato", emoji: "🥔" },
+                                    { name: "Carrot", emoji: "🥕" },
+                                    { name: "Onion", emoji: "🧅" },
+                                    { name: "Lettuce", emoji: "🥬" },
+                                    { name: "Peas", emoji: "🍈" },
+                                    { name: "Cabbage", emoji: "🥗" }
+                                ].map(({ name, emoji }) => (
                                     <button
                                         key={name}
                                         type="button"
                                         className={`custom-button ${farmData.cropName === name ? "selected" : ""}`}
                                         onClick={() => handleSelection("cropName", name)}
                                     >
-                                        <img
-                                            src={cropNameIcons[name]}
-                                            alt={`${name} icon`}
-                                            className="button-icon"
-                                        />
-                                        {name}
+                                        {emoji} {name}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
+
+
                         {/* Soil Type */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Soil Type:</label>
+                            <label className="form-label">Choose your Soil Type:</label>
                             <div className="button-group">
                                 {["Clay", "Sandy", "Loamy", "Silt"].map((soil) => (
                                     <button
@@ -509,25 +503,24 @@ const AddFarms = () => {
                                     <button
                                         key={season}
                                         type="button"
-                                        className={`custom-button ${farmData.currentSeason === season ? "selected" : ""}`}
+                                        className={`custom-button ${farmData.currentSeason === season ? "selected" : ""
+                                            }`}
                                         onClick={() => handleSelection("currentSeason", season)}
                                     >
                                         {/* Add emoji in front of the text based on the season */}
-                                        {season === "Spring" && "🌸"}   {/* Emoji for Spring */}
-                                        {season === "Summer" && "☀️"}   {/* Emoji for Summer */}
-                                        {season === "Autumn" && "🍁"}   {/* Emoji for Autumn */}
-                                        {season === "Winter" && "❄️"}   {/* Emoji for Winter */}
-
+                                        {season === "Spring" && "🌸"} {/* Emoji for Spring */}
+                                        {season === "Summer" && "☀️"} {/* Emoji for Summer */}
+                                        {season === "Autumn" && "🍁"} {/* Emoji for Autumn */}
+                                        {season === "Winter" && "❄️"} {/* Emoji for Winter */}
                                         {season}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-
                         {/* Farming Method */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Farming Method:</label>
+                            <label className="form-label">Choose your Farming Method:</label>
                             <div className="button-group">
                                 {["Organic", "Conventional", "Agroforestry", "Permaculture"].map((method) => (
                                     <button
@@ -545,7 +538,7 @@ const AddFarms = () => {
 
                         {/* Water Source */}
                         <div className="form-grp mb-4">
-                            <label className="form-label">Water Source:</label>
+                            <label className="form-label">Choose your Water Source:</label>
                             <div className="button-group">
                                 {["Well", "River", "Rainwater", "Irrigation", "Canal", "Lake", "Borewell", "Municipal Supply"].map((source) => (
                                     <button
@@ -566,7 +559,7 @@ const AddFarms = () => {
                         </div>
 
                         <div className="button-container">
-                            <button type="submit" className="main-Btn">Submit</button>
+                            <button type="submit" className="main-Btn" >Submit → </button>
                             <button type="button" className="sec-Btn" onClick={handleCancel}>Back</button>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../css/tipsSlider.css'; // Make sure to import your CSS
+// import '../css/tipsSlider.css'; 
 
 const Tips = () => {
   const [tipsData, setTipsData] = useState([]);

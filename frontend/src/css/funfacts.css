@@ -15,10 +15,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   position: relative;
   padding: 20px;
+  margin-right: 1rem;
 }
 
 .funfacts-container::after {
-
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -26,8 +26,6 @@
   height: auto;
   opacity: 0.8;
 }
-
-
 
 .funFactsDiv{
   align-self: normal;
@@ -46,14 +44,9 @@
   color: white;
 }
 
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
 .fact-item {
   font-size: 16px;
   line-height: 1.4;
   color: #fff;
+  padding: 0.5rem;
 }

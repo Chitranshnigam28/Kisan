@@ -21,6 +21,7 @@
 .form-label {
     font-weight: 600;
     color: #555;
+    padding-top: 10px;
 }
 
 .form-control, .form-select {
@@ -36,19 +37,19 @@
 }
 
 button.main-Btn {
-    background-color: #28a745;
+    background-color: black;
     color: #fff;
     padding: 10px 20px;
     font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover, input[type="submit"]:hover {
+/* button:hover, input[type="submit"]:hover {
     background-color: #218838;
-}
+} */
 
 /* General button styles */
 .button-group {
@@ -155,12 +156,12 @@ button:hover, input[type="submit"]:hover {
 
 .button-container {
     display: flex; /* Enable Flexbox */
-    flex-wrap: wrap; /* Allow buttons to wrap onto the next line if necessary */
+    flex-direction: column;
     gap: 10px; /* Space between buttons */
     justify-content: center; /* Center the buttons horizontally */
     align-items: center; /* Center the buttons vertically within the container */
     padding: 20px; /* Add padding to the container for spacing around the buttons */
-    background-color: #f0f0f0; /* Change background color of the container (optional) */
+    background-color: transparent; /* Change background color of the container (optional) */
     border-radius: 10px; /* Optional: round the corners of the container */
 }
 
@@ -207,3 +208,153 @@ button:hover, input[type="submit"]:hover {
         justify-content: flex-start;
     }
 }
+
+.mb-3 {
+    display: grid;
+    gap: 5px;
+}
+
+
+
+/* Container for Step 1 */
+.up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #96C73D;
+    border-radius: 8px;
+    padding: 40px;
+    background-color: #f9fdf9;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.up input[type="file"] {
+    display: none;
+}
+
+/* Upload icon styling */
+.up svg {
+    font-size: 50px;
+    color: #96C73D;
+    cursor: pointer;
+}
+
+/* Centering and styling text */
+.up h5, .up p {
+    text-align: center;
+    color: #666;
+}
+
+.up h5 {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.up p {
+    font-size: 0.9em;
+    color: #888;
+}
+
+/* Farm name input styling */
+.form-group {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group .form-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group .form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    font-size: 1em;
+    width: 100%;
+}
+
+/* Hide default file input */
+.up input[type="file"] {
+    display: none;
+}
+
+/* Custom file upload button */
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #96C73D;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+    margin: 20px auto;
+}
+
+.custom-file-upload:hover {
+    background-color: #8fcf88;
+}
+
+/* Hide the default file input */
+.up input[type="file"] {
+    display: none;
+}
+
+/* Custom file upload button styling */
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #96C73D;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s;
+    margin: 20px auto;
+}
+
+.custom-file-upload:hover {
+    background-color: #8fcf88;
+}
+
+/* Image preview styling */
+.image-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.image-preview-container img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 2px solid #b2d8b2;
+}
+
+.file-input {
+    font-size: 1em;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #96C73D;
+    cursor: pointer;
+    gap: 40px;
+}
+

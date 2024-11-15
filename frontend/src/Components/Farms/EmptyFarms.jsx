@@ -1,26 +1,37 @@
 import React from "react";
 import "../../css/emptyFarms.css";
 import { Link } from "react-router-dom";
-
+import farmerVideo from '../../Assets/cropPlanting.mp4';
+import { useNavigate } from "react-router-dom";
 const EmptyFarms = () => {
+  const navigate = useNavigate();
+
+  const handleGotoFarm = ()=>{
+    navigate('/my-farms')
+  }
   return (
     <div className="empty-farms-container">
       <h2 className="empty-farms-title">
-        Ready to Get Started?{" "}
-        <span role="img" aria-label="sprout">
+        Let’s Grow Together!{" "}
+        <span role="img" aria-label="sprout" className="sprout-icon">
           🌱
         </span>
       </h2>
       <p className="empty-farms-message">
-        It looks like you haven’t added any farms yet. <br />
-        Add your farm to start managing it effortlessly.
+        It seems like your farm journey is just beginning. <br />
+        Start by adding your first farm and watch it flourish!
       </p>
       <Link to="/my-farms">
-      <button className="add-farm-button">Add your First Farm</button>
-                </Link>
-      <div className="hay-bales">
-        <div className="hay-bale"></div>
-        <div className="hay-bale"></div>
+        <button className="add-farm-button" onClick={handleGotoFarm}>Add Your First Farm</button>
+      </Link>
+      <div className="farmer-animation">
+        <video
+          src={farmerVideo}
+          autoPlay
+          loop
+          muted
+          className="empty-farms-background-video"
+        ></video>
       </div>
     </div>
   );

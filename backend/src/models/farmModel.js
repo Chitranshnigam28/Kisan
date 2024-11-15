@@ -12,7 +12,7 @@ const farmSchema = mongoose.Schema({
     cropName: { 
         type: String, 
         enum: [
-            'Rice', 'Wheat', 'Corn', 'Tomato'
+            'Rice', 'Wheat', 'Corn', 'Tomato','Potato','Carrot','Onion','Lettuce','Peas','Cabbage'
         ], 
         required: true
     },
@@ -60,7 +60,7 @@ const farmSchema = mongoose.Schema({
         required: true 
     },
     sizeOfFarm: { type: Number, required: true },
-    farmImage: { type: mongoose.Schema.Types.ObjectId, ref: 'Image' }, 
+    farmImageUrl: { type: String, required: true }, 
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
     timestamps: true

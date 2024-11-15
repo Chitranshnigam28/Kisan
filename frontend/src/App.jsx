@@ -20,6 +20,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import ForgotPassword from "./Components/ForgotPassword";
 import ErrorBoundary from "./Components/ErrorBoundary";
+import FirstPage from "./Components/ProfileSetup/FirstPage";
+import SecondPage from "./Components/ProfileSetup/SecondPage";
+import MarketInsigtsDashboard from "./Components/MarketInsigtsDashboard";
 
 
 
@@ -29,11 +32,11 @@ console.log(userId);
 
 const App = () => {
 
-  
+
   return (
     <Router>
       <ErrorBoundary>
-        <AppRoutes /> 
+        <AppRoutes />
       </ErrorBoundary>
     </Router>
 
@@ -51,7 +54,7 @@ const AppRoutes = () => {
 
     if (token) {
       localStorage.setItem('token', token);
-      navigate('/'); 
+      navigate('/');
     }
   }, [navigate]);
 
@@ -66,7 +69,7 @@ const AppRoutes = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/maps" element={<GMaps />} />
-          <Route path='/charts' element={<ComponentPriceGraph crop="wheat" />} />
+          <Route path='/charts' element={<MarketInsigtsDashboard />} />
           <Route path="/crop-recommendation" element={<CropRecommendation ownerId={userId} />} />
           <Route path="/translate" element={<TranslationComponent />} />
           <Route path='/weather' element={<Weather />} />
@@ -75,6 +78,8 @@ const AppRoutes = () => {
           <Route path='/funfacts' element={<FunFact />} />
           <Route path='/tips' element={<Tips />} />
           <Route path="/profilesetup" element={<ProfileSetup />} />
+          <Route path="/first" element={<FirstPage />} />
+          <Route path="/second" element={<SecondPage />} />
 
         </Route>
       </Routes>

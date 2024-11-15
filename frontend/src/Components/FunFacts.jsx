@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import SimpleLoader from './SimpleLoader';
 import '../css/funfacts.css';
 
 const FunFacts = () => {
@@ -96,7 +97,8 @@ const FunFacts = () => {
           </div>
         </div>
       ) : (
-        <p className="loading">Loading...</p>
+        // <p className="loading">Loading...</p>
+        <SimpleLoader />
       )}
     </div>
   );

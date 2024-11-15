@@ -18,6 +18,7 @@ import { format } from "date-fns";
 import axios from "axios";
 import Header from './Dashboard/Header';
 import { Footer } from './Dashboard/Footer';
+import SimpleLoader from "./SimpleLoader";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -85,19 +86,20 @@ function Weather() {
   function getWeatherIcon(condition) {
     switch (condition) {
       case "Clear":
-        return <WiDaySunny size={64} color="#FFD700" />;
+        return <WiDaySunny size={64} color="#84B8EA" />; // Matches the sunny daytime color
       case "Clouds":
-        return <WiCloud size={64} color="#A9A9A9" />;
+        return <WiCloud size={64} color="#A9A9A9" />; // Matches the cloudy color
       case "Rain":
-        return <WiRain size={64} color="#1E90FF" />;
+        return <WiRain size={64} color="#627685" />; // Matches the rainy/hazy color
       case "Snow":
-        return <WiSnow size={64} color="#ADD8E6" />;
+        return <WiSnow size={64} color="#ADD8E6" />; // Light blue to represent snow
       case "Thunderstorm":
-        return <WiThunderstorm size={64} color="#00008B" />;
+        return <WiThunderstorm size={64} color="#1E3146" />; // Dark blue for stormy night representation
       default:
-        return <WiCloud size={64} color="#A9A9A9" />;
+        return <WiCloud size={64} color="#A9A9A9" />; // Matches default cloudy color
     }
   }
+  
 
   const getWeather = async () => {
     try {
@@ -142,6 +144,7 @@ function Weather() {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     getWeather();
@@ -224,7 +227,8 @@ function Weather() {
         </div>
 
         {loading ? (
-          <p className="loading-text">{translatedContent.labels?.loading || "Loading..."}</p>
+          // <p className="loading-text">{translatedContent.labels?.loading || "Loading..."}</p>
+          <SimpleLoader />
         ) : (
           weather && (
             <div className="weather-main">
@@ -282,7 +286,7 @@ function Weather() {
                   </div>
                   <div className="highlight-box">
                     <p>{translatedContent.labels?.visibility || "Visibility"}</p>
-                    <p>{weather.visibility} km</p>
+                    <p>{weather.visibility } km</p>
                   </div>
                   <div className="highlight-box">
                     <p>{translatedContent.labels?.aqi || "Air Quality"}</p>
@@ -294,7 +298,6 @@ function Weather() {
           )
         )}
 
-        <ToastContainer autoClose={3000} />
       </div>
     </>
   );
