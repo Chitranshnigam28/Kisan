@@ -47,9 +47,9 @@ button.main-Btn {
     transition: background-color 0.3s ease;
 }
 
-button:hover, input[type="submit"]:hover {
+/* button:hover, input[type="submit"]:hover {
     background-color: #218838;
-}
+} */
 
 /* General button styles */
 .button-group {

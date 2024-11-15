@@ -1,6 +1,9 @@
 
   /* App styles */
-  
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  body{
+    font-family: "Noto Sans", Helvetica;
+  }
   .app {
       display: flex;
       flex-direction: column;
@@ -39,7 +42,7 @@
       gap: 10px;
     }
     
-    .input {
+    input[type="text"].inputsource,input[type="text"].inputdestination {
       width: 100%;
       padding: 8px;
       border: 1px solid #ccc;
@@ -56,7 +59,7 @@
     
     .button {
       padding: 8px 12px;
-      background-color: #ff69b4;
+      background-color: #96C73D;
       color: white;
       border: none;
       border-radius: 4px;
@@ -141,3 +144,128 @@
       color: white;
       border-color: #007bff;
     }
+
+    .vegetable-buttons {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.vegetable-buttons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.vegetable-buttons .selected {
+  background-color: #4caf50;
+  color: white;
+}
+
+.scrollable-markers {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.marker-card {
+  width: 13%;
+  height: auto;
+  padding: 10px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  /* display: flex; */
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 0 auto; 
+    gap: 0.7rem;
+    padding-bottom: 0;
+    display: grid;
+    grid-template-rows: 1fr 0.4fr;
+}
+
+.marker-card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  flex-basis: 70%;
+  margin-bottom: 1rem;
+}
+
+.marker-card h4 {
+  margin: 1rem 0;
+  font-size: 14px;
+  text-wrap: auto;
+}
+.marker-card p{
+  text-wrap: auto;
+}
+.marker-card .markerNameDescription{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.controls-container {
+  position: absolute;
+  top: 5rem;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+
+
+
+
+.marker-card img {
+  width: 100%;
+  /* height: auto; */
+  object-fit: cover;
+  /* border-radius: 8px; */
+}
+
+.vegetable-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.scrollable-markers {
+  position: absolute;
+  bottom: 6rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 10px;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  scrollbar-width: thin
+}
+
+@media screen and (max-width:800px){
+  .controls-container{
+    top: 10rem;
+  }
+}
+@media screen and (max-width:1500px){
+  .controls-container{
+    top: 8rem;
+  }
+}
