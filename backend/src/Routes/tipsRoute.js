@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Tips = require('../models/tipsSchema'); 
-const Crop = require('../models/Crop'); 
+const Tips = require('/models/tipsSchema'); 
+const Crop = require('/models/Crop'); 
 
 
 

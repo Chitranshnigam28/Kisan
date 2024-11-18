@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 require('dotenv').config({ path: './../../.env' });
-const { fetchFarmAndRecommendCrop } = require('../api/openai'); 
+const { fetchFarmAndRecommendCrop } = require('/api/openai'); 
 
 router.get('/recommend-crop/:ownerId', async (req, res) => {
     const { ownerId } = req.params;

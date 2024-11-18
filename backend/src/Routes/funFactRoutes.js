@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const FunFact = require('../models/funFactSchema');
+const FunFact = require('/models/funFactSchema');
 
 router.get("/funfacts", async (req, res) => {
     try {
