@@ -49,7 +49,7 @@ const ChangeLanguage = ({ onSelectLanguage, onClose }) => {
         const textToTranslate = textNodes.map((node) => node.nodeValue).join(' || ');
 
         try {
-          const response = await axios.post('http://localhost:5001/api/translate', {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
             text: textToTranslate,
             targetLanguage: currentLanguage,
           });

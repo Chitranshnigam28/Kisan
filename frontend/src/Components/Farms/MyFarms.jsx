@@ -358,7 +358,7 @@ const MyFarms = () => {
                 return;
             }
 
-            const response = await axios.get("http://localhost:5001/api/farms", {
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/farms`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -388,7 +388,7 @@ const MyFarms = () => {
     const loadPriceData = async () => {
         try {
             setLoading(true);
-            const response = await axios.get("http://localhost:5001/api/historical-price", {
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/historical-price`, {
                 params: {
                     crop_name: selectedFarm.cropName,
                     last_crop_sowed: selectedFarm.last_crop_sowed,
@@ -439,7 +439,7 @@ const MyFarms = () => {
   const translateText = async (text, targetLanguage) => {
     try {
       console.log("Sending translation request for:", text, "to", targetLanguage);
-      const response = await axios.post("http://localhost:5001/api/translate", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
         text: text,
         targetLanguage: targetLanguage,
       });

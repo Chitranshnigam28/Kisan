@@ -37,7 +37,7 @@ const Login = () => {
     const login = { email, password };
 
     try {
-      const res = await fetch("http://localhost:5001/api/login", {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login),
@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.open("http://localhost:5001/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
   };
 
   return (

@@ -34,7 +34,7 @@ const SignUp = () => {
       };
       console.log("registerData " + JSON.stringify(registerData));
       try {
-        const res = await fetch(`http://localhost:5001/api/register`, {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const SignUp = () => {
     }
   };
   const handleGoogleLogin = () => {
-    window.open("http://localhost:5001/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
   };
   useEffect(() => {
     const handleResize = () => {

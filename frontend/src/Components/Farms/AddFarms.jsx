@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { FaCalendarDays, FaPlus } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
@@ -40,13 +38,14 @@ import EmptyFarms from "./EmptyFarms";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "art-asta-50475.firebaseapp.com",
     projectId: "art-asta-50475",
     storageBucket: "art-asta-50475.appspot.com",
     messagingSenderId: "343332230219",
     appId: "1:343332230219:web:efe5a85c164e5e461c69ce",
 };
+
 
 // Initialize Firebase with npm package
 const app = initializeApp(firebaseConfig);
@@ -214,7 +213,7 @@ const AddFarms = () => {
 
                 // Send the farm data to the backend
                 const response = await axios.post(
-                    "http://localhost:5001/api/farms",
+                    `${process.env.REACT_APP_BACKEND_URL}/api/farms`,
                     farmDetails,
                     {
                         headers: {

@@ -38,7 +38,7 @@ function Weather() {
 
   async function translateText(text, targetLanguage) {
     try {
-      const response = await axios.post('http://localhost:5001/api/translate', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
         text: text,
         targetLanguage: targetLanguage,
       });
@@ -116,7 +116,7 @@ function Weather() {
       );
 
       const response = await fetch(
-        `http://localhost:5001/api/weather?${queryString}&units=${units}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/weather?${queryString}&units=${units}`
       );
       if (!response.ok) throw new Error("Failed to fetch weather data");
 

@@ -12,7 +12,7 @@ const CropPriceChart = ({ getCropData, cropName, selectedYear, onCropNameChange,
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5001/api/crops/price?crop=${cropName}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/crops/price?crop=${cropName}`
       );
       if (!response.ok) throw new Error("Network response was not ok");
   
