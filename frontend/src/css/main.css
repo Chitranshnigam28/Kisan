@@ -49,9 +49,23 @@
   font-weight: 600;
 }
 
-/* .both-chart-container{
-  padding: 2rem;
-} */
+.extra-info{
+  margin-left: 5.5rem;
+  margin-top: 2rem;
+}
+
+.extra-info p{
+  color: #9E9E9E;
+}
+
+.content{
+  margin-top: -2rem;
+}
+
+.extra-info h4{
+  font-weight: 600;
+}
+
 
 /*Single Tips Css on market Insights page */
 .tips {
@@ -64,11 +78,12 @@
   display: flex;
   align-items: center;
 }
+
 .icon-cropName .tip-icon {
   margin-right: 0.5rem;
 }
+
 .dashboard-marketview-part {
-  /* grid-column: span 9; */
   grid-column: 1/9;
   padding: 20px;
   border-radius: 10px;
@@ -79,12 +94,14 @@
   display: flex;
   flex-flow: column wrap;
 }
+
 .market-insights-para {
-  margin-left: 3rem;
+  margin-left: 5.5rem;
   padding-top: 0.5rem;
   font-size: 1rem;
   color: gray;
 }
+
 @media (max-width: 850px) {
   .weather-info,
   .my-farms,

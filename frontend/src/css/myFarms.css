@@ -230,6 +230,11 @@
    padding: 10px;
  }
 
+ .selected-farm-card-title{
+    display: flex;
+    align-items: center;
+ }
+
  .card-title {
    font-size: 1.25rem;
    font-weight: 600;

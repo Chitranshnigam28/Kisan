@@ -22,7 +22,7 @@ const ApexSplineChart = ({ priceData, loading }) => {
                 { name: placeholderData[0].crop_name, data: placeholderData[0].prices }
               ],
         options: {
-            chart: { type: "area", height: 350 },
+            chart: { type: "line", height: 350 },
             xaxis: { categories: priceData?.[0]?.months || placeholderData[0].months },
             stroke: { curve: "smooth" },
             tooltip: { x: { format: "MMM YYYY" } },
@@ -39,7 +39,7 @@ const ApexSplineChart = ({ priceData, loading }) => {
                 <ReactApexChart
                     options={chartOptions.options}
                     series={chartOptions.series}
-                    type="area"
+                    type="line"
                     height={350}
                 />
             ) : (
