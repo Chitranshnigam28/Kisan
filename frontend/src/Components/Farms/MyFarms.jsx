@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
 import MatchingTips from "../MatchingTips";
 import MyFarmsSvg from "../../Assets/Logo/Myfarm.svg";
 import "../../css/myFarms.css";
@@ -17,7 +18,6 @@ import eggplantImg from "../../Assets/Vegetables/eggplant.png";
 import garlicImg from "../../Assets/Vegetables/garlic.png";
 import greenTeaImg from "../../Assets/Vegetables/green-tea.png";
 import jowarImg from "../../Assets/Vegetables/jowar.png";
-import maizeImg from "../../Assets/Vegetables/maize.svg";
 import onionImg from "../../Assets/Vegetables/onion.png";
 import peaImg from "../../Assets/Vegetables/pea.png";
 import potatoImg from "../../Assets/Vegetables/Potato.svg";
@@ -52,67 +52,66 @@ const MyFarms = () => {
   const [translations, setTranslations] = useState({});
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
   const location = useLocation();
-  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
-
 
   useEffect(() => {
     const fetchFarms = async () => {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                setError("Token not found");
-                return;
-            }
-
-            const response = await axios.get("http://localhost:5001/api/farms", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const userFarms = response.data.filter((farm) => farm.owner === userId);
-            setFarms(userFarms);
-
-            // Only set selectedFarm if it’s not already set
-            if (!selectedFarm && userFarms.length > 0 && location.pathname === "/my-farms") {
-                setSelectedFarm(userFarms[0]);
-            }
-        } catch (err) {
-            console.error("Error fetching farms:", err);
-            setError(err.response ? err.response.data.message : err.message);
-        } finally {
-            setLoading(false);
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setError("Token not found");
+          return;
         }
+
+        const response = await axios.get("http://localhost:5001/api/farms", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const userFarms = response.data.filter((farm) => farm.owner === userId);
+        setFarms(userFarms);
+
+        // Set the default selected farm during the initial load if none is selected
+        if (userFarms.length > 0) {
+          setSelectedFarm((prevSelectedFarm) => prevSelectedFarm || userFarms[0]);
+        }
+      } catch (err) {
+        console.error("Error fetching farms:", err);
+        setError(err.response ? err.response.data.message : err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchFarms();
-}, [userId, location.pathname, selectedFarm]);
+  }, [userId, location.pathname]);
+
 
   useEffect(() => {
     if (!selectedFarm) return;
 
     const loadPriceData = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get("http://localhost:5001/api/historical-price", {
-                params: {
-                    crop_name: selectedFarm.cropName,
-                    last_crop_sowed: selectedFarm.last_crop_sowed,
-                },
-            });
+      try {
+        setLoading(true);
+        const response = await axios.get("http://localhost:5001/api/historical-price", {
+          params: {
+            crop_name: selectedFarm.cropName,
+            last_crop_sowed: selectedFarm.last_crop_sowed,
+          },
+        });
 
-            setPriceData(response.data.crops);
-        } catch (error) {
-            console.error("Error fetching historical price data:", error);
-            setError("Failed to load historical price data.");
-        } finally {
-            setLoading(false);
-        }
+        setPriceData(response.data.crops);
+      } catch (error) {
+        console.error("Error fetching historical price data:", error);
+        setError("Failed to load historical price data.");
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadPriceData();
-}, [selectedFarm]); // Only trigger this when selectedFarm changes
+  }, [selectedFarm]);
 
 
   useEffect(() => {
@@ -175,6 +174,38 @@ const MyFarms = () => {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
+  const handleDelete = async (farmId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Token not found");
+        return;
+      }
+
+      // Delete the farm using the farmId
+      await axios.delete(`http://localhost:5001/api/farms/${farmId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Remove the deleted farm from the farms state
+      const updatedFarms = farms.filter((farm) => farm._id !== farmId);
+      setFarms(updatedFarms);
+
+      // Reset selectedFarm to the first farm in the updated list
+      if (updatedFarms.length > 0) {
+        setSelectedFarm(updatedFarms[0]);
+      } else {
+        setSelectedFarm(null);  // If no farms remain, reset selectedFarm to null
+      }
+
+    } catch (err) {
+      console.error("Error deleting farm:", err);
+      setError("Failed to delete farm.");
+    }
+  };
+
   const headingTranslationMapping = {
     'MyFarms': {
       en: 'My Farms',
@@ -232,6 +263,8 @@ const MyFarms = () => {
   const getTranslatedHeading = (headingKey) => {
     return headingTranslationMapping[headingKey] ? headingTranslationMapping[headingKey][language] : headingKey;
   };
+
+
 
 
   const getCropIcon = (cropName) => {
@@ -495,9 +528,18 @@ const MyFarms = () => {
                       <div className="sub2">
                         <div className="card-header d-flex justify-content-between align-items-center">
                           <div className="d-flex flex-column">
-                            <h5 className="card-title mb-0">
-                              {translations[selectedFarm._id]?.farmName || selectedFarm.farmName}
-                            </h5>
+                            <div className="selected-farm-card-title">
+                              <h5 className="card-title mb-0">
+                                {translations[selectedFarm._id]?.farmName || selectedFarm.farmName}
+                              </h5>
+                              <MdDelete
+                                onClick={(e) => {
+                                  e.stopPropagation();  
+                                  handleDelete(selectedFarm._id);
+                                }}
+                                style={{ fontSize: "20px", color: "red", cursor: "pointer" }}
+                              />
+                            </div>
                             <p className="card-text mb-0">{selectedFarm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
                           </div>
                         </div>

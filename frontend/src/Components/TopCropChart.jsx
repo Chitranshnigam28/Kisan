@@ -317,7 +317,7 @@ const TopCropsChart = ({ onLocationChange }) => {
           {console.log("Chart data labels:", chartData.options.labels)}
         </>
       ) : (
-        <p>No data available for the selected location.</p>
+        <p className="top-crop-no-data">No data available for the selected location.</p>
       )}
     </div>
   );

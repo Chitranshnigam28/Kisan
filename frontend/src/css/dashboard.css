@@ -1,20 +1,11 @@
-/* Container styling */
-/* .container {
-  width: 90%;
-  max-width: 800px;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 40px;
-} */
 
-/* Title styling */
 .title {
   display: flex;
   align-items: baseline;
   justify-content: left;
   gap: 8px;
   margin-left: 3rem;
+  align-items: center;
 }
 
 .title h1 {
@@ -58,7 +49,6 @@ button[type="submit"] {
   border-radius: 2rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100%;
   justify-items: center;
 }
 
@@ -107,12 +97,3 @@ button[type="submit"]:hover {
   line-height: 1.5;
 }
 
-/* Responsive Styling */
-/* @media (max-width: 768px) {
-  .container {
-    width: 95%;
-  }
-  .title h1 {
-    font-size: 1.5rem;
-  }
-} */
