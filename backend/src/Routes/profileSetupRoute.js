@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const profileController = require('/Controllers/profileSetupController');
+const profileController = require('../Controllers/profileSetupController');
 router.get('/farmer/profile',(req,res)=>{
     res.json('Welcome to Profile Setup');
 })

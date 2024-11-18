@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const FarmerProfile = require('/models/FarmerProfile'); // Import your schema
+const FarmerProfile = require('../models/FarmerProfile'); // Import your schema
 
 // Route to handle profile setup
 router.post('/profile', async (req, res) => {

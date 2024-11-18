@@ -1,6 +1,6 @@
 // routes/chat.js
 const express = require('express');
-const { chatBot } = require('/api/chatBot');
+const { chatBot } = require('../api/chatBot');
 
 const router = express.Router();
 

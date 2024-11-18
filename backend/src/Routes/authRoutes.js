@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const { home, register, login } = require('/controllers/authController');
-const signupSchema = require('/validators/auth-validator');
-const validate = require('/middlewares/validate-middleware');
-const authMiddleware =require('/middlewares/authMiddleware');
-const User=require('/models/userModel');
+const { home, register, login } = require('../controllers/authController');
+const signupSchema = require('../validators/auth-validator');
+const validate = require('../middlewares/validate-middleware');
+const authMiddleware =require('../middlewares/authMiddleware');
+const User=require('../models/userModel');
 const bcrypt = require('bcryptjs');
 router.get('/', home);
 

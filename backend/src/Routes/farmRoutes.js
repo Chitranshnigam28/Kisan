@@ -1,7 +1,7 @@
 const express = require("express")
 const { createFarm, getFarms, updateFarms, deleteFarms } = require("../Controllers/farmController")
 
-const authMiddleware = require("/middlewares/authMiddleware")
+const authMiddleware = require("../middlewares/authMiddleware")
 
 const router = express.Router();
 
