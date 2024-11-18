@@ -60,10 +60,16 @@ app.get('/', (req, res) => {
     res.status(200).send('Welcome to Kisan');
 })
 
-connectDb().then(() => {
-    app.listen(PORT, () => {
-        console.log(`server is running at port ${PORT}`);
-    })
-})
+// connectDb().then(() => {
+//     app.listen(PORT, () => {
+//         console.log(`server is running at port ${PORT}`);
+//     })
+// })
+(async () => {
+    await connectDb();
+    console.log(`Database connected successfully`);
+})();
+
+module.exports = app;
 
 module.exports=app;
