@@ -4,12 +4,18 @@
       { "src": "index.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/api/(.*)", "dest": "/index.js" }
+      { "src": "/api/(.*)", "dest": "index.js" }
     ],
     "includeFiles": [
-      "controllers/**",
-      "middlewares/**",
-      "models/**",
-      "validators/**"
-    ]
+      "src/controllers/**",
+      "src/middlewares/**",
+      "src/models/**",
+      "src/validators/**",
+      "src/utils/**",
+      "src/Routes/**",
+      "src/api/**"
+    ],
+    "env": {
+      "PORT": "5001"
+    }
   }
