@@ -25,7 +25,7 @@ const chatRoutes = require('./src/Routes/chatBotRoute');
 const app = express();
 const cors = require('cors');
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT||5001;
 app.use(cors());
 app.use(express.json());
 
