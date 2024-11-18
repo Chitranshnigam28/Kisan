@@ -301,7 +301,10 @@ const AddFarms = () => {
                                 className="file-input"
                                 style={{ display: 'none' }} // Hide the default input
                             />
-                            <div className="up" onClick={() => document.getElementById('fileInput').click()}>
+                            <div className="up" onClick={() => document.getElementById('fileInput').click()} onChange={(e) => {
+                                    handleImageChange(e);
+                                    handleUpload();
+                                }}>
                                 <IoIosCloudUpload /> {/* Icon as "choose image" button */}
                             </div>
                         </div>

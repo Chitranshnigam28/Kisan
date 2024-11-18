@@ -3,14 +3,15 @@ import ReactApexChart from "react-apexcharts";
 
 const ApexLineChart = ({ crops, cropName, selectedYear }) => {
   const prices = crops.map((item) => item.price);
-  const months = crops.map((item) => item.month.slice(0, 3));
+  const months = crops.map((item) => item.month.slice(0, 3)); // Extract first 3 letters of each month
 
-  console.log(">>>>", crops, cropName, selectedYear)
+  console.log(">>>>", crops, cropName, selectedYear);
+
   const [series] = useState([{ name: "Price", data: prices }]);
   const [options] = useState({
     chart: {
       height: 350,
-      type: 'line',
+      type: "line",
       dropShadow: {
         enabled: true,
         color: "#000",
@@ -19,16 +20,31 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
         blur: 6,
         opacity: 0.4,
       },
-      xaxis: { categories: months },
       zoom: {
-        enabled: false
-      }
+        enabled: true, // Enable zoom functionality
+        type: "x", // Zoom only along the X-axis
+        autoScaleYaxis: true, // Automatically scale the Y-axis when zooming
+      },
+      toolbar: {
+        tools: {
+          zoom: true, // Enable zoom tool
+          zoomin: true, // Enable zoom-in tool
+          zoomout: true, // Enable zoom-out tool
+          pan: true, // Enable pan tool
+          reset: true, // Enable reset zoom tool
+        },
+      },
+    },
+    xaxis: {
+      categories: months, // Place categories here to show months
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     stroke: {
-      curve: 'straight'
+      curve: "smooth",
+      colors: ["#004d00"],
+      width: 3,
     },
     title: {
       text: `${cropName || "Wheat"} Prices in ${selectedYear || "2023"}`,
@@ -40,8 +56,8 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
     },
     grid: {
       row: {
-        colors: ['#f3f3f3', 'transparent'],
-        opacity: 0.5
+        colors: ["#f3f3f3", "transparent"],
+        opacity: 0.5,
       },
     },
     fill: {
@@ -56,11 +72,6 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
         opacityTo: 0.5,
         stops: [0, 100],
       },
-    },
-    stroke: {
-      curve: "smooth",
-      colors: ["#004d00"],
-      width: 3,
     },
     tooltip: {
       theme: "dark",
