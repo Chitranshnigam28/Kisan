@@ -254,20 +254,24 @@ h4 {
     justify-content: center;
     width: auto;
     grid-column: span 12;
-    font-size: 2rem;
+    /* font-size: 2rem; */
     margin: 1.4rem 0;
+    text-align: center;
+    
   }
 
   .funfacts-container .title {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     font-weight: bold;
+    text-align: center;
   }
+   /* 
   .funfacts-container .fact-item {
     font-size: 1.3rem;
   }
   .funfacts-container strong {
     font-size: 1.3rem;
-  }
+  } */
   /* funcfacts endss========= */
 
   /* marketInsights Dashboard */
@@ -295,6 +299,16 @@ h4 {
   }
 }
 
+@media only screen and (max-width: 900px) {
+  .funfacts-container .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 2rem;
+    display: contents;
+  }
+}
+
 @media only screen and (max-width: 780px) {
   .market-section-container {
     display: flex;
@@ -307,4 +321,8 @@ h4 {
   }
 }
 
-
+@media only screen and (max-width: 780px) {
+  .weather-widget{
+    width: clamp(60vw, 85vw, 30rem);
+  } 
+}

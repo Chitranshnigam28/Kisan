@@ -206,9 +206,9 @@
  }
 
  @media (max-width: 768px) {
-   .col-md-4 {
+   /* .col-md-4 {
      max-width: 30%;
-   }
+   } */
 
    .totalBox {
      display: grid;
@@ -380,3 +380,11 @@
      object-fit: cover;
   }
 }
+
+
+ @media (max-width: 600px) {
+  .my-farms .container{
+    overflow-x: scroll;
+  }
+}
+

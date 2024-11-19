@@ -1,157 +1,163 @@
 .weather-widget {
-    width: 100%;
-    max-width: 100%;
-    padding: 20px;
-    border-radius: 16px;
-    color: #fff;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    transition: background-color 0.3s ease;
-    height: 100%;
-    align-content: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  color: #fff;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease;
+  height: 100%;
+  align-content: center;
 }
 
 .default-theme {
-    background-color: #4a90e2;
+  background-color: #4a90e2;
 }
 
 .cold-day {
-    background-color: #5dade2;
+  background-color: #5dade2;
 }
 
 .cold-night {
-    background-color: #34495e;
+  background-color: #34495e;
 }
 
 .cool-day {
-    background-color: #85c1e9;
+  background-color: #85c1e9;
 }
 
 .cool-night {
-    background-color: #2c3e50;
+  background-color: #2c3e50;
 }
 
 .warm-day {
-    background-color: rgb(247, 220, 111);
-    color: #333;
+  background-color: rgb(247, 220, 111);
+  color: #333;
 }
 
 .warm-night {
-    background-color: #af7ac5;
+  background-color: #af7ac5;
 }
 
 .widget-content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
-    font-size: 14px;
-    margin-bottom: 8px;
+  font-size: 14px;
+  margin-bottom: 8px;
 }
 
 .main-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .temperature {
-    font-size: 48px;
-    font-weight: bold;
+  font-size: 48px;
+  font-weight: bold;
 }
 
 .weather-icon {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .hourly-forecast {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .hour {
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hour img {
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .weather-widget {
-    padding: 20px;
-    color: #fff;
-    cursor: pointer;
-    width: 29rem;
-    max-width: 700px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+  padding: 20px;
+  color: #fff;
+  cursor: pointer;
+  width: 29rem;
+  max-width: 700px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
-.search-button{
-    border: 1px solid yellow;
-    border-radius: 30px;
+.search-button {
+  border: 1px solid yellow;
+  border-radius: 30px;
 }
 
-.search-input{
-    margin: 0 !important;
-    color: #96C73D;
+.search-input {
+  margin: 0 !important;
+  color: #96c73d;
 }
 
-.widgetLocationWrapper{
-    display: flex;
-    align-items: center;
-    gap:0.5rem;
+.widgetLocationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.widgetDateWeatherIconWrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.widgetDateWeatherIconWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.weather-icon{
-    width: 20%;
-    height: auto;
+.weather-icon {
+  width: 20%;
+  height: auto;
 }
 
-.temp-icon{
-    display: flex;
-    justify-items: flex-start;
+.temp-icon {
+  display: flex;
+  justify-items: flex-start;
 }
 
-.locationSearchWrapper{
-    display: flex;
-    justify-content: space-between;
+.locationSearchWrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
-.search-form{   
-    display: grid;
-    grid-template-columns: 1fr 0.25fr;
-    gap: 1rem;
+.search-form {
+  display: grid;
+  grid-template-columns: 1fr 0.25fr;
+  gap: 1rem;
 }
 
-.widgetTemperature{
-    color: white;
-    font-size: 48px;
-    font-weight: bold;
+.widgetTemperature {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
 }
 
-.weather-search-button:hover{
-    color: white;
+.weather-search-button:hover {
+  color: white;
 }
 
-.search-button:hover{
-    background-color: #F7F7F7;
-    color: black;
+.search-button:hover {
+  background-color: #f7f7f7;
+  color: black;
 }
 
-.hourly-forecast>h3{
-    margin-left: -1.5rem;
+.hourly-forecast > h3 {
+  margin-left: -1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .locationSearchWrapper {
+    flex-flow: column;
+  }
 }

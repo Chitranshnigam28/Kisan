@@ -156,7 +156,7 @@ function WeatherWidget({ showSearch = true }) {
               <div className="hourly-forecast">
                 {weather.hourlyForecast ? (
                   <>
-                    <h3>{translatedLabels.hourlyForecastLabel || "Hourly Forecast"}</h3>
+                    {/* <h3>{translatedLabels.hourlyForecastLabel || "Hourly Forecast"}</h3> */}
                     {weather.hourlyForecast.map((hour, index) => (
                       <div key={index} className="hour">
                         <p>{hour.title}</p>

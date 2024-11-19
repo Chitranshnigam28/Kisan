@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SimpleLoader from './SimpleLoader';
 import '../css/funfacts.css';
+import FunFactsLoader from "./FunFactsLoader";
 
 const FunFacts = () => {
   const [funFact, setFunFact] = useState(null);
@@ -98,7 +98,7 @@ const FunFacts = () => {
         </div>
       ) : (
         // <p className="loading">Loading...</p>
-        <SimpleLoader />
+        <FunFactsLoader />
       )}
     </div>
   );
