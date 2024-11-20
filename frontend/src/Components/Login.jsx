@@ -37,6 +37,7 @@ const Login = () => {
     const login = { email, password };
 
     try {
+      console.log('process.env.REACT_APP_BACKEND_URL '+process.env.REACT_APP_BACKEND_URL);
       const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
