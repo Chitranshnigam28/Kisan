@@ -1,31 +1,10 @@
-// import React from "react";
-// import {useState} from "react"
-// import Header from "./Header";
-// import "../../css/dashboard.css";
-// import { Footer } from "./Footer";
-// import Main from './Main'
-// const Dashboard = () => {
-//   const [showOverlay, setShowOverlay] = useState(false);
-
-//   const handleSetShowOverlay = setShowOverlay || (() => {});
-//   return (
-//     <>
-//     <Header />
-//     <Main />
-//     {showOverlay && <div className="background-overlay show" onClick={() => setShowOverlay(false)}></div>}
-//     <Footer setShowOverlay={handleSetShowOverlay}/>
-//     </>
-//   );
-// };
-
-// export default Dashboard;
 import React, { useState } from "react";
 import Header from "./Header";
 import "../../css/dashboard.css";
 import { Footer } from "./Footer";
 import Main from './Main';
 import ChatBot from '../ChatBot';
-import aiicon from "../../Assets/Images/aiicon.png";
+import aiicon from "../../Assets/bot.png";
 
 const Dashboard = () => {
   const [showChatBot, setShowChatBot] = useState(false);

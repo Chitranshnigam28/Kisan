@@ -312,7 +312,7 @@ const AddFarms = () => {
 
 
                             <div className="mb-4">
-                                <label className="form-label">How large is your farm?</label>
+                                <label className="form-label">Size of your farm (HA)?</label>
                                 <input
                                     type="text"
                                     name="sizeOfFarm"

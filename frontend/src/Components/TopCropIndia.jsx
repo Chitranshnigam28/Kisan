@@ -32,13 +32,15 @@ import groundnut from "../Assets/Vegetables/groundnut.png";
 import marketInsights from "../Assets/marketinsights.svg";
 import SimpleLoader from "./SimpleLoader";
 
+
 const MarketInsights = () => {
   const [insights, setInsights] = useState([]);
   const [translatedInsights, setTranslatedInsights] = useState([]);
   const [language, setLanguage] = useState(
     localStorage.getItem("language") || "en"
   );
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true); 
+
 
   useEffect(() => {
     console.log("Top INdia running ")
@@ -268,9 +270,12 @@ const MarketInsights = () => {
         {language === "en"
           ? "Market Insights"
           : language === "hi"
-          ? "बाजार जानकारी"
-          : "ਬਾਜਾਰ ਜਾਣਕਾਰੀ"}
+            ? "बाजार जानकारी"
+            : "ਬਾਜਾਰ ਜਾਣਕਾਰੀ"}
       </h4>
+
+      
+
       {translatedInsights.length > 0 ? (
         <ul className="market-insights-list">
           {translatedInsights.map((crop, index) => (
@@ -285,9 +290,8 @@ const MarketInsights = () => {
                 <p className="crop-location">{crop.state}</p>
               </div>
               <p
-                className={`price-trend ${
-                  crop.price_trend.startsWith("+") ? "positive" : "negative"
-                }`}
+                className={`price-trend ${crop.price_trend.startsWith("+") ? "positive" : "negative"
+                  }`}
               >
                 {crop.price_trend}
               </p>
@@ -297,9 +301,10 @@ const MarketInsights = () => {
         </ul>
       ) : (
         <SimpleLoader />
-)}
+      )}
     </div>
   );
+
 };
 
 export default MarketInsights;

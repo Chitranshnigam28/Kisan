@@ -5,7 +5,7 @@ import CropLoader from "./CropLoader";
 import { useLocation } from "react-router-dom";
 import "../css/topCropChart.css";
 import starIcon from "../Assets/TopCrop.svg";
-
+import { IoLocationSharp } from "react-icons/io5";
 
 const TopCropsChart = ({ onLocationChange }) => {
   const [location, setLocation] = useState("Delhi");
@@ -272,19 +272,22 @@ const TopCropsChart = ({ onLocationChange }) => {
           alt="Top crop"
           className="top-crop-icon"
         />
-        <br/>
+        <br />
         <h4 className="top-crop-title">
           {translatedData
             ? translatedData.title
             : `Top Selling Crops in ${location}`}
         </h4>
       </div>
-      
+
       {currentLocation.pathname === "/charts" && (
         <div className="location-topCrop">
-          <label htmlFor="state-dropdown">
+          {/* <label htmlFor="state-dropdown">
             {translatedLocationHeading || "Select Location"}:{" "}
-          </label>
+          </label> */}
+          <IoLocationSharp
+            style={{ fontSize: "20px", color: "red", cursor: "pointer" }}
+          />
           <select
             id="state-dropdown"
             value={location}
@@ -295,7 +298,7 @@ const TopCropsChart = ({ onLocationChange }) => {
               ([originalState, translatedState]) => (
                 <option key={originalState} value={originalState}>
                   {translatedState || originalState}{" "}
-                  
+
                 </option>
               )
             )}
@@ -317,7 +320,7 @@ const TopCropsChart = ({ onLocationChange }) => {
           {console.log("Chart data labels:", chartData.options.labels)}
         </>
       ) : (
-        <p>No data available for the selected location.</p>
+        <p className="top-crop-no-data">No data available for the selected location.</p>
       )}
     </div>
   );
