@@ -221,7 +221,7 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
   }, []);
 
   useEffect(() => {
-    filterByYear(cropPrices, selectedYear); // Update filtered prices when year changes
+    filterByYear(cropPrices, selectedYear); 
   }, [selectedYear, cropPrices]);
 
   return (
@@ -249,7 +249,7 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
             <form onSubmit={handleSubmit} className="crop-form-container">
               <input
                 type="text"
-                value={cropName} // Controlled input
+                value={cropName} 
                 onChange={handleInputChange}
                 placeholder="Enter crop name"
                 className="crop-input"

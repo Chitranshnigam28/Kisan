@@ -6,7 +6,7 @@
 .predefined-crops {
     display: flex;
     gap: 15px;
-    margin: 20px 0;
+    margin: 1rem 1rem;
     justify-content: flex-start;
     align-items: center;
 }
@@ -41,13 +41,10 @@
     background: #f1f1f1;
 }
 
-.apex-chart-container {
-    margin-top: 30px;
-}
-
 .crop-form-container {
     display: flex;
     flex-direction: row;
+    margin: 1rem;
 }
 
 .crop-input,

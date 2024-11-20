@@ -77,15 +77,16 @@ const MarketInsigtsDashboard = () => {
                 </p>
               </div>
 
-              {locationVal.pathname === '/charts' && (
-                <div className="extra-info">
-                  <h4>Your Crops</h4>
-                  <p>Choose from the crops below or search it</p>
-                </div>
-              )}
+
 
               <div className="both-chart-container">
                 <div className="container-tips-graph">
+                  {locationVal.pathname === '/charts' && (
+                    <div className="extra-info">
+                      <h4>Your Crops</h4>
+                      <p>Choose from the crops below or search it</p>
+                    </div>
+                  )}
                   <CropPriceChart
                     getCropData={handlegetCropdata}
                     cropName={cropName}

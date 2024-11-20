@@ -49,20 +49,20 @@
   font-weight: 600;
 }
 
-.extra-info{
-  margin-left: 5.5rem;
+.extra-info {
+  margin-left: 2rem;
   margin-top: 2rem;
 }
 
-.extra-info p{
+.extra-info p {
   color: #9E9E9E;
 }
 
-.content{
+.content {
   margin-top: -2rem;
 }
 
-.extra-info h4{
+.extra-info h4 {
   font-weight: 600;
 }
 
@@ -103,6 +103,7 @@
 }
 
 @media (max-width: 850px) {
+
   .weather-info,
   .my-farms,
   .crop-info,
@@ -186,6 +187,7 @@
 
 .LinkToCharts {
   grid-column: 2/ 3;
+  width: 100%;
 }
 
 h4 {
@@ -205,11 +207,13 @@ h4 {
 .container-tips-graph {
   grid-row: span 2;
 }
+
 .single-tips-container {
   grid-column: 2;
 }
 
 @media only screen and (max-width: 1000px) {
+
   /* .main-layout {
     grid-template-columns: 1fr;
   } */
@@ -221,15 +225,18 @@ h4 {
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
+
   .my-farms {
     display: grid;
     grid-column: span 12;
     align-items: center;
     justify-content: center;
   }
+
   .dashboard-marketview-part {
     margin-left: 0;
   }
+
   /* .top-crops {
     display: grid;
     margin-top: 3rem;
@@ -257,7 +264,7 @@ h4 {
     /* font-size: 2rem; */
     margin: 1.4rem 0;
     text-align: center;
-    
+
   }
 
   .funfacts-container .title {
@@ -265,7 +272,8 @@ h4 {
     font-weight: bold;
     text-align: center;
   }
-   /* 
+
+  /* 
   .funfacts-container .fact-item {
     font-size: 1.3rem;
   }
@@ -276,26 +284,32 @@ h4 {
 
   /* marketInsights Dashboard */
   .both-chart-container {
-    grid-template-columns: 1fr; /* Single column */
-    grid-template-rows: auto; /* Rows adjust to content height */
+    grid-template-columns: 1fr;
+    /* Single column */
+    grid-template-rows: auto;
+    /* Rows adjust to content height */
   }
 
   .container-tips-graph,
   .single-tips-container {
-    grid-column: 1; /* All elements in the first column */
-    grid-row: auto; /* Allow natural stacking */
+    grid-column: 1;
+    /* All elements in the first column */
+    grid-row: auto;
+    /* Allow natural stacking */
   }
 
   .weather-widget {
     width: 38rem;
-    max-width: none; /* Remove max-width */
+    max-width: none;
+    /* Remove max-width */
   }
 }
 
 @media only screen and (max-width: 900px) {
   .weather-widget {
     width: 27rem;
-    max-width: 600px; /* Remove max-width */
+    max-width: 600px;
+    /* Remove max-width */
   }
 }
 
@@ -322,7 +336,7 @@ h4 {
 }
 
 @media only screen and (max-width: 780px) {
-  .weather-widget{
+  .weather-widget {
     width: clamp(60vw, 85vw, 30rem);
-  } 
+  }
 }

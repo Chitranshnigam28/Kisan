@@ -15,12 +15,27 @@
   gap: 0.3rem;
 }
 
-.top-crop-no-data{
+.top-crop-container{
+  margin-top: 1rem;
+}
+
+.top-crop-no-data {
   margin: 3rem;
 }
 
-.top-crop-title{
+.top-crop-title {
   margin-bottom: 0;
+}
+
+.location-topCrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+}
+
+#state-dropdown{
+  text-align: center;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -34,32 +49,30 @@
 /* ApexLineChart.css */
 
 .chart-container {
-  padding: 20px; /* Padding around the chart */
-  background-color: #f9f9f9; /* Light background color */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
 .chart-title {
-  color: #003300; /* Title color */
-  font-weight: bold; /* Bold title */
-  font-size: 16px; /* Title font size */
-  margin-bottom: 20px; /* Space below the title */
-  text-align: center; /* Center the title */
+  color: #003300;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .xaxis-title {
-  font-size: 14px; /* X-axis title font size */
-  color: #003300; /* X-axis title color */
+  font-size: 14px;
+  color: #003300;
 }
 
 .xaxis-labels {
-  color: #003300; /* X-axis labels color */
-  font-size: 12px; /* X-axis labels font size */
+  color: #003300;
+  font-size: 12px;
 }
 
-/* Optional: Add styles for grid lines if needed */
 .apexcharts-gridline {
-  stroke: #e0e0e0 !important; /* Neutral gray color for grid lines */
-  stroke-dasharray: 4; /* Dashed lines for grid */
+  stroke: #e0e0e0 !important;
+  stroke-dasharray: 4;
 }
