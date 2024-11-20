@@ -65,7 +65,7 @@ app.get('/auth/google/callback', passport.authenticate('google', {
 }), (req, res) => {
   // Redirect or send token after successful login
   const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  res.redirect(`https://kisan-chi.vercel.app/?token=${token}`); // Redirect to frontend with JWT token
+  res.redirect(`https://kisan-green.vercel.app/login/?token=${token}`); // Redirect to frontend with JWT token
 });
 
 // Protected route example

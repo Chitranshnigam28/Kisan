@@ -15,7 +15,7 @@ router.get('/auth/google/callback',
         console.log('User authenticated:', req.user); 
         const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
         console.log('Generated JWT token:', token);
-        res.redirect(`https://kisan-chi.vercel.app/login?token=${token}`); // Redirect to frontend with the JWT token
+        res.redirect(`https://kisan-green.vercel.app/login?token=${token}`); // Redirect to frontend with the JWT token
     }
 );
 
