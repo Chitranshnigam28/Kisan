@@ -18,24 +18,52 @@ export function Footer({ setShowOverlay }) {
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let timeoutId;
+    if (window.innerWidth <= 800) {
+      setShowDock(true); // Always show footer for mobile
+      return; // Skip adding scroll event listener
+    }
     const handleScroll = () => {
-      setShowDock(window.scrollY <= lastScrollY);
-      lastScrollY = window.scrollY;
+      if (timeoutId) return;
+      timeoutId = setTimeout(() => {
+        setShowDock(window.scrollY <= lastScrollY || window.scrollY <= 20); // Always show when scrolled to the top
+        lastScrollY = window.scrollY;
+        timeoutId = null;
+      }, 100);
+      // setShowDock(window.scrollY <= lastScrollY);
+      // lastScrollY = window.scrollY;
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // const links = [
+  //   { title: "Home", icon: <FaThLarge className="footer-icon" />, href: "/" },
+  //   {
+  //     title: "Crop Recommendation",
+  //     icon: (
+  //       <FaSeedling
+  //         className="footer-icon"
+  //         onClick={() => setShowCropDiv(!showCropDiv)}
+  //       />
+  //     ),
+  //   },
+  //   {
+  //     title: "Maps",
+  //     icon: <FaMapMarkerAlt className="footer-icon" />,
+  //     href: "/maps",
+  //   },
+  // ];
   const links = [
-    { title: "Home", icon: <FaThLarge className="footer-icon" />, href: "/" },
+    {
+      title: "Home",
+      icon: <FaThLarge className="footer-icon" />,
+      href: "/",
+    },
     {
       title: "Crop Recommendation",
-      icon: (
-        <FaSeedling
-          className="footer-icon"
-          onClick={() => setShowCropDiv(!showCropDiv)}
-        />
-      ),
+      icon: <FaSeedling className="footer-icon" />,
+      onClick: () => setShowCropDiv(!showCropDiv),
     },
     {
       title: "Maps",
@@ -47,7 +75,7 @@ export function Footer({ setShowOverlay }) {
   return (
     <>
       <div className={`floating-dock ${showDock ? "show" : "hide"}`}>
-        <FloatingDock
+        {/* <FloatingDock
           mobileClassName="translate-y-20"
           items={links.map((link) => ({
             ...link,
@@ -57,7 +85,8 @@ export function Footer({ setShowOverlay }) {
               link.icon
             ),
           }))}
-        />
+        /> */}
+        <FloatingDock items={links} />
       </div>
 
       {showCropDiv && (

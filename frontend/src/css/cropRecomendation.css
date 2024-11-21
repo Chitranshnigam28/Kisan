@@ -519,3 +519,12 @@
   .attrHeading{
     color: #929292;
   }
+
+  @media screen and (max-width:500px){
+    .crop-recommendation-div {
+      width: 98vw;
+    }
+    .carousel{
+      padding: 0;
+    }
+  }
