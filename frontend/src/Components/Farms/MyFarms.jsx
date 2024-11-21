@@ -145,7 +145,7 @@ const MyFarms = () => {
   const translateText = async (text, targetLanguage) => {
     try {
       console.log("Sending translation request for:", text, "to", targetLanguage);
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
+      const response = await axios.post("http://localhost:5001/api/translate", {
         text: text,
         targetLanguage: targetLanguage,
       });
@@ -617,4 +617,3 @@ const MyFarms = () => {
 }
 
 export default MyFarms;
-
