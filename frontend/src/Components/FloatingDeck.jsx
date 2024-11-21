@@ -70,7 +70,7 @@ const FloatingDockMobile = ({ items, className }) => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-1/4 right-0 flex justify-between items-center bg-gray-100 dark:bg-neutral-900 p-2 md:hidden w-1/2 rounded-[1.25rem]",
+        "fixed bottom-0 left-[15%] right-0 flex justify-between items-center bg-gray-100 dark:bg-neutral-900 p-2 md:hidden w-3/4 rounded-[1.25rem]",
         className
       )}
     >
