@@ -17,7 +17,7 @@
 /* My Farms */
 .my-farms {
   grid-column: 2/11;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 10px;
   display: flex;
   flex-direction: row-reverse;
@@ -212,7 +212,7 @@ h4 {
   grid-column: 2;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1250px) {
 
   /* .main-layout {
     grid-template-columns: 1fr;
@@ -223,9 +223,12 @@ h4 {
     grid-column: span 12;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
   }
 
+  .weather-widget {
+    max-width: unset;
+}
   .my-farms {
     display: grid;
     grid-column: span 12;
@@ -308,7 +311,7 @@ h4 {
 @media only screen and (max-width: 900px) {
   .weather-widget {
     width: 27rem;
-    max-width: 600px;
+    /* max-width: 600px; */
     /* Remove max-width */
   }
 }
@@ -335,8 +338,8 @@ h4 {
   }
 }
 
-@media only screen and (max-width: 780px) {
+@media only screen and (max-width: 1000px) {
   .weather-widget {
-    width: clamp(60vw, 85vw, 30rem);
+    width: clamp(89vw, 95vw, 42rem);
   }
 }

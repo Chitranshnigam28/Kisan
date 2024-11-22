@@ -89,7 +89,7 @@
 .crop-icon {
   width: 50px;
   height: 50px;
-  animation: float 2s infinite;
+  /* animation: float 2s infinite; */
 }
 
 @keyframes float {
@@ -265,14 +265,14 @@ body {
   padding: 0;
 }
 
-.container {
+.landing-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
 /* Header Styles */
-.header {
+.landing-header {
   text-align: center;
   padding: 40px 0;
   display: grid;
