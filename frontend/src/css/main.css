@@ -50,9 +50,11 @@
 }
 
 .extra-info {
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   margin-top: 2rem;
+  width: max-content;
 }
+
 
 .extra-info p {
   color: #9E9E9E;
@@ -75,7 +77,7 @@
 }
 
 .icon-cropName {
-  display: flex;
+  display: inline-flex;
   align-items: center;
 }
 
@@ -163,7 +165,6 @@
 .market-section-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* align-items: center; */
   align-items: baseline;
   justify-content: center;
 }
@@ -200,12 +201,17 @@ h4 {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
 }
 
 .container-tips-graph {
-  grid-row: span 2;
+  grid-row: span 3;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px #DDDDDD;
+  height: fit-content;
+  margin-top: 2rem;
 }
 
 .single-tips-container {
@@ -214,9 +220,6 @@ h4 {
 
 @media only screen and (max-width: 1000px) {
 
-  /* .main-layout {
-    grid-template-columns: 1fr;
-  } */
   .dashboard-marketview-part,
   .weather-info {
     display: grid;
@@ -237,12 +240,6 @@ h4 {
     margin-left: 0;
   }
 
-  /* .top-crops {
-    display: grid;
-    margin-top: 3rem;
-    justify-content: center;
-  } */
-
   .location-topCrop {
     margin-bottom: 2rem;
   }
@@ -261,47 +258,31 @@ h4 {
     justify-content: center;
     width: auto;
     grid-column: span 12;
-    /* font-size: 2rem; */
     margin: 1.4rem 0;
     text-align: center;
 
   }
 
   .funfacts-container .title {
-    /* font-size: 1.5rem; */
     font-weight: bold;
     text-align: center;
   }
 
-  /* 
-  .funfacts-container .fact-item {
-    font-size: 1.3rem;
-  }
-  .funfacts-container strong {
-    font-size: 1.3rem;
-  } */
-  /* funcfacts endss========= */
-
   /* marketInsights Dashboard */
   .both-chart-container {
     grid-template-columns: 1fr;
-    /* Single column */
     grid-template-rows: auto;
-    /* Rows adjust to content height */
   }
 
   .container-tips-graph,
   .single-tips-container {
     grid-column: 1;
-    /* All elements in the first column */
     grid-row: auto;
-    /* Allow natural stacking */
   }
 
   .weather-widget {
     width: 38rem;
     max-width: none;
-    /* Remove max-width */
   }
 }
 
@@ -309,7 +290,6 @@ h4 {
   .weather-widget {
     width: 27rem;
     max-width: 600px;
-    /* Remove max-width */
   }
 }
 
@@ -323,17 +303,13 @@ h4 {
   }
 }
 
-@media only screen and (max-width: 780px) {
+/* @media only screen and (max-width: 780px) {
   .market-section-container {
-    display: flex;
-    flex-flow: column nowrap;
-    /* align-items: center; */
-    /* align-items: baseline;
-    justify-content: center; */
-    width: 90vw;
+    width: 100vw;
     align-items: center;
   }
-}
+} */
+
 
 @media only screen and (max-width: 780px) {
   .weather-widget {
