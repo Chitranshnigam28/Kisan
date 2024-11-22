@@ -88,23 +88,46 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
     fill: {
       type: "gradient",
       gradient: {
-        shade: "dark",
-        gradientToColors: ["#96C73D"],
+        shade: "light",
+        gradientToColors: ["#056109"],
         inverseColors: false,
         opacityFrom: 0.8,
         opacityTo: 0.1,
-        stops: [10, 100],
+        stops: [-10, 100],
       },
     },
     tooltip: {
-      theme: "dark",
+      theme: "dark", 
+      style: {
+        fontSize: "12px", 
+      },
       x: {
         formatter: function (value) {
-          const index = parseInt(value, 10) - 1; 
-          return monthLabels[index] || "N/A"; 
+          const index = parseInt(value, 10) - 1;
+          return monthLabels[index] || "N/A";
         },
       },
-    },    
+      y: {
+        formatter: function (value) {
+          return `₹${value.toFixed(2)}`; 
+        },
+      },
+      custom: function({ series, seriesIndex, dataPointIndex, w }) {
+        const value = series[seriesIndex][dataPointIndex];
+        return `
+          <div style="
+            padding: 8px; 
+            border-radius: 5px; 
+            color: #fff; 
+            font-family: 'Noto Sans', Arial, sans-serif; 
+            font-size: 12px;
+          ">
+            ₹${value.toFixed(2)}
+          </div>`;
+      },
+    }
+    
+        
   });
 
   return (

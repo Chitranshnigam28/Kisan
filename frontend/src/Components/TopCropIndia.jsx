@@ -43,7 +43,6 @@ const MarketInsights = () => {
 
 
   useEffect(() => {
-    console.log("Top INdia running ")
     const fetchMarketInsights = async () => {
       setLoading(true);
       try {
@@ -54,16 +53,13 @@ const MarketInsights = () => {
         if (response.data && response.data.crops) {
           setInsights(response.data.crops);
           translateMarketInsights(response.data.crops, language);
-          // onLoaded("working"); // Call onLoaded only after data is successfully fetched
         } else {
           console.error("Unexpected response format:", response.data);
-          setInsights([]); // Set to empty if the response is not in the expected format
-          // onLoaded("working"); // Still call onLoaded after error, if needed
+          setInsights([]); 
         }
       } catch (error) {
         console.error("Error fetching market insights:", error);
-        setInsights([]); // Set to empty on error
-        // onLoaded("working"); // Ensure onLoaded is called after error
+        setInsights([]); 
       } finally {
         setLoading(false);
       }

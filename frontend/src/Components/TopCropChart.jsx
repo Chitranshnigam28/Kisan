@@ -278,7 +278,7 @@ const TopCropsChart = ({ onLocationChange }) => {
       {currentLocation.pathname === "/charts" && (
         <div className="location-topCrop">
           <IoLocationSharp
-            style={{ fontSize: "20px", color: "red", cursor: "pointer" }}
+            style={{ fontSize: "25px", color: "#DF1C41", cursor: "pointer" }}
           />
           <select
             id="state-dropdown"
