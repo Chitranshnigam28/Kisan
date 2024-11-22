@@ -24,7 +24,7 @@ const FirstPage = ({ imageUrl }) => {
                 <img src= {bgImage} alt="Farm illustration" className="welcome-image" />
                 
                 <div className="button-container">
-                    <button className="main-Btn" onClick={handleSetupClick}>Set up your farms →</button>
+                    <button className="main-Btn-FirstPage" onClick={handleSetupClick}>Set up your farms →</button>
                     <button className="setup-later-btn" onClick={handleSetupLaterClick}>I'll set up later</button>
                 </div>
             </div>

@@ -54,7 +54,7 @@
     background-color: transparent;
 }
 
-.main-Btn {
+.main-Btn-FirstPage {
     background-color: black;
     color: white;
     border: none;
@@ -63,13 +63,14 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width:100%
 }
 
 .setup-later-btn {
     background: none;
     border: none;
     color: #666;
-    font-size: 16px;
+    font-size: 1.2rem;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -77,4 +78,16 @@
 
 .setup-later-btn:hover {
     background-color: transparent;
+}
+
+@media screen and (max-width:500px){
+    .main-Btn-FirstPage {
+        
+        width:100% !important
+    }
+
+    .setup-later-btn {
+        font-size: 1.2rem !important;
+    }
+    
 }
