@@ -15,8 +15,15 @@
   gap: 0.3rem;
 }
 
-.top-crop-container{
-  margin-top: 1rem;
+.top-crop-container {
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px #DDDDDD;
+  margin: 2rem 0 1rem 0;
+}
+
+.inner-top-crop-container{
+  padding: 1rem;
 }
 
 .top-crop-no-data {
@@ -34,7 +41,7 @@
   margin: 2rem;
 }
 
-#state-dropdown{
+#state-dropdown {
   text-align: center;
 }
 

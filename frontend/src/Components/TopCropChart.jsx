@@ -165,11 +165,10 @@ const TopCropsChart = ({ onLocationChange }) => {
       return response.data.translatedText;
     } catch (error) {
       console.error("Error translating text:", error);
-      return text; // Fallback to original text in case of error
+      return text;
     }
   };
 
-  // Default crops data for "Delhi" if no data is available
   const defaultCrops = [
     { crop_name: "Wheat", percentage: 40 },
     { crop_name: "Rice", percentage: 30 },
@@ -187,10 +186,6 @@ const TopCropsChart = ({ onLocationChange }) => {
             type: "donut",
             height: 350,
           },
-          // title: {
-          //   text: translatedData ? translatedData.title : `Top Selling Crops in ${location}`,
-          //   align: 'center',
-          // },
           labels: translatedData
             ? translatedData.cropNames
             : topCrops.map((crop) => crop?.crop_name ?? "Unknown"),
@@ -265,7 +260,7 @@ const TopCropsChart = ({ onLocationChange }) => {
       };
 
   return (
-    <div className="top-crop-container">
+    <div className="inner-top-crop-container">
       <div className="top-crop-title-container">
         <img
           src={starIcon}
@@ -282,9 +277,6 @@ const TopCropsChart = ({ onLocationChange }) => {
 
       {currentLocation.pathname === "/charts" && (
         <div className="location-topCrop">
-          {/* <label htmlFor="state-dropdown">
-            {translatedLocationHeading || "Select Location"}:{" "}
-          </label> */}
           <IoLocationSharp
             style={{ fontSize: "20px", color: "red", cursor: "pointer" }}
           />

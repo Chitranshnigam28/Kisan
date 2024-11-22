@@ -158,7 +158,7 @@ const MatchingTips = ({ matchedTips, setMatchedTips,selectedFarm  }) => {
           <div key={index}>
             {/* <h3>Tips for {item.cropName}</h3> */}
             {item.tips.map((tip, idx) => (
-              <p key={idx}>{tip}</p>
+              <span key={idx}>{tip}</span>
             ))}
           </div>
         ))

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import '../css/tipsSlider.css';
+import '../css/tipsSlider.css';
 
 const SingleTips = ({ cropName }) => {
   const [tipsData, setTipsData] = useState([]);
@@ -98,10 +98,9 @@ const SingleTips = ({ cropName }) => {
           <div className="tip-content">
             <div className="icon-cropName">
               <span className="tip-icon">💡</span>
-              <h3 className="crop-name">{translatedTip.crop_name}</h3>
             </div>
             {translatedTip.tips.map((tipText, tipIndex) => (
-              <p key={tipIndex}>{tipText}</p>
+              <span key={tipIndex}>{tipText} </span>
             ))}
           </div>
         </div>
