@@ -23,7 +23,7 @@ import ErrorBoundary from "./Components/ErrorBoundary";
 import FirstPage from "./Components/ProfileSetup/FirstPage";
 import SecondPage from "./Components/ProfileSetup/SecondPage";
 import MarketInsigtsDashboard from "./Components/MarketInsigtsDashboard";
-
+import LandingComponent from "./Components/LandingPage/LandingComponent";
 
 
 
@@ -61,6 +61,7 @@ const AppRoutes = () => {
   return (
     <>
       <Routes>
+        <Route path='/landing' element={<LandingComponent />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profilesetup' element={<ProfileSetup />} />

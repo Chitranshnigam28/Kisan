@@ -1,0 +1,205 @@
+/* General Styles */
+h6 {
+    background-color: transparent;
+    color: #96C73D;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Header Styles */
+  .header {
+    text-align: center;
+    padding: 40px 0;
+    display: grid;
+    grid-gap: 20px;
+  }
+  
+  .header-content {
+    margin-bottom: 20px;
+  }
+  
+  .header-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Section Styles */
+  .section-setup{
+    text-align: left;
+    padding-bottom: 50px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+  }
+  
+  @media (max-width: 993px) {
+    .section-setup {
+      display: grid; /* Switch to grid layout */
+      grid-template-columns: 1fr; /* Stack items in one column */
+      gap: 20px; /* Add gap between grid items */
+      padding: 20px 0; /* Adjust padding if needed */
+    }
+  }
+
+  .section-team {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    border-bottom: 2px solid black;
+  }
+
+  .team-members {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Default: 1 column for smaller screens */
+    justify-items: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+    gap: 20px;
+    padding-top: 30px;
+}
+
+@media (min-width: 380px) {
+    .team-members {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for screens 500px or wider */
+        gap: 20px;
+    }
+      
+}
+
+@media (min-width: 750px) {
+    .team-members {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for screens 800px or wider */
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .team-members {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for screens 1200px or wider */
+        gap: 20px;
+    }
+}
+
+
+  .section-boost {
+    text-align: center;
+    display: grid;
+  }
+
+  .section-image {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 50px;
+  }
+  
+  .sign-up-button {
+    background-color: black;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  /* Team Member Styles */
+  
+  .team-member {
+    text-align: center;
+  }
+  
+  .team-member img {
+    width: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  /* Footer Styles */
+  .footer {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .language-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+  }
+  
+  .language-option {
+    background-color: #96C73D; /* Green background */
+    border-radius: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .language-option:hover {
+    background-color: #96C73D;
+  }
+
+  .image-containerp {
+    display: flex;
+    justify-content: flex-end; /* Aligns the image to the right */
+  }
+  
+  .section-image {
+    max-width: 100%; /* Optional: ensures the image doesn't overflow */
+    height: auto;    /* Optional: keeps the image aspect ratio */
+  }
+  
+  .image-container {
+    padding-top: 25px;
+    position: relative; /* Makes the container the reference point for the absolute positioning */
+    display: inline-block; /* Ensures the container shrinks to fit the image */
+  }
+  
+  .bgfarm {
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains the aspect ratio */
+  }
+  
+  .overlay-button {
+    position: absolute;
+    top: 10%; /* Center the button vertically */
+    left: 50%; /* Center the button horizontally */
+    transform: translate(-50%, -50%); /* Adjusts the button position exactly at the center */
+    padding: 10px 20px;
+    background-color: black; /* Background color with some transparency */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  
+  .overlay-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker background on hover */
+  }
+  
+.teamImage {
+    width: 150px;
+    height: auto;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    padding-top: 20px;
+}
+
+
+
+
+
+
+
