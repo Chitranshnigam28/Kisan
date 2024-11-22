@@ -1,12 +1,12 @@
 .empty-farms-container {
   text-align: center;
-  padding: 30px;
+  /* padding: 30px; */
   animation: fadeIn 1s ease-in-out;
 }
 
 .empty-farms-title {
-  font-size: 2rem; 
-  color: #2e7d32;
+  font-size: 1.2rem; 
+  color: black;
   margin-bottom: 8px;
   font-weight: bold;
   animation: bounceIn 1s ease-in-out;
@@ -22,19 +22,22 @@
   margin-bottom: 18px;
   line-height: 1.4;
   opacity: 0;
+  padding: 1rem 0;
   animation: fadeInMessage 1.5s forwards 0.5s;
 }
 
 .add-farm-button {
   font-size: 1.1rem;
   color: white;
-  background-color: #66bb6a;
+  background-color: black;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease;
   margin-top: 15px;
+  /* float: left; */
+  /* margin-left: 2rem; */
 }
 
 .add-farm-button:hover {

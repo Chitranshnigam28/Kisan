@@ -8,7 +8,7 @@
 // import { FaSearch } from 'react-icons/fa';
 
 // const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
-//   const [cropName, setCropName] = useState("Wheat"); 
+//   const [cropName, setCropName] = useState("Wheat"); // Input state
 //   const [cropPrices, setCropPrices] = useState([]);
 //   const [filterPrice, setFilterPrice] = useState([]);
 //   const [loading, setLoading] = useState(false);
@@ -20,11 +20,12 @@
 //     { name: "Tomato", image: tomatoImg },
 //   ];
 
-//   const fetchCropPrices = async () => {
+//   // Fetch crop prices from API
+//   const fetchCropPrices = async (crop) => {
 //     try {
 //       setLoading(true);
 //       const response = await fetch(
-//         `http://localhost:5001/api/crops/price?crop=${cropName}`
+//         `http://localhost:5001/api/crops/price?crop=${crop}`
 //       );
 //       if (!response.ok) throw new Error("Network response was not ok");
 
@@ -47,6 +48,7 @@
 //     }
 //   };
 
+//   // Filter prices by selected year
 //   const filterByYear = (data, year) => {
 //     const filteredPrices = data.filter((item) => item.year === year);
 //     setFilterPrice(filteredPrices);
@@ -55,23 +57,26 @@
 //     }
 //   };
 
+//   // Handle predefined crop button click
 //   const handleCropClick = (crop) => {
 //     setCropName(crop);
-//     fetchCropPrices(); 
+//     fetchCropPrices(crop);
 //   };
 
+//   // Handle input change for manual crop search
 //   const handleInputChange = (e) => {
-//     setCropName(e.target.value); 
+//     setCropName(e.target.value); // Update local state without triggering fetch
 //   };
 
+//   // Handle form submission
 //   const handleSubmit = (e) => {
-//     e.preventDefault(); 
-//     fetchCropPrices(); 
+//     e.preventDefault();
+//     fetchCropPrices(cropName); // Fetch data only on form submission
 //   };
 
 //   useEffect(() => {
-//     fetchCropPrices();
-//   }, []); 
+//     fetchCropPrices(cropName); // Fetch data on initial render
+//   }, []);
 
 //   useEffect(() => {
 //     filterByYear(cropPrices, selectedYear); 
@@ -103,7 +108,7 @@
 //               <input
 //                 type="text"
 //                 value={cropName} 
-//                 onChange={handleInputChange} 
+//                 onChange={handleInputChange}
 //                 placeholder="Enter crop name"
 //                 className="crop-input"
 //               />
@@ -137,23 +142,24 @@
 //   );
 // };
 
-
 // export default CropPriceChart;
-
 import React, { useEffect, useState } from "react";
-import ApexLineChart from './ApexLineChart';
-import '../css/cropPrice.css';
+import ApexLineChart from "./ApexLineChart";
+import SingleTips from "./SingleTips"; // Import SingleTips component
+import "../css/cropPrice.css";
 import tomatoImg from "./../Assets/Vegetables/tomato.png";
 import wheatImg from "./../Assets/Vegetables/wheat.png";
 import potatoImg from "./../Assets/Vegetables/Potato.svg";
 import cornImg from "./../Assets/Vegetables/Corn.png";
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch } from "react-icons/fa";
 
 const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
-  const [cropName, setCropName] = useState("Wheat"); // Input state
+  const [cropName, setCropName] = useState("Wheat");
   const [cropPrices, setCropPrices] = useState([]);
   const [filterPrice, setFilterPrice] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [inputValue, setInputValue] = useState("Wheat");
+  const [matchingTips, setMatchingTips] = useState([]);
 
   const predefinedCrops = [
     { name: "Wheat", image: wheatImg },
@@ -162,7 +168,6 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
     { name: "Tomato", image: tomatoImg },
   ];
 
-  // Fetch crop prices from API
   const fetchCropPrices = async (crop) => {
     try {
       setLoading(true);
@@ -190,7 +195,6 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
     }
   };
 
-  // Filter prices by selected year
   const filterByYear = (data, year) => {
     const filteredPrices = data.filter((item) => item.year === year);
     setFilterPrice(filteredPrices);
@@ -199,29 +203,45 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
     }
   };
 
-  // Handle predefined crop button click
   const handleCropClick = (crop) => {
-    setCropName(crop);
+    setCropName(crop); // Set selected crop
+    setInputValue(crop); // Sync input with selected crop
     fetchCropPrices(crop);
+    setMatchingTips([]); // Clear tips after selecting
   };
 
-  // Handle input change for manual crop search
   const handleInputChange = (e) => {
-    setCropName(e.target.value); // Update local state without triggering fetch
+    const value = e.target.value;
+    setInputValue(value);
+
+    if (value.trim() === "") {
+      setMatchingTips([]); // Clear dropdown when input is empty
+      return;
+    }
+
+    const matchingCrops = predefinedCrops
+      .map((crop) => crop.name)
+      .filter((crop) => crop.toLowerCase().startsWith(value.toLowerCase()));
+
+    setMatchingTips(matchingCrops); // Update dropdown options
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchCropPrices(cropName); // Fetch data only on form submission
+    const trimmedInput = inputValue.trim();
+    if (trimmedInput && trimmedInput !== cropName) {
+      setCropName(trimmedInput);
+      fetchCropPrices(trimmedInput);
+      setMatchingTips([]); // Clear dropdown after submission
+    }
   };
 
   useEffect(() => {
-    fetchCropPrices(cropName); // Fetch data on initial render
+    fetchCropPrices(cropName);
   }, []);
 
   useEffect(() => {
-    filterByYear(cropPrices, selectedYear); 
+    filterByYear(cropPrices, selectedYear);
   }, [selectedYear, cropPrices]);
 
   return (
@@ -247,14 +267,28 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
             </div>
 
             <form onSubmit={handleSubmit} className="crop-form-container">
-              <input
-                type="text"
-                value={cropName} 
-                onChange={handleInputChange}
-                placeholder="Enter crop name"
-                className="crop-input"
-              />
-
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  placeholder="Enter crop name"
+                  className="crop-input"
+                />
+                {inputValue.trim() && matchingTips.length > 0 && (
+                  <div className="matching-tips">
+                    {matchingTips.map((tip) => (
+                      <div
+                        key={tip}
+                        className="tip"
+                        onClick={() => handleCropClick(tip)}
+                      >
+                        {tip}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               <select
                 id="year-dropdown"
                 value={selectedYear}
@@ -264,7 +298,6 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
                 <option value="2022">2022</option>
                 <option value="2021">2021</option>
               </select>
-
               <button type="submit" className="crop-submit-btn">
                 <FaSearch />
               </button>
@@ -277,11 +310,14 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
                 selectedYear={selectedYear}
               />
             </div>
+
+            <SingleTips cropName={cropName} />
           </div>
         </div>
       )}
     </div>
   );
 };
+
 
 export default CropPriceChart;

@@ -15,8 +15,16 @@
   gap: 0.3rem;
 }
 
-.top-crop-container{
-  margin-top: 1rem;
+.top-crop-container {
+  height: 812px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px #DDDDDD;
+  margin: 2rem 0 1rem 0;
+}
+
+.inner-top-crop-container{
+  padding: 1rem;
 }
 
 .top-crop-no-data {
@@ -32,17 +40,43 @@
   align-items: center;
   justify-content: center;
   margin: 2rem;
+  gap: 10px; 
 }
 
-#state-dropdown{
+#state-dropdown {
+  width: 220px;
+  padding: 6px 12px;
+  font-size: 16px;
   text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  appearance: none; 
 }
 
-@media only screen and (max-width: 1000px) {
-  .allContainer {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
+#state-dropdown:hover {
+  border-color: #999;
+  background-color: #f9f9f9; 
+}
+
+#state-dropdown:focus {
+  border-color: #ff6347;
+  box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
+  outline: none; 
+}
+
+#state-dropdown option {
+  background-color: #fff;
+  color: #333;
+  padding: 5px; 
+}
+
+#state-dropdown option:focus {
+  background-color: #ff6347; 
+  color: #fff; 
 }
 
 
@@ -75,4 +109,22 @@
 .apexcharts-gridline {
   stroke: #e0e0e0 !important;
   stroke-dasharray: 4;
+}
+
+@media only screen and (max-width: 1000px) {
+  .allContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .top-crop-container {
+    height: 550px;
+  }
+}
+
+@media screen and (max-width: 600px){
+
+  .both-chart-container {
+    width: 100vw;
+  }
 }
