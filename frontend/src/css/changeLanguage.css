@@ -33,10 +33,11 @@
 
 .language-option {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
+  padding: 1rem 1.8rem;
 }
 
 .language-option:hover {
@@ -66,10 +67,12 @@
 
 .languageWrapper button.language-option {
   border: none;
-  background-color: #64ab00;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.5rem;
+  border: 2px solid #E9E9E9;
 }
 
 .close-button {
