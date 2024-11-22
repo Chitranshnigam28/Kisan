@@ -389,7 +389,7 @@ const AddFarms = () => {
 
                         <div className="button-container">
                             <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue → </button>
-                            <button type="button" className="sec-Btn" onClick={handleCancel}>Cancel</button>
+                            <button type="button" className="sec-Btn" onClick={handleCancel}>Setup Later</button>
                         </div>
                     </div>
                 )}
