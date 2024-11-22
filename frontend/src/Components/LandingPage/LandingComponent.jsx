@@ -1,5 +1,6 @@
 "use client";
 import React,{useState,useRef,useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
 import { motion } from "framer-motion";
 import "../../css/landingPage.css";
 import backgroundHeroLanding from "../../Assets/landingPage/heroBG.webp";
@@ -34,7 +35,7 @@ import FeaturesSection from "./FeatureSection";
 const LandingComponent = () => {
   const [currentImage, setCurrentImage] = useState(null);
   const sections = useRef([]);
-
+  const navigate=useNavigate();
   const sectionData = [
     {
       id: 'setup-farm',
@@ -59,6 +60,9 @@ const LandingComponent = () => {
     },
   ];
 
+  const goToLogin=()=>{
+    navigate('/login');
+  }
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -103,7 +107,7 @@ const LandingComponent = () => {
               <button className="proposal-project">Proposal</button>
             </li>
             <li className="menu-item">
-              <button className="login-button">Login</button>
+              <button className="login-button" onClick={goToLogin}>Login</button>
             </li>
           </ul>
         </nav>
