@@ -103,8 +103,8 @@ body {
 
 .weather-info {
   flex: 2;
-  padding: 1.5rem;
-  background: #ffffff;
+  /* padding: 1.5rem;
+  background: #ffffff; */
   border-radius: 15px;
 }
 

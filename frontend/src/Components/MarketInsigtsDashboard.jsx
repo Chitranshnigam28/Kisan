@@ -98,9 +98,9 @@ const MarketInsigtsDashboard = () => {
                 <div className="top-crop-container">
                   <TopCropsChart />
                 </div>
-                <div className="single-tips-container">
+                {/* <div className="single-tips-container">
                   <SingleTips cropName={cropName} />
-                </div>
+                </div> */}
               </div>
               <div className="d-flex justify-content-center align-items-center vh-70">
                   <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3 mb-5">

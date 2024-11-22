@@ -43,7 +43,6 @@ const ApexSplineChart = ({ priceData, loading }) => {
                     height={350}
                 />
             ) : (
-                // <p>Loading chart data...</p>
                 <SimpleLoader />
             )}
         </div>

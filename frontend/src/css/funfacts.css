@@ -15,7 +15,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   position: relative;
   padding: 20px;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
 }
 
 .funfacts-container::after {

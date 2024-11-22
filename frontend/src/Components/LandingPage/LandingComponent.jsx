@@ -189,8 +189,8 @@ const LandingComponent = () => {
       </section> */}
       <FeaturesSection />
 
-      <div className="container">
-        <header className="header">
+      <div className="landing-container">
+        <header className="landing-header">
           <div className="header-content">
             <h6>Easy Multi-Language Support</h6>
             <h5>

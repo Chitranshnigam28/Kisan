@@ -49,7 +49,7 @@ const Login = () => {
         console.log("Login Successful", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
-        navigate("/first");
+        navigate("/");
       } else {
         setErrorMessage(data.message || "Login failed. Please try again.");
       }
