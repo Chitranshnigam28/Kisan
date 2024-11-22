@@ -164,10 +164,11 @@
 }
 
 .market-section-container {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(2, 1fr);
   align-items: baseline;
   justify-content: center;
+  flex-direction: column;
 }
 
 .main-market-container {
