@@ -1,0 +1,531 @@
+/* General Styles for the Landing Page */
+.landing-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Navbar Styles */
+.landing-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 35px;
+  width: fit-content;
+  margin: 2rem auto;
+}
+
+.logoNAvk {
+  height: 40px;
+  margin-right: 1rem;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  font-size: 1rem;
+  cursor: pointer;
+  /* margin: 0 10px; */
+}
+
+.landing-navbar li {
+  padding: 0 10px;
+}
+
+.login-button {
+  background-color: #96c73d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Hero Section Styles */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-section {
+  position: relative;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.hero-title {
+  font-size: 2rem;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.hero-images {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.crop-icon {
+  width: 50px;
+  height: 50px;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* .hero-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 2rem;
+  }
+   */
+/* .hero-title .highlight {
+    color: #22c55e;
+  } */
+
+/* Centering and Styling for Hero Description */
+.hero-description {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #333;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.description-text {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+.container-scroll {
+  height: 100vh;
+}
+
+.landing-page {
+  padding-bottom: 50px;
+}
+
+.dashboard-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.dashboard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-container {
+    height: auto;
+  }
+
+  .dashboard-image {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* section feature */
+
+/* Grid layout for feature section */
+/* Grid layout for feature section */
+.feature-sections {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns by default */
+  gap: 0.5rem; /* Fully remove gap between grid items */
+  margin: 0 auto; /* Centers the entire section horizontally */
+  max-width: 1200px; /* Restrict overall width for better control */
+}
+
+@media (max-width: 700px) {
+  .feature-sections {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+  }
+}
+@media (max-width: 1000px) {
+  .feature-sections {
+    padding: 1rem;
+  }
+}
+.feature-div {
+  position: relative;
+  width: 100%; /* Allow divs to scale with the grid */
+  padding: 0; /* Remove internal spacing */
+  overflow: hidden; /* Ensures content doesn't spill */
+  display: flex; /* Centers content */
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* Remove extra margin between items */
+}
+
+.feature-image {
+  width: 100%; /* Ensure the image fills the grid cell */
+  height: 100%; /* Match the height of the container */
+  object-fit: cover; /* Ensures the image scales proportionally */
+  transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
+}
+
+/* Hover effect on image */
+.feature-image:hover {
+  transform: scale(1.05); /* Slight scale-up on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a shadow */
+}
+
+/* Add blur effect on hover */
+.feature-div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* background: rgba(255, 255, 255, 0.4); Semi-transparent white */
+  /* backdrop-filter: blur(8px); Adds blur to the background */
+  opacity: 0; /* Invisible by default */
+  transition: opacity 0.4s ease;
+}
+
+.feature-div:hover::after {
+  opacity: 1; /* Makes the blur effect visible on hover */
+}
+
+/* Shake animation for feature container */
+/* @keyframes shake {
+    0% {
+      transform: translateX(-3px);
+    }
+    25% {
+      transform: translateX(3px);
+    }
+    50% {
+      transform: translateX(-3px);
+    }
+    75% {
+      transform: translateX(3px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .feature-div:hover {
+    animation: shake 0.3s ease;
+  }
+   */
+
+/* /////////////////////////////////////////// */
+/* General Styles */
+h6 {
+  background-color: transparent;
+  color: #96c73d;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  padding: 40px 0;
+  display: grid;
+  grid-gap: 20px;
+}
+
+.header-content {
+  margin-bottom: 20px;
+}
+
+.header-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Section Styles */
+.section-setup {
+  text-align: left;
+  padding-bottom: 50px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+}
+
+@media (max-width: 993px) {
+  .section-setup {
+    display: grid; /* Switch to grid layout */
+    grid-template-columns: 1fr; /* Stack items in one column */
+    gap: 20px; /* Add gap between grid items */
+    padding: 20px 0; /* Adjust padding if needed */
+  }
+}
+
+.section-team {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  border-bottom: 2px solid black;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(
+    1,
+    1fr
+  ); /* Default: 1 column for smaller screens */
+  justify-items: center; /* Centers items horizontally */
+  align-items: center; /* Centers items vertically */
+  gap: 20px;
+  padding-top: 30px;
+}
+
+@media (min-width: 380px) {
+  .team-members {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 columns for screens 500px or wider */
+    gap: 20px;
+  }
+}
+
+@media (min-width: 750px) {
+  .team-members {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 columns for screens 800px or wider */
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .team-members {
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ); /* 4 columns for screens 1200px or wider */
+    gap: 20px;
+  }
+}
+
+.section-boost {
+  text-align: center;
+  display: grid;
+}
+
+.section-image {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 50px;
+}
+
+.sign-up-button {
+  background-color: black;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* Team Member Styles */
+
+.team-member {
+  text-align: center;
+}
+
+.team-member img {
+  width: 200px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* Footer Styles */
+.footer {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.language-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+}
+
+.language-option {
+  background-color: #96c73d; /* Green background */
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.language-option:hover {
+  background-color: #96c73d;
+}
+
+.image-containerp {
+  display: flex;
+  justify-content: flex-end; /* Aligns the image to the right */
+}
+
+.section-image {
+  max-width: 100%; /* Optional: ensures the image doesn't overflow */
+  height: auto; /* Optional: keeps the image aspect ratio */
+}
+
+.image-containert {
+  padding-top: 25px;
+  position: relative; /* Makes the container the reference point for the absolute positioning */
+  display: inline-block; /* Ensures the container shrinks to fit the image */
+}
+
+.bgfarm {
+  width: 100%; /* Makes the image responsive */
+  height: auto; /* Maintains the aspect ratio */
+}
+
+.overlay-button {
+  position: absolute;
+  top: 10%; /* Center the button vertically */
+  left: 50%; /* Center the button horizontally */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Adjusts the button position exactly at the center */
+  padding: 10px 20px;
+  background-color: black; /* Background color with some transparency */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.overlay-button:hover {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Slightly darker background on hover */
+}
+
+.teamImage {
+  width: 150px;
+  height: auto;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  padding-top: 20px;
+}
+
+/* photoChange on tap */
+/* General Styling for ScrollSpy Sections */
+.scroll-spy-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+  
+  .text-sections {
+    width: 60%;
+    padding: 20px;
+  }
+  
+  .text-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer; /* Pointer cursor on hover to indicate it's clickable */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .text-section:hover {
+    background-color: #eaf0f6;
+    transform: translateY(-10px);
+  }
+  
+  .text-section h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .text-section p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .image-container {
+    width: 35%;
+    padding: 20px;
+  }
+  
+  .section-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Active Image Display */
+  .section-image.hidden {
+    opacity: 0;
+  }
+
