@@ -527,4 +527,7 @@
     .carousel{
       padding: 0;
     }
+    .crBtnWrapper button:last-child{
+      width: 48%;
+    }  
   }
