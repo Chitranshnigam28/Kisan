@@ -12,7 +12,7 @@
 
 .welcome-content {
     width: 100%;
-    height: auto;
+    height: 100vh;
     max-width: none;
     padding: 40px;
     background-color: #ffffff;
@@ -89,5 +89,6 @@
     .setup-later-btn {
         font-size: 1.2rem !important;
     }
+
     
 }
