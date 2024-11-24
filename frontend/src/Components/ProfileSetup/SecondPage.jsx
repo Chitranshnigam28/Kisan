@@ -19,7 +19,6 @@ import WheatIcon from "./../../Assets/Vegetables/wheat.png"
 import RiceIcon from "./../../Assets/Vegetables/rice.png"
 import CornIcon from "./../../Assets/Vegetables/Corn.svg"
 import TomatoIcon from "./../../Assets/Vegetables/tomato.png"
-
 import ClayIcon from "./../../Assets/Soil type/Clay.svg"
 import SandyIcon from "./../../Assets/Soil type/🏜️.svg"
 import LoamyIcon from "./../../Assets/Soil type/💧.svg"
@@ -28,8 +27,6 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-
-
 
 const firebaseConfig = {
     apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
@@ -81,7 +78,7 @@ const waterSourceIcons = {
 
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1); // Step state
+    const [currentStep, setCurrentStep] = useState(1); 
     const navigate = useNavigate();
     const [farmData, setFarmData] = useState({
         farmName: "",
@@ -395,7 +392,6 @@ const AddFarms = () => {
                                     <option value="Puducherry">Puducherry</option>
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                     <option value="Ladakh">Ladakh</option>
-                                    {/* Add location options here */}
                                 </select>
                             </div>
 
