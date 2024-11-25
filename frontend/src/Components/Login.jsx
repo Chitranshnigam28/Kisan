@@ -36,9 +36,10 @@ const Login = () => {
     e.preventDefault();
     const login = { email, password };
 
+    console.log(process.env.REACT_APP_BACKEND_URL)
     try {
       console.log('process.env.REACT_APP_BACKEND_URL '+process.env.REACT_APP_BACKEND_URL);
-      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
+      const res = await fetch(`http:localhost:5001/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login),
@@ -60,7 +61,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
+    window.open(`http:localhost:5001/auth/google`, "_self");
   };
 
   return (

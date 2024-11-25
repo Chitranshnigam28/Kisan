@@ -4,7 +4,7 @@ import axios from 'axios';
 export const deleteMyTips = async (farmId) => {
   const token = localStorage.getItem('token');
   try {
-    await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/farms/${farmId}`, {
+    await axios.delete(`http:localhost:5001/api/farms/${farmId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -38,7 +38,7 @@ const MatchingTips = ({ matchedTips, setMatchedTips,selectedFarm  }) => {
         throw new Error('Token not found');
       }
 
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/farms`, {
+      const response = await axios.get(`http:localhost:5001/api/farms`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,7 +54,7 @@ const MatchingTips = ({ matchedTips, setMatchedTips,selectedFarm  }) => {
   // Fetch crop tips
   const fetchTips = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/tips`);
+      const response = await axios.get(`http:localhost:5001/api/tips`);
       setTipsData(response.data);
     } catch (err) {
       console.error('Error fetching tips:', err);
@@ -65,7 +65,7 @@ const MatchingTips = ({ matchedTips, setMatchedTips,selectedFarm  }) => {
   // Translate text using the translation API
   const translateText = async (text, targetLanguage) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
+      const response = await axios.post(`http:localhost:5001/api/translate`, {
         text: text,
         targetLanguage: targetLanguage,
       });

@@ -213,7 +213,7 @@ const AddFarms = () => {
 
                 // Send the farm data to the backend
                 const response = await axios.post(
-                    `${process.env.REACT_APP_BACKEND_URL}/api/farms`,
+                    `http:localhost:5001/api/farms`,
                     farmDetails,
                     {
                         headers: {

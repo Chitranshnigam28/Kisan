@@ -26,7 +26,7 @@ const TopCropsChart = ({ onLocationChange }) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/api/recommend-crop/`,
+          `http:localhost:5001/api/recommend-crop/`,
           {
             params: { location },
           }
@@ -157,7 +157,7 @@ const TopCropsChart = ({ onLocationChange }) => {
 
   const translateText = async (text, targetLanguage) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
+      const response = await axios.post(`http:localhost:5001/api/translate`, {
         text: text,
         targetLanguage: targetLanguage,
       });
