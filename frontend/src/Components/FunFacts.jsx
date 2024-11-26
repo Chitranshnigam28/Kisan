@@ -10,7 +10,7 @@ const FunFacts = () => {
 
   const fetchRandomFunFact = async () => {
     try {
-      const response = await axios.get(`http:localhost:5001/api/funfacts`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/funfacts`);
       setFunFact(response.data);
       translateFunFact(response.data, language); 
     } catch (error) {
@@ -40,7 +40,7 @@ const FunFacts = () => {
 
   const translateText = async (text, targetLanguage) => {
     try {
-      const response = await axios.post(`http:localhost:5001/api/translate`, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
         text: text,
         targetLanguage: targetLanguage, 
       });

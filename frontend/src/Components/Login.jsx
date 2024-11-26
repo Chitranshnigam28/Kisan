@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../Assets/loginpagelogo.png";
 import logoVideo from "../Assets/logoVideo.mp4";
 import MobileLayout from "./MobileLayout";
+import Modal from "./Modal";
 import "../css/mobileLayout.css";
 
 const Login = () => {
@@ -12,10 +13,12 @@ const Login = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+
   const navigate = useNavigate();
 
-  // Listen for window resize events
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 800);
@@ -29,17 +32,15 @@ const Login = () => {
   }, []);
 
   const handleContinue = () => {
-    setShowLogin(true); // Show login form when "Continue" is clicked
+    setShowLogin(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const login = { email, password };
 
-    console.log(process.env.REACT_APP_BACKEND_URL)
     try {
-      console.log('process.env.REACT_APP_BACKEND_URL '+process.env.REACT_APP_BACKEND_URL);
-      const res = await fetch(`http:localhost:5001/api/login`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(login),
@@ -47,21 +48,32 @@ const Login = () => {
       const data = await res.json();
 
       if (res.status === 200) {
-        console.log("Login Successful", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
-        navigate("/");
+        setModalType("success");
+        setModalMessage("Login successful! Redirecting...");
+        setIsModalOpen(true);
+
+        // Redirect after a short delay
+        setTimeout(() => {
+          setIsModalOpen(false);
+          navigate("/");
+        }, 2000);
       } else {
-        setErrorMessage(data.message || "Login failed. Please try again.");
+        setModalType("error");
+        setModalMessage(data.message || "Login failed. Please try again.");
+        setIsModalOpen(true);
       }
     } catch (err) {
-      console.log(err);
-      setErrorMessage("An error occurred during login. Please try again.");
+      console.error(err);
+      setModalType("error");
+      setModalMessage("An error occurred during login. Please try again.");
+      setIsModalOpen(true);
     }
   };
 
   const handleGoogleLogin = () => {
-    window.open(`http:localhost:5001/auth/google`, "_self");
+    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
   };
 
   return (
@@ -70,11 +82,19 @@ const Login = () => {
         <MobileLayout handleContinue={handleContinue} />
       ) : (
         <div className="all-content">
+          {isModalOpen && (
+            <Modal
+              message={modalMessage}
+              type={modalType} 
+              onClose={() => setIsModalOpen(false)}
+            />
+          )}
+
+
           <div className="containerlogin">
             <div className="login-items">
               <h2>Hi, Kisan</h2>
               <p className="login-subtitle">Please login to your account</p>
-              {errorMessage && <p className="error-message">{errorMessage}</p>}
               <form onSubmit={handleSubmit}>
                 <label htmlFor="uname">
                   Email
@@ -112,7 +132,6 @@ const Login = () => {
                     </Link>
                   </p>
                 </div>
-                <div className="or-signin"></div>
                 <button onClick={handleGoogleLogin} id="googleBtn">
                   <FcGoogle id="googleIcon" /> <span>Sign in with Google</span>
                 </button>

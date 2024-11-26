@@ -47,7 +47,7 @@ const MarketInsights = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http:localhost:5001/api/get-market-insights/`
+          `${process.env.REACT_APP_BACKEND_URL}/api/get-market-insights/`
         );
         console.log("checking if topCropIndia is coming ", response);
         if (response.data && response.data.crops) {
@@ -70,7 +70,7 @@ const MarketInsights = () => {
 
   const translateText = async (text, targetLanguage) => {
     try {
-      const response = await axios.post(`http:localhost:5001/api/translate`, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
         text: text,
         targetLanguage: targetLanguage,
       });

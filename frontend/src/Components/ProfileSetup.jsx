@@ -37,7 +37,7 @@ const ProfileSetup = () => {
         try {
             const profileData = { ...formData, userId }; // Attach the userId to the profile data
             console.log("profileData "+profileData);
-            const response = await fetch(`http:localhost:5001/api/farmer/profile`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/farmer/profile`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

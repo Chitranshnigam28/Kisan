@@ -125,7 +125,7 @@ const CropRecommendation = ({ ownerId }) => {
         throw new Error("Authorization token or User ID not found");
       }
 
-      const response = await axios.get(`http:localhost:5001/api/farms`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/farms`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -151,7 +151,7 @@ const CropRecommendation = ({ ownerId }) => {
       console.log("Fetching recommendation for owner ID:", ownerId); // Debug log
 
       const response = await axios.get(
-        `http:localhost:5001/api/recommend-crop/${ownerId}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/recommend-crop/${ownerId}`
       );
       console.log("Crop recommendation response:", response.data); // Debug log
       setFarmDetails(response.data);

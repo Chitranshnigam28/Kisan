@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/signup.css";
-import { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../Assets/loginpagelogo.png";
 import logoVideo from "../Assets/logoVideo.mp4";
+import Modal from "./Modal";
 
 const SignUp = () => {
   const [uname, setUname] = useState("");
@@ -12,63 +12,84 @@ const SignUp = () => {
   const [cpassword, setCPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showSignup, setShowSignup] = useState(false);
+  const [modalMessage, setModalMessage] = useState(""); 
+  const [modalType, setModalType] = useState(""); 
+  const [showModal, setShowModal] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const usrname = uname;
-    const eml = email;
-    const pwd = password;
-    const cpwd = cpassword;
-    console.log("usrname " + usrname);
-    console.log("email " + email);
-    console.log("pwd " + pwd);
-    console.log("cpwd " + cpwd);
-    if (pwd === cpwd) {
-      console.log("matched");
-
-      const registerData = {
-        username: uname,
-        email: email,
-        password: password,
-      };
-      console.log("registerData " + JSON.stringify(registerData));
-      try {
-        const res = await fetch(`http:localhost:5001/api/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify(registerData),
-        });
-        const data = await res.json();
-        if (res.status === 200) {
-          console.log("registration succesfull");
-          console.log("${data.userId} " + data.userId);
+  
+    if (password !== cpassword) {
+      setModalMessage("Passwords do not match. Please check your passwords.");
+      setModalType("error");
+      setShowModal(true);
+      return;
+    }
+  
+    const registerData = {
+      username: uname,
+      email: email,
+      password: password,
+    };
+  
+    console.log("Sending request with data: ", registerData);
+  
+    try {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerData),
+      });
+  
+      const data = await res.json();
+      console.log("Response status:", res.status);
+      console.log("Response data:", data);
+  
+      if (res.status === 400) {
+        setModalMessage(data.message || "Email already exists. Please try again with a different email");
+        setModalType("error");
+        setShowModal(true);
+      } else if (res.status === 200) {
+        setModalMessage("Registration successful!");
+        setModalType("success");
+        setShowModal(true);
+  
+        setTimeout(() => {
           navigate(`/add-farm?userId=${data.userId}`);
-          // navigate(`/add-farm?userId=${data.userId}&fromSignup=true`);
-          // navigate(`/add-farm`);
-        }
-      } catch (error) {
-        console.log(error);
+        }, 1000); 
+      } else {
+        setModalMessage("An error occurred while signing up. Please try again.");
+        setModalType("error");
+        setShowModal(true);
       }
+    } catch (error) {
+      console.log("Error:", error);
+      setModalMessage("An error occurred while signing up. Please try again.");
+      setModalType("error");
+      setShowModal(true);
     }
   };
+  
+  
+  
   const handleGoogleLogin = () => {
     window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/google`, "_self");
   };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 800) {
-        setShowSignup(false); // Hide signup by default on small screens
+        setShowSignup(false); 
       } else {
-        setShowSignup(true); // Show signup by default on larger screens
+        setShowSignup(true); 
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Call initially to set the state based on the current window size
+    handleResize(); 
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -90,9 +111,7 @@ const SignUp = () => {
                 placeholder="Your Name"
                 id="uname"
                 value={uname}
-                onChange={(e) => {
-                  setUname(e.target.value);
-                }}
+                onChange={(e) => setUname(e.target.value)}
               />
             </label>
             <label htmlFor="email">
@@ -103,9 +122,7 @@ const SignUp = () => {
                 placeholder="Your Email"
                 id="email"
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </label>
             <label htmlFor="password">
@@ -116,9 +133,7 @@ const SignUp = () => {
                 name="password"
                 id="password"
                 value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
 
@@ -130,9 +145,7 @@ const SignUp = () => {
                 name="password"
                 id="password"
                 value={cpassword}
-                onChange={(e) => {
-                  setCPassword(e.target.value);
-                }}
+                onChange={(e) => setCPassword(e.target.value)}
               />
             </label>
             <p id="hvact" style={{ color: "#818898", fontWeight: 600 }}>
@@ -165,6 +178,10 @@ const SignUp = () => {
           className="background-video"
         ></video>
       </div>
+
+      {showModal && (
+        <Modal message={modalMessage} type={modalType} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 };
