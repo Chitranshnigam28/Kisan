@@ -143,9 +143,10 @@
 // };
 
 // export default CropPriceChart;
+
 import React, { useEffect, useState } from "react";
 import ApexLineChart from "./ApexLineChart";
-import SingleTips from "./SingleTips"; // Import SingleTips component
+import SingleTips from "./SingleTips"; 
 import "../css/cropPrice.css";
 import tomatoImg from "./../Assets/Vegetables/tomato.png";
 import wheatImg from "./../Assets/Vegetables/wheat.png";
@@ -172,7 +173,7 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5001/api/crops/price?crop=${crop}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/crops/price?crop=${crop}`
       );
       if (!response.ok) throw new Error("Network response was not ok");
 

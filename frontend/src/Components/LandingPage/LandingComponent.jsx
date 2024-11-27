@@ -1,5 +1,6 @@
 "use client";
 import React,{useState,useRef,useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
 import { motion } from "framer-motion";
 import "../../css/landingPage.css";
 import backgroundHeroLanding from "../../Assets/landingPage/heroBG.webp";
@@ -30,35 +31,41 @@ import tomo from "../../Assets/team/Tomo.png";
 import ali from "../../Assets/team/Ali.png";
 import logo from "../../Assets/Logo.png";
 import FeaturesSection from "./FeatureSection";
+import ipImage1 from "./../../Assets/Group 143726455.png"
+import ipImage2 from "./../../Assets/Group 143726456.png"
+import ipImage3 from "./../../Assets/Group 143726457.png"
 
 const LandingComponent = () => {
   const [currentImage, setCurrentImage] = useState(null);
   const sections = useRef([]);
-
+  const navigate=useNavigate();
   const sectionData = [
     {
       id: 'setup-farm',
       title: 'Setup your Farm',
       description:
         'Start by setting up your farm details - select your crops, location, and soil type. This helps us in generating insights you can trust.',
-      image: setupImage, // Replace with the actual image URL
+      image: ipImage1, // Replace with the actual image URL
     },
     {
       id: 'manage-crops',
       title: 'Manage your Crops',
       description:
         'Track the health of your crops and get real-time updates on how to care for them.',
-      image: headerImage, // Replace with the actual image URL
+      image: ipImage2, // Replace with the actual image URL
     },
     {
       id: 'harvest',
       title: 'Harvest Efficiently',
       description:
         'Get tips on harvesting efficiently and selling at the best prices.',
-      image: setupImage, // Replace with the actual image URL
+      image: ipImage3, // Replace with the actual image URL
     },
   ];
 
+  const goToLogin=()=>{
+    navigate('/login');
+  }
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -90,6 +97,9 @@ const LandingComponent = () => {
   const handleSectionClick = (image) => {
     setCurrentImage(image);
   };
+  const goToSignup=()=>{
+    navigate('/register');
+  }
   return (
     <>
       <div>
@@ -103,7 +113,7 @@ const LandingComponent = () => {
               <button className="proposal-project">Proposal</button>
             </li>
             <li className="menu-item">
-              <button className="login-button">Login</button>
+              <button className="login-button" onClick={goToLogin}>Login</button>
             </li>
           </ul>
         </nav>
@@ -268,7 +278,7 @@ const LandingComponent = () => {
           </div>
           <div class="image-containert">
             <img src={farmbg} alt="Setup Farm Image" class="bgfarm" />
-            <button class="overlay-button">Sign up Today!</button>
+            <button class="overlay-button" onClick={goToSignup}>Sign up Today!</button>
           </div>
         </section>
 

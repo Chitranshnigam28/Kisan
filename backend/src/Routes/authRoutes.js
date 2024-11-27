@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const { home, register, login } = require('../controllers/authController');
+const path = require('path');
+// const { home, register, login } = require(path.resolve(__dirname, '../controllers/authController'));
+const { home, register, login } = require('../Controllers/authController');
 const signupSchema = require('../validators/auth-validator');
 const validate = require('../middlewares/validate-middleware');
 const authMiddleware =require('../middlewares/authMiddleware');

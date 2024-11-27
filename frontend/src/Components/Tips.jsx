@@ -8,7 +8,7 @@ const Tips = () => {
 
   const fetchTips = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/tips');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/tips`);
       const data = response.data;
 
       if (Array.isArray(data)) {

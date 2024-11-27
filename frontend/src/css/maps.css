@@ -259,6 +259,13 @@
   scrollbar-width: thin
 }
 
+@media screen and (max-width:500px){
+  .controls-container {
+    top: 25% !important;
+    width: 41%;
+    height: 30%;
+}
+}
 @media screen and (max-width:800px){
   .controls-container{
     top: 10rem;

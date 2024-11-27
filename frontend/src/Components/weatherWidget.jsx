@@ -31,7 +31,7 @@ function WeatherWidget({ showSearch = true }) {
     try {
       setLoading(true);
       const queryString = query.lat && query.lon ? `lat=${query.lat}&lon=${query.lon}` : `q=${query.q}`;
-      const response = await fetch(`http://localhost:5001/api/weather?${queryString}&units=${units}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/weather?${queryString}&units=${units}`);
       if (!response.ok) throw new Error("Failed to fetch weather data");
 
       const data = await response.json();
@@ -56,7 +56,7 @@ function WeatherWidget({ showSearch = true }) {
 
   const translateText = async (text, targetLanguage) => {
     try {
-      const response = await axios.post("http://localhost:5001/api/translate", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
         text,
         targetLanguage,
       });

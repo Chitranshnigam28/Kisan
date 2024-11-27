@@ -210,6 +210,18 @@ body {
   font-size: 2rem;
 }
 
+@media screen and (max-width:500px){
+  .weather-main {
+    padding: 0;
+  }
+  .weather-details-container{
+    max-width: 92%;
+    padding: 1rem;
+  }
+  .weatherHeader {
+    margin-bottom: 1rem;
+  }
+}
 /* Responsive Adjustments */
 @media (min-width: 768px) {
   .weather-main {

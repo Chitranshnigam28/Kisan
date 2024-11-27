@@ -17,14 +17,16 @@ const FirstPage = ({ imageUrl }) => {
     return (
         <div className="welcome-con">
             <div className="welcome-content">
-                <h1>Welcome to Kisan</h1>
-                <p>
-                    We're excited to have you on board! Let’s get your farms set up to start receiving recommendations and insights.
-                </p>
+                <div className="welcomeHeadingParaWrapper">
+                    <h1>Welcome to Kisan</h1>
+                    <p>
+                        We're excited to have you on board! Let’s get your farms set up to start receiving recommendations and insights.
+                    </p>
+                </div>
                 <img src= {bgImage} alt="Farm illustration" className="welcome-image" />
                 
                 <div className="button-container">
-                    <button className="main-Btn" onClick={handleSetupClick}>Set up your farms →</button>
+                    <button className="main-Btn-FirstPage" onClick={handleSetupClick}>Set up your farms →</button>
                     <button className="setup-later-btn" onClick={handleSetupLaterClick}>I'll set up later</button>
                 </div>
             </div>

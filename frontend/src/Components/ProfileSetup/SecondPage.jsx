@@ -19,7 +19,6 @@ import WheatIcon from "./../../Assets/Vegetables/wheat.png"
 import RiceIcon from "./../../Assets/Vegetables/rice.png"
 import CornIcon from "./../../Assets/Vegetables/Corn.svg"
 import TomatoIcon from "./../../Assets/Vegetables/tomato.png"
-
 import ClayIcon from "./../../Assets/Soil type/Clay.svg"
 import SandyIcon from "./../../Assets/Soil type/🏜️.svg"
 import LoamyIcon from "./../../Assets/Soil type/💧.svg"
@@ -29,10 +28,8 @@ import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/
 import { IoIosCloudUpload } from "react-icons/io";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-
-
 const firebaseConfig = {
-    apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
+    // apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
     authDomain: "art-asta-50475.firebaseapp.com",
     projectId: "art-asta-50475",
     storageBucket: "art-asta-50475.appspot.com",
@@ -41,10 +38,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase with npm package
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
-
-
+// const app = initializeApp(firebaseConfig);
+// const storage = getStorage(app);
 
 const cropNameIcons = {
     Wheat: WheatIcon,
@@ -81,7 +76,7 @@ const waterSourceIcons = {
 
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1); // Step state
+    const [currentStep, setCurrentStep] = useState(1); 
     const navigate = useNavigate();
     const [farmData, setFarmData] = useState({
         farmName: "",
@@ -232,7 +227,7 @@ const AddFarms = () => {
 
 
                 // Send the farm data to the backend
-                const response = await axios.post('http://localhost:5001/api/farms', farmDetails, {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/farms`, farmDetails, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
@@ -395,7 +390,6 @@ const AddFarms = () => {
                                     <option value="Puducherry">Puducherry</option>
                                     <option value="Jammu and Kashmir">Jammu and Kashmir</option>
                                     <option value="Ladakh">Ladakh</option>
-                                    {/* Add location options here */}
                                 </select>
                             </div>
 
