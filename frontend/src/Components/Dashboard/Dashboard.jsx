@@ -8,7 +8,7 @@ import aiicon from "../../Assets/bot.png";
 
 const Dashboard = () => {
   const [showChatBot, setShowChatBot] = useState(false);
-
+  const [showOverlay, setShowOverlay] = useState(false);
   const toggleChatBot = () => {
     setShowChatBot((prev) => !prev);
   };
@@ -24,11 +24,20 @@ const Dashboard = () => {
           <img src={aiicon} alt="AI Icon" />
         )}
       </button>
+      <div
+        style={{
+          filter: showOverlay ? "blur(10px)" : "none",
+          transition: "filter 0.3s ease-in-out",
+        }}
+      >
       <Main />
       {/* Display overlay and chatbot only if open */}
       {showChatBot && <div className="background-overlay show" onClick={toggleChatBot}></div>}
       <ChatBot isOpen={showChatBot} onClose={toggleChatBot} />
-      <Footer />
+      </div>
+      {/* Dark Overlay */}
+      {showOverlay && <div className="overlay-dark"></div>}
+      <Footer setShowOverlay={setShowOverlay}/>
     </>
   );
 };
