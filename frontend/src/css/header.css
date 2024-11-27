@@ -157,3 +157,16 @@
   right: 10px;
   cursor: pointer;
 }
+
+.icon {
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Ensure the width and height are equal for a circle */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image doesn't stretch or distort */
+  display: inline-block; /* Keeps it inline within other elements */
+  overflow: hidden; /* Ensures content stays within the circle */
+}
+
+.change-language:hover {
+  background-color: transparent;
+}

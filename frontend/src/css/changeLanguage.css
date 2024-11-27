@@ -56,16 +56,16 @@
   }
   
   .languageWrapper:hover {
-    background-color: #e0f5e0; /* Light green background on hover */
+    background-color: transparent; /* Light green background on hover */
   }
   
   .languageWrapper:hover button.language-option {
-    background-color: #c5e1c5; /* Slightly darker green for the button on hover */
+    background-color: transparent; /* Slightly darker green for the button on hover */
   }
   
   .languageWrapper button.language-option {
     border: none;
-    background-color: #64ab00;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;

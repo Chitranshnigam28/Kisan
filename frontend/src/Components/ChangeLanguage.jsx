@@ -73,6 +73,14 @@ const ChangeLanguage = ({ onSelectLanguage, onClose }) => {
     { language: 'en', icon: "./languages/A.png" },
     { language: 'hi', icon: "./languages/Hindi.png" },
     { language: 'pa', icon: "./languages/Punjabi.png" },
+    { language: 'bg', icon: "./languages/Bengali.png" },
+    { language: 'tu', icon: "./languages/Telugu.png" },
+    { language: 'tm', icon: "./languages/Tamil.png" },
+    { language: 'gj', icon: "./languages/Gujrati.png" },
+    { language: 'ka', icon: "./languages/Kannada.png" },
+    { language: 'my', icon: "./languages/Malayalam.png" },
+    { language: 'tm', icon: "./languages/Tamil.png" },
+    { language: 'ur', icon: "./languages/Urdu.png" },
   ];
 
   return (
