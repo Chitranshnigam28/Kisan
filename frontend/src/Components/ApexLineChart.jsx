@@ -118,7 +118,7 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
           <div style="
             padding: 8px; 
             border-radius: 5px; 
-            color: #fff; 
+            color: #000; 
             font-family: 'Noto Sans', Arial, sans-serif; 
             font-size: 12px;
           ">
