@@ -172,6 +172,7 @@
 
 .main-market-container {
   grid-column: span 2;
+  margin: 1rem;
 }
 
 .funFacts-Container {
@@ -210,9 +211,15 @@ h4 {
   padding: 15px;
   border-radius: 8px;
   background-color: #ffffff;
-  box-shadow: 0 10px 30px #DDDDDD;
+  /* box-shadow: 0 10px 30px #DDDDDD; */
+  border: 2px solid #E9E9E9;
   height: fit-content;
   margin-top: 2rem;
+}
+
+.marketInsightWidgetWrapper{
+  margin: 2rem;
+  box-shadow: 0 10px 30px #DDDDDD;
 }
 
 .single-tips-container {
