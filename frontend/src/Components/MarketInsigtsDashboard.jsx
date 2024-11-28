@@ -78,7 +78,7 @@ const MarketInsigtsDashboard = () => {
                 </div>
                 <div className="both-chart-container">
                   <div className="container-tips-graph">
-                    {locationVal.pathname === '/charts' && (
+                    {locationVal.pathname === "/charts" && (
                       <div className="extra-info">
                         <h4>Your Crops</h4>
                         <p>Choose from the crops below or search it</p>
@@ -94,6 +94,17 @@ const MarketInsigtsDashboard = () => {
                   </div>
                   <div className="top-crop-container">
                     <TopCropsChart />
+                    <div className="tip-container mt-10 ml-4 mr-4">
+                      <div className="tip-card">
+                        <div className="tip-content">
+                          <div className="icon-cropName">
+                            <span className="tip-icon">💡</span>
+                          </div>
+                          <span>Practice alternate wetting and drying (AWD) to conserve water and improve root growth in rice fields.<br/>
+                          Incorporate green manure like Azolla to naturally boost soil fertility and nitrogen levels.</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   {/* <div className="single-tips-container">
                     <SingleTips cropName={cropName} />
@@ -101,10 +112,13 @@ const MarketInsigtsDashboard = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-center align-items-center vh-70">
-                  <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3 mb-5">
-                    Go Back
-                  </Link>
-                </div>
+                <Link
+                  to="/"
+                  className="btn btn-dark btn-lg rounded-pill mt-3 mb-5"
+                >
+                  Go Back
+                </Link>
+              </div>
             </>
           </div>
         )}

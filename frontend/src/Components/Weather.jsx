@@ -15,10 +15,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format } from "date-fns";
 import axios from "axios";
-import Header from './Dashboard/Header';
-import { Footer } from './Dashboard/Footer';
+import Header from "./Dashboard/Header";
+import { Footer } from "./Dashboard/Footer";
 import SimpleLoader from "./SimpleLoader";
-
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -33,11 +32,14 @@ function Weather() {
   const [units, setUnits] = useState("metric");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
+  const [language, setLanguage] = useState(
+    localStorage.getItem("language") || "en"
+  );
   const [translatedContent, setTranslatedContent] = useState({});
 
-
-  const [searchCity, setSearchCity] = useState(localStorage.getItem("searchCity") || "Delhi");
+  const [searchCity, setSearchCity] = useState(
+    localStorage.getItem("searchCity") || "Delhi"
+  );
   const [translatedLabels, setTranslatedLabels] = useState({
     searchPlaceholder: "Search city",
     hourlyForecastLabel: "Hourly Forecast",
@@ -46,10 +48,13 @@ function Weather() {
 
   async function translateText(text, targetLanguage) {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/translate`, {
-        text: text,
-        targetLanguage: targetLanguage,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/translate`,
+        {
+          text: text,
+          targetLanguage: targetLanguage,
+        }
+      );
       return response.data.translatedText;
     } catch (error) {
       console.error("Error translating text:", error);
@@ -71,10 +76,16 @@ function Weather() {
         visibility: await translateText("Visibility", targetLanguage),
         pressure: await translateText("Pressure", targetLanguage),
         loading: await translateText("Loading...", targetLanguage),
-        noTips: await translateText("No specific tips for today's weather condition.", targetLanguage),
+        noTips: await translateText(
+          "No specific tips for today's weather condition.",
+          targetLanguage
+        ),
       },
       locationLabel: await translateText("Weather", targetLanguage),
-      subtitle: await translateText("Explore key market trends and insights to stay ahead.", targetLanguage),
+      subtitle: await translateText(
+        "Explore key market trends and insights to stay ahead.",
+        targetLanguage
+      ),
       tipsTitle: await translateText("Today's Highlights", targetLanguage),
     };
     setTranslatedContent(translated);
@@ -85,7 +96,9 @@ function Weather() {
       const currentCondition = weather.details || "Unknown";
       const contentToTranslate = {
         tips: tips[currentCondition] || [],
-        highlight: highlightsMessages[currentCondition] || "Check conditions before applying pesticides.",
+        highlight:
+          highlightsMessages[currentCondition] ||
+          "Check conditions before applying pesticides.",
       };
       translateWeatherContent(contentToTranslate, language);
     }
@@ -108,7 +121,6 @@ function Weather() {
     }
   }
 
-
   const getWeather = async () => {
     try {
       setLoading(true);
@@ -120,7 +132,9 @@ function Weather() {
         ? capitalizeFirstLetter(query.q)
         : "current location";
       toast.info(
-        `Fetching weather data for ${isGeolocation ? "current location" : cityName}...`
+        `Fetching weather data for ${
+          isGeolocation ? "current location" : cityName
+        }...`
       );
 
       const response = await fetch(
@@ -153,7 +167,6 @@ function Weather() {
     }
   };
 
-
   useEffect(() => {
     getWeather();
   }, [query, units]);
@@ -167,7 +180,7 @@ function Weather() {
     Mist: [
       "Misty weather adds moisture to the soil; adjust irrigation to avoid overwatering.",
       "Mist may promote pest activity; inspect plants regularly and consider organic pest control methods.",
-      "Avoid applying pesticides during mist, as they may not adhere well; wait for clearer weather for best results."
+      "Avoid applying pesticides during mist, as they may not adhere well; wait for clearer weather for best results.",
     ],
     Rain: [
       "Expect some rain today! Check your field’s drainage to avoid waterlogging, which can lead to root rot and fungal issues.",
@@ -199,23 +212,35 @@ function Weather() {
       "Fog can be detrimental to crop health; ensure good ventilation in greenhouses.",
       "Check for pests that thrive in humid conditions due to fog.",
     ],
+    Smoke: [
+      "Smoke in the air can reduce sunlight reaching crops. Monitor sunlight levels and consider using supplemental lighting if necessary.",
+      "Airborne smoke can affect plant health. Ensure proper ventilation in greenhouses or indoor growing areas to reduce smoke exposure.",
+      "Check plants for signs of stress due to reduced air quality, such as wilting or yellowing leaves, and provide adequate water and nutrients.",
+    ],
   };
 
   const highlightsMessages = {
     Clear: "Now is a good weather for spraying pesticides.",
     Rain: "Rainy weather is ideal for root fertilization but not for pesticides.",
-    Clouds: "Cloudy weather is great for some pesticide applications, check humidity levels first.",
+    Clouds:
+      "Cloudy weather is great for some pesticide applications, check humidity levels first.",
     Snow: "Snowy conditions require caution, wait until snow clears for pesticide application.",
-    Thunderstorm: "Avoid applying pesticides during thunderstorms due to strong winds and rain.",
+    Thunderstorm:
+      "Avoid applying pesticides during thunderstorms due to strong winds and rain.",
     Haze: "Hazy weather can affect pesticide efficacy; ensure good ventilation.",
     Fog: "Foggy conditions are not ideal for spraying pesticides; wait until it clears.",
-    Mist: "Mist provides natural moisture; monitor plants for fungal growth and pests."
+    Mist: "Mist provides natural moisture; monitor plants for fungal growth and pests.",
+    Smoke:
+      "Smoke reduces air quality and sunlight exposure, making it unsuitable for pesticide application. Prioritize plant care and ventilation until conditions improve.",
   };
 
   const currentCondition = weather?.details || "Unknown";
+  console.log(currentCondition + "   curent conditonsssssssssssssssssss");
   const displayTips = translatedContent.tips || [];
   const tipToDisplay = Math.floor(Math.random() * displayTips.length);
-  const highlightsMessage = translatedContent.highlight || "Check conditions before applying pesticides.";
+  const highlightsMessage =
+    translatedContent.highlight ||
+    "Check conditions before applying pesticides.";
 
   const getCurrentDate = () => {
     return format(new Date(), "do MMMM yyyy, EEEE");
@@ -232,7 +257,6 @@ function Weather() {
     }
   };
 
-
   return (
     <>
       <Header />
@@ -243,11 +267,16 @@ function Weather() {
           <div className="weatherTitleWrapper">
             <div className="title-search-wrapper">
               <h2>{translatedContent.locationLabel || "Weather"}</h2>
-              <p>{translatedContent.subtitle || "Explore key market trends and insights to stay ahead."}</p>
+              <p>
+                {translatedContent.subtitle ||
+                  "Explore key market trends and insights to stay ahead."}
+              </p>
               <form onSubmit={handleSearchSubmit} className="search-form">
                 <input
                   type="text"
-                  placeholder={translatedLabels.searchPlaceholder || "Enter location"}
+                  placeholder={
+                    translatedLabels.searchPlaceholder || "Enter location"
+                  }
                   value={searchCity}
                   onChange={(e) => setSearchCity(e.target.value)}
                   className="search-input"
@@ -297,7 +326,10 @@ function Weather() {
                       {displayTips.length > 0 ? (
                         <p>{displayTips[tipToDisplay]}</p>
                       ) : (
-                        <p>{translatedContent.labels?.noTips || "No specific tips for today's weather condition."}</p>
+                        <p>
+                          {translatedContent.labels?.noTips ||
+                            "No specific tips for today's weather condition."}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -310,11 +342,16 @@ function Weather() {
                     <p>{weather.uvi}</p>
                   </div>
                   <div className="highlight-box">
-                    <p>{translatedContent.labels?.windStatus || "Wind Status"}</p>
+                    <p>
+                      {translatedContent.labels?.windStatus || "Wind Status"}
+                    </p>
                     <p>{weather.speed} m/s</p>
                   </div>
                   <div className="highlight-box">
-                    <p>{translatedContent.labels?.sunriseSunset || "Sunrise & Sunset"}</p>
+                    <p>
+                      {translatedContent.labels?.sunriseSunset ||
+                        "Sunrise & Sunset"}
+                    </p>
                     <p>{`${weather.sunrise} / ${weather.sunset}`}</p>
                   </div>
                   <div className="highlight-box">
@@ -322,7 +359,9 @@ function Weather() {
                     <p>{weather.humidity}%</p>
                   </div>
                   <div className="highlight-box">
-                    <p>{translatedContent.labels?.visibility || "Visibility"}</p>
+                    <p>
+                      {translatedContent.labels?.visibility || "Visibility"}
+                    </p>
                     <p>{weather.visibility} km</p>
                   </div>
                   <div className="highlight-box">
@@ -337,7 +376,6 @@ function Weather() {
       </div>
     </>
   );
-
 
   // return (
   //   <>
@@ -357,7 +395,6 @@ function Weather() {
   //       ) : (
   //         weather && (
   //           <div className="weather-main">
-
 
   //             <form onSubmit={handleSearchSubmit} className="search-form" onClick={(e) => e.stopPropagation()}>
   //               <input

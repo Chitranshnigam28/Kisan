@@ -299,7 +299,7 @@ const CropPriceChart = ({ getCropData, selectedYear, onYearChange }) => {
                 <option value="2022">2022</option>
                 <option value="2021">2021</option>
               </select>
-              <button type="submit" className="crop-submit-btn">
+              <button type="submit" id="crop-submit-btn">
                 <FaSearch />
               </button>
             </form>

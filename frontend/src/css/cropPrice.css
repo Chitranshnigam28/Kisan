@@ -11,6 +11,19 @@
     align-items: center;
 }
 
+#crop-submit-btn{
+    color: black;
+    background-color: white;
+    border: 2px solid grey;
+    padding: 0.5rem;
+    width: 10%;
+    border-radius: 40px;
+}
+#crop-submit-btn:hover{
+    background-color: #96C73D;
+    color: white;
+}
+
 .crop-button {
     display: flex;
     align-items: center;

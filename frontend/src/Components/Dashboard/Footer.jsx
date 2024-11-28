@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import "../../css/footer.css";
 import CropRecommendation from "../CropRecomendation";
 import { AiOutlineClose } from "react-icons/ai";
+import homeimg from "./../../Assets/Navbar/CirclesFour.png"
+import plantimg from "./../../Assets/Navbar/Plant.png"
+import mapPin from "./../../Assets/Navbar/MapPin.png"
 
 export function Footer({ setShowOverlay }) {
   const [showDock, setShowDock] = useState(true);
@@ -54,23 +57,45 @@ export function Footer({ setShowOverlay }) {
   //     href: "/maps",
   //   },
   // ];
+
   const links = [
-    {
-      title: "Home",
-      icon: <FaThLarge className="footer-icon" />,
-      href: "/",
-    },
+    { title: "Home", 
+    icon: <img src={homeimg} alt="Home Icon" className="footer-icon" />, 
+    href: "/"  },
     {
       title: "Crop Recommendation",
-      icon: <FaSeedling className="footer-icon" />,
-      onClick: () => setShowCropDiv(!showCropDiv),
+      icon: (
+        <img 
+          src={plantimg} 
+          alt="Crop Recommendation Icon" 
+          className="footer-icon"
+          onClick={() => setShowCropDiv(!showCropDiv)} 
+        />
+      ),
     },
     {
       title: "Maps",
-      icon: <FaMapMarkerAlt className="footer-icon" />,
-      href: "/maps",
+    icon: <img src={mapPin} alt="Maps Icon" className="footer-icon" />,
+    href: "/maps",
     },
   ];
+  // const links = [
+  //   {
+  //     title: "Home",
+  //     icon: <FaThLarge className="footer-icon" />,
+  //     href: "/",
+  //   },
+  //   {
+  //     title: "Crop Recommendation",
+  //     icon: <FaSeedling className="footer-icon" />,
+  //     onClick: () => setShowCropDiv(!showCropDiv),
+  //   },
+  //   {
+  //     title: "Maps",
+  //     icon: <FaMapMarkerAlt className="footer-icon" />,
+  //     href: "/maps",
+  //   },
+  // ];
 
   return (
     <>

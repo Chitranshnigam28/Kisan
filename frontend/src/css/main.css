@@ -102,10 +102,11 @@
 }
 
 .market-insights-para {
-  margin-left: 5.5rem;
+  /* margin-left: 5.5rem; */
   padding-top: 0.5rem;
   font-size: 1rem;
   color: gray;
+  text-align: center;
 }
 
 @media (max-width: 850px) {
@@ -221,7 +222,7 @@ h4 {
 }
 
 .marketInsightWidgetWrapper{
-  margin: 2rem;
+  /* margin: 2rem; */
   box-shadow: 0 10px 30px #DDDDDD;
 }
 
