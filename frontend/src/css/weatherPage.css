@@ -3,7 +3,7 @@ body {
 }
 
 .weather-details-container {
-  max-width: 70%;
+  max-width: 90%;
   margin: 20px auto;
   padding: 2rem;
   background: #ffffff;
@@ -231,11 +231,11 @@ body {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .tipWrapper {
+  /* .tipWrapper {
     display: grid;
     grid-template-columns: 2fr 3fr;
     gap: 1rem;
-  }
+  } */
 }
 
 @media (min-width: 1024px) {

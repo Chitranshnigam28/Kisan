@@ -210,7 +210,8 @@
 
 /* Hover effect on image */
 .feature-image:hover {
-  transform: scale(1.05); /* Slight scale-up on hover */
+  width: 10%; /* Makes the image 80% of the container width on hover */
+  height: 10%; /* Makes the image 80% of the container height on hover */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a shadow */
 }
 
