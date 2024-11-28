@@ -100,13 +100,13 @@ function WeatherWidget({ showSearch = true }) {
     const isCloudy = weather?.icon && (weather.icon.includes("03") || weather.icon.includes("04"));
     const isSunny = weather?.icon && weather.icon.includes("01");
 
-    if (isRainy) return { backgroundColor: "#627685", color: "#FFFFFF" };
-    if (isHazy) return { backgroundColor: "#627685", color: "#FFFFFF" };
-    if (isCloudy) return { backgroundColor: "#A9A9A9", color: "#FFFFFF" };
+    if (isRainy) return { backgroundColor: "#84B8EA", color: "#FFFFFF" };
+    if (isHazy) return { backgroundColor: "#84B8EA", color: "#FFFFFF" };
+    if (isCloudy) return { backgroundColor: "#84B8EA", color: "#FFFFFF" };
     if (isSunny && !isNightTime) return { backgroundColor: "#84B8EA", color: "#333333" };
-    if (isNightTime) return { backgroundColor: "#1E3146", color: "#FFFFFF" };
+    if (isNightTime) return { backgroundColor: "#84B8EA", color: "#FFFFFF" };
 
-    return { backgroundColor: "#FF6347", color: "#FFFFFF" };
+    return { backgroundColor: "#84B8EA", color: "#FFFFFF" };
   };
 
   return (
@@ -126,25 +126,7 @@ function WeatherWidget({ showSearch = true }) {
                   <FaMapMarkerAlt />
                   <p className="location">{translatedLocation}</p>
                 </div>
-                {showSearch && (
-                  <form onSubmit={handleSearchSubmit} className="search-form" onClick={(e) => e.stopPropagation()}>
-                    <input
-                      type="text"
-                      placeholder={translatedLabels.searchPlaceholder}
-                      value={searchCity}
-                      onChange={(e) => setSearchCity(e.target.value)}
-                      className="search-input"
-                      onClick={(e) => e.stopPropagation()} // Prevents redirection when clicking in the search input
-                    />
-                    <button
-                      type="submit"
-                      className="search-button weather-search-button"
-                      onClick={(e) => e.stopPropagation()} // Prevents redirection when clicking on the search button
-                    >
-                      <FaSearch />
-                    </button>
-                  </form>
-                )}
+                
               </div>
               <div className="widgetDateWeatherIconWrapper">
                 <p className="date">{translatedDate}</p>
@@ -156,7 +138,6 @@ function WeatherWidget({ showSearch = true }) {
               <div className="hourly-forecast">
                 {weather.hourlyForecast ? (
                   <>
-                    {/* <h3>{translatedLabels.hourlyForecastLabel || "Hourly Forecast"}</h3> */}
                     {weather.hourlyForecast.map((hour, index) => (
                       <div key={index} className="hour">
                         <p>{hour.title}</p>
@@ -172,7 +153,6 @@ function WeatherWidget({ showSearch = true }) {
             </div>
           )
         )}
-        {/* <ToastContainer autoClose={2500} hideProgressBar={true} theme="colored" /> */}
       </div>
     </div>
   );
