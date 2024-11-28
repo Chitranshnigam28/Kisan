@@ -1,4 +1,3 @@
-
 import "../css/weatherPage.css";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -10,7 +9,7 @@ import {
   WiThunderstorm,
 } from "react-icons/wi";
 import { BsFillSunriseFill, BsFillSunsetFill } from "react-icons/bs";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import Forecast from "../Components/weatherComponents/Forecast";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +18,7 @@ import axios from "axios";
 import Header from './Dashboard/Header';
 import { Footer } from './Dashboard/Footer';
 import SimpleLoader from "./SimpleLoader";
+
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -35,6 +35,14 @@ function Weather() {
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
   const [translatedContent, setTranslatedContent] = useState({});
+
+
+  const [searchCity, setSearchCity] = useState(localStorage.getItem("searchCity") || "Delhi");
+  const [translatedLabels, setTranslatedLabels] = useState({
+    searchPlaceholder: "Search city",
+    hourlyForecastLabel: "Hourly Forecast",
+    noData: "No hourly forecast data available",
+  });
 
   async function translateText(text, targetLanguage) {
     try {
@@ -86,20 +94,20 @@ function Weather() {
   function getWeatherIcon(condition) {
     switch (condition) {
       case "Clear":
-        return <WiDaySunny size={64} color="#84B8EA" />; // Matches the sunny daytime color
+        return <WiDaySunny size={64} color="#84B8EA" />;
       case "Clouds":
-        return <WiCloud size={64} color="#A9A9A9" />; // Matches the cloudy color
+        return <WiCloud size={64} color="#84B8EA" />;
       case "Rain":
-        return <WiRain size={64} color="#627685" />; // Matches the rainy/hazy color
+        return <WiRain size={64} color="#84B8EA" />;
       case "Snow":
-        return <WiSnow size={64} color="#ADD8E6" />; // Light blue to represent snow
+        return <WiSnow size={64} color="#84B8EA" />;
       case "Thunderstorm":
-        return <WiThunderstorm size={64} color="#1E3146" />; // Dark blue for stormy night representation
+        return <WiThunderstorm size={64} color="#84B8EA" />;
       default:
-        return <WiCloud size={64} color="#A9A9A9" />; // Matches default cloudy color
+        return <WiCloud size={64} color="#84B8EA" />;
     }
   }
-  
+
 
   const getWeather = async () => {
     try {
@@ -144,7 +152,7 @@ function Weather() {
       setLoading(false);
     }
   };
-  
+
 
   useEffect(() => {
     getWeather();
@@ -160,7 +168,7 @@ function Weather() {
       "Misty weather adds moisture to the soil; adjust irrigation to avoid overwatering.",
       "Mist may promote pest activity; inspect plants regularly and consider organic pest control methods.",
       "Avoid applying pesticides during mist, as they may not adhere well; wait for clearer weather for best results."
-    ],    
+    ],
     Rain: [
       "Expect some rain today! Check your field’s drainage to avoid waterlogging, which can lead to root rot and fungal issues.",
       "Rain is on the way! Hold off on applying fertilizer, as it may get washed away, wasting nutrients and potentially harming nearby water sources.",
@@ -213,6 +221,18 @@ function Weather() {
     return format(new Date(), "do MMMM yyyy, EEEE");
   };
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchCity.trim()) {
+      setQuery({ q: searchCity.trim() });
+      localStorage.setItem("searchCity", searchCity.trim());
+    } else {
+      setQuery({ q: "Delhi" });
+      localStorage.removeItem("searchCity");
+    }
+  };
+
+
   return (
     <>
       <Header />
@@ -221,13 +241,30 @@ function Weather() {
         <div className="weatherHeader">
           <img src="./weatherlogo.png" alt="weather logo" />
           <div className="weatherTitleWrapper">
-            <h2>{translatedContent.locationLabel || "Weather"}</h2>
-            <p>{translatedContent.subtitle || "Explore key market trends and insights to stay ahead."}</p>
+            <div className="title-search-wrapper">
+              <h2>{translatedContent.locationLabel || "Weather"}</h2>
+              <p>{translatedContent.subtitle || "Explore key market trends and insights to stay ahead."}</p>
+              <form onSubmit={handleSearchSubmit} className="search-form">
+                <input
+                  type="text"
+                  placeholder={translatedLabels.searchPlaceholder || "Enter location"}
+                  value={searchCity}
+                  onChange={(e) => setSearchCity(e.target.value)}
+                  className="search-input"
+                />
+                <button
+                  type="submit"
+                  className="search-button"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FaSearch />
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 
         {loading ? (
-          // <p className="loading-text">{translatedContent.labels?.loading || "Loading..."}</p>
           <SimpleLoader />
         ) : (
           weather && (
@@ -286,7 +323,7 @@ function Weather() {
                   </div>
                   <div className="highlight-box">
                     <p>{translatedContent.labels?.visibility || "Visibility"}</p>
-                    <p>{weather.visibility } km</p>
+                    <p>{weather.visibility} km</p>
                   </div>
                   <div className="highlight-box">
                     <p>{translatedContent.labels?.aqi || "Air Quality"}</p>
@@ -297,10 +334,118 @@ function Weather() {
             </div>
           )
         )}
-
       </div>
     </>
   );
+
+
+  // return (
+  //   <>
+  //     <Header />
+  //     <Footer />
+  //     <div className="weather-details-container">
+  //       <div className="weatherHeader">
+  //         <img src="./weatherlogo.png" alt="weather logo" />
+  //         <div className="weatherTitleWrapper">
+  //           <h2>{translatedContent.locationLabel || "Weather"}</h2>
+  //           <p>{translatedContent.subtitle || "Explore key market trends and insights to stay ahead."}</p>
+  //         </div>
+  //       </div>
+
+  //       {loading ? (
+  //         <SimpleLoader />
+  //       ) : (
+  //         weather && (
+  //           <div className="weather-main">
+
+
+  //             <form onSubmit={handleSearchSubmit} className="search-form" onClick={(e) => e.stopPropagation()}>
+  //               <input
+  //                 type="text"
+  //                 placeholder={translatedLabels.searchPlaceholder}
+  //                 value={searchCity}
+  //                 onChange={(e) => setSearchCity(e.target.value)}
+  //                 className="search-input"
+  //                 onClick={(e) => e.stopPropagation()}
+  //               />
+  //               <button
+  //                 type="submit"
+  //                 className="search-button weather-search-button"
+  //                 onClick={(e) => e.stopPropagation()}
+  //               >
+  //                 <FaSearch />
+  //               </button>
+  //             </form>
+
+  //             <div
+  //               className="weather-visualization"
+  //               style={{ backgroundColor: weather.bgColor }}
+  //             >
+  //               <div className="location">
+  //                 <FaMapMarkerAlt size={18} color="#fff" />
+  //                 <span>{`${weather.name}, ${weather.country}`}</span>
+  //               </div>
+  //               <div className="dateWeatherIconWrapper">
+  //                 <p className="date">{getCurrentDate()}</p>
+  //                 {getWeatherIcon()}
+  //               </div>
+  //               <div className="temperature-display">
+  //                 <p className="temperature">{`${weather.temp.toFixed()}°C`}</p>
+  //               </div>
+
+  //               <Forecast title="Hourly Forecast" data={weather.hourly} />
+  //             </div>
+
+  //             <div className="weather-info">
+  //               <div className="tipWrapper">
+  //                 <h3 className="highlights-title">{highlightsMessage}</h3>
+  //                 <div className="weather-tip">
+  //                   <div className="imgTipWrapper">
+  //                     <img src="./Light.svg" alt="light" />
+  //                     {displayTips.length > 0 ? (
+  //                       <p>{displayTips[tipToDisplay]}</p>
+  //                     ) : (
+  //                       <p>{translatedContent.labels?.noTips || "No specific tips for today's weather condition."}</p>
+  //                     )}
+  //                   </div>
+  //                 </div>
+  //               </div>
+
+  //               <h3>{translatedContent.tipsTitle || "Today's Highlights"}</h3>
+  //               <div className="weather-highlights">
+  //                 <div className="highlight-box">
+  //                   <p>{translatedContent.labels?.uvIndex || "UV Index"}</p>
+  //                   <p>{weather.uvi}</p>
+  //                 </div>
+  //                 <div className="highlight-box">
+  //                   <p>{translatedContent.labels?.windStatus || "Wind Status"}</p>
+  //                   <p>{weather.speed} m/s</p>
+  //                 </div>
+  //                 <div className="highlight-box">
+  //                   <p>{translatedContent.labels?.sunriseSunset || "Sunrise & Sunset"}</p>
+  //                   <p>{`${weather.sunrise} / ${weather.sunset}`}</p>
+  //                 </div>
+  //                 <div className="highlight-box">
+  //                   <p>{translatedContent.labels?.humidity || "Humidity"}</p>
+  //                   <p>{weather.humidity}%</p>
+  //                 </div>
+  //                 <div className="highlight-box">
+  //                   <p>{translatedContent.labels?.visibility || "Visibility"}</p>
+  //                   <p>{weather.visibility} km</p>
+  //                 </div>
+  //                 <div className="highlight-box">
+  //                   <p>{translatedContent.labels?.aqi || "Air Quality"}</p>
+  //                   <p>{weather.aqi}</p>
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         )
+  //       )}
+
+  //     </div>
+  //   </>
+  // );
 }
 
 export default Weather;

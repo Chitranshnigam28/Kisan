@@ -143,9 +143,10 @@
 // };
 
 // export default CropPriceChart;
+
 import React, { useEffect, useState } from "react";
 import ApexLineChart from "./ApexLineChart";
-import SingleTips from "./SingleTips"; // Import SingleTips component
+import SingleTips from "./SingleTips"; 
 import "../css/cropPrice.css";
 import tomatoImg from "./../Assets/Vegetables/tomato.png";
 import wheatImg from "./../Assets/Vegetables/wheat.png";

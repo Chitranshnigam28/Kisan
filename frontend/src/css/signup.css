@@ -3,8 +3,8 @@
   display: flex;
   flex-flow: row nowrap; /* Adjusted to row to align image/logo side by side */
   /* width: 100%; */
-  margin: 1rem 3rem;
-  padding: 0 2rem 0 0;
+  margin: 1rem 0rem;
+  padding: 0 1rem 0 0;
   justify-content: space-around;
 }
 
@@ -111,7 +111,7 @@ input[type="password"] {
   height: 100%;
   object-fit: cover;
   z-index: 1;
-  opacity: 0.5;
+  /* opacity: 0; */
 }
 
 form > label {

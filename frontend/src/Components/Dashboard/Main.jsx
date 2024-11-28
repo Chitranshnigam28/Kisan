@@ -14,6 +14,7 @@ const Main = () => {
 
   const [location, setLocation] = useState("Delhi");
   const [isLoading, setIsLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   return (
     <>
@@ -23,7 +24,7 @@ const Main = () => {
         </div>
 
         <div className="my-farms">
-          <MyFarms userId={userId} />
+          <MyFarms userId={userId} setLoading={setIsLoading} />
         </div>
 
         <div className="dashboard-marketview-part">

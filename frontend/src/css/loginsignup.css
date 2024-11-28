@@ -170,8 +170,8 @@ input[type="checkbox"]:checked {
   display: flex;
   /* align-items: center; */
   /* justify-content: center; */
-  margin: 1rem 3rem;
-  padding: 0 2rem 0 0;
+  margin: 1rem 0rem;
+  padding: 0 1rem 0 0
   /* height: 90vh; */
 }
 

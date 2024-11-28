@@ -25,6 +25,10 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   margin: 1.5rem 0;
 }
+
+.my-farms:has(.loader-container) {
+  display: block;
+}
 /* Custom scrollbar for horizontal scrolling */
 .farms-cards-container::-webkit-scrollbar {
   height: 0px;
@@ -86,7 +90,7 @@
 }
 
 .dashboard-marketview-part {
-  grid-column: 1/9;
+  grid-column: 1/10;
   padding: 20px;
   border-radius: 10px;
 }
@@ -171,6 +175,7 @@
 
 .main-market-container {
   grid-column: span 2;
+  margin: 1rem;
 }
 
 .funFacts-Container {
@@ -209,9 +214,15 @@ h4 {
   padding: 15px;
   border-radius: 8px;
   background-color: #ffffff;
-  box-shadow: 0 10px 30px #DDDDDD;
+  /* box-shadow: 0 10px 30px #DDDDDD; */
+  border: 2px solid #E9E9E9;
   height: fit-content;
   margin-top: 2rem;
+}
+
+.marketInsightWidgetWrapper{
+  margin: 2rem;
+  box-shadow: 0 10px 30px #DDDDDD;
 }
 
 .single-tips-container {
@@ -292,8 +303,7 @@ h4 {
 @media only screen and (max-width: 900px) {
   .weather-widget {
     width: 27rem;
-    /* max-width: 600px; */
-    /* Remove max-width */
+    
   }
   .market-section-container{
     display: flex;

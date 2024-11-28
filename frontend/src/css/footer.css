@@ -29,7 +29,6 @@ img{
 
 /* Style for footer icons */
 .footer-icon {
-  margin-left: 7px;
   font-size: 24px; /* Adjust icon size */
   color: white; /* Set icon color to white */
 }
@@ -50,14 +49,13 @@ img{
 
 /* Style for footer icons */
 .footer-icon {
-  margin-left: 7px;
   font-size: 24px; /* Adjust icon size */
   color: white; /* Set icon color to white */
 }
 
 /* Change icon color on hover */
 .footer-icon:hover {
-  color: #96C73D; /* Change color on hover */
+  color: #000000; /* Change color on hover */
 }
 
 .floating-dock {
