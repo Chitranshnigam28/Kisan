@@ -25,7 +25,6 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   margin: 1.5rem 0;
 }
-
 /* Custom scrollbar for horizontal scrolling */
 .farms-cards-container::-webkit-scrollbar {
   height: 0px;

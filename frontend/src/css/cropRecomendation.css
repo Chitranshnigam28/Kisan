@@ -177,12 +177,14 @@
   .rcWrapper{
     display:grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
   .rcImgText{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    justify-content:center;
   }
   .rcImgText>img{
     width: 73%;
@@ -530,4 +532,10 @@
     .crBtnWrapper button:last-child{
       width: 48%;
     }  
+    .rcImgText>img{
+      width: 100%;
+    }
+    .farm-card-cr>img{
+      height:100%;
+    }
   }
