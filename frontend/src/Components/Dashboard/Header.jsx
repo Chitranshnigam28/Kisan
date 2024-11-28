@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import '../../css/header.css'; 
+import '../../css/header.css';
 import { FaBell, FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import ProfileSetup from '../ProfileSetup';
 import ChangeLanguage from '../ChangeLanguage';
 import TranslationComponent from '../TranslationComponent';
 import ChangePassword from '../ChangePassword';
+import farmerAvatar from './../../Assets/vector-illustration-farmer-avatar_558677-933.jpg.avif'
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showProfileForm, setShowProfileForm] = useState(false);
   const [showChangeLanguage, setShowChangeLanguage] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('English'); 
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -54,7 +55,11 @@ const Header = () => {
             <span className="notification-dot"></span>
           </div> */}
           <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
-            <FaUserCircle className="icon" />
+            <img
+              src={farmerAvatar}
+              alt="Profile"
+              className="icon"
+            />
             <span className="profile-arrow">&#x25BC;</span>
           </div>
           {showDropdown && (
@@ -66,7 +71,7 @@ const Header = () => {
                 </button>
               </div> */}
               <div className="changeLanguageWrapper">
-                <img src="./changeLanguage.png" alt="changeLanguage"/>
+                <img src="./changeLanguage.png" alt="changeLanguage" />
                 <button onClick={handleChangeLanguageClick} className="change-language">
                   Change Language
                 </button>
@@ -78,7 +83,7 @@ const Header = () => {
                 </button>
               </div> */}
               <div className="logoutWrapper">
-                <img src="./logout.png" alt="logout"/>
+                <img src="./logout.png" alt="logout" />
                 <button onClick={handleLogout} className="logout-btn">
                   Logout
                 </button>
@@ -91,8 +96,8 @@ const Header = () => {
       {showProfileForm && (
         <div className="profile-setup-container">
           <ProfileSetup />
-          <button 
-            onClick={() => setShowProfileForm(false)} 
+          <button
+            onClick={() => setShowProfileForm(false)}
             className="close-profile-btn"
           >
             Close
@@ -100,8 +105,8 @@ const Header = () => {
         </div>
       )}
 
-{/* Show Change Password Modal */}
-{showChangePassword && (
+      {/* Show Change Password Modal */}
+      {showChangePassword && (
         <div className="modal-overlay">
           <div className="modal-content">
             <ChangePassword onClose={() => setShowChangePassword(false)} />
