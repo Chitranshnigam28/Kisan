@@ -100,7 +100,7 @@ const MarketInsigtsDashboard = () => {
                           <div className="icon-cropName">
                             <span className="tip-icon">💡</span>
                           </div>
-                          <span>Practice alternate wetting and drying (AWD) to conserve water and improve root growth in rice fields.<br/>
+                          <span className="font-semibold">Practice alternate wetting and drying (AWD) to conserve water and improve root growth in rice fields.<br/>
                           Incorporate green manure like Azolla to naturally boost soil fertility and nitrogen levels.</span>
                         </div>
                       </div>

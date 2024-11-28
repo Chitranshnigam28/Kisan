@@ -6,7 +6,6 @@ const router = express.Router();
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-console.log('hi topcpei');
 
 router.get('/recommend-crop', async (req, res) => {
     console.log('Request received:', req.query);
