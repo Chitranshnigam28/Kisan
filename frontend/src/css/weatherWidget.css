@@ -91,6 +91,7 @@
   width: 29rem;
   max-width: 700px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 24rem;
   transition: background-color 0.3s ease;
 }
 

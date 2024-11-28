@@ -303,8 +303,7 @@ h4 {
 @media only screen and (max-width: 900px) {
   .weather-widget {
     width: 27rem;
-    /* max-width: 600px; */
-    /* Remove max-width */
+    
   }
   .market-section-container{
     display: flex;
