@@ -53,6 +53,6 @@
 
 @media screen and (min-width: 1250px) {
   .funfacts-container {
-    height: clamp(550px, 30vw, 572px);
+    height: clamp(486px, 30vw, 490px);
   }
 }
