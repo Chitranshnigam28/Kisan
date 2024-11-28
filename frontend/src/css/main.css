@@ -26,6 +26,9 @@
   margin: 1.5rem 0;
 }
 
+.my-farms:has(.loader-container) {
+  display: block;
+}
 /* Custom scrollbar for horizontal scrolling */
 .farms-cards-container::-webkit-scrollbar {
   height: 0px;
@@ -87,7 +90,7 @@
 }
 
 .dashboard-marketview-part {
-  grid-column: 1/9;
+  grid-column: 1/10;
   padding: 20px;
   border-radius: 10px;
 }

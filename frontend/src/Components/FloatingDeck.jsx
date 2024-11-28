@@ -70,7 +70,7 @@ const FloatingDockMobile = ({ items, className }) => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-[15%] right-0 flex justify-between items-center bg-gray-100 dark:bg-neutral-900 p-2 md:hidden w-3/4 rounded-[1.25rem]",
+        "fixed bottom-0 left-[15%] right-0 flex justify-between items-center  bg-white dark:bg-white p-2 md:hidden w-3/4 rounded-[2.25rem] shadow-[0_4px_10px_rgba(0.3,_0.3,_0.3,_0.8)]",
         className
       )}
     >
@@ -78,7 +78,7 @@ const FloatingDockMobile = ({ items, className }) => {
         const content = (
           <div
             key={item.title}
-            className="h-12 w-12 rounded-full bg-gray-50 dark:bg-neutral-900 flex items-center justify-center"
+            className="h-12 w-12 rounded-full bg-[#96C73D] dark:bg-[#96C73D] flex items-center justify-center"
           >
             <div className="h-6 w-6">{item.icon}</div>
           </div>
@@ -119,7 +119,7 @@ const FloatingDockDesktop = ({ items, className }) => {
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-16 gap-4 items-end rounded-2xl bg-black dark:bg-neutral-900 px-4 pb-3",
+        "mx-auto hidden md:flex h-16 gap-4 items-end rounded-2xl bg-white dark:bg-white px-4 pb-[0.7rem] rounded-[47px] shadow-[0_4px_10px_rgba(0.3,_0.3,_0.3,_0.8)]" ,
         className
       )}
     >
@@ -245,7 +245,7 @@ function IconContainer({ mouseX, title, icon, href, onClick }) {
       style={{ width, height }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="aspect-square rounded-full bg-black dark:bg-neutral-800 flex items-center justify-center relative"
+      className="aspect-square rounded-full bg-[#96C73D] dark:bg-[#96C73D] flex items-center justify-center relative !w-[56px] !h-[55px]"
     >
       <AnimatePresence>
         {hovered && (
@@ -253,7 +253,7 @@ function IconContainer({ mouseX, title, icon, href, onClick }) {
             initial={{ opacity: 0, y: 10, x: "-50%" }}
             animate={{ opacity: 1, y: 0, x: "-50%" }}
             exit={{ opacity: 0, y: 2, x: "-50%" }}
-            className="px-2 py-0.5 whitespace-pre rounded-md bg-gray-100 border dark:bg-neutral-800 dark:border-neutral-900 dark:text-white border-gray-200 text-neutral-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-xs"
+            className=" whitespace-pre rounded-md bg-gray-100 border dark:bg-neutral-800 dark:border-neutral-900 dark:text-white border-gray-200 text-neutral-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-xs"
           >
             {title}
           </motion.div>

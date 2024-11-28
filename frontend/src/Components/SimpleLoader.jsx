@@ -8,6 +8,7 @@ const IndiaCropLoader = () => {
       justifyContent: "center",
       alignItems: "center",
       // height: "100vh",
+      height: "400px",
       padding: "2rem", 
       backgroundColor: "white", // Optional background color
     },
