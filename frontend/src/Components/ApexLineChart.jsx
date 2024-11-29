@@ -131,7 +131,7 @@ const ApexLineChart = ({ crops, cropName, selectedYear }) => {
   });
 
   return (
-    <div style={{ border: "1px solid #ddd", padding: "15px", borderRadius: "8px" }}>
+    <div className="apexLine" style={{ border: "1px solid #ddd", padding: "15px", borderRadius: "8px" }}>
       <ReactApexChart options={options} series={series} type="area" height={350} />
     </div>
   );

@@ -80,6 +80,7 @@ const soilImg = {
   Clay: <FaWater style={{ color: "#2196F3", fontSize: "24px" }} />,
   Loamy: <FaSeedling style={{ color: "#4CAF50", fontSize: "24px" }} />,
 };
+
 const CropRecommendation = ({ ownerId }) => {
   const [farmDetails, setFarmDetails] = useState(null);
   const [farms, setFarms] = useState([]); // For multiple farms

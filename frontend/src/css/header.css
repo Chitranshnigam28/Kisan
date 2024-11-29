@@ -4,7 +4,8 @@
   align-items: center;
   padding: 1rem 2rem;
   background-color: #FAFFFB;
-  position: relative; /* Ensures dropdown positions within header */
+  position: relative;
+  /* Ensures dropdown positions within header */
 }
 
 .logo {
@@ -13,7 +14,8 @@
 }
 
 .logo-image {
-  height: 30px; /* Adjust based on your logo size */
+  height: 30px;
+  /* Adjust based on your logo size */
   margin-right: 0.5rem;
 }
 
@@ -46,7 +48,8 @@
 .profile {
   display: flex;
   align-items: center;
-  position: relative; /* Keeps dropdown aligned with profile icon */
+  position: relative;
+  /* Keeps dropdown aligned with profile icon */
   cursor: pointer;
 }
 
@@ -58,9 +61,8 @@
 
 .dropdown {
   position: absolute !important;
-  
-    top: 4rem;
-    right: 0.5rem;
+  top: 4rem;
+  right: 0.5rem;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -73,7 +75,8 @@
   gap: 1rem;
 }
 
-.profile-btn, .logout-btn {
+.profile-btn,
+.logout-btn {
   padding: 0.5rem 1rem;
   width: 100%;
   background: none;
@@ -84,7 +87,8 @@
   color: #333;
 }
 
-.profile-btn:hover, .logout-btn:hover {
+.profile-btn:hover,
+.logout-btn:hover {
   background-color: #f0f0f0;
 }
 
@@ -111,14 +115,20 @@
   border-radius: 4px;
 }
 
-.changePasswordWrapper,.changeLanguageWrapper,.helpAndSupportWrapper,.logoutWrapper{
+.changePasswordWrapper,
+.changeLanguageWrapper,
+.helpAndSupportWrapper,
+.logoutWrapper {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
 
-.changePasswordWrapper:hover,.changeLanguageWrapper:hover,.helpAndSupportWrapper:hover,.logoutWrapper:hover{
+.changePasswordWrapper:hover,
+.changeLanguageWrapper:hover,
+.helpAndSupportWrapper:hover,
+.logoutWrapper:hover {
   background-color: #F7F7F7;
 }
 
@@ -143,8 +153,9 @@
   max-width: 400px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
-.modal-content input{
-  border:1px solid #ccc;
+
+.modal-content input {
+  border: 1px solid #ccc;
 }
 
 
@@ -159,12 +170,12 @@
 }
 
 .icon {
-  width: 50px; /* Adjust the size as needed */
-  height: 50px; /* Ensure the width and height are equal for a circle */
-  border-radius: 50%; /* Makes the image circular */
-  object-fit: cover; /* Ensures the image doesn't stretch or distort */
-  display: inline-block; /* Keeps it inline within other elements */
-  overflow: hidden; /* Ensures content stays within the circle */
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  overflow: hidden;
 }
 
 .change-language:hover {

@@ -97,7 +97,6 @@ const FunFacts = () => {
           </div>
         </div>
       ) : (
-        // <p className="loading">Loading...</p>
         <FunFactsLoader />
       )}
     </div>

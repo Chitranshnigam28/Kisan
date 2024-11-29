@@ -80,3 +80,31 @@
     border-radius: 8px;
     background-color: #f9f9f9;
 }
+
+@media screen and (max-width: 611px){
+    .marketInsightsCropContainer{
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 350px;
+    }
+    
+    .crop-form-container{
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+    }
+    
+    .predefined-crops{
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 350px;
+        justify-content: center;
+    }
+
+    .apexLine{
+        display: "flex";
+        flex-flow:"row wrap"; 
+        max-width:"350px"
+    }
+}
+
