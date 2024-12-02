@@ -29,6 +29,7 @@
 .my-farms:has(.loader-container) {
   display: block;
 }
+
 /* Custom scrollbar for horizontal scrolling */
 .farms-cards-container::-webkit-scrollbar {
   height: 0px;
@@ -102,7 +103,6 @@
 }
 
 .market-insights-para {
-  /* margin-left: 5.5rem; */
   padding-top: 0.5rem;
   font-size: 1rem;
   color: gray;
@@ -131,6 +131,23 @@
   align-items: center;
   justify-content: space-between;
 }
+
+
+/* Test code */
+.my-farms {
+  border-radius: 25px;
+}
+
+.MyFarmsHeading{
+  padding: 1rem;
+}
+
+#containerFarms{
+  margin: 0;
+  padding: 0;
+}
+
+/* Test code */
 
 .MyFarmsHeading h4 {
   display: flex;
@@ -221,7 +238,7 @@ h4 {
   margin-top: 2rem;
 }
 
-.marketInsightWidgetWrapper{
+.marketInsightWidgetWrapper {
   /* margin: 2rem; */
   box-shadow: 0 10px 30px #DDDDDD;
 }
@@ -243,7 +260,8 @@ h4 {
 
   .weather-widget {
     max-width: unset;
-}
+  }
+
   .my-farms {
     display: grid;
     grid-column: span 12;
@@ -304,9 +322,10 @@ h4 {
 @media only screen and (max-width: 900px) {
   .weather-widget {
     width: 27rem;
-    
+
   }
-  .market-section-container{
+
+  .market-section-container {
     display: flex;
     flex-direction: column;
   }
@@ -321,16 +340,6 @@ h4 {
     display: contents;
   }
 }
-
-/* @media only screen and (max-width: 780px) {
-  .market-section-container {
-    width: 100vw;
-    align-items: center;
-  }
-} */
-
-
-
 
 @media only screen and (max-width: 1000px) {
   .weather-widget {

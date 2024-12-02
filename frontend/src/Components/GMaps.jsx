@@ -522,6 +522,13 @@ import kurushetraAnazMandi from "../Assets/mandis/kurushetraAnazMandi.jpg";
 import ludhianaAnazMandi from "../Assets/mandis/ludhianaAnazMandi.jpeg";
 import pune from "../Assets/mandis/pune.webp";
 import Vashimumbai from "../Assets/mandis/Vashimumbai.webp";
+import Modal from './Modal';
+import tomatoImg from "../Assets/Vegetables/tomato.png";
+import wheatImg from "../Assets/Vegetables/wheat.png";
+import potatoImg from "../Assets/Vegetables/Potato.svg";
+import cornImg from "../Assets/Vegetables/Corn.png";
+import riceImg from "../Assets/Vegetables/rice.png";
+import onionImg from "../Assets/Vegetables/onion.png";
 
 const center = { lat: 30.2458, lng: 75.8421 };
 
@@ -568,6 +575,15 @@ const markerLocations = [
   },
 ];
 
+const vegetableIcons = {
+  Tomato: tomatoImg,
+  Wheat: wheatImg,
+  Potato: potatoImg,
+  Corn: cornImg,
+  Rice: riceImg,
+  Onion: onionImg,
+};
+
 function GMaps() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -583,6 +599,8 @@ function GMaps() {
   const [duration, setDuration] = useState("");
   const originRef = useRef();
   const destinationRef = useRef();
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const allCrops = [
     ...new Set(markerLocations.flatMap((location) => location.vegetables)),
@@ -605,7 +623,8 @@ function GMaps() {
 
   async function calculateRoute() {
     if (!originRef.current.value || !destinationRef.current.value) {
-      alert("Please enter both origin and destination.");
+      setModalMessage("Please enter both origin and destination.");
+      setShowModal(true);
       return;
     }
     const directionsService = new google.maps.DirectionsService();
@@ -641,6 +660,14 @@ function GMaps() {
   return (
     <div className="app">
       <div className="vegetable-buttons">
+        {showModal && (
+          <Modal
+            title="Information"
+            message={modalMessage}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+
         {allCrops.map((crop) => (
           <button
             key={crop}
@@ -650,18 +677,10 @@ function GMaps() {
             }}
             className={selectedVegetable === crop ? "selected" : ""}
           >
+            <img src={vegetableIcons[crop]} alt={crop} className="crop-icon-map" />
             {crop}
           </button>
         ))}
-        <button
-          onClick={() => {
-            setSelectedVegetable(null);
-            setFilteredLocations(markerLocations);
-            setShowCards(true);
-          }}
-        >
-          Show All
-        </button>
       </div>
 
       <div className="map-container">

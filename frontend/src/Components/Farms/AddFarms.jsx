@@ -33,8 +33,7 @@ import {
 } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import EmptyFarms from "./EmptyFarms";
-
+import Modal from "./../Modal";
 
 
 const firebaseConfig = {
@@ -46,12 +45,9 @@ const firebaseConfig = {
     appId: "1:343332230219:web:efe5a85c164e5e461c69ce",
 };
 
-
 // Initialize Firebase with npm package
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-
-
 
 const cropNameIcons = {
     Wheat: WheatIcon,
@@ -102,53 +98,80 @@ const AddFarms = () => {
         sizeOfFarm: "",
         farmImageUrl: "",
     });
-    const [file, setFile] = useState(null); // Declare the file state
+    const [file, setFile] = useState(null);
     const [downloadURL, setDownloadURL] = useState("");
-    // const [farmData, setFarmData] = useState({
-    //   farmImage: null,
-    // });
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalType, setModalType] = useState("");
 
-    // // Handle file selection and update the file state
-    // const handleFileChange = (e) => {
-    //   const selectedFile = e.target.files[0];  // Get the selected file from input
-    //   if (selectedFile) {
-    //     setFile(selectedFile);  // Update the state with the selected file
-    //   }
-    // };
+
     // Handle file upload
-    const handleUpload = (fileToUpload) => {
-        if (!fileToUpload) {
-            alert("No file selected.");
-            return;
-        }
-
-        const storageRef = ref(storage, `images/${fileToUpload.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, fileToUpload);
-
-        uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-                const progress =
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                if (progress % 10 === 0) {
-                    console.log(`Upload is ${Math.round(progress)}% done`);
-                }
-            },
-            (error) => {
-                console.error("Upload failed:", error);
-            },
-            async () => {
-                const url = await getDownloadURL(uploadTask.snapshot.ref);
-                console.log("File available at", url);
-                setFarmData((prevData) => ({
-                    ...prevData,
-                    farmImageUrl: url,
-                }));
-                setDownloadURL(url);
+    const handleUpload = (selectedFile = file) => {
+        return new Promise((resolve, reject) => {
+            if (!selectedFile) {
+                setModalMessage("Please select a file first.");
+                setModalType("error");
+                setShowModal(true);
+                reject(new Error("No file selected"));
+                return;
             }
-        );
+    
+            const storageRef = ref(storage, `images/${selectedFile.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, selectedFile);
+    
+            // Set initial progress message
+            setModalMessage("File upload started...");
+            setModalType("info");
+            setShowModal(true);
+    
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    setModalMessage(`Upload is ${progress}% done.`);
+                    setModalType("info");
+                    setShowModal(true);
+                },
+                (error) => {
+                    console.error("Upload failed:", error);
+                    setModalMessage("Upload failed. Please try again.");
+                    setModalType("error");
+                    setShowModal(true);
+                    reject(error);
+                },
+                async () => {
+                    try {
+                        const url = await getDownloadURL(uploadTask.snapshot.ref);
+                        console.log("File available at", url);
+    
+                        // Update farmData with the uploaded file URL
+                        setFarmData((prevData) => ({
+                            ...prevData,
+                            farmImageUrl: url,
+                        }));
+    
+                        setDownloadURL(url);
+    
+                        // Show success message
+                        setModalMessage("File uploaded successfully!");
+                        setModalType("success");
+                        setShowModal(true);
+    
+                        resolve(url);
+                    } catch (error) {
+                        console.error("Error fetching download URL:", error);
+                        setModalMessage("An error occurred while finalizing the upload.");
+                        setModalType("error");
+                        setShowModal(true);
+                        reject(error);
+                    }
+                }
+            );
+        });
     };
-
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -168,21 +191,26 @@ const AddFarms = () => {
     };
 
     const [previewURL, setPreviewURL] = useState(null);
+
     const handleImageChange = (event) => {
         const selectedFile = event.target.files[0];
         if (!selectedFile) {
-            alert("Please select a file.");
+            setModalMessage("Please select a valid file.");
+            setModalType("error");
+            setShowModal(true);
             return;
         }
-
+    
         setFile(selectedFile);
-
+    
         // Use modern API for preview
         const preview = URL.createObjectURL(selectedFile);
         setPreviewURL(preview);
-
+    
+        // Pass the selected file directly to handleUpload
         handleUpload(selectedFile);
     };
+    
 
 
     const handleSubmit = async (e) => {
@@ -192,24 +220,30 @@ const AddFarms = () => {
             try {
                 // Ensure the image is uploaded before submitting
                 if (!farmData.farmImageUrl) {
-                    alert("Farm image is required. Please upload an image.");
+                    setModalMessage("Farm image is required. Please upload an image.");
+                    setModalType("error");
+                    setShowModal(true);
                     return;
                 }
 
                 const token = localStorage.getItem("token");
                 if (!token) {
-                    alert("No token found. Please log in again.");
+                    setModalMessage("No token found. Please log in again.");
+                    setModalType("error");
+                    setShowModal(true);
                     return;
                 }
 
                 // Ensure that sizeOfFarm is a number
                 if (isNaN(farmData.sizeOfFarm) || farmData.sizeOfFarm <= 0) {
-                    alert("Please enter a valid size for the farm.");
+                    setModalMessage("Please enter a valid size for the farm.");
+                    setModalType("error");
+                    setShowModal(true);
                     return;
                 }
 
                 const farmDetails = { ...farmData };
-                console.log("farm details of mongo" + JSON.stringify(farmDetails));
+                console.log("farm details of mongo", JSON.stringify(farmDetails));
 
                 // Send the farm data to the backend
                 const response = await axios.post(
@@ -224,15 +258,20 @@ const AddFarms = () => {
                 );
 
                 console.log("Farm added:", response.data);
-                alert("Farm added successfully!");
-                navigate("/");
-                resetForm();
+                setModalMessage("Farm added successfully!");
+                setModalType("success");
+                setShowModal(true);
+
+                // Navigate after showing success message
+                setTimeout(() => {
+                    navigate("/");
+                    resetForm();
+                }, 2000);
             } catch (error) {
-                console.error(
-                    "Error adding farm:",
-                    error.response?.data || error.message
-                );
-                alert("Failed to add farm. Please try again.");
+                console.error("Error adding farm:", error.response?.data || error.message);
+                setModalMessage("Failed to add farm. Please try again.");
+                setModalType("error");
+                setShowModal(true);
             }
         }
     };
@@ -276,6 +315,16 @@ const AddFarms = () => {
 
 
                 {/* Step 1 */}
+                {showModal && (
+                    <Modal
+                        message={modalMessage}
+                        type={modalType}
+                        onClose={() => setShowModal(false)}
+                    />
+                )}
+
+
+
                 {currentStep === 1 && (
                     <div>
                         <h5 className="mb-4">Step 1 of 2</h5>

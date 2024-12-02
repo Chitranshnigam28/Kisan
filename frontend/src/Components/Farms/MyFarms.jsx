@@ -259,13 +259,9 @@ const MyFarms = () => {
     }
   };
 
-
   const getTranslatedHeading = (headingKey) => {
     return headingTranslationMapping[headingKey] ? headingTranslationMapping[headingKey][language] : headingKey;
   };
-
-
-
 
   const getCropIcon = (cropName) => {
     if (!cropName) return null;
@@ -396,8 +392,8 @@ const MyFarms = () => {
       )}
 
 
-      <div className="container">
-
+      <div className="container" id="containerFarms">
+      {/* <div className="containerFarms"> */}
         <div className="MyFarmsHeading">
           <h4>
             <img

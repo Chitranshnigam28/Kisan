@@ -27,19 +27,15 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { IoIosCloudUpload } from "react-icons/io";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import Modal from './../Modal';
 
 const firebaseConfig = {
-    // apiKey: "AIzaSyDu1mNebskATIVQmz59QosBS1AhdMAkxqM",
     authDomain: "art-asta-50475.firebaseapp.com",
     projectId: "art-asta-50475",
     storageBucket: "art-asta-50475.appspot.com",
     messagingSenderId: "343332230219",
     appId: "1:343332230219:web:efe5a85c164e5e461c69ce"
 };
-
-// Initialize Firebase with npm package
-// const app = initializeApp(firebaseConfig);
-// const storage = getStorage(app);
 
 const cropNameIcons = {
     Wheat: WheatIcon,
@@ -76,7 +72,7 @@ const waterSourceIcons = {
 
 
 const AddFarms = () => {
-    const [currentStep, setCurrentStep] = useState(1); 
+    const [currentStep, setCurrentStep] = useState(1);
     const navigate = useNavigate();
     const [farmData, setFarmData] = useState({
         farmName: "",
@@ -92,67 +88,85 @@ const AddFarms = () => {
         sizeOfFarm: "",
         farmImageUrl: "",
     });
-    const [file, setFile] = useState(null);  // Declare the file state
+    const [file, setFile] = useState(null);
     const [downloadURL, setDownloadURL] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalType, setModalType] = useState("");
+    
 
     const location = useLocation();
 
     // Check if the user came from the sign-up process
     const fromSignup = new URLSearchParams(location.search).get("fromSignup") === "true";
-    // const [farmData, setFarmData] = useState({
-    //   farmImage: null,
-    // });
-
-    // // Handle file selection and update the file state
-    // const handleFileChange = (e) => {
-    //   const selectedFile = e.target.files[0];  // Get the selected file from input
-    //   if (selectedFile) {
-    //     setFile(selectedFile);  // Update the state with the selected file
-    //   }
-    // };
 
     // Handle file upload
     const handleUpload = () => {
         return new Promise((resolve, reject) => {
             if (!file) {
-                alert('Please select a file first');
-                reject(new Error('No file selected'));
+                setModalMessage("Please select a file first.");
+                setModalType("error");
+                setShowModal(true);
+                reject(new Error("No file selected"));
                 return;
             }
-
-
+    
             const storageRef = ref(storage, `images/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
-
-
+    
+            // Set initial progress message
+            setModalMessage("File upload started...");
+            setModalType("info");
+            setShowModal(true);
+    
             uploadTask.on(
-                'state_changed',
+                "state_changed",
                 (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    setModalMessage(`Upload is ${progress}% done.`);
+                    setModalType("info");
+                    setShowModal(true);
                 },
                 (error) => {
-                    console.error('Upload failed:', error);
+                    console.error("Upload failed:", error);
+                    setModalMessage("Upload failed. Please try again.");
+                    setModalType("error");
+                    setShowModal(true);
                     reject(error);
                 },
                 async () => {
-                    const url = await getDownloadURL(uploadTask.snapshot.ref);
-                    console.log('File available at', url);
-
-
-                    // Update farmData after upload with the correct field
-                    setFarmData((prevData) => ({
-                        ...prevData,
-                        farmImageUrl: url,
-                    }));
-
-
-                    setDownloadURL(url);
-                    resolve(url);
+                    try {
+                        const url = await getDownloadURL(uploadTask.snapshot.ref);
+                        console.log("File available at", url);
+    
+                        // Update farmData with the uploaded file URL
+                        setFarmData((prevData) => ({
+                            ...prevData,
+                            farmImageUrl: url,
+                        }));
+    
+                        setDownloadURL(url);
+    
+                        // Show success message
+                        setModalMessage("File uploaded successfully!");
+                        setModalType("success");
+                        setShowModal(true);
+    
+                        resolve(url);
+                    } catch (error) {
+                        console.error("Error fetching download URL:", error);
+                        setModalMessage("An error occurred while finalizing the upload.");
+                        setModalType("error");
+                        setShowModal(true);
+                        reject(error);
+                    }
                 }
             );
         });
     };
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -197,63 +211,77 @@ const AddFarms = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-
+    
         if (currentStep === 2) {
             try {
                 // Ensure the image is uploaded before submitting
                 if (!farmData.farmImageUrl) {
-                    alert('Farm image is required. Please upload an image.');
+                    setModalMessage("Farm image is required. Please upload an image.");
+                    setModalType("error");
+                    setShowModal(true);
                     return;
                 }
-
-
-                const token = localStorage.getItem('token');
+    
+                const token = localStorage.getItem("token");
                 if (!token) {
-                    alert('No token found. Please log in again.');
+                    setModalMessage("No token found. Please log in again.");
+                    setModalType("error");
+                    setShowModal(true);
                     return;
                 }
-
-
+    
                 // Ensure that sizeOfFarm is a number
                 if (isNaN(farmData.sizeOfFarm) || farmData.sizeOfFarm <= 0) {
-                    alert('Please enter a valid size for the farm.');
+                    setModalMessage("Please enter a valid size for the farm.");
+                    setModalType("error");
+                    setShowModal(true);
                     return;
                 }
-
-
+    
                 const farmDetails = { ...farmData };
-                console.log("farm details of mongo" + JSON.stringify(farmDetails));
-
-
+                console.log("farm details of mongo", JSON.stringify(farmDetails));
+    
                 // Send the farm data to the backend
-                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/farms`, farmDetails, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-
-
-                console.log('Farm added:', response.data);
-                alert('Farm added successfully!');
-                navigate('/');
-                resetForm();
+                const response = await axios.post(
+                    `${process.env.REACT_APP_BACKEND_URL}/api/farms`,
+                    farmDetails,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+    
+                console.log("Farm added:", response.data);
+                setModalMessage("Farm added successfully!");
+                setModalType("success");
+                setShowModal(true);
+    
+                // Navigate after showing success message
+                setTimeout(() => {
+                    navigate("/");
+                    resetForm();
+                }, 2000);
             } catch (error) {
-                console.error('Error adding farm:', error.response?.data || error.message);
-                alert('Failed to add farm. Please try again.');
+                console.error("Error adding farm:", error.response?.data || error.message);
+                setModalMessage("Failed to add farm. Please try again.");
+                setModalType("error");
+                setShowModal(true);
             }
         }
-
-        navigate('/');
     };
+    
 
     // Show alert only if coming from signup
     useEffect(() => {
         if (fromSignup) {
-            alert("Sign Up Successful! Please add your farm details.");
+            setModalMessage("Sign Up Successful! Please add your farm details.");
+            setModalType("success");
+            setShowModal(true);
         }
     }, [fromSignup]);
+    
     const resetForm = () => {
         setFarmData({
             farmName: "",
