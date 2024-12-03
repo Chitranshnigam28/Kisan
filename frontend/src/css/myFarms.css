@@ -1,4 +1,4 @@
- /* My Farms section on Homepage dashboard */
+/* My Farms section on Homepage dashboard */
 
  .MyFarmsHeading {
    display: flex;
@@ -360,6 +360,9 @@
    border-bottom-right-radius: var(--bs-border-radius) !important;
  }
 
+ .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title{
+  background-color: #000000 !important;
+ }
  @media screen and (max-width: 1300px) {
    .myFarms_info {
      grid-template-columns: repeat(1, 1fr);

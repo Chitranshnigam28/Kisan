@@ -237,6 +237,7 @@ const CropRecommendation = ({ ownerId }) => {
                       src={farm.farmImageUrl}
                       alt="placeholderImg"
                       className="placeholderImg"
+                      id="farm-card-imges"
                     />
                     <div className="farmTitleSizeImgWrapper">
                       <div className="farmTitleSize">
