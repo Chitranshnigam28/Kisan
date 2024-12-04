@@ -70,7 +70,7 @@ const FloatingDockMobile = ({ items, className }) => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-[15%] right-0 flex justify-between items-center  bg-white dark:bg-white p-2 md:hidden w-3/4 rounded-[2.25rem] shadow-[0_4px_10px_rgba(0.3,_0.3,_0.3,_0.8)]",
+        "fixed bottom-0 left-[15%] right-0 flex justify-between items-center  bg-white dark:bg-white p-2 md:hidden w-3/4 rounded-[2.25rem] shadow-[0_2px_5px_rgba(0.1,_0.2,_0.2,_0.3)]",
         className
       )}
     >
@@ -78,9 +78,9 @@ const FloatingDockMobile = ({ items, className }) => {
         const content = (
           <div
             key={item.title}
-            className="h-12 w-12 rounded-full bg-[#96C73D] dark:bg-[#96C73D] flex items-center justify-center"
+            className="h-12 w-12 rounded-full bg-[#F7F7F7] dark:bg-[#F7F7F7] flex items-center justify-center hover:bg-[#96C73D] transition-colors duration-300"
           >
-            <div className="h-6 w-6">{item.icon}</div>
+            <div className="h-6 w-6 text-black dark:text-black">{item.icon}</div>
           </div>
         );
 
@@ -119,7 +119,7 @@ const FloatingDockDesktop = ({ items, className }) => {
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-20 gap-4 items-end rounded-2xl bg-white dark:bg-white px-4 pb-[0.7rem] rounded-[47px] shadow-[0_4px_10px_rgba(0.3,_0.3,_0.3,_0.8)]" ,
+        "mx-auto hidden md:flex h-20 gap-4 items-end rounded-2xl bg-white dark:bg-white px-4 pb-[0.7rem] rounded-[47px] shadow-[0_2px_5px_rgba(0.1,_0.2,_0.2,_0.3)]" ,
         className
       )}
     >
@@ -245,7 +245,7 @@ function IconContainer({ mouseX, title, icon, href, onClick }) {
       style={{ width, height }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="aspect-square rounded-full bg-[#96C73D] dark:bg-[#96C73D] flex items-center justify-center relative !w-[56px] !h-[55px]"
+      className="aspect-square rounded-full bg-[#F7F7F7] dark:bg-[#F7F7F7] flex items-center justify-center relative !w-[62.5px] !h-[62.5px] hover:bg-[#96C73D] transition-colors duration-300"
     >
       <AnimatePresence>
         {hovered && (
@@ -261,7 +261,7 @@ function IconContainer({ mouseX, title, icon, href, onClick }) {
       </AnimatePresence>
       <motion.div
         style={{ width: widthIcon, height: heightIcon }}
-        className="flex items-center justify-center"
+        className="flex items-center justify-center "
       >
         {icon}
       </motion.div>
