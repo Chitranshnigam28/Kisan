@@ -237,6 +237,7 @@ const CropRecommendation = ({ ownerId }) => {
                       src={farm.farmImageUrl}
                       alt="placeholderImg"
                       className="placeholderImg"
+                      id="carouselImgs"
                     />
                     <div className="farmTitleSizeImgWrapper">
                       <div className="farmTitleSize">

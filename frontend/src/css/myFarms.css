@@ -98,6 +98,7 @@
    padding-bottom: 10px;
    white-space: nowrap;
    -webkit-overflow-scrolling: touch;
+   margin-left: 1rem;
  }
 
  .farms-cards-container::-webkit-scrollbar {

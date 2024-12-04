@@ -432,11 +432,14 @@ p {
 img {
   display: block;
   max-width: 100%;
-  max-height: 120px;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
 
+
+#carouselImgs{
+  max-height: 120px;
+}
 
 .crop-recommendation-div {
   position: fixed;

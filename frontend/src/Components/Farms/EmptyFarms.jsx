@@ -23,7 +23,7 @@ const EmptyFarms = () => {
         Start by adding your first farm and watch it flourish!
       </p>
       <Link to="/my-farms" className="addNewEmptyFarmLink">
-        <button className="add-farm-button" onClick={handleGotoFarm}>Add Your First Farm</button>
+        <button className="add-farm-button" onClick={handleGotoFarm}>Add Farm</button>
       </Link>
       <img src={EmptyFarmImage} alt="Empty Farm Image" className="emptyFarm-image" />
     </div>
