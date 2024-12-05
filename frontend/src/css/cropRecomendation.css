@@ -484,20 +484,14 @@ img {
   padding-top: 0;
 }
 
-/* .crop-recommendation-div .close-btn:hover{
-    background-color:#ffffff;
-    color: black;
-  } */
 .crop-recommendation-div .recommend-btn {
   margin-top: 15px;
   padding: 10px 15px;
   background-color: #f1c40f;
-  /* Yellow color for the button */
   border: none;
   border-radius: 20px;
   cursor: pointer;
   color: #000000;
-  /* Black text color */
   font-weight: bold;
 }
 

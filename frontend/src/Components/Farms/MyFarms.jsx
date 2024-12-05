@@ -493,7 +493,7 @@ const MyFarms = () => {
                               alt={farm.farmName}
                               className="card-img-top"
                             />
-                            <div className="card-header d-flex justify-content-between align-items-center">
+                            <div className="card-header2 d-flex justify-content-between align-items-center">
                               <div className="d-flex flex-column">
                                 <h5 className="card-title mb-0">{translations[farm._id]?.farmName || farm.farmName}</h5>
                                 <p className="card-text mb-0">{farm.sizeOfFarm} {getTranslatedHeading('ha')}</p>

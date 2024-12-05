@@ -7,6 +7,7 @@ import "../css/weatherWidget.css";
 import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 import axios from "axios";
 import SimpleLoader from "./SimpleLoader";
+import Day from './../Assets/Weather/Day.svg'
 
 const getCurrentDate = () => format(new Date(), "do MMMM yyyy, EEEE");
 
@@ -130,7 +131,8 @@ function WeatherWidget({ showSearch = true }) {
               </div>
               <div className="widgetDateWeatherIconWrapper">
                 <p className="date">{translatedDate}</p>
-                <img src={weather.icon} alt="weather-icon" className="weather-icon" />
+                <img src={Day} alt="weather-icon" className="weather-icon" />
+                {/* <img src={weather.icon} alt="weather-icon" className="weather-icon" /> */}
               </div>
               <div className="temp-icon">
                 <p className="widgetTemperature">{`+${Math.round(weather.temp)}°`}</p>

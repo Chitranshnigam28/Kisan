@@ -1,10 +1,13 @@
  /* My Farms section on Homepage dashboard */
+.card-body{
+  background-color: #F7F7F7;
+  border-radius: 1rem;
+}
 
  .MyFarmsHeading {
    display: flex;
    flex-direction: row;
    align-items: center;
-   margin-bottom: 15px;
  }
 
  .MyFarmsHeading h4 {
@@ -23,6 +26,7 @@
    padding: 0;
    border: 0;
    border: var(--bs-card-border-width) solid #FFF;
+   background-color: #F7F7F7;
  }
 
  .farms-cards-container {
@@ -42,6 +46,7 @@
    flex: 0 0 auto;
    justify-content: space-between;
    padding: 0.5rem;
+   background-color: #F7F7F7;
  }
 
  .farm-card .card-img-top {
@@ -49,6 +54,7 @@
    border-top-left-radius: 2rem;
    border-top-right-radius: 2rem;
    border-color: white;
+   background-color: #F7F7F7;
  }
 
  .card-title {
@@ -89,6 +95,7 @@
    font-size: 1rem;
    margin: 0;
    padding: 10px;
+   padding-top: 0
  }
 
  .farms-cards-container {
@@ -223,12 +230,20 @@
    transform: translateY(-5px);
  }
 
- .card-header {
-   background-color: transparent !important;
+ .card-header2 {
+   background-color: #F7F7F7 !important;
    color: black !important;
    text-align: left;
    padding: 10px;
  }
+
+ .card-header {
+  background-color: transparent !important;
+  color: black !important;
+  text-align: left;
+  padding: 10px;
+}
+
 
  .selected-farm-card-title{
     display: flex;

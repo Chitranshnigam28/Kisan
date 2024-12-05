@@ -280,10 +280,12 @@ function Weather() {
                   value={searchCity}
                   onChange={(e) => setSearchCity(e.target.value)}
                   className="search-input"
+                  id="weatherinput"
                 />
                 <button
                   type="submit"
                   className="search-button"
+                  id="weatherSearch"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <FaSearch />
