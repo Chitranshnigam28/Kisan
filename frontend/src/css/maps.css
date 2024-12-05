@@ -139,11 +139,7 @@
       cursor: pointer;
     }
     
-    .vegetable-buttons .selected {
-      background-color: #007bff;
-      color: white;
-      border-color: #007bff;
-    }
+    
 
     .vegetable-buttons {
   display: flex;
@@ -162,8 +158,8 @@
 }
 
 .vegetable-buttons .selected {
-  background-color: #4caf50;
-  color: white;
+  background-color: #DBEFB8;
+  color: black;
 }
 
 .scrollable-markers {
@@ -244,8 +240,34 @@
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+    position: fixed;
+    background-color: rgba(255, 255, 255);
+    top: 1rem;
+    z-index: 1500;
+    border-radius: 2rem;
+}
+.vegetable-buttons button{
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px; 
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  cursor: pointer;
+  min-width: 100px; 
+  font-size: 14px; 
+  text-align: center;
+  border: 2px solid #E9E9E9;
 }
 
+
+.vegetable-buttons button img.cropBtnImage{
+  width: 24px; 
+  height: 24px; 
+  object-fit: contain; 
+}
 .scrollable-markers {
   position: absolute;
   bottom: 6rem;
@@ -259,11 +281,45 @@
   scrollbar-width: thin
 }
 
+.dropdown-container {
+  display: none; /* Hidden on larger screens */
+}
+
+.dropdown-select {
+  width: 90%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+}
+
 @media screen and (max-width:500px){
   .controls-container {
-    top: 25% !important;
+    top: 7% !important;
     width: 41%;
     height: 30%;
+}
+.marker-card{
+  width: 41%;
+}
+.vegetable-buttons {
+  display: none; /* Hide the buttons on small screens */
+}
+.dropdown-container {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dropdown-select {
+  width: 90%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
 }
 }
 @media screen and (max-width:800px){
