@@ -296,9 +296,9 @@
 
 @media screen and (max-width:500px){
   .controls-container {
-    top: 7% !important;
-    width: 41%;
-    height: 30%;
+    top: 9% !important;
+    width: 60%;
+    height: 27%;
 }
 .marker-card{
   width: 41%;
@@ -312,6 +312,9 @@
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+div.gmnoprint{
+  display: none;
 }
 
 .dropdown-select {
