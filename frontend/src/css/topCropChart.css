@@ -22,6 +22,7 @@
   border: 2px solid #E9E9E9;
   /* box-shadow: 0 10px 30px #DDDDDD; */
   margin: 2rem 0 1rem 0;
+  
 }
 
 .inner-top-crop-container{
@@ -34,7 +35,9 @@
 
 .top-crop-title {
   margin-bottom: 0;
+
 }
+
 
 .location-topCrop {
   display: flex;

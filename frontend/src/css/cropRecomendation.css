@@ -1,142 +1,138 @@
 .crop-recommendation-div {
-  position: fixed;
-  bottom: 9rem;
-  /* Positions the modal above the floating dock */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #96C73D;
-  /* Background color similar to your design */
-  padding: 20px;
-  width: 50%;
-  /* Adjust width as needed */
-  border-radius: 15px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1500;
-  /* Ensures it appears above other content */
-  text-align: center;
-}
-
-.crop-recommendation-div h2.crTitle {
-  font-size: 1.5rem;
-  color: #ffffff;
-  margin: 0;
-}
-
-.crTitleWrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: left;
-  align-items: start;
-  margin-bottom: 1rem;
-}
-
-.crop-recommendation-div .close-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: #ffffff;
-  /* White close button color */
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-left: 0;
-  display: grid;
-  justify-items: end;
-  align-items: start;
-  padding-top: 0;
-}
-
-.crop-recommendation-div .recommend-btn {
-  margin-top: 15px;
-  padding: 10px 15px;
-  background-color: #f1c40f;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  color: #000000;
-  font-weight: bold;
-}
-
-.crWrapper .carouselHeaderWrapper h4 {
-  color: white;
-}
-
-.farmCardWrapper {
-  display: flex;
-  gap: 1rem;
-}
-
-.farmImgWrapper {
-  grid-row: 1 / -1;
-  background: white;
-  border-radius: 1rem;
-}
-
-.farmCardWrapper {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 15px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.farm-card-cr {
-  flex: 0 0 auto;
-  width: 150px;
-  /* Adjust width as needed */
-  cursor: pointer;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  text-align: center;
-}
-
-.farm-card-cr:hover {
-  background-color: #f0f0f0;
-}
-
-.carouselHeaderWrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 8rem;
-}
-
-.carouselBtnWrapper {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 2rem;
-}
-
-.carousel-button:hover {
-  background-color: transparent;
-}
-
-.farmTitleSize {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.farmTitleSizeImgWrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem;
-}
-
-.fieldIconWrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-.farmTitleSize p {
-  margin-bottom: 0;
-}
-
-.farmTitleSize p:last-child {
+    position: fixed;
+    bottom: 9rem;/* Positions the modal above the floating dock */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #96C73D; /* Background color similar to your design */
+    padding: 20px;
+    width: 50%; /* Adjust width as needed */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1500; /* Ensures it appears above other content */
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .crop-recommendation-div h2.crTitle {
+    font-size: 1.5rem;
+    color: #ffffff; /* White text color */
+    /* margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    margin: 0;
+  }
+  .crTitleWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: left;
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+  .crop-recommendation-div .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #ffffff; /* White close button color */
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-left: 0;
+    display: grid;
+      justify-items: end;
+      align-items: start;
+      padding-top: 0;
+  }
+  
+  /* .crop-recommendation-div .close-btn:hover{
+    background-color:#ffffff;
+    color: black;
+  } */
+  .crop-recommendation-div .recommend-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #f1c40f; /* Yellow color for the button */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #000000; /* Black text color */
+    font-weight: bold;
+  }
+  
+  .crop-recommendation-div .crWrapper{
+      /* display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1rem; */
+  }
+  .crWrapper .carouselHeaderWrapper h4{
+    color: white;
+  }
+  
+  .farmCardWrapper{
+    display: flex;
+    gap: 1rem;
+  }
+  .farmImgWrapper{
+    grid-row: 1 / -1;
+    background: white;
+      border-radius: 1rem;
+  }
+  
+  .farmCardWrapper {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 15px;
+  }
+  
+  .farm-card-cr {
+    flex: 0 0 auto;
+    width: 150px; /* Adjust width as needed */
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .farm-card-cr:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .carouselHeaderWrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 8rem;
+  }
+  .carouselBtnWrapper{
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .carousel-button:hover{
+    background-color: transparent;
+  }
+  
+  .farmTitleSize{
+    display: flex;
+    flex-direction: column;
+  }
+  .farmTitleSizeImgWrapper{
+    display: flex;
+    justify-content: space-between;
+    padding:0 0.75rem;
+  }
+  .fieldIconWrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  .farmTitleSize p{
+    margin-bottom: 0;
+  }
+  .farmTitleSize p:last-child{
   color: #595959;
 }
 

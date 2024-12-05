@@ -64,17 +64,21 @@ const MarketInsigtsDashboard = () => {
               <Footer />
               <div className="marketInsightWidgetWrapper">
                 <div className="heading">
+                  
                   <div className="title">
+                  <div className="heading-title-wrapper">
                     <img
                       src={marketInsights}
                       alt="Market Insights"
                       className="market-insights-icon"
                     />
                     <h1>Market Insights</h1>
-                  </div>
-                  <p className="market-insights-para">
-                    Explore key market trends and insights to stay ahead.
+                    </div>
+                    <p className="market-insights-para">
+                    Explore key market trends and instop-crop-titleights to stay ahead.
                   </p>
+                  </div>
+                  
                 </div>
                 <div className="both-chart-container">
                   <div className="container-tips-graph">

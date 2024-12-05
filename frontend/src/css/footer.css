@@ -30,7 +30,7 @@ img{
 /* Style for footer icons */
 .footer-icon {
   font-size: 24px; /* Adjust icon size */
-  color: white; /* Set icon color to white */
+  color: rgb(0, 0, 0); /* Set icon color to white */
 }
 
 /* Change icon color on hover */
@@ -50,12 +50,12 @@ img{
 /* Style for footer icons */
 .footer-icon {
   font-size: 24px; /* Adjust icon size */
-  color: white; /* Set icon color to white */
+  color: rgb(0, 0, 0); /* Set icon color to white */
 }
 
 /* Change icon color on hover */
 .footer-icon:hover {
-  color: #000000; /* Change color on hover */
+  color: #ffffff; /* Change color on hover */
 }
 
 .floating-dock {
@@ -79,5 +79,13 @@ img{
     transform: translateX(-50%) translateY(0) !important; /* Always visible */
     /* background-color: #fff; Ensure visibility */
   }
+}
+
+.footer-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+.footer-icon:hover {
+  filter: brightness(100%) saturate(0); /* White color */
 }
 
