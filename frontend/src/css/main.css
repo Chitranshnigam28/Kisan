@@ -4,6 +4,10 @@
   gap: 10px;
 }
 
+.card-body{
+  background-color: #F7F7F7;
+}
+
 .title {
   display: flex;
   flex-direction: column;
