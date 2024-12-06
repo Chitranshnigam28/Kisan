@@ -280,7 +280,8 @@
  .tipsBox {
    display: flex;
    align-items: center;
-   padding-top: 2rem;
+   margin-top: 2rem;
+   padding: 0.75rem;
    background-color: #F7F7F7;
    border-radius: 30px;
    color: black;
@@ -375,6 +376,12 @@
    border-bottom-left-radius: var(--bs-border-radius) !important;
    border-bottom-right-radius: var(--bs-border-radius) !important;
  }
+
+ .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  background: #dbefb8 !important;
+  border-bottom: 1px solid #000 !important;
+  color: #000000 !important;
+}
 
  @media screen and (max-width: 1300px) {
    .myFarms_info {

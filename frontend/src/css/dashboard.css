@@ -72,8 +72,8 @@ button[type="submit"]:hover {
 }
 
 .apexcharts-tooltip {
-  background-color: #4b8c4a !important;
-  color: #ffffff !important;
+  background-color: #dbefb8 !important;
+  color: #000 !important;
   font-weight: bold;
 }
 

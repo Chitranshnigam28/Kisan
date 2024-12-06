@@ -24,16 +24,16 @@ router.get('/historical-price', async (req, res) => {
     }
 
     const prompt = `
-    Generate realistic monthly price data over the last 6 months for the following crops in India based on historical trends, formatted strictly as a JSON array:
+    Generate realistic monthly price data over the last 10 months for the following crops in India based on historical trends, formatted strictly as a JSON array:
     [
         {
             "crop_name": "${crop_name}",
-            "months": ["Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024", "Jul 2024", "Sept 2024", "Oct 2024"],
+            "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Sept", "Oct"],
             "prices": [/* six realistic values in INR based on Indian market trends per Kg. It should be some sort of real crop pricing instead of just round-off values. */]
         },
         {
             "crop_name": "${last_crop_sowed}",
-            "months": ["Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", "Jun 2024", "Jul 2024", "Sept 2024", "Oct 2024"],
+            "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Sept", "Oct"],
             "prices": [/* six realistic values in INR based on Indian market trends per Kg. It should be some sort of real crop pricing instead of just round-off values. */]
         }
     ]
