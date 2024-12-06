@@ -75,7 +75,7 @@ const MarketInsigtsDashboard = () => {
                     <h1>Market Insights</h1>
                     </div>
                     <p className="market-insights-para">
-                    Explore key market trends and instop-crop-titleights to stay ahead.
+                    Explore key market trends and insights to stay ahead.
                   </p>
                   </div>
                   
