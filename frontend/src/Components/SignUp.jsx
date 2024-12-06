@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import logo from "../Assets/loginpagelogo.png";
 import logoVideo from "../Assets/logoVideo.mp4";
 import Modal from "./Modal";
+// import { locals } from "../../../backend/app";
 
 const SignUp = () => {
   const [uname, setUname] = useState("");
@@ -44,24 +45,35 @@ const SignUp = () => {
         body: JSON.stringify(registerData),
       });
   
-      const data = await res.json();
+      if (!res.ok) {
+        const errorData = await res.json();
+        setModalMessage(errorData.message || "An error occurred. Please try again.");
+        setModalType("error");
+        setShowModal(true);
+        return;
+      }
+  
+      const data = await res.json(); // Parse the response JSON
       console.log("Response status:", res.status);
       console.log("Response data:", data);
   
-      if (res.status === 400) {
-        setModalMessage(data.message || "Email already exists. Please try again with a different email");
-        setModalType("error");
-        setShowModal(true);
-      } else if (res.status === 200) {
+      // Handle the response data
+      if (res.status === 200) {
+        const { userId, token } = data;
+  
+        // Store the token for immediate use
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+  
         setModalMessage("Registration successful!");
         setModalType("success");
         setShowModal(true);
   
         setTimeout(() => {
-          navigate(`/add-farm?userId=${data.userId}`);
-        }, 1000); 
+          navigate(`/add-farm?userId=${userId}`);
+        }, 1000);
       } else {
-        setModalMessage("An error occurred while signing up. Please try again.");
+        setModalMessage(data.message || "An error occurred while signing up. Please try again.");
         setModalType("error");
         setShowModal(true);
       }
@@ -72,7 +84,6 @@ const SignUp = () => {
       setShowModal(true);
     }
   };
-  
   
   
   const handleGoogleLogin = () => {

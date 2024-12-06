@@ -9,7 +9,7 @@ const chatBot = async (messages) => {
 
     const systemMessage = {
         role: "system",
-        content: "Speak like a farmer. Responses must be in a professional tone."
+        content: "Speak like a farmer. Responses must be in a professional tone. Whatever you answer it must be really concise and short (maximum 3-4 sentences)."
     };
 
     const apiRequestBody = {

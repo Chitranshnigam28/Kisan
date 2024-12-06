@@ -96,6 +96,8 @@ function GMaps() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
   const originRef = useRef();
   const destinationRef = useRef();
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
 
   const allCrops = [
@@ -127,7 +129,8 @@ function GMaps() {
 
   async function calculateRoute() {
     if (!originRef.current.value || !destinationRef.current.value) {
-      alert("Please enter both origin and destination.");
+      setModalMessage("Please enter both origin and destination.");
+      setShowModal(true);
       return;
     }
     const directionsService = new google.maps.DirectionsService();

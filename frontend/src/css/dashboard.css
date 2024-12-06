@@ -9,7 +9,6 @@
   align-items: center;
 }
 
-
 .title h1 {
   font-size: 1.8rem;
   font-weight: bold;
@@ -73,8 +72,8 @@ button[type="submit"]:hover {
 }
 
 .apexcharts-tooltip {
-  background-color: #4b8c4a !important;
-  color: #ffffff !important;
+  background-color: #dbefb8 !important;
+  color: #000 !important;
   font-weight: bold;
 }
 

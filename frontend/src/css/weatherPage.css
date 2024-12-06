@@ -1,5 +1,6 @@
 body {
   background-color: #fafffb;
+  font-family: 'Noto Sans',sans-serif;
 }
 
 .weather-details-container {
@@ -34,7 +35,7 @@ body {
 .weather-main {
   display: flex;
   gap: 30px;
-  padding: 20px;
+  padding: 0 20px;
   flex-direction: column;
 
 }
@@ -93,7 +94,7 @@ body {
 
 .location {
   font-family: "Noto Sans", Helvetica;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -108,7 +109,15 @@ body {
   border-radius: 15px;
 }
 
-.weather-highlights {
+#weatherinput{
+  width: 90%;
+}
+
+#weatherSearch{
+  width: 4%;
+}
+
+  .weather-highlights {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }

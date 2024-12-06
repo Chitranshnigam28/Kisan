@@ -64,15 +64,14 @@ export function Footer({ setShowOverlay }) {
     href: "/"  },
     {
       title: "Crop Recommendation",
-      icon: (
+      icon: 
         <img 
           src={plantimg} 
           alt="Crop Recommendation Icon" 
-          className="footer-icon"
-          onClick={() => setShowCropDiv(!showCropDiv)} 
-        />
-      ),
+          className="footer-icon" />,
+          onClick: () => setShowCropDiv(!showCropDiv),        
     },
+
     {
       title: "Maps",
     icon: <img src={mapPin} alt="Maps Icon" className="footer-icon" />,

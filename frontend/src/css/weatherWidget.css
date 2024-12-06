@@ -90,8 +90,8 @@
   cursor: pointer;
   width: 29rem;
   max-width: 700px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  height: 23.8rem;
+  box-shadow: 5px 10px 50px 0 rgba(0, 0, 0, 0.1);
+  height: 22.8rem;
   transition: background-color 0.3s ease;
 }
 
@@ -114,7 +114,10 @@
 .widgetDateWeatherIconWrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+
+  align-items: flex-start;
+  margin-top: 0.5rem;
 }
 
 .weather-icon {
@@ -133,14 +136,15 @@
 }
 
 .search-form {
-  display: grid;
-  grid-template-columns: 1fr 0.25fr;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
   gap: 1rem;
 }
 
 .widgetTemperature {
   color: white;
-  font-size: 48px;
+  font-size: 60px;
   font-weight: bold;
 }
 
@@ -153,7 +157,7 @@
   color: black;
 }
 
-.hourly-forecast > h3 {
+.hourly-forecast>h3 {
   margin-left: -1.5rem;
 }
 

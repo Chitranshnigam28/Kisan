@@ -1,10 +1,13 @@
  /* My Farms section on Homepage dashboard */
+.card-body{
+  background-color: #F7F7F7;
+  border-radius: 1rem;
+}
 
  .MyFarmsHeading {
    display: flex;
    flex-direction: row;
    align-items: center;
-   margin-bottom: 15px;
  }
 
  .MyFarmsHeading h4 {
@@ -23,6 +26,7 @@
    padding: 0;
    border: 0;
    border: var(--bs-card-border-width) solid #FFF;
+   background-color: #F7F7F7;
  }
 
  .farms-cards-container {
@@ -42,6 +46,7 @@
    flex: 0 0 auto;
    justify-content: space-between;
    padding: 0.5rem;
+   background-color: #F7F7F7;
  }
 
  .farm-card .card-img-top {
@@ -49,6 +54,7 @@
    border-top-left-radius: 2rem;
    border-top-right-radius: 2rem;
    border-color: white;
+   background-color: #F7F7F7;
  }
 
  .card-title {
@@ -89,6 +95,7 @@
    font-size: 1rem;
    margin: 0;
    padding: 10px;
+   padding-top: 0
  }
 
  .farms-cards-container {
@@ -98,6 +105,7 @@
    padding-bottom: 10px;
    white-space: nowrap;
    -webkit-overflow-scrolling: touch;
+   margin-left: 1rem;
  }
 
  .farms-cards-container::-webkit-scrollbar {
@@ -127,7 +135,6 @@
  .myFarms_info {
    display: grid;
    grid-template-columns: 2fr 0.8fr;
-   /* box-shadow: 5px 10px 50px rgba(150, 199, 61, 0.25); */
  }
 
  .selected-farm {
@@ -223,12 +230,20 @@
    transform: translateY(-5px);
  }
 
- .card-header {
-   background-color: transparent !important;
+ .card-header2 {
+   background-color: #F7F7F7 !important;
    color: black !important;
    text-align: left;
    padding: 10px;
  }
+
+ .card-header {
+  background-color: transparent !important;
+  color: black !important;
+  text-align: left;
+  padding: 10px;
+}
+
 
  .selected-farm-card-title{
     display: flex;
@@ -265,7 +280,8 @@
  .tipsBox {
    display: flex;
    align-items: center;
-   padding-top: 2rem;
+   margin-top: 2rem;
+   padding: 0.75rem;
    background-color: #F7F7F7;
    border-radius: 30px;
    color: black;
@@ -360,6 +376,12 @@
    border-bottom-left-radius: var(--bs-border-radius) !important;
    border-bottom-right-radius: var(--bs-border-radius) !important;
  }
+
+ .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  background: #dbefb8 !important;
+  border-bottom: 1px solid #000 !important;
+  color: #000000 !important;
+}
 
  @media screen and (max-width: 1300px) {
    .myFarms_info {

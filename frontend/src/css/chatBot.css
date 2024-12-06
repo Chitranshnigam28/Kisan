@@ -1,21 +1,21 @@
 /* Chatbot Container */
 .chatbot-container {
-    position: fixed;
-    bottom: 5rem;
-    right: 2rem;
-    width: 90%;
-    max-width: 400px;
-    height: 500px; /* Fixed height to prevent overflow */
-    background: radial-gradient(circle, #ffffff 30%, #96C73D 100%);
-    border-radius: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1500;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow: hidden; /* Prevent content overflow */
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  width: 90%;
+  max-width: 400px;
+  height: 500px; /* Fixed height to prevent overflow */
+  background: radial-gradient(circle at bottom, #ffffff 30%, #96C73D 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1500;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow: hidden; /* Prevent content overflow */
+  display: flex;
+  flex-direction: column;
     
   }
   
@@ -102,12 +102,12 @@
   }
 
   .cs-main-container{
-    background: radial-gradient(circle, #ffffff 30%, #96C73D 100%) !important;
+    background: radial-gradient(circle at bottom, #ffffff 30%, #96C73D 100%) !important;
     background-size: cover;
     border: none !important;
   }
 .cs-message-list{
-    background:radial-gradient(circle, rgba(150, 199, 61, 0.3) 21%,rgba(255, 255, 255, 0.7) 71%) !important;
+    background:radial-gradient(circle at bottom, rgba(150, 199, 61, 0.3) 21%,rgba(255, 255, 255, 0.7) 71%) !important;
 background-size: cover;
 border: none !important;
 }
@@ -214,5 +214,5 @@ svg[data-icon="paperclip"]{
     display: none;
 }
 .cs-message-input{
-    background:radial-gradient(circle, rgba(150, 199, 61, 0.3) 21%,rgba(255, 255, 255, 0.7) 71%) !important;
+    background:radial-gradient(circle at bottom, rgba(150, 199, 61, 0.3) 21%,rgba(255, 255, 255, 0.7) 71%) !important;
 }

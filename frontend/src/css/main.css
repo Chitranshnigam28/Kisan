@@ -1,4 +1,21 @@
 /* Global Layout */
+.heading-title-wrapper{
+  display: flex;
+  gap: 10px;
+}
+
+.card-body{
+  background-color: #F7F7F7;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content: left;
+  padding-left: 60px;
+}
+
 .main-layout {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -22,13 +39,14 @@
   display: flex;
   flex-direction: row-reverse;
   background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 5px 10px 50px 0 rgba(0, 0, 0, 0.1);
   margin: 1.5rem 0;
 }
 
 .my-farms:has(.loader-container) {
   display: block;
 }
+
 /* Custom scrollbar for horizontal scrolling */
 .farms-cards-container::-webkit-scrollbar {
   height: 0px;
@@ -102,7 +120,6 @@
 }
 
 .market-insights-para {
-  /* margin-left: 5.5rem; */
   padding-top: 0.5rem;
   font-size: 1rem;
   color: gray;
@@ -132,6 +149,22 @@
   justify-content: space-between;
 }
 
+
+/* Test code */
+.my-farms {
+  border-radius: 25px;
+}
+
+.MyFarmsHeading{
+  padding: 1rem;
+}
+
+#containerFarms{
+  padding: 0;
+}
+
+/* Test code */
+
 .MyFarmsHeading h4 {
   display: flex;
   align-items: center;
@@ -156,7 +189,7 @@
 /* marketView section */
 .dashboard-marketview-part {
   position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 5px 10px 50px 0 rgba(0, 0, 0, 0.1);
   background: white;
   margin-left: 1.5rem;
 }
@@ -186,6 +219,7 @@
   grid-column: 10 / 11;
   align-self: baseline;
   margin-top: 0.2rem;
+  box-shadow: 5px 10px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .topCropIndia-container {
@@ -215,14 +249,12 @@ h4 {
   padding: 15px;
   border-radius: 8px;
   background-color: #ffffff;
-  /* box-shadow: 0 10px 30px #DDDDDD; */
   border: 2px solid #E9E9E9;
   height: fit-content;
   margin-top: 2rem;
 }
 
-.marketInsightWidgetWrapper{
-  /* margin: 2rem; */
+.marketInsightWidgetWrapper {
   box-shadow: 0 10px 30px #DDDDDD;
 }
 
@@ -238,12 +270,12 @@ h4 {
     grid-column: span 12;
     align-items: center;
     justify-content: center;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); */
   }
 
   .weather-widget {
     max-width: unset;
-}
+  }
+
   .my-farms {
     display: grid;
     grid-column: span 12;
@@ -304,9 +336,10 @@ h4 {
 @media only screen and (max-width: 900px) {
   .weather-widget {
     width: 27rem;
-    
+
   }
-  .market-section-container{
+
+  .market-section-container {
     display: flex;
     flex-direction: column;
   }
@@ -321,16 +354,6 @@ h4 {
     display: contents;
   }
 }
-
-/* @media only screen and (max-width: 780px) {
-  .market-section-container {
-    width: 100vw;
-    align-items: center;
-  }
-} */
-
-
-
 
 @media only screen and (max-width: 1000px) {
   .weather-widget {

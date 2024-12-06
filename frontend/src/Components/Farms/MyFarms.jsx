@@ -259,13 +259,9 @@ const MyFarms = () => {
     }
   };
 
-
   const getTranslatedHeading = (headingKey) => {
     return headingTranslationMapping[headingKey] ? headingTranslationMapping[headingKey][language] : headingKey;
   };
-
-
-
 
   const getCropIcon = (cropName) => {
     if (!cropName) return null;
@@ -396,220 +392,216 @@ const MyFarms = () => {
       )}
 
 
-      <div className="container">
-
-        <div className="MyFarmsHeading">
-          <h4>
-            <img
-              src={MyFarmsSvg}
-              alt="My Farm"
-              style={{ width: "40px", height: "40px" }}
-            />
-            {getTranslatedHeading('MyFarms')}
-          </h4>
-
-          {location.pathname === "/" ? (
-            <Link to="my-farms">
-              <BsArrowUpRightCircle style={{ fontSize: "30px", color: "grey" }} />
-            </Link>
-          ) : (
-            location.pathname === "/my-farms" &&
-            (showAddFarm ? (
-              <MdOutlineCancel
-                className="add-icon"
-                onClick={() => setShowAddFarm(false)}
-                style={{
-                  fontSize: "30px",
-                  cursor: "pointer",
-                  marginLeft: "10px",
-                  color: "grey",
-                }}
+      <div className="container" id="containerFarms">
+      {/* <div className="containerFarms"> */}
+        <div className="wrapperMainContainer">
+          <div className="MyFarmsHeading">
+            <h4>
+              <img
+                src={MyFarmsSvg}
+                alt="My Farm"
+                style={{ width: "40px", height: "40px" }}
               />
-            ) : (
-              <IoIosAddCircleOutline
-                className="add-icon"
-                onClick={() => setShowAddFarm(true)}
-                style={{
-                  fontSize: "30px",
-                  cursor: "pointer",
-                  marginLeft: "10px",
-                  color: "grey",
-                }}
-              />
-            ))
-          )}
-        </div>
-
-        {showAddFarm ? (
-          <AddFarms />
-        ) : farms.length === 0 ? (
-          <EmptyFarms />
-        ) : (
-          <div
-            className={
-              location.pathname === "/" ? "farms-cards-container" : "row g-3"
-            }
-          >
+              {getTranslatedHeading('MyFarms')}
+            </h4>
             {location.pathname === "/" ? (
-              farms.map((farm) => (
-                <div
-                  className="col-md-4"
-                  key={farm._id}
-                  onClick={() => setSelectedFarm(farm)}
-                >
-                  <div className="card farm-card">
-                    <img
-                      src={farm.farmImageUrl}
-                      alt={farm.farmName}
-                      className="card-img-top"
-                    />
-                    <div className="card-body">
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="card-info">
-                          <h4 className="card-title mb-0">{translations[farm._id]?.farmName || farm.farmName}</h4>
-                          <p className="card-text mb-0">{farm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
-                        </div>
-                        <img
-                          src={getCropIcon(farm.cropName)}
-                          alt={farm.cropName}
-                          className="crop-icon"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
+              <Link to="my-farms">
+                <BsArrowUpRightCircle style={{ fontSize: "30px", color: "grey" }} />
+              </Link>
             ) : (
-              <>
-                <div className="farms-card-container">
-                  <div className="farms-card-paragraph-container">
-                    <p className="farms-card-paragraph">{getTranslatedHeading('trackCropsMonitorSoilInsights')}</p>
-                  </div>
-                  <div className="farms-cards-container">
-                    {farms.map((farm) => (
-                      <div
-                        className="flex-none"
-                        key={farm._id}
-                        onClick={() => setSelectedFarm(farm)}
-                      >
-                        <div className="card farm-card myFarmsCard">
+              location.pathname === "/my-farms" &&
+              (showAddFarm ? (
+                <MdOutlineCancel
+                  className="add-icon"
+                  onClick={() => setShowAddFarm(false)}
+                  style={{
+                    fontSize: "30px",
+                    cursor: "pointer",
+                    marginLeft: "10px",
+                    color: "grey",
+                  }}
+                />
+              ) : (
+                <IoIosAddCircleOutline
+                  className="add-icon"
+                  onClick={() => setShowAddFarm(true)}
+                  style={{
+                    fontSize: "30px",
+                    cursor: "pointer",
+                    marginLeft: "10px",
+                    color: "grey",
+                  }}
+                />
+              ))
+            )}
+          </div>
+          {showAddFarm ? (
+            <AddFarms />
+          ) : farms.length === 0 ? (
+            <EmptyFarms />
+          ) : (
+            <div
+              className={
+                location.pathname === "/" ? "farms-cards-container" : "row g-3"
+              }
+            >
+              {location.pathname === "/" ? (
+                farms.map((farm) => (
+                  <div
+                    className="col-md-4"
+                    key={farm._id}
+                    onClick={() => setSelectedFarm(farm)}
+                  >
+                    <div className="card farm-card">
+                      <img
+                        src={farm.farmImageUrl}
+                        alt={farm.farmName}
+                        className="card-img-top"
+                      />
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="card-info">
+                            <h4 className="card-title mb-0">{translations[farm._id]?.farmName || farm.farmName}</h4>
+                            <p className="card-text mb-0">{farm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
+                          </div>
                           <img
-                            src={farm.farmImageUrl}
-                            alt={farm.farmName}
-                            className="card-img-top"
+                            src={getCropIcon(farm.cropName)}
+                            alt={farm.cropName}
+                            className="crop-icon"
                           />
-                          <div className="card-header d-flex justify-content-between align-items-center">
-                            <div className="d-flex flex-column">
-                              <h5 className="card-title mb-0">{translations[farm._id]?.farmName || farm.farmName}</h5>
-                              <p className="card-text mb-0">{farm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    {farms.length === 0 && (
-                      <div className="col-12 text-center">
-                        <p className="text-muted">{getTranslatedHeading('noFarmsFound')}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="myFarms_info">
-                  {selectedFarm && (
-                    <div className="selected-farm p-4">
-                      <div className="sub1">
-                        <img
-                          src={selectedFarm.farmImageUrl}
-                          alt={selectedFarm.farmName}
-                          className="card-img-top rounded-top abc"
-                        />
-                      </div>
-                      <div className="sub2">
-                        <div className="card-header d-flex justify-content-between align-items-center">
-                          <div className="d-flex flex-column">
-                            <div className="selected-farm-card-title">
-                              <h5 className="card-title mb-0">
-                                {translations[selectedFarm._id]?.farmName || selectedFarm.farmName}
-                              </h5>
-                              <MdDelete
-                                onClick={(e) => {
-                                  e.stopPropagation();  
-                                  handleDelete(selectedFarm._id);
-                                }}
-                                style={{ fontSize: "20px", color: "red", cursor: "pointer" }}
-                              />
-                            </div>
-                            <p className="card-text mb-0">{selectedFarm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
-                          </div>
-                        </div>
-                        <br />
-                        <div className="totalBox">
-                          <div className="greenBoxes">
-                            <div className="soilBox">
-                              <h2>🌱</h2>
-                              <p className="boxHeading">
-                                {getTranslatedHeading('soilType')}
-                                <br />
-                                {translations[selectedFarm._id]?.soilType || selectedFarm.soilType}
-                              </p>
-                            </div>
-                            <div className="waterBox">
-                              <h2>💧</h2>
-                              <p className="boxHeading">
-                                {getTranslatedHeading('waterSource')}
-                                <br />
-                                {translations[selectedFarm._id]?.waterSource || selectedFarm.waterSource}
-                              </p>
-                            </div>
-                            <div className="farmBox">
-                              <h2>🚜</h2>
-                              <p className="boxHeading">
-                                {getTranslatedHeading('farmingMethod')}
-                                <br />
-                                {translations[selectedFarm._id]?.farmingMethod || selectedFarm.farmingMethod}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="tipsBox">
-                            <h1>💡</h1>
-                            <MatchingTips
-                              matchedTips={matchedTips}
-                              setMatchedTips={setMatchedTips}
-                              selectedFarm={selectedFarm}
-                            />
-                          </div>
                         </div>
                       </div>
                     </div>
-                  )}
-
-                  {priceData && priceData.length >= 2 && (
-                    <div id="chart" style={{ marginTop: "20px" }}>
-                      {loading ? (
-                        <p>{getTranslatedHeading('loadingData')}</p>
-                      ) : error ? (
-                        <p>{error}</p>
-                      ) : (
-                        <div className="splineChart">
-                          <h4>{getTranslatedHeading('currentVsPreviouslyGrownCrop')}</h4>
-                          <ApexSplineChart priceData={priceData} loading={loading} />
+                  </div>
+                ))
+              ) : (
+                <>
+                  <div className="farms-card-container">
+                    <div className="farms-card-paragraph-container">
+                      <p className="farms-card-paragraph">{getTranslatedHeading('trackCropsMonitorSoilInsights')}</p>
+                    </div>
+                    <div className="farms-cards-container">
+                      {farms.map((farm) => (
+                        <div
+                          className="flex-none"
+                          key={farm._id}
+                          onClick={() => setSelectedFarm(farm)}
+                        >
+                          <div className="card farm-card myFarmsCard">
+                            <img
+                              src={farm.farmImageUrl}
+                              alt={farm.farmName}
+                              className="card-img-top"
+                            />
+                            <div className="card-header2 d-flex justify-content-between align-items-center">
+                              <div className="d-flex flex-column">
+                                <h5 className="card-title mb-0">{translations[farm._id]?.farmName || farm.farmName}</h5>
+                                <p className="card-text mb-0">{farm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                      {farms.length === 0 && (
+                        <div className="col-12 text-center">
+                          <p className="text-muted">{getTranslatedHeading('noFarmsFound')}</p>
                         </div>
                       )}
                     </div>
-                  )}
-
-
-                </div>
-                <div className="d-flex justify-content-center align-items-center vh-50">
-                  <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
-                    {getTranslatedHeading('back')}
-                  </Link>
-                </div>
-              </>
-            )}
-          </div>
-        )}
+                  </div>
+                  <div className="myFarms_info">
+                    {selectedFarm && (
+                      <div className="selected-farm p-4">
+                        <div className="sub1">
+                          <img
+                            src={selectedFarm.farmImageUrl}
+                            alt={selectedFarm.farmName}
+                            className="card-img-top rounded-top abc"
+                          />
+                        </div>
+                        <div className="sub2">
+                          <div className="card-header d-flex justify-content-between align-items-center">
+                            <div className="d-flex flex-column">
+                              <div className="selected-farm-card-title">
+                                <h5 className="card-title mb-0">
+                                  {translations[selectedFarm._id]?.farmName || selectedFarm.farmName}
+                                </h5>
+                                <MdDelete
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDelete(selectedFarm._id);
+                                  }}
+                                  style={{ fontSize: "20px", color: "red", cursor: "pointer" }}
+                                />
+                              </div>
+                              <p className="card-text mb-0">{selectedFarm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
+                            </div>
+                          </div>
+                          <br />
+                          <div className="totalBox">
+                            <div className="greenBoxes">
+                              <div className="soilBox">
+                                <h2>🌱</h2>
+                                <p className="boxHeading">
+                                  {getTranslatedHeading('soilType')}
+                                  <br />
+                                  {translations[selectedFarm._id]?.soilType || selectedFarm.soilType}
+                                </p>
+                              </div>
+                              <div className="waterBox">
+                                <h2>💧</h2>
+                                <p className="boxHeading">
+                                  {getTranslatedHeading('waterSource')}
+                                  <br />
+                                  {translations[selectedFarm._id]?.waterSource || selectedFarm.waterSource}
+                                </p>
+                              </div>
+                              <div className="farmBox">
+                                <h2>🚜</h2>
+                                <p className="boxHeading">
+                                  {getTranslatedHeading('farmingMethod')}
+                                  <br />
+                                  {translations[selectedFarm._id]?.farmingMethod || selectedFarm.farmingMethod}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="tipsBox">
+                              <h1>💡</h1>
+                              <MatchingTips
+                                matchedTips={matchedTips}
+                                setMatchedTips={setMatchedTips}
+                                selectedFarm={selectedFarm}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {priceData && priceData.length >= 2 && (
+                      <div id="chart" style={{ marginTop: "20px" }}>
+                        {loading ? (
+                          <p>{getTranslatedHeading('loadingData')}</p>
+                        ) : error ? (
+                          <p>{error}</p>
+                        ) : (
+                          <div className="splineChart">
+                            <h4>{getTranslatedHeading('currentVsPreviouslyGrownCrop')}</h4>
+                            <ApexSplineChart priceData={priceData} loading={loading} />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center vh-50">
+                    <Link to="/" className="btn btn-dark btn-lg rounded-pill mt-3">
+                      {getTranslatedHeading('back')}
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
 
       </div>
     </>
