@@ -60,7 +60,7 @@
   }
   
   .languageWrapper:hover {
-    background-color: transparent; /* Light green background on hover */
+    background-color: #96C73D; /* Light green background on hover */
   }
   
   .languageWrapper:hover button.language-option {

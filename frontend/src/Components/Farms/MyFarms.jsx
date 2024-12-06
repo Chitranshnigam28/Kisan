@@ -467,7 +467,7 @@ const MyFarms = () => {
                           <img
                             src={getCropIcon(farm.cropName)}
                             alt={farm.cropName}
-                            className="crop-icon"
+                            className="crop-icon-myfarms"
                           />
                         </div>
                       </div>
@@ -498,6 +498,11 @@ const MyFarms = () => {
                                 <h5 className="card-title mb-0">{translations[farm._id]?.farmName || farm.farmName}</h5>
                                 <p className="card-text mb-0">{farm.sizeOfFarm} {getTranslatedHeading('ha')}</p>
                               </div>
+                              <img
+                            src={getCropIcon(farm.cropName)}
+                            alt={farm.cropName}
+                            className="crop-icon-myfarms"
+                          />
                             </div>
                           </div>
                         </div>

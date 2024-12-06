@@ -60,7 +60,7 @@ img{
 
 .floating-dock {
   position: fixed; /* Keep it fixed at the bottom */
-  bottom: 10px; /* Align to the bottom of the viewport */
+  bottom: 16px; /* Align to the bottom of the viewport */
   left: 50%; /* Center the dock horizontally */
   transform: translateX(-50%) translateY(0); /* Center horizontally, initially visible */
   width: 80%; /* Set width to 80% of the viewport width */
