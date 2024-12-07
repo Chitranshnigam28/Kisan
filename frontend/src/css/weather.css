@@ -5,7 +5,9 @@
 @tailwind utilities; */
 
 /* In your CSS file */
-
+body{
+  font-family: "Noto Sans", sans-serif !important;
+}
 .navbar {
     list-style-type: none;
     padding: 0;

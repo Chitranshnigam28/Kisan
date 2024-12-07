@@ -89,7 +89,7 @@ const FunFacts = () => {
     <div className="funfacts-container">
       {funFact ? (
         <div className="funFactsDiv">
-          <p className="title">{getTranslatedHeading('didYouKnow')}</p>
+          <p className="funFactstitle">{getTranslatedHeading('didYouKnow')}</p>
           <div className="fun-fact-card">
             <p className="fact-item"><strong>{getTranslatedHeading('scientificName')}:</strong> {translatedFunFact ? translatedFunFact.scientificName : funFact.scientificName}</p>
             <p className="fact-item"><strong>{getTranslatedHeading('funFact')}:</strong> {translatedFunFact ? translatedFunFact.funFact.general : funFact.funFact.general}</p>

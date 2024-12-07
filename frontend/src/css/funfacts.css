@@ -17,7 +17,9 @@
   padding: 20px;
   margin-left: 20px;
 }
-
+.funFactstitle{
+  text-align: center;
+}
 .funfacts-container::after {
   position: absolute;
   bottom: 20px;

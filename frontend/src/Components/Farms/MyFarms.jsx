@@ -40,7 +40,10 @@ import Header from './../Dashboard/Header';
 import { Footer } from './../Dashboard/Footer';
 import SimpleLoader from '../SimpleLoader';
 import ApexSplineChart from "../ApexSplineChart";
-
+import farmingMethod from "../../Assets/Farming Method/farmingMethod.png";
+import soiltype from "../../Assets/Farming Method/soiltype.png";
+import irrigation from "../../Assets/Farming Method/irrigation.png";
+irrigation
 const MyFarms = () => {
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -546,7 +549,9 @@ const MyFarms = () => {
                           <div className="totalBox">
                             <div className="greenBoxes">
                               <div className="soilBox">
-                                <h2>🌱</h2>
+                                {/* <h2>🌱</h2> */}
+                                <img src={soiltype} alt="soilType"
+                                className="totalBoxImages"/>
                                 <p className="boxHeading">
                                   {getTranslatedHeading('soilType')}
                                   <br />
@@ -554,7 +559,10 @@ const MyFarms = () => {
                                 </p>
                               </div>
                               <div className="waterBox">
-                                <h2>💧</h2>
+                                {/* <h2>💧</h2> */}
+                                <img src={irrigation} 
+                                alt="irrigation"
+                                className="totalBoxImages"/>
                                 <p className="boxHeading">
                                   {getTranslatedHeading('waterSource')}
                                   <br />
@@ -562,7 +570,8 @@ const MyFarms = () => {
                                 </p>
                               </div>
                               <div className="farmBox">
-                                <h2>🚜</h2>
+                                {/* <h2>🚜</h2> */}
+                                <img className="totalBoxImages" src={farmingMethod} alt="farmingMethod"/>
                                 <p className="boxHeading">
                                   {getTranslatedHeading('farmingMethod')}
                                   <br />
