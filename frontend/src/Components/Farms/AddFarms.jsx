@@ -300,6 +300,10 @@ const AddFarms = () => {
         navigate("/");
         resetForm();
     };
+    const handleLoginBack=()=>{
+        navigate("/login");
+        resetForm();
+    }
 
     const farmAdded = () => {
         navigate('/')
@@ -438,7 +442,7 @@ const AddFarms = () => {
 
                         <div className="button-container">
                             <button type="button" className="main-Btn" onClick={() => setCurrentStep(2)}>Continue → </button>
-                            <button type="button" className="sec-Btn" onClick={handleCancel}>Setup Later</button>
+                            <button type="button" className="sec-Btn" onClick={handleLoginBack}>Setup Later</button>
                         </div>
                     </div>
                 )}
