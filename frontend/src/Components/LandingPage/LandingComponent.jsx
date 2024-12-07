@@ -110,7 +110,11 @@ const LandingComponent = () => {
             <li className="menu-item">Features</li>
             <li className="menu-item">How it works!</li>
             <li className="prop">
-              <button className="proposal-project">Proposal</button>
+               <a
+    className="proposal-project"
+    href="/proposal.pdf" // Relative path to the file
+    download="Proposal.pdf" // Trigger file download with this name
+  >Proposal</a>
             </li>
             <li className="menu-item">
               <button className="login-button" onClick={goToLogin}>Login</button>
