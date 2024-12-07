@@ -735,10 +735,12 @@ const CropRecommendation = ({ ownerId }) => {
             </div>
             <div className="rcDetails">
               <div className="seedCost">
-                <FaSeedling style={{ color: "#4CAF50", fontSize: "24px" }} />
+                <div className="seedIconTextWrapper">
+                  <FaSeedling style={{ color: "#4CAF50", fontSize: "24px" }} />
+                  <p id="seedCostPara">Seed Cost</p>
+                </div>
                 <div className="seedText">
-                  <p>Seed Cost</p>
-                  <p>{JSON.parse(farmDetails.recommendedCrop)[1]}/Qt</p>
+                  <p id="seedPriceQT">{JSON.parse(farmDetails.recommendedCrop)[1]}/Qt</p>
                 </div>
               </div>
               <div className="harvest">

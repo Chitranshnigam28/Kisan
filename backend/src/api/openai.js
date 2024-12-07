@@ -50,7 +50,7 @@ const fetchFarmAndRecommendCrop = async (ownerId) => {
             - Soil Quality: ${soilQuality}
             - Current Season: ${currentSeason}
 
-        Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. Provide the data in the following JSON array format:
+            Based on the farm details and considering the soil type, season, and previous crop, please recommend the best crop to grow next. (Only recommend crops from the following crops: Rice, Wheat, Maize, Barley, Millet, Jowar, Bajra, Ragi, Soybean, Cotton, Sugarcane, Tobacco, Cabbage, Onion, Garlic, Cauliflower, Spinach, Tomato, Pumpkin, Eggplant, Bitter Gourd, Potato, Peas,Tea, Coffee, Groundnut). Provide the data in the following JSON array format:
 
         At index 0: The recommended crop in one word.
         At index 1: The current price of the crop in the market Per kg (numerical value in INR).

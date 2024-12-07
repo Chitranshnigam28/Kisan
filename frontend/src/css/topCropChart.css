@@ -10,9 +10,13 @@
 
 .top-crop-title-container {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 0.3rem;
+}
+.top-crop-title-container>img{
+  height: 50px;
+  width: 50px;
 }
 
 .top-crop-container {

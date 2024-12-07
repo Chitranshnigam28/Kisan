@@ -27,9 +27,12 @@
   font-weight: 600;
   line-height: 1.2;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: center;
+  /* justify-content: center; */
   gap: 0.7rem;
+}
+.market-insights-title>img{
+  width: 50px;
 }
 
 .market-insights-list {

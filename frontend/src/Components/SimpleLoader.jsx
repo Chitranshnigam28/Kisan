@@ -10,7 +10,7 @@ const IndiaCropLoader = () => {
       // height: "100vh",
       height: "400px",
       padding: "2rem", 
-      backgroundColor: "white", // Optional background color
+      // backgroundColor: "white", // Optional background color
     },
     greenCircleLoader: {
       width: "50px",

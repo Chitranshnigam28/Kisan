@@ -248,7 +248,7 @@
   text-align: left;
 }
 
-.seedCost p:first-child,
+/* .seedCost p:first-child, */
 .harvest p:first-child {
   color: #929292;
   text-align: left;
@@ -259,7 +259,7 @@
   text-align: left;
 }
 
-.seedCost p:last-child,
+/* .seedCost p:last-child, */
 .harvest p:last-child {
   font-size: 1.5rem;
   text-align: left;
@@ -407,7 +407,20 @@ p {
   text-align: left;
   gap: 0.5rem;
 }
+#seedPriceQT{
+  font-size: 1.5rem;
+  text-align: left;
+}
+.seedIconTextWrapper p{
+  color: #929292;
+  font-size:unset;
+  
+}
 
+p#seedCostPara{
+  font-size: unset;
+  text-align: left;
+}
 /* Overlay for blurring background */
 .background-overlay {
   position: fixed;
