@@ -221,7 +221,7 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   height: 90%;
 
   align-self: end;
@@ -263,6 +263,9 @@
 .harvest p:last-child {
   font-size: 1.5rem;
   text-align: left;
+}
+.harvest>svg{
+  font-size: 46px;
 }
 
 .farmingMethodWrapper {
