@@ -145,14 +145,14 @@ const Login = () => {
             </div>
           </div>
           <div className="image-logo-container">
-            <img src={logo} className="logo" alt="Logo" />
+            {/* <img src={logo} className="logo" alt="Logo" />
             <video
               src={logoVideo}
               autoPlay
               loop
               muted
               className="background-video"
-            ></video>
+            ></video> */}
           </div>
         </div>
       )}

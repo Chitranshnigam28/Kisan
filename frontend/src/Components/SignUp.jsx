@@ -180,14 +180,14 @@ const SignUp = () => {
         </div>
       </div>
       <div className="imagelogo-container-signup">
-        <img src={logo} className="logo" alt="Logo" />
+        {/* <img src={logo} className="logo" alt="Logo" />
         <video
           src={logoVideo}
           autoPlay
           loop
           muted
           className="background-video"
-        ></video>
+        ></video> */}
       </div>
 
       {showModal && (

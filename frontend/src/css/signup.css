@@ -85,15 +85,19 @@ input[type="password"] {
 }
 
 /* Video and Logo Styling */
+
 .imagelogo-container-signup {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background: url('../Assets/loginbg.png');
+  background-size: cover;
+  background-position: center;
   border-radius: 1rem;
   overflow: hidden;
-  width: 50%; /* Ensure container size is fixed */
+  width: 50%;
+  /* Ensure container size is fixed */
 }
 
 /* Logo Styling */
