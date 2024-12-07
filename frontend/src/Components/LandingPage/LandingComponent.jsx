@@ -114,7 +114,8 @@ const LandingComponent = () => {
     className="proposal-project"
     href="/proposal.pdf" // Relative path to the file
     download="Proposal.pdf" // Trigger file download with this name
-  >Proposal</a>
+style={{    color: "white",
+    text-decoration: "none"}}  >Proposal</a>
             </li>
             <li className="menu-item">
               <button className="login-button" onClick={goToLogin}>Login</button>
