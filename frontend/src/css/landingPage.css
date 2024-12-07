@@ -46,7 +46,10 @@ body{
 .landing-navbar li {
   padding: 0 10px;
 }
-
+.landing-navbar li a{
+  text-decoration:none;
+  color:white;
+}
 .login-button {
   background-color: #96c73d;
   color: white;
